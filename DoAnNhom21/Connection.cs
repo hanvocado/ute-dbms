@@ -42,6 +42,30 @@ namespace DoAnNhom21
             }
             return dataTable;
         }
+
+        public static DataTable LoadDataTable(SqlCommand command)
+        {
+            connectString = GetConnectionString(user, pass);
+            SqlConnection conn = new SqlConnection(connectString);
+            DataTable dataTable = new DataTable();
+            try
+            {
+                command.Connection = conn;
+                conn.Open();
+                SqlDataAdapter adapter = new SqlDataAdapter(command);
+                adapter.Fill(dataTable);
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show(exc.Message);
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return dataTable;
+        }
+
         public static void ExecuteCommand(SqlCommand command)
         {
             connectString = GetConnectionString(user, pass);
