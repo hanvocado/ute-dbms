@@ -52,6 +52,12 @@
       <DependentUpon>AppDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="Connection.cs" />
+    <Compile Include="FormBaoHiemNV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormBaoHiemNV.Designer.cs">
+      <DependentUpon>FormBaoHiemNV.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormThongTinHopDong.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -60,6 +66,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FormBaoHiemNV.resx">
+      <DependentUpon>FormBaoHiemNV.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormThongTinHopDong.resx">
       <DependentUpon>FormThongTinHopDong.cs</DependentUpon>
     </EmbeddedResource>
