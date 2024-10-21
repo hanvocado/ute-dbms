@@ -58,6 +58,12 @@
     <Compile Include="FormBaoHiemNV.Designer.cs">
       <DependentUpon>FormBaoHiemNV.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormChamCong.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormChamCong.Designer.cs">
+      <DependentUpon>FormChamCong.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormNghiPhep.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -69,6 +75,9 @@
     <Compile Include="SessionInfo.cs" />
     <EmbeddedResource Include="FormBaoHiemNV.resx">
       <DependentUpon>FormBaoHiemNV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormChamCong.resx">
+      <DependentUpon>FormChamCong.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormNghiPhep.resx">
       <DependentUpon>FormNghiPhep.cs</DependentUpon>

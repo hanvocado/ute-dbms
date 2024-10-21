@@ -365,5 +365,36 @@ VALUES
 ('NV03', 'PC03', '032023', 20, 400000),
 ('NV04', 'PC01', '042023', 25, 200000);
 
+GO
 
+CREATE OR ALTER PROCEDURE sp_GetChamCongByMaNV
+    @MaNV VARCHAR(10)
+AS
+BEGIN
+    SELECT 
+        ct.NgayChamCong, 
+        thg.MoTa AS Thang, 
+        cong.MoTa AS MoTa, 
+        cong.HeSo
+    FROM 
+        ctChamCong ct
+    JOIN 
+        ChamCong cong ON cong.MaCC = ct.MaCC
+    JOIN 
+        Thang thg ON thg.MaThang = ct.MaThang
+    WHERE 
+        ct.MaNV = @MaNV;
+END;
 
+GO
+
+CREATE OR ALTER PROCEDURE sp_AddctChamCong
+    @MaNV VARCHAR(10),
+    @MaCC VARCHAR(10),
+    @MaThang VARCHAR(10),
+    @NgayChamCong int
+AS
+BEGIN
+    INSERT INTO ctChamCong (MaNV, MaCC, MaThang, NgayChamCong)
+    VALUES (@MaNV, @MaCC, @MaThang, @NgayChamCong);
+END;
