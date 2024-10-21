@@ -121,7 +121,7 @@ CREATE TABLE ctChamCong (
     MaCC NVARCHAR(10) NOT NULL,
     MaThang NVARCHAR(6) NOT NULL,
     NgayChamCong INT NOT NULL,
-    PRIMARY KEY (MaNV, MaCC, MaThang, NgayChamCong),
+    PRIMARY KEY (MaNV, MaThang, NgayChamCong),
     CONSTRAINT fK_ctCC_MaNV FOREIGN KEY (MaNV) REFERENCES NhanVien(MaNV)
 	ON UPDATE CASCADE
     ON DELETE NO ACTION,
@@ -398,3 +398,60 @@ BEGIN
     INSERT INTO ctChamCong (MaNV, MaCC, MaThang, NgayChamCong)
     VALUES (@MaNV, @MaCC, @MaThang, @NgayChamCong);
 END;
+
+GO
+
+CREATE OR ALTER PROCEDURE sp_GetAllctChamCong
+AS
+BEGIN
+    SELECT 
+		ct.MaNV,
+        ct.NgayChamCong, 
+        thg.MoTa AS Thang, 
+        cong.MoTa AS MoTa, 
+        cong.HeSo
+    FROM 
+        ctChamCong ct
+    JOIN 
+        ChamCong cong ON cong.MaCC = ct.MaCC
+    JOIN 
+        Thang thg ON thg.MaThang = ct.MaThang
+END;
+
+GO
+
+CREATE OR ALTER PROCEDURE sp_GetctChamCong
+    @MaNV VARCHAR(10),
+	@MaThang VARCHAR(10)
+AS
+BEGIN
+    SELECT 
+		ct.MaNV,
+        ct.NgayChamCong, 
+        thg.MoTa AS Thang, 
+        cong.MoTa AS MoTa, 
+        cong.HeSo
+    FROM 
+        ctChamCong ct
+    JOIN 
+        ChamCong cong ON cong.MaCC = ct.MaCC
+    JOIN 
+        Thang thg ON thg.MaThang = ct.MaThang
+    WHERE 
+        ct.MaNV = @MaNV and ct.MaThang = @MaThang;
+END;
+
+GO
+
+CREATE OR ALTER PROCEDURE sp_UpdatectChamCong
+    @MaNV VARCHAR(10),
+    @MaCC VARCHAR(10),
+    @MaThang VARCHAR(10),
+    @NgayChamCong int
+AS
+BEGIN
+    UPDATE ctChamCong SET MaCC=@MaCC
+	WHERE MaNV=@MaNV and MaThang=@MaThang and NgayChamCong=@NgayChamCong;
+END;
+
+GO
