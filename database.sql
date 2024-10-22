@@ -391,7 +391,7 @@ GO
 CREATE OR ALTER PROCEDURE sp_AddctChamCong
     @MaNV VARCHAR(10),
     @MaCC VARCHAR(10),
-    @MaThang VARCHAR(10),
+    @MaThang VARCHAR(6),
     @NgayChamCong int
 AS
 BEGIN
@@ -429,7 +429,7 @@ GO
 
 CREATE OR ALTER PROCEDURE sp_GetctChamCong
     @MaNV VARCHAR(10),
-	@MaThang VARCHAR(10)
+	@MaThang VARCHAR(6)
 AS
 BEGIN
 	IF (@MaThang IS NULL)
@@ -473,7 +473,7 @@ GO
 CREATE OR ALTER PROCEDURE sp_UpdatectChamCong
     @MaNV VARCHAR(10),
     @MaCC VARCHAR(10),
-    @MaThang VARCHAR(10),
+    @MaThang VARCHAR(6),
     @NgayChamCong int
 AS
 BEGIN
@@ -494,11 +494,65 @@ GO
 
 CREATE OR ALTER PROCEDURE sp_DeletectChamCong
     @MaNV VARCHAR(10),
-    @MaThang VARCHAR(10),
+    @MaThang VARCHAR(6),
     @NgayChamCong int
 AS
 BEGIN
         DELETE FROM ctChamCong WHERE MaNV = @MaNV AND MaThang = @MaThang AND NgayChamCong = @NgayChamCong;
+END;
+
+GO
+
+CREATE OR ALTER PROCEDURE sp_AddNghiPhep
+    @MaNV VARCHAR(10),
+    @MaThang VARCHAR(6),
+    @NgayNghiPhep int,
+	@GhiChu NVARCHAR(MAX)
+AS
+BEGIN
+	DECLARE @Nam VARCHAR(4);
+	DECLARE @SoNgayDaNghi INT;
+	DECLARE @MaCC VARCHAR(10);
+
+	SELECT @Nam = SUBSTRING(@MaThang, 3, 4);  -- start tính từ 1, length
+	SELECT @SoNgayDaNghi = COUNT(*) FROM NghiPhep 
+	WHERE MaNV = @MaNV AND RIGHT(MaThang, 4) = @Nam; -- 4 ký tự cuối của MaThang giống với @Nam
+
+	IF (@SoNgayDaNghi >= 12)
+		SELECT @MaCC = MaCC FROM ChamCong WHERE MoTa like N'%ghỉ không lương%';
+	ELSE
+		SELECT @MaCC = MaCC FROM ChamCong WHERE MoTa like N'%ghỉ phép năm%';
+
+	BEGIN TRANSACTION;
+	BEGIN TRY
+		INSERT INTO NghiPhep (MaNV, MaThang, NgayNghiPhep, GhiChu) VALUES (@MaNV, @MaThang, @NgayNghiPhep, @GhiChu);
+		INSERT INTO ctChamCong (MaNV, MaCC, MaThang, NgayChamCong) VALUES (@MaNV, @MaCC, @MaThang, @NgayNghiPhep);
+		COMMIT TRANSACTION
+	END TRY
+	BEGIN CATCH
+		ROLLBACK TRANSACTION;
+		DECLARE @ErrorMessage NVARCHAR(4000);
+		SELECT @ErrorMessage = ERROR_MESSAGE();
+		RAISERROR(@ErrorMessage, 16, 1);
+	END CATCH
+END;
+
+GO
+
+CREATE OR ALTER PROCEDURE sp_GetNghiPhepByMaNV
+    @MaNV VARCHAR(10)
+AS
+BEGIN
+    SELECT 
+        NgayNghiPhep, 
+        thg.MoTa AS Thang, 
+        GhiChu
+    FROM 
+        NghiPhep np
+    JOIN 
+        Thang thg ON thg.MaThang = np.MaThang
+    WHERE 
+        MaNV = @MaNV;
 END;
 
 GO

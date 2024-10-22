@@ -13,7 +13,7 @@ namespace DoAnNhom21
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormQuanLyChamCong());
+            Application.Run(new FormNghiPhep());
         }
     }
 }

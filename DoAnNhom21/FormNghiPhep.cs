@@ -13,7 +13,7 @@ namespace DoAnNhom21
 
             txtMaNV.Text = SessionInfo.MaNV;
 
-            string queryAllThang = "Select MaThang, MoTa from Thang";
+            string queryAllThang = "SELECT MaThang, MoTa FROM Thang ORDER By MaThang DESC";
             DataTable dtThang = Connection.LoadDataTable(queryAllThang);
             cbbThang.Items.Clear();
             cbbThang.DataSource = new BindingSource(dtThang, null);
@@ -25,21 +25,36 @@ namespace DoAnNhom21
         {
             try
             {
-                using (SqlCommand command = new SqlCommand("INSERT INTO NghiPhep (MaNV, MaThang, NgayNghiPhep, GhiChu) VALUES (@MaNV, @MaThang, @NgayNghiPhep, @GhiChu)"))
+                using (SqlCommand command = new SqlCommand("sp_AddNghiPhep"))
                 {
+                    command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@MaNV", this.txtMaNV.Text);
                     command.Parameters.AddWithValue("@MaThang", this.cbbThang.SelectedValue.ToString());
                     command.Parameters.AddWithValue("@NgayNghiPhep", this.txtNgayNghi.Text);
                     command.Parameters.AddWithValue("@GhiChu", this.txtLyDo.Text);
                     Connection.ExecuteCommand(command);
                     MessageBox.Show("Đăng ký nghỉ thành công");
-                    txtMaNV.Text = cbbThang.Text = txtNgayNghi.Text = txtLyDo.Text = "";
+                    txtNgayNghi.Text = txtLyDo.Text = "";
+                    load();
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Lỗi: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void FormNghiPhep_Load(object sender, EventArgs e)
+        {
+            load();
+        }
+
+        private void load()
+        {
+            SqlCommand cmd = new SqlCommand("sp_GetNghiPhepByMaNV");
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@MaNV", SessionInfo.MaNV);
+            dataGVoffHistory.DataSource = Connection.LoadDataTable(cmd);
         }
     }
 }

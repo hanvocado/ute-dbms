@@ -13,7 +13,7 @@ namespace DoAnNhom21
 
         private void load()
         {
-            string queryAllThang = "Select * from Thang";
+            string queryAllThang = "Select * from Thang ORDER By MaThang DESC";
             dataGVThang.DataSource = Connection.LoadDataTable(queryAllThang);
 
             string queryAllCong = "Select * from ChamCong";

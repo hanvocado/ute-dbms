@@ -25,7 +25,7 @@ namespace DoAnNhom21
             cbbLoaiCong.DisplayMember = "MoTa";
             cbbLoaiCong.ValueMember = "MaCC";
 
-            string queryAllThang = "Select MaThang, MoTa from Thang";
+            string queryAllThang = "Select MaThang, MoTa from Thang ORDER By MaThang DESC";
             DataTable dtThang = Connection.LoadDataTable(queryAllThang);
             cbbThang.Items.Clear();
             cbbThang.DataSource = new BindingSource(dtThang, null);
