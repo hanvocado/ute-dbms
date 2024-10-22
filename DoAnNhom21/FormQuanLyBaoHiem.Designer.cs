@@ -336,18 +336,18 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "DANH SÁCH BẢO HIỂM";
             // 
-            // FormBaoHiemNV
+            // FormQuanLyBaoHiem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.ClientSize = new System.Drawing.Size(1059, 848);
+            this.ClientSize = new System.Drawing.Size(1060, 805);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox3);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "FormBaoHiemNV";
+            this.Name = "FormQuanLyBaoHiem";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormBaoHiemNV";
             this.Load += new System.EventHandler(this.FormBaoHiemNV_Load);

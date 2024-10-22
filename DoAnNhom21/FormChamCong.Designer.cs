@@ -30,14 +30,14 @@
         {
             this.lblMaNV = new System.Windows.Forms.Label();
             this.dataGridViewChamCong = new System.Windows.Forms.DataGridView();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Thang = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.HeSo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnChamCong = new System.Windows.Forms.Button();
             this.txtMaNV = new System.Windows.Forms.TextBox();
-            this.HeSo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Thang = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewChamCong)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -71,6 +71,38 @@
             this.dataGridViewChamCong.Size = new System.Drawing.Size(865, 198);
             this.dataGridViewChamCong.TabIndex = 4;
             // 
+            // Column2
+            // 
+            this.Column2.DataPropertyName = "NgayChamCong";
+            this.Column2.HeaderText = "Ngày chấm công";
+            this.Column2.MinimumWidth = 6;
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
+            // 
+            // Thang
+            // 
+            this.Thang.DataPropertyName = "Thang";
+            this.Thang.HeaderText = "Tháng";
+            this.Thang.MinimumWidth = 8;
+            this.Thang.Name = "Thang";
+            this.Thang.ReadOnly = true;
+            // 
+            // Column3
+            // 
+            this.Column3.DataPropertyName = "MoTa";
+            this.Column3.HeaderText = "Mô tả";
+            this.Column3.MinimumWidth = 6;
+            this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
+            // 
+            // HeSo
+            // 
+            this.HeSo.DataPropertyName = "HeSo";
+            this.HeSo.HeaderText = "Hệ số";
+            this.HeSo.MinimumWidth = 8;
+            this.HeSo.Name = "HeSo";
+            this.HeSo.ReadOnly = true;
+            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.btnChamCong);
@@ -83,17 +115,6 @@
             this.groupBox1.TabIndex = 11;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "THÔNG TIN CHẤM CÔNG";
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.dataGridViewChamCong);
-            this.groupBox2.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(69, 367);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(877, 261);
-            this.groupBox2.TabIndex = 12;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "DANH SÁCH CHẤM CÔNG";
             // 
             // btnChamCong
             // 
@@ -117,37 +138,16 @@
             this.txtMaNV.Size = new System.Drawing.Size(252, 35);
             this.txtMaNV.TabIndex = 9;
             // 
-            // HeSo
+            // groupBox2
             // 
-            this.HeSo.DataPropertyName = "HeSo";
-            this.HeSo.HeaderText = "Hệ số";
-            this.HeSo.MinimumWidth = 8;
-            this.HeSo.Name = "HeSo";
-            this.HeSo.ReadOnly = true;
-            // 
-            // Column3
-            // 
-            this.Column3.DataPropertyName = "MoTa";
-            this.Column3.HeaderText = "Mô tả";
-            this.Column3.MinimumWidth = 6;
-            this.Column3.Name = "Column3";
-            this.Column3.ReadOnly = true;
-            // 
-            // Thang
-            // 
-            this.Thang.DataPropertyName = "Thang";
-            this.Thang.HeaderText = "Tháng";
-            this.Thang.MinimumWidth = 8;
-            this.Thang.Name = "Thang";
-            this.Thang.ReadOnly = true;
-            // 
-            // Column2
-            // 
-            this.Column2.DataPropertyName = "NgayChamCong";
-            this.Column2.HeaderText = "Ngày chấm công";
-            this.Column2.MinimumWidth = 6;
-            this.Column2.Name = "Column2";
-            this.Column2.ReadOnly = true;
+            this.groupBox2.Controls.Add(this.dataGridViewChamCong);
+            this.groupBox2.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox2.Location = new System.Drawing.Point(69, 367);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(877, 261);
+            this.groupBox2.TabIndex = 12;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "DANH SÁCH CHẤM CÔNG";
             // 
             // FormChamCong
             // 
@@ -155,7 +155,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.ClientSize = new System.Drawing.Size(1059, 848);
+            this.ClientSize = new System.Drawing.Size(1060, 805);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox2);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
