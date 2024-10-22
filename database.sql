@@ -432,20 +432,40 @@ CREATE OR ALTER PROCEDURE sp_GetctChamCong
 	@MaThang VARCHAR(10)
 AS
 BEGIN
-    SELECT 
-		ct.MaNV,
-        ct.NgayChamCong, 
-        thg.MoTa AS Thang, 
-        cong.MoTa AS MoTa, 
-        cong.HeSo
-    FROM 
-        ctChamCong ct
-    JOIN 
-        ChamCong cong ON cong.MaCC = ct.MaCC
-    JOIN 
-        Thang thg ON thg.MaThang = ct.MaThang
-    WHERE 
-        ct.MaNV = @MaNV and ct.MaThang = @MaThang;
+	IF (@MaThang IS NULL)
+		BEGIN
+			SELECT 
+				ct.MaNV,
+				ct.NgayChamCong, 
+				thg.MoTa AS Thang, 
+				cong.MoTa AS MoTa, 
+				cong.HeSo
+			FROM 
+				ctChamCong ct
+			JOIN 
+				ChamCong cong ON cong.MaCC = ct.MaCC
+			JOIN 
+				Thang thg ON thg.MaThang = ct.MaThang
+			WHERE 
+				ct.MaNV = @MaNV;
+		END
+	ELSE
+	   	BEGIN
+			SELECT 
+				ct.MaNV,
+				ct.NgayChamCong, 
+				thg.MoTa AS Thang, 
+				cong.MoTa AS MoTa, 
+				cong.HeSo
+			FROM 
+				ctChamCong ct
+			JOIN 
+				ChamCong cong ON cong.MaCC = ct.MaCC
+			JOIN 
+				Thang thg ON thg.MaThang = ct.MaThang
+			WHERE 
+				ct.MaNV = @MaNV and ct.MaThang = @MaThang;
+		END
 END;
 
 GO
@@ -468,6 +488,17 @@ BEGIN
     BEGIN
         RAISERROR('Record not found', 16, 1);
     END
+END;
+
+GO
+
+CREATE OR ALTER PROCEDURE sp_DeletectChamCong
+    @MaNV VARCHAR(10),
+    @MaThang VARCHAR(10),
+    @NgayChamCong int
+AS
+BEGIN
+        DELETE FROM ctChamCong WHERE MaNV = @MaNV AND MaThang = @MaThang AND NgayChamCong = @NgayChamCong;
 END;
 
 GO

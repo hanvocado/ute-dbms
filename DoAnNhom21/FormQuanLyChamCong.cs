@@ -61,7 +61,7 @@ namespace DoAnNhom21
             SqlCommand cmd = new SqlCommand("sp_GetctChamCong");
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@MaNV", cbbMaNV.Text);
-            cmd.Parameters.AddWithValue("@MaThang", cbbThang.SelectedValue.ToString());
+            cmd.Parameters.AddWithValue("@MaThang", cbbThang.SelectedValue ?? DBNull.Value);
             dataGVctChamCong.DataSource = Connection.LoadDataTable(cmd);
         }
 
@@ -112,16 +112,39 @@ namespace DoAnNhom21
 
         private void btnXoa_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                using (SqlCommand command = new SqlCommand("sp_DeletectChamCong"))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@MaNV", cbbMaNV.Text);
+                    command.Parameters.AddWithValue("@MaThang", cbbThang.SelectedValue);
+                    command.Parameters.AddWithValue("@NgayChamCong", txtNgayCC.Text);
+                    Connection.ExecuteCommand(command);
+                    MessageBox.Show("Xóa thành công");
+                    clearFields();
+                    load();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnLamMoi_Click(object sender, EventArgs e)
+        {
+            clearFields();
+            load();
+        }
+
+        private void clearFields()
         {
             cbbMaNV.Enabled = true;
             txtNgayCC.Enabled = true;
             cbbThang.Enabled = true;
             cbbMaNV.Text = txtNgayCC.Text = cbbThang.Text = cbbLoaiCong.Text = "";
-            load();
+            cbbThang.SelectedValue = "";
         }
     }
 }
