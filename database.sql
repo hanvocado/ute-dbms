@@ -395,8 +395,15 @@ CREATE OR ALTER PROCEDURE sp_AddctChamCong
     @NgayChamCong int
 AS
 BEGIN
-    INSERT INTO ctChamCong (MaNV, MaCC, MaThang, NgayChamCong)
-    VALUES (@MaNV, @MaCC, @MaThang, @NgayChamCong);
+	IF EXISTS (SELECT 1 FROM ctChamCong WHERE MaNV = @MaNV AND MaThang = @MaThang AND NgayChamCong = @NgayChamCong)
+		BEGIN
+			RAISERROR('Đã chấm công cho ngày này', 16, 1);
+		END
+    ELSE
+		BEGIN
+			INSERT INTO ctChamCong (MaNV, MaCC, MaThang, NgayChamCong)
+			VALUES (@MaNV, @MaCC, @MaThang, @NgayChamCong);
+		END    
 END;
 
 GO
@@ -450,8 +457,17 @@ CREATE OR ALTER PROCEDURE sp_UpdatectChamCong
     @NgayChamCong int
 AS
 BEGIN
-    UPDATE ctChamCong SET MaCC=@MaCC
-	WHERE MaNV=@MaNV and MaThang=@MaThang and NgayChamCong=@NgayChamCong;
+    -- Kiểm tra xem bản ghi có tồn tại trước khi cập nhật
+    IF EXISTS (SELECT 1 FROM ctChamCong WHERE MaNV = @MaNV AND MaThang = @MaThang AND NgayChamCong = @NgayChamCong)
+    BEGIN
+        UPDATE ctChamCong
+        SET MaCC = @MaCC
+        WHERE MaNV = @MaNV AND MaThang = @MaThang AND NgayChamCong = @NgayChamCong;
+    END
+    ELSE
+    BEGIN
+        RAISERROR('Record not found', 16, 1);
+    END
 END;
 
 GO

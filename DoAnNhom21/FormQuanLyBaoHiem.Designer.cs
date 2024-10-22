@@ -1,6 +1,6 @@
 ﻿namespace DoAnNhom21
 {
-    partial class FormBaoHiemNV
+    partial class FormQuanLyBaoHiem
     {
         /// <summary>
         /// Required designer variable.

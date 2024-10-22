@@ -52,11 +52,11 @@
       <DependentUpon>AppDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="Connection.cs" />
-    <Compile Include="FormBaoHiemNV.cs">
+    <Compile Include="FormQuanLyBaoHiem.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormBaoHiemNV.Designer.cs">
-      <DependentUpon>FormBaoHiemNV.cs</DependentUpon>
+    <Compile Include="FormQuanLyBaoHiem.Designer.cs">
+      <DependentUpon>FormQuanLyBaoHiem.cs</DependentUpon>
     </Compile>
     <Compile Include="FormChamCong.cs">
       <SubType>Form</SubType>
@@ -70,6 +70,12 @@
     <Compile Include="FormNghiPhep.Designer.cs">
       <DependentUpon>FormNghiPhep.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormQuanLyChamCong.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormQuanLyChamCong.Designer.cs">
+      <DependentUpon>FormQuanLyChamCong.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormQuanLyThangCong.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -79,14 +85,17 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SessionInfo.cs" />
-    <EmbeddedResource Include="FormBaoHiemNV.resx">
-      <DependentUpon>FormBaoHiemNV.cs</DependentUpon>
+    <EmbeddedResource Include="FormQuanLyBaoHiem.resx">
+      <DependentUpon>FormQuanLyBaoHiem.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormChamCong.resx">
       <DependentUpon>FormChamCong.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormNghiPhep.resx">
       <DependentUpon>FormNghiPhep.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormQuanLyChamCong.resx">
+      <DependentUpon>FormQuanLyChamCong.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormQuanLyThangCong.resx">
       <DependentUpon>FormQuanLyThangCong.cs</DependentUpon>

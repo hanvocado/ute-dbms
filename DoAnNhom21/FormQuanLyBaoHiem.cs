@@ -5,9 +5,9 @@ using System.Windows.Forms;
 
 namespace DoAnNhom21
 {
-    public partial class FormBaoHiemNV : Form
+    public partial class FormQuanLyBaoHiem : Form
     {
-        public FormBaoHiemNV()
+        public FormQuanLyBaoHiem()
         {
             InitializeComponent();
 
