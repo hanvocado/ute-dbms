@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Forms;
 
 namespace DoAnNhom21
 {
@@ -30,7 +31,6 @@ namespace DoAnNhom21
         /// </summary>
         private void InitializeComponent()
         {
-            this.dateTimePickerThuongPhat = new System.Windows.Forms.DateTimePicker();
             this.lblNgay = new System.Windows.Forms.Label();
             this.cbbMaNV = new System.Windows.Forms.ComboBox();
             this.lblMaNV = new System.Windows.Forms.Label();
@@ -58,33 +58,27 @@ namespace DoAnNhom21
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnSuaTPNV = new System.Windows.Forms.Button();
             this.btnXoaTPNV = new System.Windows.Forms.Button();
             this.btnThemTPNV = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.btnTPNV = new System.Windows.Forms.Button();
             this.btnLamMoi = new System.Windows.Forms.Button();
             this.btnThoat = new System.Windows.Forms.Button();
+            this.lblMaThang = new System.Windows.Forms.Label();
+            this.cbbMaThang = new System.Windows.Forms.ComboBox();
+            this.txtNgayTP = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTP)).BeginInit();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCTTP)).BeginInit();
             this.SuspendLayout();
             // 
-            // dateTimePickerThuongPhat
-            // 
-            this.dateTimePickerThuongPhat.Font = new System.Drawing.Font("Times New Roman", 12F);
-            this.dateTimePickerThuongPhat.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePickerThuongPhat.Location = new System.Drawing.Point(211, 188);
-            this.dateTimePickerThuongPhat.Name = "dateTimePickerThuongPhat";
-            this.dateTimePickerThuongPhat.Size = new System.Drawing.Size(251, 30);
-            this.dateTimePickerThuongPhat.TabIndex = 33;
-            // 
             // lblNgay
             // 
             this.lblNgay.AutoSize = true;
             this.lblNgay.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.lblNgay.Location = new System.Drawing.Point(18, 194);
+            this.lblNgay.Location = new System.Drawing.Point(18, 197);
             this.lblNgay.Name = "lblNgay";
             this.lblNgay.Size = new System.Drawing.Size(159, 22);
             this.lblNgay.TabIndex = 32;
@@ -128,7 +122,7 @@ namespace DoAnNhom21
             this.groupBox1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.groupBox1.Location = new System.Drawing.Point(46, 94);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(443, 518);
+            this.groupBox1.Size = new System.Drawing.Size(443, 625);
             this.groupBox1.TabIndex = 34;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "THƯỞNG PHẠT ";
@@ -266,8 +260,9 @@ namespace DoAnNhom21
             this.dataGridViewTP.RowHeadersVisible = false;
             this.dataGridViewTP.RowHeadersWidth = 51;
             this.dataGridViewTP.RowTemplate.Height = 24;
-            this.dataGridViewTP.Size = new System.Drawing.Size(404, 180);
+            this.dataGridViewTP.Size = new System.Drawing.Size(404, 281);
             this.dataGridViewTP.TabIndex = 40;
+            this.dataGridViewTP.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewTP_CellContentClick);
             // 
             // Column1
             // 
@@ -285,7 +280,7 @@ namespace DoAnNhom21
             // 
             // Column3
             // 
-            this.Column3.DataPropertyName = "Tien";
+            this.Column3.DataPropertyName = "SoTien";
             this.Column3.HeaderText = "Số Tiền";
             this.Column3.MinimumWidth = 6;
             this.Column3.Name = "Column3";
@@ -299,6 +294,9 @@ namespace DoAnNhom21
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.txtNgayTP);
+            this.groupBox2.Controls.Add(this.cbbMaThang);
+            this.groupBox2.Controls.Add(this.lblMaThang);
             this.groupBox2.Controls.Add(this.btnLoc);
             this.groupBox2.Controls.Add(this.cbbMaTP);
             this.groupBox2.Controls.Add(this.dataGridViewCTTP);
@@ -309,11 +307,10 @@ namespace DoAnNhom21
             this.groupBox2.Controls.Add(this.lblNgay);
             this.groupBox2.Controls.Add(this.btnThemTPNV);
             this.groupBox2.Controls.Add(this.label2);
-            this.groupBox2.Controls.Add(this.dateTimePickerThuongPhat);
             this.groupBox2.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.groupBox2.Location = new System.Drawing.Point(495, 94);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(489, 518);
+            this.groupBox2.Size = new System.Drawing.Size(489, 625);
             this.groupBox2.TabIndex = 37;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "CHI TIẾT THƯỞNG PHẠT";
@@ -331,13 +328,14 @@ namespace DoAnNhom21
             this.btnLoc.Text = "Lọc";
             this.btnLoc.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnLoc.UseVisualStyleBackColor = false;
+            this.btnLoc.Click += new System.EventHandler(this.btnLoc_Click);
             // 
             // cbbMaTP
             // 
             this.cbbMaTP.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbbMaTP.Font = new System.Drawing.Font("Times New Roman", 12F);
             this.cbbMaTP.FormattingEnabled = true;
-            this.cbbMaTP.Location = new System.Drawing.Point(211, 131);
+            this.cbbMaTP.Location = new System.Drawing.Point(211, 114);
             this.cbbMaTP.Name = "cbbMaTP";
             this.cbbMaTP.Size = new System.Drawing.Size(251, 30);
             this.cbbMaTP.TabIndex = 41;
@@ -349,13 +347,14 @@ namespace DoAnNhom21
             this.dataGridViewCTTP.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn1,
             this.dataGridViewTextBoxColumn2,
-            this.dataGridViewTextBoxColumn3});
+            this.dataGridViewTextBoxColumn3,
+            this.dataGridViewTextBoxColumn4});
             this.dataGridViewCTTP.Location = new System.Drawing.Point(16, 338);
             this.dataGridViewCTTP.Name = "dataGridViewCTTP";
             this.dataGridViewCTTP.RowHeadersVisible = false;
             this.dataGridViewCTTP.RowHeadersWidth = 51;
             this.dataGridViewCTTP.RowTemplate.Height = 24;
-            this.dataGridViewCTTP.Size = new System.Drawing.Size(457, 180);
+            this.dataGridViewCTTP.Size = new System.Drawing.Size(457, 281);
             this.dataGridViewCTTP.TabIndex = 40;
             // 
             // dataGridViewTextBoxColumn1
@@ -367,17 +366,24 @@ namespace DoAnNhom21
             // 
             // dataGridViewTextBoxColumn2
             // 
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "NgayThuongPhat";
-            this.dataGridViewTextBoxColumn2.HeaderText = "Ngày thưởng phạt";
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "MaThuongPhat";
+            this.dataGridViewTextBoxColumn2.HeaderText = "Mã thưởng phạt";
             this.dataGridViewTextBoxColumn2.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
             // 
             // dataGridViewTextBoxColumn3
             // 
-            this.dataGridViewTextBoxColumn3.DataPropertyName = "MaThuongPhat";
-            this.dataGridViewTextBoxColumn3.HeaderText = "Mã thưởng phạt";
+            this.dataGridViewTextBoxColumn3.DataPropertyName = "MaThang";
+            this.dataGridViewTextBoxColumn3.HeaderText = "Mã Tháng";
             this.dataGridViewTextBoxColumn3.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.DataPropertyName = "NgayThuongPhat";
+            this.dataGridViewTextBoxColumn4.HeaderText = "Ngày thưởng phạt";
+            this.dataGridViewTextBoxColumn4.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
             // 
             // btnSuaTPNV
             // 
@@ -391,6 +397,7 @@ namespace DoAnNhom21
             this.btnSuaTPNV.Text = "Sửa";
             this.btnSuaTPNV.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSuaTPNV.UseVisualStyleBackColor = false;
+            this.btnSuaTPNV.Click += new System.EventHandler(this.btnSuaTPNV_Click);
             // 
             // btnXoaTPNV
             // 
@@ -404,6 +411,7 @@ namespace DoAnNhom21
             this.btnXoaTPNV.Text = "Xoá";
             this.btnXoaTPNV.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnXoaTPNV.UseVisualStyleBackColor = false;
+            this.btnXoaTPNV.Click += new System.EventHandler(this.btnXoaTPNV_Click);
             // 
             // btnThemTPNV
             // 
@@ -418,49 +426,38 @@ namespace DoAnNhom21
             this.btnThemTPNV.Text = "Thêm";
             this.btnThemTPNV.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnThemTPNV.UseVisualStyleBackColor = false;
+            this.btnThemTPNV.Click += new System.EventHandler(this.btnThemTPNV_Click);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Times New Roman", 12F);
-            this.label2.Location = new System.Drawing.Point(18, 134);
+            this.label2.Location = new System.Drawing.Point(18, 117);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(139, 22);
             this.label2.TabIndex = 0;
             this.label2.Text = "Mã thưởng phạt:";
-            // 
-            // btnTPNV
-            // 
-            this.btnTPNV.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            this.btnTPNV.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTPNV.Font = new System.Drawing.Font("Times New Roman", 12F);
-            this.btnTPNV.Location = new System.Drawing.Point(92, 660);
-            this.btnTPNV.Name = "btnTPNV";
-            this.btnTPNV.Size = new System.Drawing.Size(257, 40);
-            this.btnTPNV.TabIndex = 38;
-            this.btnTPNV.Text = "Thưởng phạt nhân viên";
-            this.btnTPNV.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnTPNV.UseVisualStyleBackColor = false;
             // 
             // btnLamMoi
             // 
             this.btnLamMoi.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.btnLamMoi.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLamMoi.Font = new System.Drawing.Font("Times New Roman", 12F);
-            this.btnLamMoi.Location = new System.Drawing.Point(361, 660);
+            this.btnLamMoi.Location = new System.Drawing.Point(232, 740);
             this.btnLamMoi.Name = "btnLamMoi";
             this.btnLamMoi.Size = new System.Drawing.Size(257, 40);
             this.btnLamMoi.TabIndex = 35;
             this.btnLamMoi.Text = "Làm mới";
             this.btnLamMoi.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnLamMoi.UseVisualStyleBackColor = false;
+            this.btnLamMoi.Click += new System.EventHandler(this.btnLamMoi_Click);
             // 
             // btnThoat
             // 
             this.btnThoat.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.btnThoat.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnThoat.Font = new System.Drawing.Font("Times New Roman", 12F);
-            this.btnThoat.Location = new System.Drawing.Point(634, 660);
+            this.btnThoat.Location = new System.Drawing.Point(495, 740);
             this.btnThoat.Name = "btnThoat";
             this.btnThoat.Size = new System.Drawing.Size(257, 40);
             this.btnThoat.TabIndex = 29;
@@ -469,13 +466,40 @@ namespace DoAnNhom21
             this.btnThoat.UseVisualStyleBackColor = false;
             this.btnThoat.Click += new System.EventHandler(this.btnThoat_Click);
             // 
+            // lblMaThang
+            // 
+            this.lblMaThang.AutoSize = true;
+            this.lblMaThang.Font = new System.Drawing.Font("Times New Roman", 12F);
+            this.lblMaThang.Location = new System.Drawing.Point(18, 158);
+            this.lblMaThang.Name = "lblMaThang";
+            this.lblMaThang.Size = new System.Drawing.Size(82, 22);
+            this.lblMaThang.TabIndex = 43;
+            this.lblMaThang.Text = "Mã tháng";
+            // 
+            // cbbMaThang
+            // 
+            this.cbbMaThang.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbbMaThang.Font = new System.Drawing.Font("Times New Roman", 12F);
+            this.cbbMaThang.FormattingEnabled = true;
+            this.cbbMaThang.Location = new System.Drawing.Point(211, 155);
+            this.cbbMaThang.Name = "cbbMaThang";
+            this.cbbMaThang.Size = new System.Drawing.Size(251, 30);
+            this.cbbMaThang.TabIndex = 44;
+            // 
+            // txtNgayTP
+            // 
+            this.txtNgayTP.Font = new System.Drawing.Font("Times New Roman", 12F);
+            this.txtNgayTP.Location = new System.Drawing.Point(211, 197);
+            this.txtNgayTP.Name = "txtNgayTP";
+            this.txtNgayTP.Size = new System.Drawing.Size(251, 30);
+            this.txtNgayTP.TabIndex = 41;
+            // 
             // FormThuongPhat
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.ClientSize = new System.Drawing.Size(1059, 848);
-            this.Controls.Add(this.btnTPNV);
+            this.ClientSize = new System.Drawing.Size(1060, 805);
             this.Controls.Add(this.btnLamMoi);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -497,8 +521,6 @@ namespace DoAnNhom21
 
 
         #endregion
-
-        private System.Windows.Forms.DateTimePicker dateTimePickerThuongPhat;
         private System.Windows.Forms.Label lblNgay;
         private System.Windows.Forms.ComboBox cbbMaNV;
         private System.Windows.Forms.Button btnThoat;
@@ -513,7 +535,6 @@ namespace DoAnNhom21
         private System.Windows.Forms.DataGridView dataGridViewCTTP;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox cbbMaTP;
-        private System.Windows.Forms.Button btnTPNV;
         private System.Windows.Forms.TextBox txtMaTP;
         private System.Windows.Forms.Label lblMaTP;
         private System.Windows.Forms.Label lblLoai;
@@ -533,5 +554,9 @@ namespace DoAnNhom21
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private ComboBox cbbMaThang;
+        private Label lblMaThang;
+        private TextBox txtNgayTP;
     }
 }
