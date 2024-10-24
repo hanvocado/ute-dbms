@@ -510,31 +510,7 @@ CREATE OR ALTER PROCEDURE sp_AddNghiPhep
 	@GhiChu NVARCHAR(MAX)
 AS
 BEGIN
-	DECLARE @Nam VARCHAR(4);
-	DECLARE @SoNgayDaNghi INT;
-	DECLARE @MaCC VARCHAR(10);
-
-	SELECT @Nam = SUBSTRING(@MaThang, 3, 4);  -- start tính từ 1, length
-	SELECT @SoNgayDaNghi = COUNT(*) FROM NghiPhep 
-	WHERE MaNV = @MaNV AND RIGHT(MaThang, 4) = @Nam; -- 4 ký tự cuối của MaThang giống với @Nam
-
-	IF (@SoNgayDaNghi >= 12)
-		SELECT @MaCC = MaCC FROM ChamCong WHERE MoTa like N'%ghỉ không lương%';
-	ELSE
-		SELECT @MaCC = MaCC FROM ChamCong WHERE MoTa like N'%ghỉ phép năm%';
-
-	BEGIN TRANSACTION;
-	BEGIN TRY
-		INSERT INTO NghiPhep (MaNV, MaThang, NgayNghiPhep, GhiChu) VALUES (@MaNV, @MaThang, @NgayNghiPhep, @GhiChu);
-		INSERT INTO ctChamCong (MaNV, MaCC, MaThang, NgayChamCong) VALUES (@MaNV, @MaCC, @MaThang, @NgayNghiPhep);
-		COMMIT TRANSACTION
-	END TRY
-	BEGIN CATCH
-		ROLLBACK TRANSACTION;
-		DECLARE @ErrorMessage NVARCHAR(4000);
-		SELECT @ErrorMessage = ERROR_MESSAGE();
-		RAISERROR(@ErrorMessage, 16, 1);
-	END CATCH
+	INSERT INTO NghiPhep (MaNV, MaThang, NgayNghiPhep, GhiChu) VALUES (@MaNV, @MaThang, @NgayNghiPhep, @GhiChu);
 END;
 
 GO
@@ -690,3 +666,40 @@ BEGIN
 END;
 
 GO
+
+CREATE OR ALTER TRIGGER tr_NghiPhep_ctChamCong_CheckNghiPhep
+ON NghiPhep
+AFTER INSERT
+AS
+BEGIN
+    DECLARE @MaNV NVARCHAR(10),
+		@MaThang NVARCHAR(6),
+		@NgayNghiPhep INT,
+		@Nam NVARCHAR(4),
+		@SoNgayDaNghi INT,
+		@MaCC NVARCHAR(10);
+
+    -- Lấy thông tin từ bản ghi mới được thêm vào
+    SELECT @MaNV = i.MaNV,
+           @MaThang = i.MaThang,
+           @NgayNghiPhep = i.NgayNghiPhep
+    FROM inserted i;
+
+	-- Tách năm từ 4 ký tự cuối trong MaThang
+    SELECT @Nam = SUBSTRING(@MaThang, 3, 4);
+
+    -- Đếm số ngày nghỉ phép trong năm
+    SELECT @SoNgayDaNghi = COUNT(*)
+    FROM NghiPhep
+    WHERE MaNV = @MaNV AND RIGHT(MaThang, 4) = @Nam;
+
+    -- Xác định MaCC dựa trên số ngày đã nghỉ phép, 13 là do tính inserted
+    IF (@SoNgayDaNghi >= 13)
+        SELECT @MaCC = MaCC FROM ChamCong WHERE MoTa LIKE N'%ghỉ không lương%';
+    ELSE
+        SELECT @MaCC = MaCC FROM ChamCong WHERE MoTa LIKE N'%ghỉ phép năm%';
+
+    -- Thêm bản ghi vào bảng ctChamCong
+    INSERT INTO ctChamCong (MaNV, MaCC, MaThang, NgayChamCong) 
+    VALUES (@MaNV, @MaCC, @MaThang, @NgayNghiPhep);
+END;
