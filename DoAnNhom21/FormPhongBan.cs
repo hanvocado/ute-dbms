@@ -106,10 +106,6 @@ namespace DoAnNhom21
             txtMaPB.Enabled = true;
             txtMaPB.Text = txtTenPB.Text = cbbMaTrP.Text = txtSDT.Text = " ";
         }
-        private void btnThoat_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
 
         private void btnThongBao_Click(object sender, EventArgs e)
         {
