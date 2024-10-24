@@ -1,15 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.Data.SqlClient;
-using DoAnNhom21;
+using System.Windows.Forms;
 
 namespace DoAnNhom21
 {
@@ -23,14 +15,14 @@ namespace DoAnNhom21
         {
             string data1 = "Select * from PhuCap";
             string data2 = "Select * from ctPhuCap";
-            dgvPhuCap.DataSource = Connection.Docdulieu(data1);
-            dgvctPhuCap.DataSource = Connection.Docdulieu(data2);
+            dgvPhuCap.DataSource = Connection.LoadDataTable(data1);
+            dgvctPhuCap.DataSource = Connection.LoadDataTable(data2);
             string nhanVien = "select MaNV from NhanVien";
-            cbbMaNV.DataSource = Connection.Docdulieu(nhanVien);
+            cbbMaNV.DataSource = Connection.LoadDataTable(nhanVien);
             cbbMaNV.ValueMember = "MaNV";
             cbbMaNV.DisplayMember = "MaNV";
             string phuCap = "select MaPhuCap from PhuCap";
-            cbbMaPhuCapctPhuCap.DataSource = Connection.Docdulieu(phuCap);
+            cbbMaPhuCapctPhuCap.DataSource = Connection.LoadDataTable(phuCap);
             cbbMaPhuCapctPhuCap.DisplayMember = "MaPhuCap";
         }
 
