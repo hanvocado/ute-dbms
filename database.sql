@@ -113,11 +113,7 @@ GO
 CREATE TABLE ChamCong (
     MaCC NVARCHAR(10) PRIMARY KEY,
     MoTa NVARCHAR(MAX),
-<<<<<<< HEAD
-    HeSo INT NOT NULL
-=======
     HeSo FLOAT NOT NULL
->>>>>>> 4574ba0ab9d0dcaf1aeaff86f52e09a8f5a7727d
 );
 GO
 CREATE TABLE ctChamCong (
@@ -125,11 +121,7 @@ CREATE TABLE ctChamCong (
     MaCC NVARCHAR(10) NOT NULL,
     MaThang NVARCHAR(6) NOT NULL,
     NgayChamCong INT NOT NULL,
-<<<<<<< HEAD
-    PRIMARY KEY (MaNV, MaCC, MaThang, NgayChamCong),
-=======
     PRIMARY KEY (MaNV, MaThang, NgayChamCong),
->>>>>>> 4574ba0ab9d0dcaf1aeaff86f52e09a8f5a7727d
     CONSTRAINT fK_ctCC_MaNV FOREIGN KEY (MaNV) REFERENCES NhanVien(MaNV)
 	ON UPDATE CASCADE
     ON DELETE NO ACTION,
