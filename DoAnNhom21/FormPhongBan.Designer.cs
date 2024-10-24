@@ -274,7 +274,6 @@ namespace DoAnNhom21
             this.btnXemThongTin.Text = "Xem thông tin chi tiết";
             this.btnXemThongTin.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnXemThongTin.UseVisualStyleBackColor = false;
-            this.btnXemThongTin.Click += new System.EventHandler(this.btnXemThongTin_Click);
             // 
             // btnThem
             // 
@@ -347,7 +346,6 @@ namespace DoAnNhom21
             this.Name = "FormPhongBan";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Phòng Ban";
-            this.Load += FormPhongBan_Load;
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPhongBan)).EndInit();
             this.groupBoxThongTinPhongBan.ResumeLayout(false);
             this.groupBoxThongTinPhongBan.PerformLayout();
