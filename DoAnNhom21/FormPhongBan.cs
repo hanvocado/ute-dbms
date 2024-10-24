@@ -95,6 +95,7 @@ namespace DoAnNhom21
             }
         }
         
+<<<<<<< HEAD
         private void btnXemThongTin_Click(object sender, EventArgs e)
         {
 
@@ -125,17 +126,26 @@ namespace DoAnNhom21
         }
 
 
+=======
+>>>>>>> 1fbbd7e1384315f970f8543922ed57884bed64f4
         private void btnThoat_Click(object sender, EventArgs e)
         {
             Close();
         }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 1fbbd7e1384315f970f8543922ed57884bed64f4
         private void btnLamMoi_Click(object sender, EventArgs e)
         {
             txtMaPB.Enabled = true;
             txtMaPB.Text = txtTenPB.Text = cbbMaTrP.Text = txtSDT.Text = " ";
         }
+<<<<<<< HEAD
         
+=======
+>>>>>>> 1fbbd7e1384315f970f8543922ed57884bed64f4
 
         private void btnThongBao_Click(object sender, EventArgs e)
         {

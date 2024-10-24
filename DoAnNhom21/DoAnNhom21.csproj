@@ -12,6 +12,24 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+<<<<<<< HEAD
+=======
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+>>>>>>> 1fbbd7e1384315f970f8543922ed57884bed64f4
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -33,8 +51,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <Reference Include="System" />
     <Reference Include="System.Core" />
+=======
+    <Reference Include="Guna.UI2, Version=2.0.4.6, Culture=neutral, PublicKeyToken=8b9d14aa5142e261, processorArchitecture=MSIL">
+      <HintPath>..\packages\Guna.UI2.WinForms.2.0.4.6\lib\net48\Guna.UI2.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Web" />
+>>>>>>> 1fbbd7e1384315f970f8543922ed57884bed64f4
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -52,11 +81,25 @@
       <DependentUpon>AppDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="Connection.cs" />
+<<<<<<< HEAD
     <Compile Include="FormBaoHiemNV.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormBaoHiemNV.Designer.cs">
       <DependentUpon>FormBaoHiemNV.cs</DependentUpon>
+=======
+    <Compile Include="FormChucVu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormChucVu.Designer.cs">
+      <DependentUpon>FormChucVu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormPhuCap.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPhuCap.Designer.cs">
+      <DependentUpon>FormPhuCap.cs</DependentUpon>
+>>>>>>> 1fbbd7e1384315f970f8543922ed57884bed64f4
     </Compile>
     <Compile Include="FormQuanLyBaoHiem.cs">
       <SubType>Form</SubType>
@@ -100,6 +143,7 @@
     <Compile Include="FormThongBao.Designer.cs">
       <DependentUpon>FormThongBao.cs</DependentUpon>
     </Compile>
+<<<<<<< HEAD
     <Compile Include="FormThongTinHopDong.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -111,6 +155,13 @@
     </Compile>
     <Compile Include="FormThuongPhat.Designer.cs">
       <DependentUpon>FormThuongPhat.cs</DependentUpon>
+=======
+    <Compile Include="FormThongKeLuong.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormThongKeLuong.Designer.cs">
+      <DependentUpon>FormThongKeLuong.cs</DependentUpon>
+>>>>>>> 1fbbd7e1384315f970f8543922ed57884bed64f4
     </Compile>
     <Compile Include="FormXemChiTietPhongBan.cs">
       <SubType>Form</SubType>
@@ -120,10 +171,20 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+<<<<<<< HEAD
     <EmbeddedResource Include="FormBaoHiemNV.resx">
       <DependentUpon>FormBaoHiemNV.cs</DependentUpon>
     </EmbeddedResource>
     <Compile Include="SessionInfo.cs" />
+=======
+    <Compile Include="SessionInfo.cs" />
+    <EmbeddedResource Include="FormChucVu.resx">
+      <DependentUpon>FormChucVu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormPhuCap.resx">
+      <DependentUpon>FormPhuCap.cs</DependentUpon>
+    </EmbeddedResource>
+>>>>>>> 1fbbd7e1384315f970f8543922ed57884bed64f4
     <EmbeddedResource Include="FormQuanLyBaoHiem.resx">
       <DependentUpon>FormQuanLyBaoHiem.cs</DependentUpon>
     </EmbeddedResource>
@@ -146,11 +207,16 @@
     <EmbeddedResource Include="FormThongBao.resx">
       <DependentUpon>FormThongBao.cs</DependentUpon>
     </EmbeddedResource>
+<<<<<<< HEAD
     <EmbeddedResource Include="FormThongTinHopDong.resx">
       <DependentUpon>FormThongTinHopDong.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormThuongPhat.resx">
       <DependentUpon>FormThuongPhat.cs</DependentUpon>
+=======
+    <EmbeddedResource Include="FormThongKeLuong.resx">
+      <DependentUpon>FormThongKeLuong.cs</DependentUpon>
+>>>>>>> 1fbbd7e1384315f970f8543922ed57884bed64f4
     </EmbeddedResource>
     <EmbeddedResource Include="FormXemChiTietPhongBan.resx">
       <DependentUpon>FormXemChiTietPhongBan.cs</DependentUpon>
@@ -175,6 +241,10 @@
     <None Include="AppDataSet.xss">
       <DependentUpon>AppDataSet.xsd</DependentUpon>
     </None>
+<<<<<<< HEAD
+=======
+    <None Include="packages.config" />
+>>>>>>> 1fbbd7e1384315f970f8543922ed57884bed64f4
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -188,5 +258,20 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+<<<<<<< HEAD
+=======
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.8">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.8 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+>>>>>>> 1fbbd7e1384315f970f8543922ed57884bed64f4
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

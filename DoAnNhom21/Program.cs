@@ -13,10 +13,15 @@ namespace DoAnNhom21
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+<<<<<<< HEAD
             
             Application.Run(new FormThuongPhat());
 
 
+=======
+            //Application.Run(new FormBaoHiemNV());
+            Application.Run(new FormThongKeLuong());
+>>>>>>> 1fbbd7e1384315f970f8543922ed57884bed64f4
         }
     }
 }
