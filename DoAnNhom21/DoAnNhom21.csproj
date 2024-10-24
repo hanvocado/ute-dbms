@@ -33,8 +33,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Guna.UI2, Version=2.0.4.6, Culture=neutral, PublicKeyToken=8b9d14aa5142e261, processorArchitecture=MSIL">
+      <HintPath>..\packages\Guna.UI2.WinForms.2.0.4.6\lib\net48\Guna.UI2.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -52,6 +58,18 @@
       <DependentUpon>AppDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="Connection.cs" />
+    <Compile Include="FormChucVu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormChucVu.Designer.cs">
+      <DependentUpon>FormChucVu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormPhuCap.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPhuCap.Designer.cs">
+      <DependentUpon>FormPhuCap.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormQuanLyBaoHiem.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -94,6 +112,12 @@
     <Compile Include="FormThongBao.Designer.cs">
       <DependentUpon>FormThongBao.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormThongKeLuong.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormThongKeLuong.Designer.cs">
+      <DependentUpon>FormThongKeLuong.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormXemChiTietPhongBan.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -103,6 +127,12 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SessionInfo.cs" />
+    <EmbeddedResource Include="FormChucVu.resx">
+      <DependentUpon>FormChucVu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormPhuCap.resx">
+      <DependentUpon>FormPhuCap.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormQuanLyBaoHiem.resx">
       <DependentUpon>FormQuanLyBaoHiem.cs</DependentUpon>
     </EmbeddedResource>
@@ -148,6 +178,7 @@
     <None Include="AppDataSet.xss">
       <DependentUpon>AppDataSet.xsd</DependentUpon>
     </None>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
