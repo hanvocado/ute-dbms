@@ -52,11 +52,35 @@
       <DependentUpon>AppDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="Connection.cs" />
-    <Compile Include="FormBaoHiemNV.cs">
+    <Compile Include="FormQuanLyBaoHiem.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormBaoHiemNV.Designer.cs">
-      <DependentUpon>FormBaoHiemNV.cs</DependentUpon>
+    <Compile Include="FormQuanLyBaoHiem.Designer.cs">
+      <DependentUpon>FormQuanLyBaoHiem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormChamCong.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormChamCong.Designer.cs">
+      <DependentUpon>FormChamCong.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormNghiPhep.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormNghiPhep.Designer.cs">
+      <DependentUpon>FormNghiPhep.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormQuanLyChamCong.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormQuanLyChamCong.Designer.cs">
+      <DependentUpon>FormQuanLyChamCong.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormQuanLyThangCong.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormQuanLyThangCong.Designer.cs">
+      <DependentUpon>FormQuanLyThangCong.cs</DependentUpon>
     </Compile>
     <Compile Include="FormPhongBan.cs">
       <SubType>Form</SubType>
@@ -70,12 +94,6 @@
     <Compile Include="FormThongBao.Designer.cs">
       <DependentUpon>FormThongBao.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormThongTinHopDong.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormThongTinHopDong.Designer.cs">
-      <DependentUpon>FormThongTinHopDong.cs</DependentUpon>
-    </Compile>
     <Compile Include="FormXemChiTietPhongBan.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -84,17 +102,28 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="FormBaoHiemNV.resx">
-      <DependentUpon>FormBaoHiemNV.cs</DependentUpon>
+    <Compile Include="SessionInfo.cs" />
+    <EmbeddedResource Include="FormQuanLyBaoHiem.resx">
+      <DependentUpon>FormQuanLyBaoHiem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormChamCong.resx">
+      <DependentUpon>FormChamCong.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormNghiPhep.resx">
+      <DependentUpon>FormNghiPhep.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormQuanLyChamCong.resx">
+      <DependentUpon>FormQuanLyChamCong.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormQuanLyThangCong.resx">
+      <DependentUpon>FormQuanLyThangCong.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormPhongBan.resx">
       <DependentUpon>FormPhongBan.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormThongBao.resx">
       <DependentUpon>FormThongBao.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormThongTinHopDong.resx">
-      <DependentUpon>FormThongTinHopDong.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormXemChiTietPhongBan.resx">
       <DependentUpon>FormXemChiTietPhongBan.cs</DependentUpon>

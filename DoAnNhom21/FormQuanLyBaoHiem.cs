@@ -1,37 +1,29 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace DoAnNhom21
 {
-    public partial class FormBaoHiemNV : Form
+    public partial class FormQuanLyBaoHiem : Form
     {
-        public FormBaoHiemNV()
+        public FormQuanLyBaoHiem()
         {
             InitializeComponent();
 
             string queryMaNV = "Select MaNV from NhanVien";
-            List<string> listMaNV = Connection.LoadDataTable(queryMaNV).AsEnumerable()
-                           .Select(r => r.Field<string>("MaNV"))
-                           .ToList();
+            DataTable dtMaNV = Connection.LoadDataTable(queryMaNV);
             cbbMaNV.Items.Clear();
-            foreach (string maNV in listMaNV)
-            {
-                cbbMaNV.Items.Add(maNV);
-            }
+            cbbMaNV.DataSource = new BindingSource(dtMaNV, null);
+            cbbMaNV.DisplayMember = "MaNV";
+            cbbMaNV.ValueMember = "MaNV";
 
-            string queryLoaiBH = "Select MaLoai from BaoHiem";
-            List<string> listLoaiBH = Connection.LoadDataTable(queryLoaiBH).AsEnumerable()
-                           .Select(r => r.Field<string>("MaLoai"))
-                           .ToList();
+            string queryLoaiBH = "Select MaLoai, TenBH from BaoHiem";
+            DataTable dtLoaiBH = Connection.LoadDataTable(queryLoaiBH);
             cbbLoaiBH.Items.Clear();
-            foreach (string loai in listLoaiBH)
-            {
-                cbbLoaiBH.Items.Add(loai);
-            }
+            cbbLoaiBH.DataSource = new BindingSource(dtLoaiBH, null);
+            cbbLoaiBH.DisplayMember = "TenBH";
+            cbbLoaiBH.ValueMember = "MaLoai";
         }
 
         private void load()
@@ -54,7 +46,7 @@ namespace DoAnNhom21
                 using (SqlCommand command = new SqlCommand("INSERT INTO ctBaoHiem (MaNV, MaBH, MaLoai, NgayBD, NgayKT) VALUES (@MaNV, @MaBH, @MaLoai, @NgayBD, @NgayKT)"))
                 {
                     command.Parameters.AddWithValue("@MaNV", this.cbbMaNV.Text);
-                    command.Parameters.AddWithValue("@MaLoai", this.cbbLoaiBH.Text);
+                    command.Parameters.AddWithValue("@MaLoai", this.cbbLoaiBH.SelectedValue.ToString());
                     command.Parameters.AddWithValue("@MaBH", this.txtMaBH.Text);
                     command.Parameters.AddWithValue("@NgayBD", this.dateTimePickerNgayBD.Value);
                     command.Parameters.AddWithValue("@NgayKT", this.dateTimePickerNgayKT.Value);
@@ -75,7 +67,7 @@ namespace DoAnNhom21
             {
                 using (SqlCommand command = new SqlCommand("UPDATE ctBaoHiem SET MaLoai=@LoaiBH, NgayBD=@NgayBD, NgayKT=@NgayKT WHERE MaBH=@MaBH"))
                 {
-                    command.Parameters.AddWithValue("@LoaiBH", this.cbbLoaiBH.Text);
+                    command.Parameters.AddWithValue("@LoaiBH", this.cbbLoaiBH.SelectedValue.ToString());
                     command.Parameters.AddWithValue("@MaBH", this.txtMaBH.Text);
                     command.Parameters.AddWithValue("@NgayBD", this.dateTimePickerNgayBD.Value);
                     command.Parameters.AddWithValue("@NgayKT", this.dateTimePickerNgayKT.Value);
