@@ -79,6 +79,24 @@
     <Compile Include="FormChucVu.Designer.cs">
       <DependentUpon>FormChucVu.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormDangNhap.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormDangNhap.Designer.cs">
+      <DependentUpon>FormDangNhap.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormHopDongNhanVien.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormHopDongNhanVien.Designer.cs">
+      <DependentUpon>FormHopDongNhanVien.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormLuongNhanVien.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormLuongNhanVien.Designer.cs">
+      <DependentUpon>FormLuongNhanVien.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormPhuCap.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -109,6 +127,12 @@
     <Compile Include="FormQuanLyChamCong.Designer.cs">
       <DependentUpon>FormQuanLyChamCong.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormQuanLyNhanVien.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormQuanLyNhanVien.Designer.cs">
+      <DependentUpon>FormQuanLyNhanVien.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormQuanLyThangCong.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -133,11 +157,29 @@
     <Compile Include="FormThongKeLuong.Designer.cs">
       <DependentUpon>FormThongKeLuong.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormThongTinNhanVien.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormThongTinNhanVien.Designer.cs">
+      <DependentUpon>FormThongTinNhanVien.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormThuongPhat.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormThuongPhat.Designer.cs">
       <DependentUpon>FormThuongPhat.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormTrangChuNhanVien.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormTrangChuNhanVien.Designer.cs">
+      <DependentUpon>FormTrangChuNhanVien.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormTrangChuQuanLy.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormTrangChuQuanLy.Designer.cs">
+      <DependentUpon>FormTrangChuQuanLy.cs</DependentUpon>
     </Compile>
     <Compile Include="FormXemChiTietPhongBan.cs">
       <SubType>Form</SubType>
@@ -147,9 +189,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="FormBaoHiemNV.resx">
-      <DependentUpon>FormBaoHiemNV.cs</DependentUpon>
-    </EmbeddedResource>
     <Compile Include="SessionInfo.cs" />
     <EmbeddedResource Include="FormChucVu.resx">
       <DependentUpon>FormChucVu.cs</DependentUpon>
@@ -234,5 +273,6 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
