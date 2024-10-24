@@ -45,6 +45,7 @@ namespace DoAnNhom21
                         {
 
                             string loaiTaiKhoan = result.ToString();
+                            SessionInfo.MaNV = tenDangNhap;
 
                             // Điều hướng sang form tương ứng dựa trên LoaiTaiKhoan
                             if (loaiTaiKhoan == "LTK01")

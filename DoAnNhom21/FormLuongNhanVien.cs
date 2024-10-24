@@ -1,5 +1,6 @@
 ﻿using DoAnNhom21;
 using System;
+using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
 
@@ -26,33 +27,26 @@ namespace DoAnNhom9
 
         private void btnTinhLuong_Click(object sender, EventArgs e)
         {
-            using (SqlConnection conn = Connection.getConnection())
-            {
-                conn.Open();
-                string query = "select * from ViewTinhLuong where MaNV = @MaNv and MaThang = @MaThang";
-                SqlCommand cmd = new SqlCommand(query, conn);
-                cmd.Parameters.AddWithValue("@MaNV", txtMaNV.Text);
-                cmd.Parameters.AddWithValue("@MaThang", this.guna2DateTimePicker1.Value.ToString("MMyyyy"));
-                SqlDataReader reader = cmd.ExecuteReader();
-                if (reader.Read())
-                {
-                    txtMaNV.Text = reader["MaNV"].ToString();
-                    txtLuongCoBan.Text = reader["LuongCoBan"].ToString();
-                    txtBHTN.Text = reader["TienBaoHiemBH03"].ToString();
-                    txtBHXH.Text = reader["TienBaoHiemBH02"].ToString();
-                    txtBHYT.Text = reader["TienBaoHiemBH01"].ToString();
-                    txtPhuCap.Text = reader["TongPhuCap"].ToString();
-                    txtGiamTruGiaCanh.Text = reader["GiamTruGiaCanh"].ToString();
-                    txtLuongCoBan.Text = reader["LuongCoBan"].ToString();
-                    txtLuongThucTe.Text = reader["LuongThucTe"].ToString();
-                    txtThucLanh.Text = reader["LuongThucLanh"].ToString();
-                    txtSoNgayCongChuan.Text = reader["SoNgayCongChuan"].ToString();
-                    txtSoNgayLamViec.Text = reader["SoNgayLamViec"].ToString();
-                    txtTongBaoHiem.Text = reader["TongTienBaoHiem"].ToString();
-                    txtThue.Text = reader["ThueThuNhapCaNhan"].ToString();
-                    txtThuongPhat.Text = reader["TongThuongPhat"].ToString();
-                }
-            }
+            SqlCommand cmd = new SqlCommand("sp_TinhLuongTheoThang");
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@MaNV", SessionInfo.MaNV);
+            cmd.Parameters.AddWithValue("@MaThang", this.guna2DateTimePicker1.Value.ToString("MMyyyy"));
+            DataTable dt = Connection.LoadDataTable(cmd);
+            DataRow reader = dt.Rows[0];
+            txtMaNV.Text = reader["MaNV"].ToString();
+            txtLuongCoBan.Text = reader["LuongCoBan"].ToString();
+            txtBHTN.Text = reader["BH03"].ToString();
+            txtBHXH.Text = reader["BH02"].ToString();
+            txtBHYT.Text = reader["BH01"].ToString();
+            txtPhuCap.Text = reader["TongPhuCap"].ToString();
+            txtGiamTruGiaCanh.Text = reader["GiamTruGiaCanh"].ToString();
+            txtLuongThucTe.Text = reader["LuongChiuThue"].ToString();
+            txtThucLanh.Text = reader["LuongThucLanh"].ToString();
+            txtSoNgayCongChuan.Text = reader["SoNgayCongChuan"].ToString();
+            txtSoNgayLamViec.Text = reader["SoNgayCong"].ToString();
+            txtTongBaoHiem.Text = reader["TongTienBaoHiem"].ToString();
+            txtThue.Text = reader["Thue"].ToString();
+            txtThuongPhat.Text = reader["TongThuongPhat"].ToString();
         }
         private void btnThoat_Click(object sender, EventArgs e)
         {

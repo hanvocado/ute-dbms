@@ -556,94 +556,119 @@ AS NgayBatDauHopDong, hd.NgayKT AS NgayKetThucHopDong FROM NhanVien nv JOIN HopD
 
 GO
 
-CREATE OR ALTER PROCEDURE sp_TinhLuongTheoThang
-    @MaThang VARCHAR(6)
+---TINH LUONG---
+CREATE OR ALTER PROCEDURE sp_TinhLuongTheoThang 
+    @MaThang VARCHAR(6),
+    @MaNV VARCHAR(10) = NULL -- Thêm MaNV để chỉ tính lương cho nhân viên cụ thể
 AS
 BEGIN
-	DECLARE @ChamCongThang TABLE (
-		MaNV VARCHAR(10),
-		SoNgayCong FLOAT
-	);
-	INSERT INTO @ChamCongThang (MaNV, SoNgayCong)
-	SELECT MaNV, Sum(HeSo)
-	FROM ctChamCong ct JOIN ChamCong cc
-	ON ct.MaCC = cc.MaCC
-	WHERE MaThang = @MaThang
+    -- Bảng tạm chứa số ngày công
+    DECLARE @ChamCongThang TABLE (
+        MaNV VARCHAR(10),
+        SoNgayCong FLOAT
+    );
+    INSERT INTO @ChamCongThang (MaNV, SoNgayCong)
+    SELECT MaNV, SUM(HeSo)
+    FROM ctChamCong ct 
+    JOIN ChamCong cc ON ct.MaCC = cc.MaCC
+    WHERE MaThang = @MaThang 
+    AND (@MaNV IS NULL OR ct.MaNV = @MaNV) -- Lọc theo MaNV nếu có
     GROUP BY MaNV, MaThang;
 
-	DECLARE @NguoiPhuThuoc TABLE (
-		MaNV VARCHAR(10),
-		SoNguoiPhuThuoc INT
-	);
-	INSERT INTO @NguoiPhuThuoc (MaNV, SoNguoiPhuThuoc)
-	SELECT MaNV, COUNT(*)
-	FROM NguoiPhuThuoc
+    -- Bảng tạm chứa thông tin người phụ thuộc
+    DECLARE @NguoiPhuThuoc TABLE (
+        MaNV VARCHAR(10),
+        SoNguoiPhuThuoc INT,
+        GiamTruGiaCanh INT
+    );
+    INSERT INTO @NguoiPhuThuoc (MaNV, SoNguoiPhuThuoc, GiamTruGiaCanh)
+    SELECT MaNV, COUNT(*), ISNULL(COUNT(*), 0) * 4400000
+    FROM NguoiPhuThuoc
+    WHERE (@MaNV IS NULL OR MaNV = @MaNV) -- Lọc theo MaNV nếu có
     GROUP BY MaNV;
 
-	DECLARE @PhuCapThang TABLE (
-		MaNV VARCHAR(10),
-		TongPhuCap INT
-	);
-	INSERT INTO @PhuCapThang (MaNV, TongPhuCap)
-	SELECT MaNV, ISNULL(SUM(SoTien), 0)
-	FROM ctPhuCap
-	WHERE MaThang = @MaThang
+    -- Bảng tạm chứa phụ cấp tháng
+    DECLARE @PhuCapThang TABLE (
+        MaNV VARCHAR(10),
+        TongPhuCap INT DEFAULT 0
+    );
+    INSERT INTO @PhuCapThang (MaNV, TongPhuCap)
+    SELECT MaNV, ISNULL(SUM(SoTien), 0)
+    FROM ctPhuCap
+    WHERE MaThang = @MaThang
+    AND (@MaNV IS NULL OR MaNV = @MaNV) -- Lọc theo MaNV nếu có
     GROUP BY MaNV, MaThang;
 
-	DECLARE @ThuongPhatThang TABLE (
-		MaNV VARCHAR(10),
-		TongThuongPhat INT
-	);
-	INSERT INTO @ThuongPhatThang (MaNV, TongThuongPhat)
-	SELECT MaNV, ISNULL(SUM(SoTien), 0)
-	FROM ctThuongPhat ctp
+    -- Bảng tạm chứa thưởng phạt tháng
+    DECLARE @ThuongPhatThang TABLE (
+        MaNV VARCHAR(10),
+        TongThuongPhat INT DEFAULT 0
+    );
+    INSERT INTO @ThuongPhatThang (MaNV, TongThuongPhat)
+    SELECT MaNV, ISNULL(SUM(SoTien), 0)
+    FROM ctThuongPhat ctp
     JOIN ThuongPhat tp ON ctp.MaThuongPhat = tp.MaThuongPhat
-	WHERE MaThang = @MaThang
+    WHERE MaThang = @MaThang
+    AND (@MaNV IS NULL OR ctp.MaNV = @MaNV) -- Lọc theo MaNV nếu có
     GROUP BY MaNV, MaThang;
 
-	DECLARE @BaoHiem TABLE (
-		MaNV VARCHAR(10),
-		BH01 FLOAT,
-		BH02 FLOAT,
-		BH03 FLOAT
-	);
-	INSERT INTO @BaoHiem (MaNV, BH01, BH02, BH03)
-	SELECT bh.MaNV,
+    -- Bảng tạm chứa bảo hiểm
+    DECLARE @BaoHiem TABLE (
+        MaNV VARCHAR(10),
+        BH01 FLOAT DEFAULT 0,
+        BH02 FLOAT DEFAULT 0,
+        BH03 FLOAT DEFAULT 0
+    );
+    INSERT INTO @BaoHiem (MaNV, BH01, BH02, BH03)
+    SELECT bh.MaNV,
            SUM(CASE WHEN bh.MaLoai = 'BH01' THEN 0.015 * hd.LuongCoBan ELSE 0 END),
            SUM(CASE WHEN bh.MaLoai = 'BH02' THEN 0.01 * hd.LuongCoBan ELSE 0 END),
            SUM(CASE WHEN bh.MaLoai = 'BH03' THEN 0.08 * hd.LuongCoBan ELSE 0 END)
     FROM ctBaoHiem bh
     JOIN HopDong hd ON bh.MaNV = hd.MaNV
+    WHERE (@MaNV IS NULL OR bh.MaNV = @MaNV) -- Lọc theo MaNV nếu có
     GROUP BY bh.MaNV;
 
-	DECLARE @SoNgayCongChuan INT;
-	SELECT @SoNgayCongChuan = SoNgayCongChuan
-	FROM Thang WHERE MaThang = @MaThang;
+    -- Số ngày công chuẩn
+    DECLARE @SoNgayCongChuan INT;
+    SELECT @SoNgayCongChuan = SoNgayCongChuan
+    FROM Thang WHERE MaThang = @MaThang;
 
-	DECLARE @LuongChiuThue TABLE (
-		MaNV VARCHAR(10),
-		LuongChiuThue INT
-	);
-	INSERT INTO @LuongChiuThue (MaNV, LuongChiuThue)
-	SELECT 
-		nv.MaNV,
-		( ( (hd.LuongCoBan / @SoNgayCongChuan * ISNULL(cc.SoNgayCong, 0)) + ISNULL(pc.TongPhuCap, 0) + ISNULL(tp.TongThuongPhat, 0) )
-    - (ISNULL(bhct.BH01, 0) + ISNULL(bhct.BH02, 0) + ISNULL(bhct.BH03, 0)) - ISNULL(npt.SoNguoiPhuThuoc, 0) * 4400000)
-	FROM NhanVien nv
-	JOIN HopDong hd ON nv.MaNV = hd.MaNV
-	LEFT JOIN @ChamCongThang cc ON nv.MaNV = cc.MaNV
-	LEFT JOIN @NguoiPhuThuoc npt ON nv.MaNV = npt.MaNV
-	LEFT JOIN @PhuCapThang pc ON nv.MaNV = pc.MaNV
-	LEFT JOIN @ThuongPhatThang tp ON nv.MaNV = tp.MaNV
-	LEFT JOIN @BaoHiem bhct ON nv.MaNV = bhct.MaNV;
+    -- Tính lương chịu thuế
+    DECLARE @LuongChiuThue TABLE (
+        MaNV VARCHAR(10),
+        LuongCoBan INT,
+        GiamTruGiaCanh INT,
+        TongPhuCap INT,
+        TongThuongPhat INT,
+        BH01 INT, BH02 INT, BH03 INT,
+        TongTienBaoHiem INT,
+        SoNgayCong INT,
+        LuongChiuThue INT
+    );
+    INSERT INTO @LuongChiuThue (MaNV, LuongCoBan, GiamTruGiaCanh, TongPhuCap, TongThuongPhat, BH01, BH02, BH03, TongTienBaoHiem, SoNgayCong, LuongChiuThue)
+    SELECT 
+        nv.MaNV, LuongCoBan, ISNULL(npt.GiamTruGiaCanh, 0), ISNULL(pc.TongPhuCap, 0), ISNULL(tp.TongThuongPhat, 0),
+        BH01, BH02, BH03, ISNULL(bhct.BH01, 0) + ISNULL(bhct.BH02, 0) + ISNULL(bhct.BH03, 0), ISNULL(SoNgayCong, 0),
+        ( ( (hd.LuongCoBan / @SoNgayCongChuan * ISNULL(cc.SoNgayCong, 0)) + ISNULL(pc.TongPhuCap, 0) + ISNULL(tp.TongThuongPhat, 0) )
+    - (ISNULL(bhct.BH01, 0) + ISNULL(bhct.BH02, 0) + ISNULL(bhct.BH03, 0)) - ISNULL(npt.GiamTruGiaCanh, 0))
+    FROM NhanVien nv
+    JOIN HopDong hd ON nv.MaNV = hd.MaNV
+    LEFT JOIN @ChamCongThang cc ON nv.MaNV = cc.MaNV
+    LEFT JOIN @NguoiPhuThuoc npt ON nv.MaNV = npt.MaNV
+    LEFT JOIN @PhuCapThang pc ON nv.MaNV = pc.MaNV
+    LEFT JOIN @ThuongPhatThang tp ON nv.MaNV = tp.MaNV
+    LEFT JOIN @BaoHiem bhct ON nv.MaNV = bhct.MaNV
+    WHERE @MaNV IS NULL OR nv.MaNV = @MaNV; -- Lọc theo MaNV nếu có
 
-	DECLARE @ThueThuNhapCaNhan TABLE (
-		MaNV VARCHAR(10),
-		Thue INT
-	);
-	INSERT INTO @ThueThuNhapCaNhan (MaNV, Thue)
-	SELECT nv.MaNV,
-		CASE
+    -- Tính thuế thu nhập cá nhân
+    DECLARE @ThueThuNhapCaNhan TABLE (
+        MaNV VARCHAR(10),
+        Thue INT
+    );
+    INSERT INTO @ThueThuNhapCaNhan (MaNV, Thue)
+    SELECT nv.MaNV,
+        CASE
             WHEN LuongChiuThue <= 5000000
                 THEN LuongChiuThue * 5 / 100
             WHEN LuongChiuThue <= 10000000
@@ -658,15 +683,20 @@ BEGIN
                 THEN LuongChiuThue * 30 / 100
             ELSE LuongChiuThue * 35 / 100
         END AS ThueThuNhapCaNhan
-	FROM NhanVien nv
-	LEFT JOIN @LuongChiuThue lct 
-	ON nv.MaNV = lct.MaNV;
+    FROM NhanVien nv
+    LEFT JOIN @LuongChiuThue lct ON nv.MaNV = lct.MaNV
+    WHERE @MaNV IS NULL OR nv.MaNV = @MaNV; -- Lọc theo MaNV nếu có
 
-	SELECT nv.MaNV, Ho, Ten, SoNgayCong, (LuongChiuThue - Thue) AS LuongThucLanh
-	FROM NhanVien nv
-	LEFT JOIN @ChamCongThang cc ON nv.MaNV = cc.MaNV
-	LEFT JOIN @LuongChiuThue pc ON nv.MaNV = pc.MaNV
-	LEFT JOIN @ThueThuNhapCaNhan tp ON nv.MaNV = tp.MaNV;
+    -- Kết quả lương của nhân viên
+    SELECT nv.MaNV, Ho, Ten, LuongCoBan, BH01, BH02, BH03,
+            (BH01 + BH02 + BH03) AS TongTienBaoHiem,
+            @SoNgayCongChuan AS SoNgayCongChuan,
+            TongPhuCap, GiamTruGiaCanh, LuongChiuThue, 
+            SoNgayCong, Thue, TongThuongPhat, (LuongChiuThue - Thue) AS LuongThucLanh
+    FROM NhanVien nv
+    LEFT JOIN @LuongChiuThue lct ON nv.MaNV = lct.MaNV
+    LEFT JOIN @ThueThuNhapCaNhan thue ON nv.MaNV = thue.MaNV
+    WHERE @MaNV IS NULL OR nv.MaNV = @MaNV; -- Lọc theo MaNV nếu có
 END;
 
 GO
