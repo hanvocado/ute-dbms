@@ -37,15 +37,29 @@ namespace DoAnNhom21
             this.cbbMaThang = new System.Windows.Forms.ComboBox();
             this.lblNgayNghiPhep = new System.Windows.Forms.Label();
             this.btnXemLuong = new System.Windows.Forms.Button();
+            this.MaNV = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Ho = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Ten = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LuongChiuThue = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Thue = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LuongThucLanh = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLuong)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvLuong
             // 
-            this.dgvLuong.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvLuong.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvLuong.ColumnHeadersHeight = 34;
+            this.dgvLuong.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.MaNV,
+            this.Ho,
+            this.Ten,
+            this.LuongChiuThue,
+            this.Thue,
+            this.LuongThucLanh});
             this.dgvLuong.Location = new System.Drawing.Point(38, 157);
             this.dgvLuong.Name = "dgvLuong";
-            this.dgvLuong.RowHeadersWidth = 51;
+            this.dgvLuong.RowHeadersWidth = 120;
             this.dgvLuong.Size = new System.Drawing.Size(1105, 576);
             this.dgvLuong.TabIndex = 3;
             // 
@@ -82,6 +96,50 @@ namespace DoAnNhom21
             this.btnXemLuong.UseVisualStyleBackColor = false;
             this.btnXemLuong.Click += new System.EventHandler(this.btnXemLuong_Click);
             // 
+            // MaNV
+            // 
+            this.MaNV.DataPropertyName = "MaNV";
+            this.MaNV.HeaderText = "Mã NV";
+            this.MaNV.MinimumWidth = 8;
+            this.MaNV.Name = "MaNV";
+            // 
+            // Ho
+            // 
+            this.Ho.DataPropertyName = "Ho";
+            this.Ho.HeaderText = "Họ";
+            this.Ho.MinimumWidth = 8;
+            this.Ho.Name = "Ho";
+            // 
+            // Ten
+            // 
+            this.Ten.DataPropertyName = "Ten";
+            this.Ten.HeaderText = "Tên";
+            this.Ten.MinimumWidth = 8;
+            this.Ten.Name = "Ten";
+            // 
+            // LuongChiuThue
+            // 
+            this.LuongChiuThue.DataPropertyName = "LuongChiuThue";
+            this.LuongChiuThue.HeaderText = "Lương Chịu Thuế";
+            this.LuongChiuThue.MinimumWidth = 8;
+            this.LuongChiuThue.Name = "LuongChiuThue";
+            // 
+            // Thue
+            // 
+            this.Thue.DataPropertyName = "Thue";
+            this.Thue.HeaderText = "Thuế thu nhập cá nhân";
+            this.Thue.MinimumWidth = 8;
+            this.Thue.Name = "Thue";
+            // 
+            // LuongThucLanh
+            // 
+            this.LuongThucLanh.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.LuongThucLanh.DataPropertyName = "LuongThucLanh";
+            this.LuongThucLanh.HeaderText = "Lương Thực Lãnh";
+            this.LuongThucLanh.MinimumWidth = 8;
+            this.LuongThucLanh.Name = "LuongThucLanh";
+            this.LuongThucLanh.Width = 169;
+            // 
             // FormThongKeLuong
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -101,9 +159,15 @@ namespace DoAnNhom21
         }
 
         #endregion
-        private DataGridView dgvLuong;
         private ComboBox cbbMaThang;
         private Label lblNgayNghiPhep;
         private Button btnXemLuong;
+        private DataGridViewTextBoxColumn MaNV;
+        private DataGridViewTextBoxColumn Ho;
+        private DataGridViewTextBoxColumn Ten;
+        private DataGridViewTextBoxColumn LuongChiuThue;
+        private DataGridViewTextBoxColumn Thue;
+        private DataGridViewTextBoxColumn LuongThucLanh;
+        private DataGridView dgvLuong;
     }
 }

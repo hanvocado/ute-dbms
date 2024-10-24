@@ -19,6 +19,7 @@ namespace DoAnNhom21
             cbbMaThang.DataSource = new BindingSource(dtThang, null);
             cbbMaThang.DisplayMember = "MoTa";
             cbbMaThang.ValueMember = "MaThang";
+            dgvLuong.AutoGenerateColumns = false;
         }
 
         private void FormThongKeLuong_Load(object sender, EventArgs e)
