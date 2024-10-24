@@ -687,8 +687,6 @@ BEGIN
 	LEFT JOIN @ChamCongThang cc ON nv.MaNV = cc.MaNV
 	LEFT JOIN @LuongChiuThue pc ON nv.MaNV = pc.MaNV
 	LEFT JOIN @ThueThuNhapCaNhan tp ON nv.MaNV = tp.MaNV;
-
-	select * from @ThueThuNhapCaNhan;
 END;
 
 GO
