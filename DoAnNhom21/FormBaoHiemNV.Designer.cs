@@ -47,12 +47,12 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.cbbMaNV = new System.Windows.Forms.ComboBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnLamMoi = new System.Windows.Forms.Button();
             this.btnSua = new System.Windows.Forms.Button();
             this.btnXoa = new System.Windows.Forms.Button();
             this.btnTim = new System.Windows.Forms.Button();
             this.btnThem = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.btnLamMoi = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewBaoHiemNV)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -126,7 +126,7 @@
             this.lblMaNV.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMaNV.Location = new System.Drawing.Point(92, 54);
             this.lblMaNV.Name = "lblMaNV";
-            this.lblMaNV.Size = new System.Drawing.Size(156, 27);
+            this.lblMaNV.Size = new System.Drawing.Size(97, 19);
             this.lblMaNV.TabIndex = 1;
             this.lblMaNV.Text = "Mã nhân viên: ";
             // 
@@ -136,7 +136,7 @@
             this.lblLoaiBH.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblLoaiBH.Location = new System.Drawing.Point(92, 108);
             this.lblLoaiBH.Name = "lblLoaiBH";
-            this.lblLoaiBH.Size = new System.Drawing.Size(162, 27);
+            this.lblLoaiBH.Size = new System.Drawing.Size(102, 19);
             this.lblLoaiBH.TabIndex = 1;
             this.lblLoaiBH.Text = "Loại bảo hiểm: ";
             // 
@@ -146,7 +146,7 @@
             this.lblNgayKT.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNgayKT.Location = new System.Drawing.Point(474, 106);
             this.lblNgayKT.Name = "lblNgayKT";
-            this.lblNgayKT.Size = new System.Drawing.Size(159, 27);
+            this.lblNgayKT.Size = new System.Drawing.Size(101, 19);
             this.lblNgayKT.TabIndex = 1;
             this.lblNgayKT.Text = "Ngày kết thúc: ";
             // 
@@ -156,7 +156,7 @@
             this.lblMaBH.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMaBH.Location = new System.Drawing.Point(92, 162);
             this.lblMaBH.Name = "lblMaBH";
-            this.lblMaBH.Size = new System.Drawing.Size(150, 27);
+            this.lblMaBH.Size = new System.Drawing.Size(96, 19);
             this.lblMaBH.TabIndex = 1;
             this.lblMaBH.Text = "Mã bảo hiểm: ";
             // 
@@ -166,7 +166,7 @@
             this.lblNgayBD.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNgayBD.Location = new System.Drawing.Point(474, 60);
             this.lblNgayBD.Name = "lblNgayBD";
-            this.lblNgayBD.Size = new System.Drawing.Size(152, 27);
+            this.lblNgayBD.Size = new System.Drawing.Size(98, 19);
             this.lblNgayBD.TabIndex = 1;
             this.lblNgayBD.Text = "Ngày bắt đầu: ";
             // 
@@ -176,7 +176,7 @@
             this.cbbLoaiBH.FormattingEnabled = true;
             this.cbbLoaiBH.Location = new System.Drawing.Point(255, 100);
             this.cbbLoaiBH.Name = "cbbLoaiBH";
-            this.cbbLoaiBH.Size = new System.Drawing.Size(155, 35);
+            this.cbbLoaiBH.Size = new System.Drawing.Size(155, 27);
             this.cbbLoaiBH.TabIndex = 2;
             // 
             // txtMaBH
@@ -185,7 +185,7 @@
             this.txtMaBH.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtMaBH.Location = new System.Drawing.Point(255, 160);
             this.txtMaBH.Name = "txtMaBH";
-            this.txtMaBH.Size = new System.Drawing.Size(155, 35);
+            this.txtMaBH.Size = new System.Drawing.Size(155, 26);
             this.txtMaBH.TabIndex = 3;
             // 
             // dateTimePickerNgayBD
@@ -195,7 +195,7 @@
             this.dateTimePickerNgayBD.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePickerNgayBD.Location = new System.Drawing.Point(617, 54);
             this.dateTimePickerNgayBD.Name = "dateTimePickerNgayBD";
-            this.dateTimePickerNgayBD.Size = new System.Drawing.Size(200, 35);
+            this.dateTimePickerNgayBD.Size = new System.Drawing.Size(200, 26);
             this.dateTimePickerNgayBD.TabIndex = 4;
             // 
             // dateTimePickerNgayKT
@@ -205,7 +205,7 @@
             this.dateTimePickerNgayKT.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePickerNgayKT.Location = new System.Drawing.Point(617, 100);
             this.dateTimePickerNgayKT.Name = "dateTimePickerNgayKT";
-            this.dateTimePickerNgayKT.Size = new System.Drawing.Size(200, 35);
+            this.dateTimePickerNgayKT.Size = new System.Drawing.Size(200, 26);
             this.dateTimePickerNgayKT.TabIndex = 4;
             // 
             // groupBox1
@@ -243,7 +243,7 @@
             this.cbbMaNV.FormattingEnabled = true;
             this.cbbMaNV.Location = new System.Drawing.Point(255, 54);
             this.cbbMaNV.Name = "cbbMaNV";
-            this.cbbMaNV.Size = new System.Drawing.Size(155, 35);
+            this.cbbMaNV.Size = new System.Drawing.Size(155, 27);
             this.cbbMaNV.TabIndex = 2;
             // 
             // groupBox2
@@ -260,6 +260,21 @@
             this.groupBox2.TabIndex = 10;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "CHỨC NĂNG";
+            // 
+            // btnLamMoi
+            // 
+            this.btnLamMoi.BackColor = System.Drawing.Color.LavenderBlush;
+            this.btnLamMoi.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLamMoi.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLamMoi.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnLamMoi.Location = new System.Drawing.Point(708, 40);
+            this.btnLamMoi.Name = "btnLamMoi";
+            this.btnLamMoi.Size = new System.Drawing.Size(155, 40);
+            this.btnLamMoi.TabIndex = 9;
+            this.btnLamMoi.Text = "Làm mới";
+            this.btnLamMoi.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnLamMoi.UseVisualStyleBackColor = false;
+            this.btnLamMoi.Click += new System.EventHandler(this.btnLamMoi_Click);
             // 
             // btnSua
             // 
@@ -332,27 +347,12 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "DANH SÁCH BẢO HIỂM";
             // 
-            // btnLamMoi
-            // 
-            this.btnLamMoi.BackColor = System.Drawing.Color.LavenderBlush;
-            this.btnLamMoi.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLamMoi.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLamMoi.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnLamMoi.Location = new System.Drawing.Point(708, 40);
-            this.btnLamMoi.Name = "btnLamMoi";
-            this.btnLamMoi.Size = new System.Drawing.Size(155, 40);
-            this.btnLamMoi.TabIndex = 9;
-            this.btnLamMoi.Text = "Làm mới";
-            this.btnLamMoi.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnLamMoi.UseVisualStyleBackColor = false;
-            this.btnLamMoi.Click += new System.EventHandler(this.btnLamMoi_Click);
-            // 
             // FormBaoHiemNV
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.ClientSize = new System.Drawing.Size(1059, 848);
+            this.ClientSize = new System.Drawing.Size(1060, 845);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox3);
