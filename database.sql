@@ -113,7 +113,7 @@ GO
 CREATE TABLE ChamCong (
     MaCC NVARCHAR(10) PRIMARY KEY,
     MoTa NVARCHAR(MAX),
-    HeSo INT NOT NULL
+    HeSo FLOAT NOT NULL
 );
 GO
 CREATE TABLE ctChamCong (
@@ -121,7 +121,7 @@ CREATE TABLE ctChamCong (
     MaCC NVARCHAR(10) NOT NULL,
     MaThang NVARCHAR(6) NOT NULL,
     NgayChamCong INT NOT NULL,
-    PRIMARY KEY (MaNV, MaCC, MaThang, NgayChamCong),
+    PRIMARY KEY (MaNV, MaThang, NgayChamCong),
     CONSTRAINT fK_ctCC_MaNV FOREIGN KEY (MaNV) REFERENCES NhanVien(MaNV)
 	ON UPDATE CASCADE
     ON DELETE NO ACTION,
@@ -365,5 +365,328 @@ VALUES
 ('NV03', 'PC03', '032023', 20, 400000),
 ('NV04', 'PC01', '042023', 25, 200000);
 
+GO
 
+CREATE OR ALTER PROCEDURE sp_GetChamCongByMaNV
+    @MaNV VARCHAR(10)
+AS
+BEGIN
+    SELECT 
+        ct.NgayChamCong, 
+        thg.MoTa AS Thang, 
+        cong.MoTa AS MoTa, 
+        cong.HeSo
+    FROM 
+        ctChamCong ct
+    JOIN 
+        ChamCong cong ON cong.MaCC = ct.MaCC
+    JOIN 
+        Thang thg ON thg.MaThang = ct.MaThang
+    WHERE 
+        ct.MaNV = @MaNV;
+END;
 
+GO
+
+CREATE OR ALTER PROCEDURE sp_AddctChamCong
+    @MaNV VARCHAR(10),
+    @MaCC VARCHAR(10),
+    @MaThang VARCHAR(6),
+    @NgayChamCong int
+AS
+BEGIN
+	IF EXISTS (SELECT 1 FROM ctChamCong WHERE MaNV = @MaNV AND MaThang = @MaThang AND NgayChamCong = @NgayChamCong)
+		BEGIN
+			RAISERROR('Đã chấm công cho ngày này', 16, 1);
+		END
+    ELSE
+		BEGIN
+			INSERT INTO ctChamCong (MaNV, MaCC, MaThang, NgayChamCong)
+			VALUES (@MaNV, @MaCC, @MaThang, @NgayChamCong);
+		END    
+END;
+
+GO
+
+CREATE OR ALTER PROCEDURE sp_GetAllctChamCong
+AS
+BEGIN
+    SELECT 
+		ct.MaNV,
+        ct.NgayChamCong, 
+        thg.MoTa AS Thang, 
+        cong.MoTa AS MoTa, 
+        cong.HeSo
+    FROM 
+        ctChamCong ct
+    JOIN 
+        ChamCong cong ON cong.MaCC = ct.MaCC
+    JOIN 
+        Thang thg ON thg.MaThang = ct.MaThang
+END;
+
+GO
+
+CREATE OR ALTER PROCEDURE sp_GetctChamCong
+    @MaNV VARCHAR(10),
+	@MaThang VARCHAR(6)
+AS
+BEGIN
+	IF (@MaThang IS NULL)
+		BEGIN
+			SELECT 
+				ct.MaNV,
+				ct.NgayChamCong, 
+				thg.MoTa AS Thang, 
+				cong.MoTa AS MoTa, 
+				cong.HeSo
+			FROM 
+				ctChamCong ct
+			JOIN 
+				ChamCong cong ON cong.MaCC = ct.MaCC
+			JOIN 
+				Thang thg ON thg.MaThang = ct.MaThang
+			WHERE 
+				ct.MaNV = @MaNV;
+		END
+	ELSE
+	   	BEGIN
+			SELECT 
+				ct.MaNV,
+				ct.NgayChamCong, 
+				thg.MoTa AS Thang, 
+				cong.MoTa AS MoTa, 
+				cong.HeSo
+			FROM 
+				ctChamCong ct
+			JOIN 
+				ChamCong cong ON cong.MaCC = ct.MaCC
+			JOIN 
+				Thang thg ON thg.MaThang = ct.MaThang
+			WHERE 
+				ct.MaNV = @MaNV and ct.MaThang = @MaThang;
+		END
+END;
+
+GO
+
+CREATE OR ALTER PROCEDURE sp_UpdatectChamCong
+    @MaNV VARCHAR(10),
+    @MaCC VARCHAR(10),
+    @MaThang VARCHAR(6),
+    @NgayChamCong int
+AS
+BEGIN
+    -- Kiểm tra xem bản ghi có tồn tại trước khi cập nhật
+    IF EXISTS (SELECT 1 FROM ctChamCong WHERE MaNV = @MaNV AND MaThang = @MaThang AND NgayChamCong = @NgayChamCong)
+    BEGIN
+        UPDATE ctChamCong
+        SET MaCC = @MaCC
+        WHERE MaNV = @MaNV AND MaThang = @MaThang AND NgayChamCong = @NgayChamCong;
+    END
+    ELSE
+    BEGIN
+        RAISERROR('Record not found', 16, 1);
+    END
+END;
+
+GO
+
+CREATE OR ALTER PROCEDURE sp_DeletectChamCong
+    @MaNV VARCHAR(10),
+    @MaThang VARCHAR(6),
+    @NgayChamCong int
+AS
+BEGIN
+        DELETE FROM ctChamCong WHERE MaNV = @MaNV AND MaThang = @MaThang AND NgayChamCong = @NgayChamCong;
+END;
+
+GO
+
+CREATE OR ALTER PROCEDURE sp_AddNghiPhep
+    @MaNV VARCHAR(10),
+    @MaThang VARCHAR(6),
+    @NgayNghiPhep int,
+	@GhiChu NVARCHAR(MAX)
+AS
+BEGIN
+	DECLARE @Nam VARCHAR(4);
+	DECLARE @SoNgayDaNghi INT;
+	DECLARE @MaCC VARCHAR(10);
+
+	SELECT @Nam = SUBSTRING(@MaThang, 3, 4);  -- start tính từ 1, length
+	SELECT @SoNgayDaNghi = COUNT(*) FROM NghiPhep 
+	WHERE MaNV = @MaNV AND RIGHT(MaThang, 4) = @Nam; -- 4 ký tự cuối của MaThang giống với @Nam
+
+	IF (@SoNgayDaNghi >= 12)
+		SELECT @MaCC = MaCC FROM ChamCong WHERE MoTa like N'%ghỉ không lương%';
+	ELSE
+		SELECT @MaCC = MaCC FROM ChamCong WHERE MoTa like N'%ghỉ phép năm%';
+
+	BEGIN TRANSACTION;
+	BEGIN TRY
+		INSERT INTO NghiPhep (MaNV, MaThang, NgayNghiPhep, GhiChu) VALUES (@MaNV, @MaThang, @NgayNghiPhep, @GhiChu);
+		INSERT INTO ctChamCong (MaNV, MaCC, MaThang, NgayChamCong) VALUES (@MaNV, @MaCC, @MaThang, @NgayNghiPhep);
+		COMMIT TRANSACTION
+	END TRY
+	BEGIN CATCH
+		ROLLBACK TRANSACTION;
+		DECLARE @ErrorMessage NVARCHAR(4000);
+		SELECT @ErrorMessage = ERROR_MESSAGE();
+		RAISERROR(@ErrorMessage, 16, 1);
+	END CATCH
+END;
+
+GO
+
+CREATE OR ALTER PROCEDURE sp_GetNghiPhepByMaNV
+    @MaNV VARCHAR(10)
+AS
+BEGIN
+    SELECT 
+        NgayNghiPhep, 
+        thg.MoTa AS Thang, 
+        GhiChu
+    FROM 
+        NghiPhep np
+    JOIN 
+        Thang thg ON thg.MaThang = np.MaThang
+    WHERE 
+        MaNV = @MaNV;
+END;
+
+GO
+
+-----------------VIEW NHAN VIEN-------------
+CREATE OR ALTER VIEW v_QuanLyNhanVien AS SELECT nv.MaNV, nv.Ho, nv.Ten, nv.GioiTinh, nv.NgaySinh, nv.DiaChi, nv.SDT, nv.Email, nv.CCCD, pb.TenPB AS TenPhongBan, cv.TenCV AS TenChucVu
+FROM NhanVien nv JOIN PhongBan pb ON nv.MaPB = pb.MaPB JOIN ChucVu cv ON nv.MaCV = cv.MaCV;
+
+GO
+
+-----------------VIEW BAO HIEM--------------
+CREATE OR ALTER VIEW v_QuanLyBaoHiem AS SELECT nv.MaNV, nv.Ho, nv.Ten, bh.MaLoai
+AS MaBaoHiem, bh.TenBH, ctbh.MaBH, ctbh.NgayBD AS NgayBatDauBaoHiem, ctbh.NgayKT AS NgayKetThucBaoHiem
+FROM NhanVien nv JOIN ctBaoHiem ctbh ON nv.MaNV = ctbh.MaNV JOIN BaoHiem bh ON ctbh.MaLoai = bh.MaLoai;
+
+GO
+
+-----------------VIEW HOP DONG---------------
+CREATE OR ALTER VIEW v_QuanLyHopDong AS SELECT nv.MaNV, nv.Ho, nv.Ten, hd.MaHD, hd.LuongCoBan, hd.NgayBD
+AS NgayBatDauHopDong, hd.NgayKT AS NgayKetThucHopDong FROM NhanVien nv JOIN HopDong hd ON nv.MaHD = hd.MaHD;
+
+GO
+
+CREATE OR ALTER PROCEDURE sp_TinhLuongTheoThang
+    @MaThang VARCHAR(6)
+AS
+BEGIN
+	DECLARE @ChamCongThang TABLE (
+		MaNV VARCHAR(10),
+		SoNgayCong FLOAT
+	);
+	INSERT INTO @ChamCongThang (MaNV, SoNgayCong)
+	SELECT MaNV, Sum(HeSo)
+	FROM ctChamCong ct JOIN ChamCong cc
+	ON ct.MaCC = cc.MaCC
+	WHERE MaThang = @MaThang
+    GROUP BY MaNV, MaThang;
+
+	DECLARE @NguoiPhuThuoc TABLE (
+		MaNV VARCHAR(10),
+		SoNguoiPhuThuoc INT
+	);
+	INSERT INTO @NguoiPhuThuoc (MaNV, SoNguoiPhuThuoc)
+	SELECT MaNV, COUNT(*)
+	FROM NguoiPhuThuoc
+    GROUP BY MaNV;
+
+	DECLARE @PhuCapThang TABLE (
+		MaNV VARCHAR(10),
+		TongPhuCap INT
+	);
+	INSERT INTO @PhuCapThang (MaNV, TongPhuCap)
+	SELECT MaNV, ISNULL(SUM(SoTien), 0)
+	FROM ctPhuCap
+	WHERE MaThang = @MaThang
+    GROUP BY MaNV, MaThang;
+
+	DECLARE @ThuongPhatThang TABLE (
+		MaNV VARCHAR(10),
+		TongThuongPhat INT
+	);
+	INSERT INTO @ThuongPhatThang (MaNV, TongThuongPhat)
+	SELECT MaNV, ISNULL(SUM(SoTien), 0)
+	FROM ctThuongPhat ctp
+    JOIN ThuongPhat tp ON ctp.MaThuongPhat = tp.MaThuongPhat
+	WHERE MaThang = @MaThang
+    GROUP BY MaNV, MaThang;
+
+	DECLARE @BaoHiem TABLE (
+		MaNV VARCHAR(10),
+		BH01 FLOAT,
+		BH02 FLOAT,
+		BH03 FLOAT
+	);
+	INSERT INTO @BaoHiem (MaNV, BH01, BH02, BH03)
+	SELECT bh.MaNV,
+           SUM(CASE WHEN bh.MaLoai = 'BH01' THEN 0.015 * hd.LuongCoBan ELSE 0 END),
+           SUM(CASE WHEN bh.MaLoai = 'BH02' THEN 0.01 * hd.LuongCoBan ELSE 0 END),
+           SUM(CASE WHEN bh.MaLoai = 'BH03' THEN 0.08 * hd.LuongCoBan ELSE 0 END)
+    FROM ctBaoHiem bh
+    JOIN HopDong hd ON bh.MaNV = hd.MaNV
+    GROUP BY bh.MaNV;
+
+	DECLARE @SoNgayCongChuan INT;
+	SELECT @SoNgayCongChuan = SoNgayCongChuan
+	FROM Thang WHERE MaThang = @MaThang;
+
+	DECLARE @LuongChiuThue TABLE (
+		MaNV VARCHAR(10),
+		LuongChiuThue INT
+	);
+	INSERT INTO @LuongChiuThue (MaNV, LuongChiuThue)
+	SELECT 
+		nv.MaNV,
+		( ( (hd.LuongCoBan / @SoNgayCongChuan * ISNULL(cc.SoNgayCong, 0)) + ISNULL(pc.TongPhuCap, 0) + ISNULL(tp.TongThuongPhat, 0) )
+    - (ISNULL(bhct.BH01, 0) + ISNULL(bhct.BH02, 0) + ISNULL(bhct.BH03, 0)) - ISNULL(npt.SoNguoiPhuThuoc, 0) * 4400000)
+	FROM NhanVien nv
+	JOIN HopDong hd ON nv.MaNV = hd.MaNV
+	LEFT JOIN @ChamCongThang cc ON nv.MaNV = cc.MaNV
+	LEFT JOIN @NguoiPhuThuoc npt ON nv.MaNV = npt.MaNV
+	LEFT JOIN @PhuCapThang pc ON nv.MaNV = pc.MaNV
+	LEFT JOIN @ThuongPhatThang tp ON nv.MaNV = tp.MaNV
+	LEFT JOIN @BaoHiem bhct ON nv.MaNV = bhct.MaNV;
+
+	DECLARE @ThueThuNhapCaNhan TABLE (
+		MaNV VARCHAR(10),
+		Thue INT
+	);
+	INSERT INTO @ThueThuNhapCaNhan (MaNV, Thue)
+	SELECT nv.MaNV,
+		CASE
+            WHEN LuongChiuThue <= 5000000
+                THEN LuongChiuThue * 5 / 100
+            WHEN LuongChiuThue <= 10000000
+                THEN LuongChiuThue * 10 / 100
+            WHEN LuongChiuThue <= 18000000
+                THEN LuongChiuThue * 15 / 100
+            WHEN LuongChiuThue <= 32000000
+                THEN LuongChiuThue * 20 / 100
+            WHEN LuongChiuThue <= 52000000
+                THEN LuongChiuThue * 25 / 100
+            WHEN LuongChiuThue <= 80000000
+                THEN LuongChiuThue * 30 / 100
+            ELSE LuongChiuThue * 35 / 100
+        END AS ThueThuNhapCaNhan
+	FROM NhanVien nv
+	LEFT JOIN @LuongChiuThue lct 
+	ON nv.MaNV = lct.MaNV;
+
+	SELECT nv.MaNV, Ho, Ten, SoNgayCong, (LuongChiuThue - Thue) AS LuongThucLanh
+	FROM NhanVien nv
+	LEFT JOIN @ChamCongThang cc ON nv.MaNV = cc.MaNV
+	LEFT JOIN @LuongChiuThue pc ON nv.MaNV = pc.MaNV
+	LEFT JOIN @ThueThuNhapCaNhan tp ON nv.MaNV = tp.MaNV;
+END;
+
+GO

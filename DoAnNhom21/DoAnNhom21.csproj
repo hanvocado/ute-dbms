@@ -12,6 +12,21 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -58,11 +73,65 @@
       <DependentUpon>AppDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="Connection.cs" />
-    <Compile Include="FormBaoHiemNV.cs">
+    <Compile Include="FormChucVu.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormBaoHiemNV.Designer.cs">
-      <DependentUpon>FormBaoHiemNV.cs</DependentUpon>
+    <Compile Include="FormChucVu.Designer.cs">
+      <DependentUpon>FormChucVu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormPhuCap.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPhuCap.Designer.cs">
+      <DependentUpon>FormPhuCap.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormQuanLyBaoHiem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormQuanLyBaoHiem.Designer.cs">
+      <DependentUpon>FormQuanLyBaoHiem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormChamCong.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormChamCong.Designer.cs">
+      <DependentUpon>FormChamCong.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormNghiPhep.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormNghiPhep.Designer.cs">
+      <DependentUpon>FormNghiPhep.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormQuanLyChamCong.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormQuanLyChamCong.Designer.cs">
+      <DependentUpon>FormQuanLyChamCong.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormQuanLyThangCong.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormQuanLyThangCong.Designer.cs">
+      <DependentUpon>FormQuanLyThangCong.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormPhongBan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPhongBan.Designer.cs">
+      <DependentUpon>FormPhongBan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormThongBao.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormThongBao.Designer.cs">
+      <DependentUpon>FormThongBao.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormThongKeLuong.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormThongKeLuong.Designer.cs">
+      <DependentUpon>FormThongKeLuong.cs</DependentUpon>
     </Compile>
     <Compile Include="FormDangNhap.cs">
       <SubType>Form</SubType>
@@ -91,8 +160,8 @@
     <Compile Include="FormThongTinHopDong.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormThongTinHopDong.Designer.cs">
-      <DependentUpon>FormThongTinHopDong.cs</DependentUpon>
+    <Compile Include="FormXemChiTietPhongBan.Designer.cs">
+      <DependentUpon>FormXemChiTietPhongBan.cs</DependentUpon>
     </Compile>
     <Compile Include="FormTrangChuNhanVien.cs">
       <SubType>Form</SubType>
@@ -177,13 +246,16 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Images\hop.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Images\content-management-system.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Images\27.jpg" />
+    <BootstrapperPackage Include=".NETFramework,Version=v4.8">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.8 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
