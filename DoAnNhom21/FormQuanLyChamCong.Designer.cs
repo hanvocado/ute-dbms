@@ -60,7 +60,7 @@
             this.lblMaNV.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMaNV.Location = new System.Drawing.Point(41, 51);
             this.lblMaNV.Name = "lblMaNV";
-            this.lblMaNV.Size = new System.Drawing.Size(156, 27);
+            this.lblMaNV.Size = new System.Drawing.Size(127, 22);
             this.lblMaNV.TabIndex = 1;
             this.lblMaNV.Text = "Mã nhân viên: ";
             // 
@@ -70,7 +70,7 @@
             this.lblLoaiCong.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblLoaiCong.Location = new System.Drawing.Point(41, 105);
             this.lblLoaiCong.Name = "lblLoaiCong";
-            this.lblLoaiCong.Size = new System.Drawing.Size(114, 27);
+            this.lblLoaiCong.Size = new System.Drawing.Size(94, 22);
             this.lblLoaiCong.TabIndex = 1;
             this.lblLoaiCong.Text = "Loại công:";
             // 
@@ -80,7 +80,7 @@
             this.lblThang.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblThang.Location = new System.Drawing.Point(484, 51);
             this.lblThang.Name = "lblThang";
-            this.lblThang.Size = new System.Drawing.Size(78, 27);
+            this.lblThang.Size = new System.Drawing.Size(64, 22);
             this.lblThang.TabIndex = 1;
             this.lblThang.Text = "Tháng:";
             // 
@@ -90,7 +90,7 @@
             this.cbbLoaiCong.FormattingEnabled = true;
             this.cbbLoaiCong.Location = new System.Drawing.Point(204, 97);
             this.cbbLoaiCong.Name = "cbbLoaiCong";
-            this.cbbLoaiCong.Size = new System.Drawing.Size(195, 35);
+            this.cbbLoaiCong.Size = new System.Drawing.Size(195, 30);
             this.cbbLoaiCong.TabIndex = 2;
             // 
             // groupBox1
@@ -109,7 +109,7 @@
             this.groupBox1.Controls.Add(this.cbbLoaiCong);
             this.groupBox1.Controls.Add(this.lblMaNV);
             this.groupBox1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(69, 55);
+            this.groupBox1.Location = new System.Drawing.Point(267, 87);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(878, 232);
             this.groupBox1.TabIndex = 9;
@@ -152,7 +152,7 @@
             this.lblNgay.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNgay.Location = new System.Drawing.Point(484, 100);
             this.lblNgay.Name = "lblNgay";
-            this.lblNgay.Size = new System.Drawing.Size(69, 27);
+            this.lblNgay.Size = new System.Drawing.Size(57, 22);
             this.lblNgay.TabIndex = 13;
             this.lblNgay.Text = "Ngày:";
             // 
@@ -175,7 +175,7 @@
             // 
             this.txtNgayCC.Location = new System.Drawing.Point(584, 97);
             this.txtNgayCC.Name = "txtNgayCC";
-            this.txtNgayCC.Size = new System.Drawing.Size(230, 35);
+            this.txtNgayCC.Size = new System.Drawing.Size(230, 30);
             this.txtNgayCC.TabIndex = 12;
             // 
             // btnTim
@@ -199,7 +199,7 @@
             this.cbbThang.FormattingEnabled = true;
             this.cbbThang.Location = new System.Drawing.Point(584, 51);
             this.cbbThang.Name = "cbbThang";
-            this.cbbThang.Size = new System.Drawing.Size(230, 35);
+            this.cbbThang.Size = new System.Drawing.Size(230, 30);
             this.cbbThang.TabIndex = 3;
             // 
             // btnThem
@@ -223,14 +223,14 @@
             this.cbbMaNV.FormattingEnabled = true;
             this.cbbMaNV.Location = new System.Drawing.Point(204, 51);
             this.cbbMaNV.Name = "cbbMaNV";
-            this.cbbMaNV.Size = new System.Drawing.Size(195, 35);
+            this.cbbMaNV.Size = new System.Drawing.Size(195, 30);
             this.cbbMaNV.TabIndex = 2;
             // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.dataGVctChamCong);
             this.groupBox3.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox3.Location = new System.Drawing.Point(69, 335);
+            this.groupBox3.Location = new System.Drawing.Point(267, 367);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(878, 324);
             this.groupBox3.TabIndex = 11;
@@ -299,10 +299,10 @@
             // 
             // FormQuanLyChamCong
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(234)))), ((int)(((byte)(220)))));
-            this.ClientSize = new System.Drawing.Size(1060, 805);
+            this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.ClientSize = new System.Drawing.Size(1413, 778);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox3);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));

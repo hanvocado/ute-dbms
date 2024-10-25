@@ -51,7 +51,7 @@
             this.cbbQuanLy.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(218)))), ((int)(((byte)(81)))), ((int)(((byte)(57)))));
             this.cbbQuanLy.FocusedColor = System.Drawing.Color.Empty;
             this.cbbQuanLy.FocusedState.FillColor = System.Drawing.Color.Transparent;
-            this.cbbQuanLy.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbbQuanLy.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold);
             this.cbbQuanLy.ForeColor = System.Drawing.Color.Black;
             this.cbbQuanLy.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.cbbQuanLy.HoverState.ForeColor = System.Drawing.Color.Transparent;
@@ -70,10 +70,10 @@
             this.cbbQuanLy.ItemsAppearance.BackColor = System.Drawing.Color.White;
             this.cbbQuanLy.ItemsAppearance.ForeColor = System.Drawing.Color.Black;
             this.cbbQuanLy.ItemsAppearance.SelectedBackColor = System.Drawing.Color.Silver;
-            this.cbbQuanLy.Location = new System.Drawing.Point(237, 10);
-            this.cbbQuanLy.Margin = new System.Windows.Forms.Padding(22, 7, 2, 2);
+            this.cbbQuanLy.Location = new System.Drawing.Point(316, 12);
+            this.cbbQuanLy.Margin = new System.Windows.Forms.Padding(29, 9, 3, 2);
             this.cbbQuanLy.Name = "cbbQuanLy";
-            this.cbbQuanLy.Size = new System.Drawing.Size(241, 56);
+            this.cbbQuanLy.Size = new System.Drawing.Size(320, 56);
             this.cbbQuanLy.StartIndex = 1;
             this.cbbQuanLy.TabIndex = 0;
             this.cbbQuanLy.SelectedIndexChanged += new System.EventHandler(this.guna2ComboBox1_SelectedIndexChanged);
@@ -96,10 +96,10 @@
             this.pnlContent.CustomizableEdges.BottomRight = false;
             this.pnlContent.CustomizableEdges.TopLeft = false;
             this.pnlContent.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlContent.Location = new System.Drawing.Point(0, 72);
-            this.pnlContent.Margin = new System.Windows.Forms.Padding(2);
+            this.pnlContent.Location = new System.Drawing.Point(0, 87);
+            this.pnlContent.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlContent.Name = "pnlContent";
-            this.pnlContent.Size = new System.Drawing.Size(1060, 712);
+            this.pnlContent.Size = new System.Drawing.Size(1413, 778);
             this.pnlContent.TabIndex = 2;
             // 
             // guna2Panel1
@@ -110,10 +110,11 @@
             this.guna2Panel1.Controls.Add(this.btnDangXuat);
             this.guna2Panel1.Controls.Add(this.guna2ComboBox2);
             this.guna2Panel1.Controls.Add(this.cbbQuanLy);
-            this.guna2Panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.guna2Panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.guna2Panel1.Location = new System.Drawing.Point(0, 0);
+            this.guna2Panel1.Margin = new System.Windows.Forms.Padding(4);
             this.guna2Panel1.Name = "guna2Panel1";
-            this.guna2Panel1.Size = new System.Drawing.Size(1060, 72);
+            this.guna2Panel1.Size = new System.Drawing.Size(1413, 84);
             this.guna2Panel1.TabIndex = 4;
             // 
             // btnDangXuat
@@ -125,11 +126,13 @@
             this.btnDangXuat.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(218)))), ((int)(((byte)(81)))), ((int)(((byte)(57)))));
             this.btnDangXuat.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDangXuat.ForeColor = System.Drawing.Color.Black;
-            this.btnDangXuat.Location = new System.Drawing.Point(935, 21);
+            this.btnDangXuat.Location = new System.Drawing.Point(1249, 13);
+            this.btnDangXuat.Margin = new System.Windows.Forms.Padding(4);
             this.btnDangXuat.Name = "btnDangXuat";
-            this.btnDangXuat.Size = new System.Drawing.Size(113, 45);
+            this.btnDangXuat.Size = new System.Drawing.Size(151, 55);
             this.btnDangXuat.TabIndex = 4;
             this.btnDangXuat.Text = "Đăng xuất";
+            this.btnDangXuat.Click += new System.EventHandler(this.btnDangXuat_Click);
             // 
             // guna2ComboBox2
             // 
@@ -157,22 +160,22 @@
             this.guna2ComboBox2.ItemsAppearance.BackColor = System.Drawing.Color.White;
             this.guna2ComboBox2.ItemsAppearance.ForeColor = System.Drawing.Color.Black;
             this.guna2ComboBox2.ItemsAppearance.SelectedBackColor = System.Drawing.Color.Silver;
-            this.guna2ComboBox2.Location = new System.Drawing.Point(583, 10);
-            this.guna2ComboBox2.Margin = new System.Windows.Forms.Padding(22, 7, 2, 2);
+            this.guna2ComboBox2.Location = new System.Drawing.Point(770, 12);
+            this.guna2ComboBox2.Margin = new System.Windows.Forms.Padding(29, 9, 3, 2);
             this.guna2ComboBox2.Name = "guna2ComboBox2";
-            this.guna2ComboBox2.Size = new System.Drawing.Size(241, 56);
+            this.guna2ComboBox2.Size = new System.Drawing.Size(320, 56);
             this.guna2ComboBox2.StartIndex = 0;
             this.guna2ComboBox2.TabIndex = 2;
             // 
             // FormTrangChuQuanLy
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1060, 784);
+            this.ClientSize = new System.Drawing.Size(1413, 865);
             this.Controls.Add(this.guna2Panel1);
             this.Controls.Add(this.pnlContent);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "FormTrangChuQuanLy";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormTrangChuQuanLy";

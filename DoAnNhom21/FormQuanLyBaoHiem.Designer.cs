@@ -144,7 +144,7 @@
             this.lblMaNV.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMaNV.Location = new System.Drawing.Point(92, 54);
             this.lblMaNV.Name = "lblMaNV";
-            this.lblMaNV.Size = new System.Drawing.Size(156, 27);
+            this.lblMaNV.Size = new System.Drawing.Size(127, 22);
             this.lblMaNV.TabIndex = 1;
             this.lblMaNV.Text = "Mã nhân viên: ";
             // 
@@ -154,7 +154,7 @@
             this.lblLoaiBH.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblLoaiBH.Location = new System.Drawing.Point(92, 108);
             this.lblLoaiBH.Name = "lblLoaiBH";
-            this.lblLoaiBH.Size = new System.Drawing.Size(162, 27);
+            this.lblLoaiBH.Size = new System.Drawing.Size(134, 22);
             this.lblLoaiBH.TabIndex = 1;
             this.lblLoaiBH.Text = "Loại bảo hiểm: ";
             // 
@@ -164,7 +164,7 @@
             this.lblNgayKT.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNgayKT.Location = new System.Drawing.Point(474, 106);
             this.lblNgayKT.Name = "lblNgayKT";
-            this.lblNgayKT.Size = new System.Drawing.Size(159, 27);
+            this.lblNgayKT.Size = new System.Drawing.Size(128, 22);
             this.lblNgayKT.TabIndex = 1;
             this.lblNgayKT.Text = "Ngày kết thúc: ";
             // 
@@ -174,7 +174,7 @@
             this.lblMaBH.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMaBH.Location = new System.Drawing.Point(92, 162);
             this.lblMaBH.Name = "lblMaBH";
-            this.lblMaBH.Size = new System.Drawing.Size(150, 27);
+            this.lblMaBH.Size = new System.Drawing.Size(124, 22);
             this.lblMaBH.TabIndex = 1;
             this.lblMaBH.Text = "Mã bảo hiểm: ";
             // 
@@ -184,7 +184,7 @@
             this.lblNgayBD.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNgayBD.Location = new System.Drawing.Point(474, 60);
             this.lblNgayBD.Name = "lblNgayBD";
-            this.lblNgayBD.Size = new System.Drawing.Size(152, 27);
+            this.lblNgayBD.Size = new System.Drawing.Size(124, 22);
             this.lblNgayBD.TabIndex = 1;
             this.lblNgayBD.Text = "Ngày bắt đầu: ";
             // 
@@ -194,7 +194,7 @@
             this.cbbLoaiBH.FormattingEnabled = true;
             this.cbbLoaiBH.Location = new System.Drawing.Point(255, 100);
             this.cbbLoaiBH.Name = "cbbLoaiBH";
-            this.cbbLoaiBH.Size = new System.Drawing.Size(155, 35);
+            this.cbbLoaiBH.Size = new System.Drawing.Size(155, 30);
             this.cbbLoaiBH.TabIndex = 2;
             // 
             // txtMaBH
@@ -203,7 +203,7 @@
             this.txtMaBH.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtMaBH.Location = new System.Drawing.Point(255, 160);
             this.txtMaBH.Name = "txtMaBH";
-            this.txtMaBH.Size = new System.Drawing.Size(155, 35);
+            this.txtMaBH.Size = new System.Drawing.Size(155, 30);
             this.txtMaBH.TabIndex = 3;
             // 
             // dateTimePickerNgayBD
@@ -213,7 +213,7 @@
             this.dateTimePickerNgayBD.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePickerNgayBD.Location = new System.Drawing.Point(617, 54);
             this.dateTimePickerNgayBD.Name = "dateTimePickerNgayBD";
-            this.dateTimePickerNgayBD.Size = new System.Drawing.Size(200, 35);
+            this.dateTimePickerNgayBD.Size = new System.Drawing.Size(200, 30);
             this.dateTimePickerNgayBD.TabIndex = 4;
             // 
             // dateTimePickerNgayKT
@@ -223,7 +223,7 @@
             this.dateTimePickerNgayKT.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePickerNgayKT.Location = new System.Drawing.Point(617, 100);
             this.dateTimePickerNgayKT.Name = "dateTimePickerNgayKT";
-            this.dateTimePickerNgayKT.Size = new System.Drawing.Size(200, 35);
+            this.dateTimePickerNgayKT.Size = new System.Drawing.Size(200, 30);
             this.dateTimePickerNgayKT.TabIndex = 4;
             // 
             // groupBox1
@@ -239,7 +239,7 @@
             this.groupBox1.Controls.Add(this.txtMaBH);
             this.groupBox1.Controls.Add(this.lblMaNV);
             this.groupBox1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(69, 55);
+            this.groupBox1.Location = new System.Drawing.Point(267, 20);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(878, 232);
             this.groupBox1.TabIndex = 9;
@@ -252,7 +252,7 @@
             this.cbbMaNV.FormattingEnabled = true;
             this.cbbMaNV.Location = new System.Drawing.Point(255, 54);
             this.cbbMaNV.Name = "cbbMaNV";
-            this.cbbMaNV.Size = new System.Drawing.Size(155, 35);
+            this.cbbMaNV.Size = new System.Drawing.Size(155, 30);
             this.cbbMaNV.TabIndex = 2;
             // 
             // groupBox2
@@ -263,7 +263,7 @@
             this.groupBox2.Controls.Add(this.btnTim);
             this.groupBox2.Controls.Add(this.btnThem);
             this.groupBox2.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(69, 330);
+            this.groupBox2.Location = new System.Drawing.Point(267, 295);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(878, 96);
             this.groupBox2.TabIndex = 10;
@@ -349,7 +349,7 @@
             // 
             this.groupBox3.Controls.Add(this.dataGridViewBaoHiemNV);
             this.groupBox3.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox3.Location = new System.Drawing.Point(69, 470);
+            this.groupBox3.Location = new System.Drawing.Point(267, 435);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(878, 324);
             this.groupBox3.TabIndex = 11;
@@ -358,10 +358,10 @@
             // 
             // FormQuanLyBaoHiem
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(234)))), ((int)(((byte)(220)))));
-            this.ClientSize = new System.Drawing.Size(1060, 805);
+            this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.ClientSize = new System.Drawing.Size(1413, 778);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox3);

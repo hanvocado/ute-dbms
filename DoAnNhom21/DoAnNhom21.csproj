@@ -202,6 +202,9 @@
     <EmbeddedResource Include="FormChucVu.resx">
       <DependentUpon>FormChucVu.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormDangNhap.resx">
+      <DependentUpon>FormDangNhap.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormHopDongNhanVien.resx">
       <DependentUpon>FormHopDongNhanVien.cs</DependentUpon>
     </EmbeddedResource>
@@ -246,6 +249,9 @@
     <EmbeddedResource Include="FormTrangChuNhanVien.resx">
       <DependentUpon>FormTrangChuNhanVien.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormTrangChuQuanLy.resx">
+      <DependentUpon>FormTrangChuQuanLy.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormXemChiTietPhongBan.resx">
       <DependentUpon>FormXemChiTietPhongBan.cs</DependentUpon>
     </EmbeddedResource>
@@ -257,6 +263,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="app.manifest" />
     <None Include="AppDataSet.xsc">
@@ -296,6 +303,11 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Img\27.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Img\profile.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
