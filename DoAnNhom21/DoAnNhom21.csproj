@@ -208,6 +208,9 @@
     <EmbeddedResource Include="FormHopDongNhanVien.resx">
       <DependentUpon>FormHopDongNhanVien.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormLuongNhanVien.resx">
+      <DependentUpon>FormLuongNhanVien.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormPhuCap.resx">
       <DependentUpon>FormPhuCap.cs</DependentUpon>
     </EmbeddedResource>
@@ -226,6 +229,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormQuanLyHopDong.resx">
       <DependentUpon>FormQuanLyHopDong.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormQuanLyNhanVien.resx">
+      <DependentUpon>FormQuanLyNhanVien.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormQuanLyThangCong.resx">
       <DependentUpon>FormQuanLyThangCong.cs</DependentUpon>

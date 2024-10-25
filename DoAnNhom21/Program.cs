@@ -14,7 +14,7 @@ namespace DoAnNhom21
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new FormBaoHiemNV());
-            Application.Run(new FormLuongNhanVien(SessionInfo.MaNV));
+            Application.Run(new FormQuanLyBaoHiem());
         }
     }
 }

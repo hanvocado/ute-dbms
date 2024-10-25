@@ -456,7 +456,8 @@ BEGIN
 			JOIN 
 				Thang thg ON thg.MaThang = ct.MaThang
 			WHERE 
-				ct.MaNV = @MaNV;
+				ct.MaNV = @MaNV
+			ORDER BY thg.MaThang, ct.NgayChamCong DESC;
 		END
 	ELSE
 	   	BEGIN
@@ -473,7 +474,8 @@ BEGIN
 			JOIN 
 				Thang thg ON thg.MaThang = ct.MaThang
 			WHERE 
-				ct.MaNV = @MaNV and ct.MaThang = @MaThang;
+				ct.MaNV = @MaNV and ct.MaThang = @MaThang
+			ORDER BY thg.MaThang, ct.NgayChamCong DESC;
 		END
 END;
 
@@ -543,7 +545,7 @@ END;
 GO
 
 -----------------VIEW NHAN VIEN-------------
-CREATE VIEW vw_QuanLyNhanVien AS SELECT nv.MaNV, nv.Ho, nv.Ten, nv.GioiTinh, nv.NgaySinh, nv.DiaChi, nv.SDT, nv.Email, nv.CCCD, pb.TenPB AS TenPhongBan, cv.TenCV AS TenChucVu
+CREATE OR ALTER VIEW vw_QuanLyNhanVien AS SELECT nv.MaNV, nv.Ho, nv.Ten, nv.GioiTinh, nv.NgaySinh, nv.DiaChi, nv.SDT, nv.Email, nv.CCCD, pb.TenPB AS TenPhongBan, cv.TenCV AS TenChucVu
 FROM NhanVien nv JOIN PhongBan pb ON nv.MaPB = pb.MaPB JOIN ChucVu cv ON nv.MaCV = cv.MaCV;
 
 GO
@@ -559,8 +561,24 @@ GO
 CREATE OR ALTER VIEW vw_QuanLyHopDong AS SELECT nv.MaNV, nv.Ho, nv.Ten, hd.MaHD, hd.LuongCoBan, hd.NgayBD
 AS NgayBatDauHopDong, hd.NgayKT AS NgayKetThucHopDong FROM NhanVien nv JOIN HopDong hd ON nv.MaHD = hd.MaHD;
 
+GO
+
+CREATE OR ALTER VIEW vw_ThuongPhatNhanVien AS
+SELECT nv.MaNV as MaNhanVien, nv.Ho as Ho, nv.Ten as Ten,  tp.Loai as Loai, tp.LyDo as LyDo, tp.SoTien as TienThuongPhat, cttp.NgayThuongPhat  as NgayThuongPhat
+FROM ctThuongPhat cttp
+join ThuongPhat tp on cttp.MaThuongPhat = tp.MaThuongPhat
+join NhanVien nv on cttp.MaNV = nv.MaNV
 
 GO
+
+CREATE OR ALTER VIEW vw_PhuCapNhanVien AS
+SELECT nv.MaNV as MaNhanVien, nv.Ho as Ho, nv.Ten as Ten,  pc.Loai as Loai, ctpc.SoTien as TienPhuCap, ctpc.NgayPhuCap  as NgayPhuCap
+FROM ctPhuCap ctpc
+join PhuCap pc on ctpc.MaPhuCap = pc.MaPhuCap
+join NhanVien nv on ctpc.MaNV = nv.MaNV
+
+GO
+
 
 ---TINH LUONG---
 CREATE OR ALTER PROCEDURE sp_TinhLuongTheoThang 
@@ -787,3 +805,67 @@ BEGIN
     DELETE FROM ctBaoHiem WHERE MaBH=@MaBH;
 END;
 
+INSERT INTO ctChamCong (MaNV, MaCC, MaThang, NgayChamCong)
+VALUES ('NV01', 'CC01', '032023', 1),
+('NV01', 'CC01', '032023', 2),
+('NV01', 'CC01', '032023', 3),
+('NV01', 'CC01', '032023', 4),
+('NV01', 'CC01', '032023', 5),
+('NV01', 'CC01', '032023', 6),
+('NV01', 'CC01', '032023', 7),
+('NV01', 'CC01', '032023', 8),
+('NV01', 'CC01', '032023', 9),
+('NV01', 'CC01', '032023', 10),
+('NV01', 'CC01', '032023', 11),
+('NV01', 'CC01', '032023', 12),
+('NV01', 'CC01', '032023', 13),
+('NV01', 'CC01', '032023', 14),
+('NV01', 'CC01', '032023', 15),
+('NV01', 'CC01', '032023', 16),
+('NV01', 'CC01', '032023', 17),
+('NV01', 'CC01', '032023', 18),
+('NV01', 'CC01', '032023', 19),
+('NV01', 'CC01', '032023', 20),
+('NV01', 'CC01', '032023', 21),
+('NV01', 'CC01', '032023', 22);
+
+CREATE OR ALTER FUNCTION fn_TinhThamNien (@NgayBD DATE)
+RETURNS INT
+AS
+BEGIN
+    DECLARE @ThamNien INT;
+    SET @ThamNien = DATEDIFF(YEAR, @NgayBD, GETDATE());
+    RETURN @ThamNien;
+END;
+GO
+
+--SELECT MaNV, NgayBD, dbo.fn_TinhThamNien(NgayBD) AS ThamNien
+--FROM HopDong;
+CREATE OR ALTER TRIGGER tr_ctBaoHiem_KiemTraNgay
+ON ctBaoHiem
+AFTER INSERT, UPDATE
+AS
+BEGIN
+    DECLARE @NgayBD date,
+            @NgayKT date;
+
+    SELECT @NgayBD = i.NgayBD, @NgayKT = i.NgayKT
+    FROM inserted i;
+
+    IF @NgayBD >= @NgayKT
+    BEGIN
+        RAISERROR('Ngày bắt đầu phải trước ngày kết thúc', 16, 1);
+        ROLLBACK TRANSACTION;
+    END
+END;
+
+GO 
+CREATE FUNCTION dbo.GetThang()
+RETURNS TABLE
+AS
+RETURN
+(
+    SELECT TOP 100 PERCENT MaThang, MoTa
+    FROM Thang
+    ORDER BY MaThang DESC
+);

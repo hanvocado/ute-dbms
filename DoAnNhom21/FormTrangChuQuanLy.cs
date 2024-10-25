@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq.Expressions;
 using System.Windows.Forms;
 
 namespace DoAnNhom21
@@ -51,10 +50,12 @@ namespace DoAnNhom21
             else if (cbbQuanLy.SelectedItem.ToString() == "Quản lý tháng công")
             {
                 OpenForm(new FormQuanLyThangCong());
-            } else if (cbbQuanLy.SelectedItem.ToString() == "Quản lý chấm công")
+            }
+            else if (cbbQuanLy.SelectedItem.ToString() == "Quản lý chấm công")
             {
                 OpenForm(new FormQuanLyBaoHiem());
-            } else if (cbbQuanLy.SelectedItem.ToString() == "Quản lý phòng ban")
+            }
+            else if (cbbQuanLy.SelectedItem.ToString() == "Quản lý phòng ban")
             {
                 OpenForm(new FormPhongBan());
             }
@@ -62,7 +63,7 @@ namespace DoAnNhom21
             {
                 OpenForm(new FormChucVu());
             }
-            else if (cbbQuanLy.SelectedItem.ToString() == "Quản lý phụ cấp") 
+            else if (cbbQuanLy.SelectedItem.ToString() == "Quản lý phụ cấp")
             {
                 OpenForm(new FormPhuCap());
             }
@@ -71,13 +72,21 @@ namespace DoAnNhom21
                 OpenForm(new FormThuongPhat());
             }
 
-        } 
+        }
 
         private void btnDangXuat_Click(object sender, EventArgs e)
         {
             this.Hide();
             FormDangNhap form = new FormDangNhap();
             form.Show();
+        }
+
+        private void guna2ComboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbbQuanLy.SelectedItem.ToString() == "Thống kê lương")
+            {
+                OpenForm(new FormThongKeLuong());
+            }
         }
     }
 }

@@ -70,10 +70,10 @@
             this.cbbQuanLy.ItemsAppearance.BackColor = System.Drawing.Color.White;
             this.cbbQuanLy.ItemsAppearance.ForeColor = System.Drawing.Color.Black;
             this.cbbQuanLy.ItemsAppearance.SelectedBackColor = System.Drawing.Color.Silver;
-            this.cbbQuanLy.Location = new System.Drawing.Point(316, 12);
-            this.cbbQuanLy.Margin = new System.Windows.Forms.Padding(29, 9, 3, 2);
+            this.cbbQuanLy.Location = new System.Drawing.Point(356, 15);
+            this.cbbQuanLy.Margin = new System.Windows.Forms.Padding(33, 11, 3, 2);
             this.cbbQuanLy.Name = "cbbQuanLy";
-            this.cbbQuanLy.Size = new System.Drawing.Size(320, 56);
+            this.cbbQuanLy.Size = new System.Drawing.Size(360, 56);
             this.cbbQuanLy.StartIndex = 1;
             this.cbbQuanLy.TabIndex = 0;
             this.cbbQuanLy.SelectedIndexChanged += new System.EventHandler(this.guna2ComboBox1_SelectedIndexChanged);
@@ -96,10 +96,10 @@
             this.pnlContent.CustomizableEdges.BottomRight = false;
             this.pnlContent.CustomizableEdges.TopLeft = false;
             this.pnlContent.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlContent.Location = new System.Drawing.Point(0, 87);
+            this.pnlContent.Location = new System.Drawing.Point(0, 109);
             this.pnlContent.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlContent.Name = "pnlContent";
-            this.pnlContent.Size = new System.Drawing.Size(1413, 778);
+            this.pnlContent.Size = new System.Drawing.Size(1590, 972);
             this.pnlContent.TabIndex = 2;
             // 
             // guna2Panel1
@@ -112,9 +112,9 @@
             this.guna2Panel1.Controls.Add(this.cbbQuanLy);
             this.guna2Panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.guna2Panel1.Location = new System.Drawing.Point(0, 0);
-            this.guna2Panel1.Margin = new System.Windows.Forms.Padding(4);
+            this.guna2Panel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.guna2Panel1.Name = "guna2Panel1";
-            this.guna2Panel1.Size = new System.Drawing.Size(1413, 84);
+            this.guna2Panel1.Size = new System.Drawing.Size(1590, 105);
             this.guna2Panel1.TabIndex = 4;
             // 
             // btnDangXuat
@@ -126,10 +126,10 @@
             this.btnDangXuat.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(218)))), ((int)(((byte)(81)))), ((int)(((byte)(57)))));
             this.btnDangXuat.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDangXuat.ForeColor = System.Drawing.Color.Black;
-            this.btnDangXuat.Location = new System.Drawing.Point(1249, 13);
-            this.btnDangXuat.Margin = new System.Windows.Forms.Padding(4);
+            this.btnDangXuat.Location = new System.Drawing.Point(1405, 16);
+            this.btnDangXuat.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnDangXuat.Name = "btnDangXuat";
-            this.btnDangXuat.Size = new System.Drawing.Size(151, 55);
+            this.btnDangXuat.Size = new System.Drawing.Size(170, 69);
             this.btnDangXuat.TabIndex = 4;
             this.btnDangXuat.Text = "Đăng xuất";
             this.btnDangXuat.Click += new System.EventHandler(this.btnDangXuat_Click);
@@ -160,18 +160,19 @@
             this.guna2ComboBox2.ItemsAppearance.BackColor = System.Drawing.Color.White;
             this.guna2ComboBox2.ItemsAppearance.ForeColor = System.Drawing.Color.Black;
             this.guna2ComboBox2.ItemsAppearance.SelectedBackColor = System.Drawing.Color.Silver;
-            this.guna2ComboBox2.Location = new System.Drawing.Point(770, 12);
-            this.guna2ComboBox2.Margin = new System.Windows.Forms.Padding(29, 9, 3, 2);
+            this.guna2ComboBox2.Location = new System.Drawing.Point(866, 15);
+            this.guna2ComboBox2.Margin = new System.Windows.Forms.Padding(33, 11, 3, 2);
             this.guna2ComboBox2.Name = "guna2ComboBox2";
-            this.guna2ComboBox2.Size = new System.Drawing.Size(320, 56);
+            this.guna2ComboBox2.Size = new System.Drawing.Size(360, 56);
             this.guna2ComboBox2.StartIndex = 0;
             this.guna2ComboBox2.TabIndex = 2;
+            this.guna2ComboBox2.SelectedIndexChanged += new System.EventHandler(this.guna2ComboBox2_SelectedIndexChanged);
             // 
             // FormTrangChuQuanLy
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1413, 865);
+            this.ClientSize = new System.Drawing.Size(1590, 1081);
             this.Controls.Add(this.guna2Panel1);
             this.Controls.Add(this.pnlContent);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
