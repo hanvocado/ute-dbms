@@ -173,6 +173,8 @@
             // 
             // dataGVoffHistory
             // 
+            this.dataGVoffHistory.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGVoffHistory.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dataGVoffHistory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGVoffHistory.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Ngay,
@@ -192,7 +194,6 @@
             this.Ngay.HeaderText = "Ngày";
             this.Ngay.MinimumWidth = 8;
             this.Ngay.Name = "Ngay";
-            this.Ngay.Width = 150;
             // 
             // Thang
             // 
@@ -200,7 +201,6 @@
             this.Thang.HeaderText = "Tháng";
             this.Thang.MinimumWidth = 8;
             this.Thang.Name = "Thang";
-            this.Thang.Width = 150;
             // 
             // LyDo
             // 
@@ -208,7 +208,6 @@
             this.LyDo.HeaderText = "Lý do";
             this.LyDo.MinimumWidth = 8;
             this.LyDo.Name = "LyDo";
-            this.LyDo.Width = 150;
             // 
             // FormNghiPhep
             // 
