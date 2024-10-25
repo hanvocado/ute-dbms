@@ -1,4 +1,4 @@
-﻿namespace DoAnNhom9
+﻿namespace DoAnNhom21
 {
     partial class FormLuongNhanVien
     {

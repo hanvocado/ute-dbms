@@ -45,7 +45,7 @@ namespace DoAnNhom21
             }
             else if (cbbQuanLy.SelectedItem.ToString() == "Quản lý hợp đồng")
             {
-                //OpenForm(new FormThongTinHopDong());
+                OpenForm(new FormQuanLyHopDong());
 
             }
         }

@@ -23,7 +23,8 @@ namespace DoAnNhom21
             {
                 using (conn = Connection.getConnection())
                 {
-                    string query = "select * from HopDong where MaNV = @MaNV";
+                    string query = "select *from HopDong join NhanVien on HopDong.MaNV = NhanVien.MaNV join ChucVu on NhanVien.MaCV = ChucVu.MaCV join PhongBan on PhongBan.MaPB = NhanVien.MaPB where HopDong.MaNV = @MaNV";
+
                     conn.Open();
                     SqlCommand cmd = new SqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@MaNV", this.maNV);
@@ -34,6 +35,9 @@ namespace DoAnNhom21
                         txtLuongCoBan.Text = reader["LuongCoBan"].ToString();
                         dateTimePickerNgayBD.Text = reader["NgayBD"].ToString();
                         dateTimePickerNgayKT.Text = reader["NgayKT"].ToString();
+                        txtChucVu.Text = reader["TenCV"].ToString();
+                        txtPhongBan.Text = reader["TenPB"].ToString();
+                        txtMaHD.Text = reader["MaHD"].ToString();
                     }
 
                 }
@@ -43,6 +47,12 @@ namespace DoAnNhom21
                 MessageBox.Show("Lỗi: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
+
+        }
+
+        private void btnThoat_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }
