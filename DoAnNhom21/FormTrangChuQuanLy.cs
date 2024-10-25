@@ -71,8 +71,9 @@ namespace DoAnNhom21
                 OpenForm(new FormThuongPhat());
             }
 
-        }
-        private void btnDangXuat_Click_1(object sender, EventArgs e)
+        } 
+
+        private void btnDangXuat_Click(object sender, EventArgs e)
         {
             this.Hide();
             FormDangNhap form = new FormDangNhap();

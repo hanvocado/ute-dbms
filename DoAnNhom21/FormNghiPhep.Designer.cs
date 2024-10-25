@@ -52,9 +52,9 @@
             // 
             this.lblNgayNghiPhep.AutoSize = true;
             this.lblNgayNghiPhep.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.lblNgayNghiPhep.Location = new System.Drawing.Point(14, 119);
+            this.lblNgayNghiPhep.Location = new System.Drawing.Point(12, 95);
             this.lblNgayNghiPhep.Name = "lblNgayNghiPhep";
-            this.lblNgayNghiPhep.Size = new System.Drawing.Size(84, 27);
+            this.lblNgayNghiPhep.Size = new System.Drawing.Size(69, 22);
             this.lblNgayNghiPhep.TabIndex = 3;
             this.lblNgayNghiPhep.Text = "Tháng: ";
             // 
@@ -62,9 +62,9 @@
             // 
             this.lblLyDo.AutoSize = true;
             this.lblLyDo.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.lblLyDo.Location = new System.Drawing.Point(548, 116);
+            this.lblLyDo.Location = new System.Drawing.Point(487, 93);
             this.lblLyDo.Name = "lblLyDo";
-            this.lblLyDo.Size = new System.Drawing.Size(81, 27);
+            this.lblLyDo.Size = new System.Drawing.Size(67, 22);
             this.lblLyDo.TabIndex = 5;
             this.lblLyDo.Text = "Lý do: ";
             // 
@@ -80,27 +80,27 @@
             this.groupBox1.Controls.Add(this.lblLyDo);
             this.groupBox1.Controls.Add(this.lblNgayNghiPhep);
             this.groupBox1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(31, 28);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.groupBox1.Location = new System.Drawing.Point(260, 129);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox1.Size = new System.Drawing.Size(1004, 261);
+            this.groupBox1.Size = new System.Drawing.Size(892, 209);
             this.groupBox1.TabIndex = 8;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "ĐĂNG KÝ NGHỈ PHÉP";
             // 
             // txtLyDo
             // 
-            this.txtLyDo.Location = new System.Drawing.Point(673, 113);
+            this.txtLyDo.Location = new System.Drawing.Point(598, 90);
+            this.txtLyDo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtLyDo.Name = "txtLyDo";
-            this.txtLyDo.Size = new System.Drawing.Size(282, 35);
+            this.txtLyDo.Size = new System.Drawing.Size(251, 30);
             this.txtLyDo.TabIndex = 13;
             // 
             // txtNgayNghi
             // 
-            this.txtNgayNghi.Location = new System.Drawing.Point(673, 48);
+            this.txtNgayNghi.Location = new System.Drawing.Point(598, 38);
+            this.txtNgayNghi.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtNgayNghi.Name = "txtNgayNghi";
-            this.txtNgayNghi.Size = new System.Drawing.Size(282, 35);
+            this.txtNgayNghi.Size = new System.Drawing.Size(251, 30);
             this.txtNgayNghi.TabIndex = 12;
             // 
             // btnNghiPhep
@@ -108,10 +108,9 @@
             this.btnNghiPhep.BackColor = System.Drawing.Color.LavenderBlush;
             this.btnNghiPhep.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNghiPhep.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.btnNghiPhep.Location = new System.Drawing.Point(374, 185);
-            this.btnNghiPhep.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnNghiPhep.Location = new System.Drawing.Point(332, 148);
             this.btnNghiPhep.Name = "btnNghiPhep";
-            this.btnNghiPhep.Size = new System.Drawing.Size(207, 50);
+            this.btnNghiPhep.Size = new System.Drawing.Size(184, 40);
             this.btnNghiPhep.TabIndex = 4;
             this.btnNghiPhep.Text = "Đăng ký nghỉ";
             this.btnNghiPhep.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -120,19 +119,20 @@
             // 
             // txtMaNV
             // 
-            this.txtMaNV.Location = new System.Drawing.Point(142, 48);
+            this.txtMaNV.Location = new System.Drawing.Point(126, 38);
+            this.txtMaNV.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtMaNV.Name = "txtMaNV";
             this.txtMaNV.ReadOnly = true;
-            this.txtMaNV.Size = new System.Drawing.Size(282, 35);
+            this.txtMaNV.Size = new System.Drawing.Size(251, 30);
             this.txtMaNV.TabIndex = 11;
             // 
             // tblMaNV
             // 
             this.tblMaNV.AutoSize = true;
             this.tblMaNV.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.tblMaNV.Location = new System.Drawing.Point(17, 51);
+            this.tblMaNV.Location = new System.Drawing.Point(15, 41);
             this.tblMaNV.Name = "tblMaNV";
-            this.tblMaNV.Size = new System.Drawing.Size(93, 27);
+            this.tblMaNV.Size = new System.Drawing.Size(78, 22);
             this.tblMaNV.TabIndex = 10;
             this.tblMaNV.Text = "Mã NV: ";
             // 
@@ -140,29 +140,28 @@
             // 
             this.lblNgayNghi.AutoSize = true;
             this.lblNgayNghi.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.lblNgayNghi.Location = new System.Drawing.Point(548, 51);
+            this.lblNgayNghi.Location = new System.Drawing.Point(487, 41);
             this.lblNgayNghi.Name = "lblNgayNghi";
-            this.lblNgayNghi.Size = new System.Drawing.Size(75, 27);
+            this.lblNgayNghi.Size = new System.Drawing.Size(62, 22);
             this.lblNgayNghi.TabIndex = 8;
             this.lblNgayNghi.Text = "Ngày: ";
             // 
             // cbbThang
             // 
             this.cbbThang.FormattingEnabled = true;
-            this.cbbThang.Location = new System.Drawing.Point(142, 112);
+            this.cbbThang.Location = new System.Drawing.Point(126, 90);
+            this.cbbThang.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cbbThang.Name = "cbbThang";
-            this.cbbThang.Size = new System.Drawing.Size(282, 34);
+            this.cbbThang.Size = new System.Drawing.Size(251, 31);
             this.cbbThang.TabIndex = 7;
             // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.dataGVoffHistory);
             this.groupBox2.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(31, 326);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.groupBox2.Location = new System.Drawing.Point(260, 368);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox2.Size = new System.Drawing.Size(1004, 353);
+            this.groupBox2.Size = new System.Drawing.Size(892, 282);
             this.groupBox2.TabIndex = 15;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "LỊCH SỬ XIN NGHỈ";
@@ -174,11 +173,12 @@
             this.Ngay,
             this.Thang,
             this.LyDo});
-            this.dataGVoffHistory.Location = new System.Drawing.Point(63, 52);
+            this.dataGVoffHistory.Location = new System.Drawing.Point(56, 42);
+            this.dataGVoffHistory.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dataGVoffHistory.Name = "dataGVoffHistory";
             this.dataGVoffHistory.RowHeadersWidth = 62;
             this.dataGVoffHistory.RowTemplate.Height = 28;
-            this.dataGVoffHistory.Size = new System.Drawing.Size(865, 241);
+            this.dataGVoffHistory.Size = new System.Drawing.Size(769, 193);
             this.dataGVoffHistory.TabIndex = 0;
             // 
             // Ngay
@@ -207,14 +207,13 @@
             // 
             // FormNghiPhep
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.ClientSize = new System.Drawing.Size(1060, 805);
+            this.ClientSize = new System.Drawing.Size(1413, 778);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "FormNghiPhep";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormNghiPhep";

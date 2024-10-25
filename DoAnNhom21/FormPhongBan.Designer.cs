@@ -186,7 +186,7 @@ namespace DoAnNhom21
             this.groupBoxThongTinPhongBan.Controls.Add(this.lblSDT);
             this.groupBoxThongTinPhongBan.Controls.Add(this.txtMaPB);
             this.groupBoxThongTinPhongBan.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.groupBoxThongTinPhongBan.Location = new System.Drawing.Point(70, 30);
+            this.groupBoxThongTinPhongBan.Location = new System.Drawing.Point(268, 19);
             this.groupBoxThongTinPhongBan.Name = "groupBoxThongTinPhongBan";
             this.groupBoxThongTinPhongBan.Size = new System.Drawing.Size(877, 205);
             this.groupBoxThongTinPhongBan.TabIndex = 5;
@@ -208,7 +208,7 @@ namespace DoAnNhom21
             // 
             this.groupBoxDanhSachPhongBan.Controls.Add(this.dataGridViewPhongBan);
             this.groupBoxDanhSachPhongBan.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.groupBoxDanhSachPhongBan.Location = new System.Drawing.Point(70, 506);
+            this.groupBoxDanhSachPhongBan.Location = new System.Drawing.Point(268, 495);
             this.groupBoxDanhSachPhongBan.Name = "groupBoxDanhSachPhongBan";
             this.groupBoxDanhSachPhongBan.Size = new System.Drawing.Size(877, 264);
             this.groupBoxDanhSachPhongBan.TabIndex = 7;
@@ -241,7 +241,7 @@ namespace DoAnNhom21
             this.groupBoxChucNang.Controls.Add(this.btnThoat);
             this.groupBoxChucNang.Controls.Add(this.btnSua);
             this.groupBoxChucNang.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBoxChucNang.Location = new System.Drawing.Point(70, 264);
+            this.groupBoxChucNang.Location = new System.Drawing.Point(268, 253);
             this.groupBoxChucNang.Name = "groupBoxChucNang";
             this.groupBoxChucNang.Size = new System.Drawing.Size(877, 223);
             this.groupBoxChucNang.TabIndex = 6;
@@ -337,7 +337,7 @@ namespace DoAnNhom21
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.ClientSize = new System.Drawing.Size(1041, 801);
+            this.ClientSize = new System.Drawing.Size(1413, 778);
             this.ControlBox = false;
             this.Controls.Add(this.groupBoxChucNang);
             this.Controls.Add(this.groupBoxDanhSachPhongBan);

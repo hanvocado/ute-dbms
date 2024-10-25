@@ -52,6 +52,9 @@ namespace DoAnNhom21
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txtNgayTP = new System.Windows.Forms.TextBox();
+            this.cbbMaThang = new System.Windows.Forms.ComboBox();
+            this.lblMaThang = new System.Windows.Forms.Label();
             this.btnLoc = new System.Windows.Forms.Button();
             this.cbbMaTP = new System.Windows.Forms.ComboBox();
             this.dataGridViewCTTP = new System.Windows.Forms.DataGridView();
@@ -65,9 +68,6 @@ namespace DoAnNhom21
             this.label2 = new System.Windows.Forms.Label();
             this.btnLamMoi = new System.Windows.Forms.Button();
             this.btnThoat = new System.Windows.Forms.Button();
-            this.lblMaThang = new System.Windows.Forms.Label();
-            this.cbbMaThang = new System.Windows.Forms.ComboBox();
-            this.txtNgayTP = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTP)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -120,7 +120,7 @@ namespace DoAnNhom21
             this.groupBox1.Controls.Add(this.txtLyDo);
             this.groupBox1.Controls.Add(this.dataGridViewTP);
             this.groupBox1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.groupBox1.Location = new System.Drawing.Point(46, 94);
+            this.groupBox1.Location = new System.Drawing.Point(237, 46);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(443, 625);
             this.groupBox1.TabIndex = 34;
@@ -308,12 +308,40 @@ namespace DoAnNhom21
             this.groupBox2.Controls.Add(this.btnThemTPNV);
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.groupBox2.Location = new System.Drawing.Point(495, 94);
+            this.groupBox2.Location = new System.Drawing.Point(686, 46);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(489, 625);
             this.groupBox2.TabIndex = 37;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "CHI TIẾT THƯỞNG PHẠT";
+            // 
+            // txtNgayTP
+            // 
+            this.txtNgayTP.Font = new System.Drawing.Font("Times New Roman", 12F);
+            this.txtNgayTP.Location = new System.Drawing.Point(211, 197);
+            this.txtNgayTP.Name = "txtNgayTP";
+            this.txtNgayTP.Size = new System.Drawing.Size(251, 30);
+            this.txtNgayTP.TabIndex = 41;
+            // 
+            // cbbMaThang
+            // 
+            this.cbbMaThang.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbbMaThang.Font = new System.Drawing.Font("Times New Roman", 12F);
+            this.cbbMaThang.FormattingEnabled = true;
+            this.cbbMaThang.Location = new System.Drawing.Point(211, 155);
+            this.cbbMaThang.Name = "cbbMaThang";
+            this.cbbMaThang.Size = new System.Drawing.Size(251, 30);
+            this.cbbMaThang.TabIndex = 44;
+            // 
+            // lblMaThang
+            // 
+            this.lblMaThang.AutoSize = true;
+            this.lblMaThang.Font = new System.Drawing.Font("Times New Roman", 12F);
+            this.lblMaThang.Location = new System.Drawing.Point(18, 158);
+            this.lblMaThang.Name = "lblMaThang";
+            this.lblMaThang.Size = new System.Drawing.Size(82, 22);
+            this.lblMaThang.TabIndex = 43;
+            this.lblMaThang.Text = "Mã tháng";
             // 
             // btnLoc
             // 
@@ -443,7 +471,7 @@ namespace DoAnNhom21
             this.btnLamMoi.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.btnLamMoi.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLamMoi.Font = new System.Drawing.Font("Times New Roman", 12F);
-            this.btnLamMoi.Location = new System.Drawing.Point(232, 740);
+            this.btnLamMoi.Location = new System.Drawing.Point(423, 692);
             this.btnLamMoi.Name = "btnLamMoi";
             this.btnLamMoi.Size = new System.Drawing.Size(257, 40);
             this.btnLamMoi.TabIndex = 35;
@@ -457,7 +485,7 @@ namespace DoAnNhom21
             this.btnThoat.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.btnThoat.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnThoat.Font = new System.Drawing.Font("Times New Roman", 12F);
-            this.btnThoat.Location = new System.Drawing.Point(495, 740);
+            this.btnThoat.Location = new System.Drawing.Point(686, 692);
             this.btnThoat.Name = "btnThoat";
             this.btnThoat.Size = new System.Drawing.Size(257, 40);
             this.btnThoat.TabIndex = 29;
@@ -466,40 +494,12 @@ namespace DoAnNhom21
             this.btnThoat.UseVisualStyleBackColor = false;
             this.btnThoat.Click += new System.EventHandler(this.btnThoat_Click);
             // 
-            // lblMaThang
-            // 
-            this.lblMaThang.AutoSize = true;
-            this.lblMaThang.Font = new System.Drawing.Font("Times New Roman", 12F);
-            this.lblMaThang.Location = new System.Drawing.Point(18, 158);
-            this.lblMaThang.Name = "lblMaThang";
-            this.lblMaThang.Size = new System.Drawing.Size(82, 22);
-            this.lblMaThang.TabIndex = 43;
-            this.lblMaThang.Text = "Mã tháng";
-            // 
-            // cbbMaThang
-            // 
-            this.cbbMaThang.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbbMaThang.Font = new System.Drawing.Font("Times New Roman", 12F);
-            this.cbbMaThang.FormattingEnabled = true;
-            this.cbbMaThang.Location = new System.Drawing.Point(211, 155);
-            this.cbbMaThang.Name = "cbbMaThang";
-            this.cbbMaThang.Size = new System.Drawing.Size(251, 30);
-            this.cbbMaThang.TabIndex = 44;
-            // 
-            // txtNgayTP
-            // 
-            this.txtNgayTP.Font = new System.Drawing.Font("Times New Roman", 12F);
-            this.txtNgayTP.Location = new System.Drawing.Point(211, 197);
-            this.txtNgayTP.Name = "txtNgayTP";
-            this.txtNgayTP.Size = new System.Drawing.Size(251, 30);
-            this.txtNgayTP.TabIndex = 41;
-            // 
             // FormThuongPhat
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.ClientSize = new System.Drawing.Size(1060, 805);
+            this.ClientSize = new System.Drawing.Size(1413, 778);
             this.Controls.Add(this.btnLamMoi);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
