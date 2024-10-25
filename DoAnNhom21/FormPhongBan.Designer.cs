@@ -65,9 +65,10 @@ namespace DoAnNhom21
             // 
             this.lblMaPB.AutoSize = true;
             this.lblMaPB.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMaPB.Location = new System.Drawing.Point(39, 59);
+            this.lblMaPB.Location = new System.Drawing.Point(47, 71);
+            this.lblMaPB.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblMaPB.Name = "lblMaPB";
-            this.lblMaPB.Size = new System.Drawing.Size(127, 22);
+            this.lblMaPB.Size = new System.Drawing.Size(156, 27);
             this.lblMaPB.TabIndex = 0;
             this.lblMaPB.Text = "Mã phòng ban:";
             // 
@@ -75,9 +76,10 @@ namespace DoAnNhom21
             // 
             this.lblTenPB.AutoSize = true;
             this.lblTenPB.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTenPB.Location = new System.Drawing.Point(39, 106);
+            this.lblTenPB.Location = new System.Drawing.Point(47, 127);
+            this.lblTenPB.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTenPB.Name = "lblTenPB";
-            this.lblTenPB.Size = new System.Drawing.Size(136, 22);
+            this.lblTenPB.Size = new System.Drawing.Size(167, 27);
             this.lblTenPB.TabIndex = 0;
             this.lblTenPB.Text = "Tên phòng ban: ";
             // 
@@ -85,9 +87,10 @@ namespace DoAnNhom21
             // 
             this.lblMaTrP.AutoSize = true;
             this.lblMaTrP.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMaTrP.Location = new System.Drawing.Point(461, 102);
+            this.lblMaTrP.Location = new System.Drawing.Point(553, 122);
+            this.lblMaTrP.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblMaTrP.Name = "lblMaTrP";
-            this.lblMaTrP.Size = new System.Drawing.Size(156, 22);
+            this.lblMaTrP.Size = new System.Drawing.Size(191, 27);
             this.lblMaTrP.TabIndex = 0;
             this.lblMaTrP.Text = "Mã trưởng phòng: ";
             // 
@@ -95,34 +98,38 @@ namespace DoAnNhom21
             // 
             this.lblSDT.AutoSize = true;
             this.lblSDT.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSDT.Location = new System.Drawing.Point(461, 59);
+            this.lblSDT.Location = new System.Drawing.Point(553, 71);
+            this.lblSDT.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblSDT.Name = "lblSDT";
-            this.lblSDT.Size = new System.Drawing.Size(125, 22);
+            this.lblSDT.Size = new System.Drawing.Size(149, 27);
             this.lblSDT.TabIndex = 0;
             this.lblSDT.Text = "Số điện thoại: ";
             // 
             // txtMaPB
             // 
             this.txtMaPB.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.txtMaPB.Location = new System.Drawing.Point(210, 57);
+            this.txtMaPB.Location = new System.Drawing.Point(252, 68);
+            this.txtMaPB.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtMaPB.Name = "txtMaPB";
-            this.txtMaPB.Size = new System.Drawing.Size(196, 27);
+            this.txtMaPB.Size = new System.Drawing.Size(234, 31);
             this.txtMaPB.TabIndex = 1;
             // 
             // txtTenPB
             // 
             this.txtTenPB.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.txtTenPB.Location = new System.Drawing.Point(210, 102);
+            this.txtTenPB.Location = new System.Drawing.Point(252, 122);
+            this.txtTenPB.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtTenPB.Name = "txtTenPB";
-            this.txtTenPB.Size = new System.Drawing.Size(196, 27);
+            this.txtTenPB.Size = new System.Drawing.Size(234, 31);
             this.txtTenPB.TabIndex = 1;
             // 
             // txtSDT
             // 
             this.txtSDT.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.txtSDT.Location = new System.Drawing.Point(629, 54);
+            this.txtSDT.Location = new System.Drawing.Point(755, 65);
+            this.txtSDT.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtSDT.Name = "txtSDT";
-            this.txtSDT.Size = new System.Drawing.Size(196, 27);
+            this.txtSDT.Size = new System.Drawing.Size(234, 31);
             this.txtSDT.TabIndex = 1;
             // 
             // dataGridViewPhongBan
@@ -134,13 +141,14 @@ namespace DoAnNhom21
             this.Column2,
             this.Column3,
             this.Column4});
-            this.dataGridViewPhongBan.Location = new System.Drawing.Point(6, 63);
+            this.dataGridViewPhongBan.Location = new System.Drawing.Point(7, 76);
+            this.dataGridViewPhongBan.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dataGridViewPhongBan.Name = "dataGridViewPhongBan";
             this.dataGridViewPhongBan.ReadOnly = true;
             this.dataGridViewPhongBan.RowHeadersVisible = false;
             this.dataGridViewPhongBan.RowHeadersWidth = 51;
             this.dataGridViewPhongBan.RowTemplate.Height = 24;
-            this.dataGridViewPhongBan.Size = new System.Drawing.Size(839, 201);
+            this.dataGridViewPhongBan.Size = new System.Drawing.Size(1007, 241);
             this.dataGridViewPhongBan.TabIndex = 4;
             // 
             // Column1
@@ -186,9 +194,11 @@ namespace DoAnNhom21
             this.groupBoxThongTinPhongBan.Controls.Add(this.lblSDT);
             this.groupBoxThongTinPhongBan.Controls.Add(this.txtMaPB);
             this.groupBoxThongTinPhongBan.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.groupBoxThongTinPhongBan.Location = new System.Drawing.Point(70, 30);
+            this.groupBoxThongTinPhongBan.Location = new System.Drawing.Point(84, 36);
+            this.groupBoxThongTinPhongBan.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.groupBoxThongTinPhongBan.Name = "groupBoxThongTinPhongBan";
-            this.groupBoxThongTinPhongBan.Size = new System.Drawing.Size(877, 205);
+            this.groupBoxThongTinPhongBan.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBoxThongTinPhongBan.Size = new System.Drawing.Size(1052, 246);
             this.groupBoxThongTinPhongBan.TabIndex = 5;
             this.groupBoxThongTinPhongBan.TabStop = false;
             this.groupBoxThongTinPhongBan.Text = "THÔNG TIN PHÒNG BAN";
@@ -198,9 +208,10 @@ namespace DoAnNhom21
             this.cbbMaTrP.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbbMaTrP.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.cbbMaTrP.FormattingEnabled = true;
-            this.cbbMaTrP.Location = new System.Drawing.Point(629, 98);
+            this.cbbMaTrP.Location = new System.Drawing.Point(755, 118);
+            this.cbbMaTrP.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cbbMaTrP.Name = "cbbMaTrP";
-            this.cbbMaTrP.Size = new System.Drawing.Size(196, 30);
+            this.cbbMaTrP.Size = new System.Drawing.Size(234, 35);
             this.cbbMaTrP.Sorted = true;
             this.cbbMaTrP.TabIndex = 5;
             // 
@@ -208,9 +219,11 @@ namespace DoAnNhom21
             // 
             this.groupBoxDanhSachPhongBan.Controls.Add(this.dataGridViewPhongBan);
             this.groupBoxDanhSachPhongBan.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.groupBoxDanhSachPhongBan.Location = new System.Drawing.Point(70, 506);
+            this.groupBoxDanhSachPhongBan.Location = new System.Drawing.Point(84, 607);
+            this.groupBoxDanhSachPhongBan.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.groupBoxDanhSachPhongBan.Name = "groupBoxDanhSachPhongBan";
-            this.groupBoxDanhSachPhongBan.Size = new System.Drawing.Size(877, 264);
+            this.groupBoxDanhSachPhongBan.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBoxDanhSachPhongBan.Size = new System.Drawing.Size(1052, 317);
             this.groupBoxDanhSachPhongBan.TabIndex = 7;
             this.groupBoxDanhSachPhongBan.TabStop = false;
             this.groupBoxDanhSachPhongBan.Text = "DANH SÁCH PHÒNG BAN";
@@ -222,9 +235,10 @@ namespace DoAnNhom21
             this.btnThongBao.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnThongBao.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnThongBao.ForeColor = System.Drawing.Color.Black;
-            this.btnThongBao.Location = new System.Drawing.Point(326, 158);
+            this.btnThongBao.Location = new System.Drawing.Point(391, 190);
+            this.btnThongBao.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnThongBao.Name = "btnThongBao";
-            this.btnThongBao.Size = new System.Drawing.Size(220, 40);
+            this.btnThongBao.Size = new System.Drawing.Size(264, 48);
             this.btnThongBao.TabIndex = 6;
             this.btnThongBao.Text = "Thông Báo";
             this.btnThongBao.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -241,9 +255,11 @@ namespace DoAnNhom21
             this.groupBoxChucNang.Controls.Add(this.btnThoat);
             this.groupBoxChucNang.Controls.Add(this.btnSua);
             this.groupBoxChucNang.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBoxChucNang.Location = new System.Drawing.Point(70, 264);
+            this.groupBoxChucNang.Location = new System.Drawing.Point(84, 317);
+            this.groupBoxChucNang.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.groupBoxChucNang.Name = "groupBoxChucNang";
-            this.groupBoxChucNang.Size = new System.Drawing.Size(877, 223);
+            this.groupBoxChucNang.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBoxChucNang.Size = new System.Drawing.Size(1052, 268);
             this.groupBoxChucNang.TabIndex = 6;
             this.groupBoxChucNang.TabStop = false;
             this.groupBoxChucNang.Text = "CHỨC NĂNG";
@@ -253,9 +269,10 @@ namespace DoAnNhom21
             this.btnLamMoi.BackColor = System.Drawing.Color.LavenderBlush;
             this.btnLamMoi.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLamMoi.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.btnLamMoi.Location = new System.Drawing.Point(326, 100);
+            this.btnLamMoi.Location = new System.Drawing.Point(391, 120);
+            this.btnLamMoi.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnLamMoi.Name = "btnLamMoi";
-            this.btnLamMoi.Size = new System.Drawing.Size(220, 38);
+            this.btnLamMoi.Size = new System.Drawing.Size(264, 46);
             this.btnLamMoi.TabIndex = 5;
             this.btnLamMoi.Text = "Làm mới";
             this.btnLamMoi.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -267,9 +284,10 @@ namespace DoAnNhom21
             this.btnXemThongTin.BackColor = System.Drawing.Color.LavenderBlush;
             this.btnXemThongTin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnXemThongTin.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnXemThongTin.Location = new System.Drawing.Point(74, 100);
+            this.btnXemThongTin.Location = new System.Drawing.Point(89, 120);
+            this.btnXemThongTin.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnXemThongTin.Name = "btnXemThongTin";
-            this.btnXemThongTin.Size = new System.Drawing.Size(220, 38);
+            this.btnXemThongTin.Size = new System.Drawing.Size(264, 46);
             this.btnXemThongTin.TabIndex = 4;
             this.btnXemThongTin.Text = "Xem thông tin chi tiết";
             this.btnXemThongTin.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -281,9 +299,10 @@ namespace DoAnNhom21
             this.btnThem.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnThem.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnThem.ForeColor = System.Drawing.Color.Black;
-            this.btnThem.Location = new System.Drawing.Point(74, 44);
+            this.btnThem.Location = new System.Drawing.Point(89, 53);
+            this.btnThem.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnThem.Name = "btnThem";
-            this.btnThem.Size = new System.Drawing.Size(220, 38);
+            this.btnThem.Size = new System.Drawing.Size(264, 46);
             this.btnThem.TabIndex = 3;
             this.btnThem.Text = "Thêm";
             this.btnThem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -295,9 +314,10 @@ namespace DoAnNhom21
             this.btnXoa.BackColor = System.Drawing.Color.LavenderBlush;
             this.btnXoa.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnXoa.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnXoa.Location = new System.Drawing.Point(577, 44);
+            this.btnXoa.Location = new System.Drawing.Point(692, 53);
+            this.btnXoa.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnXoa.Name = "btnXoa";
-            this.btnXoa.Size = new System.Drawing.Size(220, 38);
+            this.btnXoa.Size = new System.Drawing.Size(264, 46);
             this.btnXoa.TabIndex = 3;
             this.btnXoa.Text = "Xoá";
             this.btnXoa.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -309,9 +329,10 @@ namespace DoAnNhom21
             this.btnThoat.BackColor = System.Drawing.Color.LavenderBlush;
             this.btnThoat.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnThoat.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnThoat.Location = new System.Drawing.Point(577, 100);
+            this.btnThoat.Location = new System.Drawing.Point(692, 120);
+            this.btnThoat.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnThoat.Name = "btnThoat";
-            this.btnThoat.Size = new System.Drawing.Size(220, 38);
+            this.btnThoat.Size = new System.Drawing.Size(264, 46);
             this.btnThoat.TabIndex = 3;
             this.btnThoat.Text = "Thoát";
             this.btnThoat.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -323,9 +344,10 @@ namespace DoAnNhom21
             this.btnSua.BackColor = System.Drawing.Color.LavenderBlush;
             this.btnSua.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSua.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSua.Location = new System.Drawing.Point(326, 44);
+            this.btnSua.Location = new System.Drawing.Point(391, 53);
+            this.btnSua.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnSua.Name = "btnSua";
-            this.btnSua.Size = new System.Drawing.Size(220, 38);
+            this.btnSua.Size = new System.Drawing.Size(264, 46);
             this.btnSua.TabIndex = 3;
             this.btnSua.Text = "Sửa";
             this.btnSua.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -334,15 +356,16 @@ namespace DoAnNhom21
             // 
             // FormPhongBan
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.ClientSize = new System.Drawing.Size(1041, 801);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(234)))), ((int)(((byte)(220)))));
+            this.ClientSize = new System.Drawing.Size(1249, 961);
             this.ControlBox = false;
             this.Controls.Add(this.groupBoxChucNang);
             this.Controls.Add(this.groupBoxDanhSachPhongBan);
             this.Controls.Add(this.groupBoxThongTinPhongBan);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "FormPhongBan";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Phòng Ban";

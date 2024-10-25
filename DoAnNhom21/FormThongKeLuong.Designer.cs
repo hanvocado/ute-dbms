@@ -34,15 +34,15 @@ namespace DoAnNhom21
         private void InitializeComponent()
         {
             this.dgvLuong = new System.Windows.Forms.DataGridView();
-            this.cbbMaThang = new System.Windows.Forms.ComboBox();
-            this.lblNgayNghiPhep = new System.Windows.Forms.Label();
-            this.btnXemLuong = new System.Windows.Forms.Button();
             this.MaNV = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Ho = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Ten = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.LuongChiuThue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Thue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.LuongThucLanh = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cbbMaThang = new System.Windows.Forms.ComboBox();
+            this.lblNgayNghiPhep = new System.Windows.Forms.Label();
+            this.btnXemLuong = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLuong)).BeginInit();
             this.SuspendLayout();
             // 
@@ -62,39 +62,6 @@ namespace DoAnNhom21
             this.dgvLuong.RowHeadersWidth = 120;
             this.dgvLuong.Size = new System.Drawing.Size(1105, 576);
             this.dgvLuong.TabIndex = 3;
-            // 
-            // cbbMaThang
-            // 
-            this.cbbMaThang.FormattingEnabled = true;
-            this.cbbMaThang.Location = new System.Drawing.Point(485, 34);
-            this.cbbMaThang.Name = "cbbMaThang";
-            this.cbbMaThang.Size = new System.Drawing.Size(282, 28);
-            this.cbbMaThang.TabIndex = 9;
-            // 
-            // lblNgayNghiPhep
-            // 
-            this.lblNgayNghiPhep.AutoSize = true;
-            this.lblNgayNghiPhep.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.lblNgayNghiPhep.Location = new System.Drawing.Point(356, 32);
-            this.lblNgayNghiPhep.Name = "lblNgayNghiPhep";
-            this.lblNgayNghiPhep.Size = new System.Drawing.Size(84, 27);
-            this.lblNgayNghiPhep.TabIndex = 8;
-            this.lblNgayNghiPhep.Text = "Tháng: ";
-            // 
-            // btnXemLuong
-            // 
-            this.btnXemLuong.BackColor = System.Drawing.Color.LavenderBlush;
-            this.btnXemLuong.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnXemLuong.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.btnXemLuong.Location = new System.Drawing.Point(485, 87);
-            this.btnXemLuong.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btnXemLuong.Name = "btnXemLuong";
-            this.btnXemLuong.Size = new System.Drawing.Size(207, 50);
-            this.btnXemLuong.TabIndex = 10;
-            this.btnXemLuong.Text = "Xem lương";
-            this.btnXemLuong.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnXemLuong.UseVisualStyleBackColor = false;
-            this.btnXemLuong.Click += new System.EventHandler(this.btnXemLuong_Click);
             // 
             // MaNV
             // 
@@ -140,10 +107,44 @@ namespace DoAnNhom21
             this.LuongThucLanh.Name = "LuongThucLanh";
             this.LuongThucLanh.Width = 169;
             // 
+            // cbbMaThang
+            // 
+            this.cbbMaThang.FormattingEnabled = true;
+            this.cbbMaThang.Location = new System.Drawing.Point(485, 34);
+            this.cbbMaThang.Name = "cbbMaThang";
+            this.cbbMaThang.Size = new System.Drawing.Size(282, 28);
+            this.cbbMaThang.TabIndex = 9;
+            // 
+            // lblNgayNghiPhep
+            // 
+            this.lblNgayNghiPhep.AutoSize = true;
+            this.lblNgayNghiPhep.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.lblNgayNghiPhep.Location = new System.Drawing.Point(356, 32);
+            this.lblNgayNghiPhep.Name = "lblNgayNghiPhep";
+            this.lblNgayNghiPhep.Size = new System.Drawing.Size(84, 27);
+            this.lblNgayNghiPhep.TabIndex = 8;
+            this.lblNgayNghiPhep.Text = "Tháng: ";
+            // 
+            // btnXemLuong
+            // 
+            this.btnXemLuong.BackColor = System.Drawing.Color.LavenderBlush;
+            this.btnXemLuong.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnXemLuong.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.btnXemLuong.Location = new System.Drawing.Point(485, 87);
+            this.btnXemLuong.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnXemLuong.Name = "btnXemLuong";
+            this.btnXemLuong.Size = new System.Drawing.Size(207, 50);
+            this.btnXemLuong.TabIndex = 10;
+            this.btnXemLuong.Text = "Xem lương";
+            this.btnXemLuong.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnXemLuong.UseVisualStyleBackColor = false;
+            this.btnXemLuong.Click += new System.EventHandler(this.btnXemLuong_Click);
+            // 
             // FormThongKeLuong
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(234)))), ((int)(((byte)(220)))));
             this.ClientSize = new System.Drawing.Size(1172, 758);
             this.Controls.Add(this.btnXemLuong);
             this.Controls.Add(this.cbbMaThang);
