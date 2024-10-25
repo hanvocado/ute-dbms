@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq.Expressions;
 using System.Windows.Forms;
 
 namespace DoAnNhom21
@@ -46,8 +47,30 @@ namespace DoAnNhom21
             else if (cbbQuanLy.SelectedItem.ToString() == "Quản lý hợp đồng")
             {
                 OpenForm(new FormQuanLyHopDong());
-
             }
+            else if (cbbQuanLy.SelectedItem.ToString() == "Quản lý tháng công")
+            {
+                OpenForm(new FormQuanLyThangCong());
+            } else if (cbbQuanLy.SelectedItem.ToString() == "Quản lý chấm công")
+            {
+                OpenForm(new FormQuanLyBaoHiem());
+            } else if (cbbQuanLy.SelectedItem.ToString() == "Quản lý phòng ban")
+            {
+                OpenForm(new FormPhongBan());
+            }
+            else if (cbbQuanLy.SelectedItem.ToString() == "Quản lý chức vụ")
+            {
+                OpenForm(new FormChucVu());
+            }
+            else if (cbbQuanLy.SelectedItem.ToString() == "Quản lý phụ cấp") 
+            {
+                OpenForm(new FormPhuCap());
+            }
+            else if (cbbQuanLy.SelectedItem.ToString() == "Quản lý thưởng phạt")
+            {
+                OpenForm(new FormThuongPhat());
+            }
+
         }
         private void btnDangXuat_Click_1(object sender, EventArgs e)
         {
