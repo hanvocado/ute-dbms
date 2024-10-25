@@ -4,7 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
 
-namespace DoAnNhom9
+namespace DoAnNhom21
 {
     public partial class FormLuongNhanVien : Form
     {
