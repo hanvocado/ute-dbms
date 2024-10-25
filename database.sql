@@ -365,10 +365,6 @@ VALUES
 ('NV03', 'PC03', '032023', 20, 400000),
 ('NV04', 'PC01', '042023', 25, 200000);
 
-<<<<<<< HEAD
-
-
-=======
 GO
 
 CREATE OR ALTER PROCEDURE sp_GetChamCongByMaNV
@@ -538,21 +534,22 @@ END;
 GO
 
 -----------------VIEW NHAN VIEN-------------
-CREATE OR ALTER VIEW v_QuanLyNhanVien AS SELECT nv.MaNV, nv.Ho, nv.Ten, nv.GioiTinh, nv.NgaySinh, nv.DiaChi, nv.SDT, nv.Email, nv.CCCD, pb.TenPB AS TenPhongBan, cv.TenCV AS TenChucVu
+CREATE VIEW vw_QuanLyNhanVien AS SELECT nv.MaNV, nv.Ho, nv.Ten, nv.GioiTinh, nv.NgaySinh, nv.DiaChi, nv.SDT, nv.Email, nv.CCCD, pb.TenPB AS TenPhongBan, cv.TenCV AS TenChucVu
 FROM NhanVien nv JOIN PhongBan pb ON nv.MaPB = pb.MaPB JOIN ChucVu cv ON nv.MaCV = cv.MaCV;
 
 GO
 
 -----------------VIEW BAO HIEM--------------
-CREATE OR ALTER VIEW v_QuanLyBaoHiem AS SELECT nv.MaNV, nv.Ho, nv.Ten, bh.MaLoai
-AS MaBaoHiem, bh.TenBH, ctbh.MaBH, ctbh.NgayBD AS NgayBatDauBaoHiem, ctbh.NgayKT AS NgayKetThucBaoHiem
+CREATE OR ALTER VIEW vw_QuanLyBaoHiem AS
+SELECT nv.MaNV, nv.Ho, nv.Ten, bh.TenBH, ctbh.MaBH, ctbh.NgayBD, ctbh.NgayKT
 FROM NhanVien nv JOIN ctBaoHiem ctbh ON nv.MaNV = ctbh.MaNV JOIN BaoHiem bh ON ctbh.MaLoai = bh.MaLoai;
 
 GO
 
 -----------------VIEW HOP DONG---------------
-CREATE OR ALTER VIEW v_QuanLyHopDong AS SELECT nv.MaNV, nv.Ho, nv.Ten, hd.MaHD, hd.LuongCoBan, hd.NgayBD
+CREATE OR ALTER VIEW vw_QuanLyHopDong AS SELECT nv.MaNV, nv.Ho, nv.Ten, hd.MaHD, hd.LuongCoBan, hd.NgayBD
 AS NgayBatDauHopDong, hd.NgayKT AS NgayKetThucHopDong FROM NhanVien nv JOIN HopDong hd ON nv.MaHD = hd.MaHD;
+
 
 GO
 
@@ -737,3 +734,47 @@ BEGIN
     INSERT INTO ctChamCong (MaNV, MaCC, MaThang, NgayChamCong) 
     VALUES (@MaNV, @MaCC, @MaThang, @NgayNghiPhep);
 END;
+
+GO
+
+CREATE OR ALTER PROCEDURE sp_GetctBaoHiemByMaNV
+    @MaNV VARCHAR(10)
+AS
+BEGIN
+    SELECT * FROM vw_QuanLyBaoHiem WHERE MaNV = @MaNV;
+END;
+
+GO
+
+CREATE OR ALTER PROCEDURE sp_AddctBaoHiem
+    @MaNV VARCHAR(10),
+	@MaLoai VARCHAR(10),
+	@MaBH VARCHAR(10),
+	@NgayBD DATE,
+	@NgayKT DATE
+AS
+BEGIN
+    INSERT INTO ctBaoHiem (MaNV, MaBH, MaLoai, NgayBD, NgayKT) VALUES (@MaNV, @MaBH, @MaLoai, @NgayBD, @NgayKT);
+END;
+
+GO
+
+CREATE OR ALTER PROCEDURE sp_UpdatectBaoHiem
+	@LoaiBH VARCHAR(10),
+	@MaBH VARCHAR(10),
+	@NgayBD DATE,
+	@NgayKT DATE
+AS
+BEGIN
+    UPDATE ctBaoHiem SET MaLoai=@LoaiBH, NgayBD=@NgayBD, NgayKT=@NgayKT WHERE MaBH=@MaBH;
+END;
+
+GO
+
+CREATE OR ALTER PROCEDURE sp_DeletectBaoHiem
+    @MaBH VARCHAR(10)
+AS
+BEGIN
+    DELETE FROM ctBaoHiem WHERE MaBH=@MaBH;
+END;
+

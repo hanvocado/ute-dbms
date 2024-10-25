@@ -28,14 +28,15 @@ namespace DoAnNhom21
 
         private void load()
         {
-            string queryAllBH = "Select * from ctBaoHiem";
+            string queryAllBH = "Select * from vw_QuanLyBaoHiem";
             dataGridViewBaoHiemNV.DataSource = Connection.LoadDataTable(queryAllBH);
         }
 
         private void btnTim_Click(object sender, EventArgs e)
         {
-            SqlCommand cmd = new SqlCommand("select * from ctBaoHiem where MaNV = @maNV");
-            cmd.Parameters.AddWithValue("@maNV", this.cbbMaNV.Text);
+            SqlCommand cmd = new SqlCommand("sp_GetctBaoHiemByMaNV");
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@MaNV", this.cbbMaNV.Text);
             dataGridViewBaoHiemNV.DataSource = Connection.LoadDataTable(cmd);
         }
 
@@ -43,8 +44,9 @@ namespace DoAnNhom21
         {
             try
             {
-                using (SqlCommand command = new SqlCommand("INSERT INTO ctBaoHiem (MaNV, MaBH, MaLoai, NgayBD, NgayKT) VALUES (@MaNV, @MaBH, @MaLoai, @NgayBD, @NgayKT)"))
+                using (SqlCommand command = new SqlCommand("sp_AddctBaoHiem"))
                 {
+                    command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@MaNV", this.cbbMaNV.Text);
                     command.Parameters.AddWithValue("@MaLoai", this.cbbLoaiBH.SelectedValue.ToString());
                     command.Parameters.AddWithValue("@MaBH", this.txtMaBH.Text);
@@ -65,15 +67,16 @@ namespace DoAnNhom21
         {
             try
             {
-                using (SqlCommand command = new SqlCommand("UPDATE ctBaoHiem SET MaLoai=@LoaiBH, NgayBD=@NgayBD, NgayKT=@NgayKT WHERE MaBH=@MaBH"))
+                using (SqlCommand command = new SqlCommand("sp_UpdatectBaoHiem"))
                 {
+                    command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@LoaiBH", this.cbbLoaiBH.SelectedValue.ToString());
                     command.Parameters.AddWithValue("@MaBH", this.txtMaBH.Text);
                     command.Parameters.AddWithValue("@NgayBD", this.dateTimePickerNgayBD.Value);
                     command.Parameters.AddWithValue("@NgayKT", this.dateTimePickerNgayKT.Value);
                     Connection.ExecuteCommand(command);
-                    MessageBox.Show("Cập nhật thành công");
                     load();
+                    MessageBox.Show("Cập nhật thành công");
                 }
             }
             catch (Exception ex)
@@ -86,8 +89,9 @@ namespace DoAnNhom21
         {
             try
             {
-                using (SqlCommand command = new SqlCommand("DELETE FROM ctBaoHiem WHERE MaBH=@MaBH"))
+                using (SqlCommand command = new SqlCommand("sp_DeletectBaoHiem"))
                 {
+                    command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@MaBH", this.txtMaBH.Text);
                     Connection.ExecuteCommand(command);
                     MessageBox.Show("Xóa thành công");
@@ -110,10 +114,10 @@ namespace DoAnNhom21
             cbbMaNV.Enabled = false;
             txtMaBH.Enabled = false;
             cbbMaNV.Text = dataGridViewBaoHiemNV.CurrentRow.Cells[0].Value.ToString();
-            txtMaBH.Text = dataGridViewBaoHiemNV.CurrentRow.Cells[1].Value.ToString();
-            cbbLoaiBH.Text = dataGridViewBaoHiemNV.CurrentRow.Cells[2].Value.ToString();
-            dateTimePickerNgayBD.Text = dataGridViewBaoHiemNV.CurrentRow.Cells[3].Value.ToString();
-            dateTimePickerNgayKT.Text = dataGridViewBaoHiemNV.CurrentRow.Cells[4].Value.ToString();
+            txtMaBH.Text = dataGridViewBaoHiemNV.CurrentRow.Cells[4].Value.ToString();
+            cbbLoaiBH.Text = dataGridViewBaoHiemNV.CurrentRow.Cells[3].Value.ToString();
+            dateTimePickerNgayBD.Text = dataGridViewBaoHiemNV.CurrentRow.Cells[5].Value.ToString();
+            dateTimePickerNgayKT.Text = dataGridViewBaoHiemNV.CurrentRow.Cells[6].Value.ToString();
         }
 
         private void btnLamMoi_Click(object sender, EventArgs e)
