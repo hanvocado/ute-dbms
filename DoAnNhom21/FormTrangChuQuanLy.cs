@@ -48,6 +48,10 @@ namespace DoAnNhom21
                 OpenForm(new FormQuanLyHopDong());
 
             }
+            else if (cbbQuanLy.SelectedItem.ToString() == "Quản lý phòng ban")
+            {
+                OpenForm(new FormPhongBan());
+            }
         }
         private void btnDangXuat_Click_1(object sender, EventArgs e)
         {

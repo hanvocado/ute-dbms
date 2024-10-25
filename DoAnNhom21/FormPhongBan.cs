@@ -141,8 +141,10 @@ namespace DoAnNhom21
         {
             FormThongBao formTB = new FormThongBao();
             
-            formTB.Show();
+            formTB.Show(); 
 
         }
+
+        
     }
 }

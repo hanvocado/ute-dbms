@@ -274,6 +274,7 @@ namespace DoAnNhom21
             this.btnXemThongTin.Text = "Xem thông tin chi tiết";
             this.btnXemThongTin.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnXemThongTin.UseVisualStyleBackColor = false;
+            this.btnXemThongTin.Click += new System.EventHandler(this.btnXemThongTin_Click);
             // 
             // btnThem
             // 

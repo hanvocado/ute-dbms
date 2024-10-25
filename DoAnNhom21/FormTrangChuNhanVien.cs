@@ -47,5 +47,6 @@ namespace DoAnNhom21
         {
             OpenForm(new FormHopDongNhanVien(this.maNv));
         }
+        private void bt
     }
 }
