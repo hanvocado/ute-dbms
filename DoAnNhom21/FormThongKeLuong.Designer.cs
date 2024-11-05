@@ -57,10 +57,11 @@ namespace DoAnNhom21
             this.LuongChiuThue,
             this.Thue,
             this.LuongThucLanh});
-            this.dgvLuong.Location = new System.Drawing.Point(38, 157);
+            this.dgvLuong.Location = new System.Drawing.Point(38, 164);
+            this.dgvLuong.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgvLuong.Name = "dgvLuong";
             this.dgvLuong.RowHeadersWidth = 120;
-            this.dgvLuong.Size = new System.Drawing.Size(1105, 576);
+            this.dgvLuong.Size = new System.Drawing.Size(982, 461);
             this.dgvLuong.TabIndex = 3;
             // 
             // MaNV
@@ -105,23 +106,24 @@ namespace DoAnNhom21
             this.LuongThucLanh.HeaderText = "Lương Thực Lãnh";
             this.LuongThucLanh.MinimumWidth = 8;
             this.LuongThucLanh.Name = "LuongThucLanh";
-            this.LuongThucLanh.Width = 169;
+            this.LuongThucLanh.Width = 138;
             // 
             // cbbMaThang
             // 
             this.cbbMaThang.FormattingEnabled = true;
-            this.cbbMaThang.Location = new System.Drawing.Point(485, 34);
+            this.cbbMaThang.Location = new System.Drawing.Point(431, 27);
+            this.cbbMaThang.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cbbMaThang.Name = "cbbMaThang";
-            this.cbbMaThang.Size = new System.Drawing.Size(282, 28);
+            this.cbbMaThang.Size = new System.Drawing.Size(251, 24);
             this.cbbMaThang.TabIndex = 9;
             // 
             // lblNgayNghiPhep
             // 
             this.lblNgayNghiPhep.AutoSize = true;
             this.lblNgayNghiPhep.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.lblNgayNghiPhep.Location = new System.Drawing.Point(356, 32);
+            this.lblNgayNghiPhep.Location = new System.Drawing.Point(325, 27);
             this.lblNgayNghiPhep.Name = "lblNgayNghiPhep";
-            this.lblNgayNghiPhep.Size = new System.Drawing.Size(84, 27);
+            this.lblNgayNghiPhep.Size = new System.Drawing.Size(69, 22);
             this.lblNgayNghiPhep.TabIndex = 8;
             this.lblNgayNghiPhep.Text = "Tháng: ";
             // 
@@ -130,10 +132,9 @@ namespace DoAnNhom21
             this.btnXemLuong.BackColor = System.Drawing.Color.LavenderBlush;
             this.btnXemLuong.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnXemLuong.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.btnXemLuong.Location = new System.Drawing.Point(485, 87);
-            this.btnXemLuong.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnXemLuong.Location = new System.Drawing.Point(431, 86);
             this.btnXemLuong.Name = "btnXemLuong";
-            this.btnXemLuong.Size = new System.Drawing.Size(207, 50);
+            this.btnXemLuong.Size = new System.Drawing.Size(184, 40);
             this.btnXemLuong.TabIndex = 10;
             this.btnXemLuong.Text = "Xem lương";
             this.btnXemLuong.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -142,14 +143,16 @@ namespace DoAnNhom21
             // 
             // FormThongKeLuong
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(234)))), ((int)(((byte)(220)))));
-            this.ClientSize = new System.Drawing.Size(1172, 758);
+            this.ClientSize = new System.Drawing.Size(1042, 606);
             this.Controls.Add(this.btnXemLuong);
             this.Controls.Add(this.cbbMaThang);
             this.Controls.Add(this.lblNgayNghiPhep);
             this.Controls.Add(this.dgvLuong);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "FormThongKeLuong";
             this.Text = "FormThongKeLuong";
             this.Load += new System.EventHandler(this.FormThongKeLuong_Load);
