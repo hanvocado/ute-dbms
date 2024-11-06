@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
 
@@ -13,8 +14,9 @@ namespace DoAnNhom21
 
         private void load()
         {
-            string queryAllThang = "Select * from Thang ORDER By MaThang DESC";
-            dataGVThang.DataSource = Connection.LoadDataTable(queryAllThang);
+            SqlCommand cmd = new SqlCommand("sp_GetThang");
+            cmd.CommandType = CommandType.StoredProcedure;
+            dataGVThang.DataSource = Connection.LoadDataTable(cmd);
 
             string queryAllCong = "Select * from ChamCong";
             dataGVCong.DataSource = Connection.LoadDataTable(queryAllCong);

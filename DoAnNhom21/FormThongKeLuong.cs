@@ -13,8 +13,9 @@ namespace DoAnNhom21
         }
         void load()
         {
-            string queryAllThang = "SELECT MaThang, MoTa FROM Thang ORDER By MaThang DESC";
-            DataTable dtThang = Connection.LoadDataTable(queryAllThang);
+            SqlCommand cmd = new SqlCommand("sp_GetThang");
+            cmd.CommandType = CommandType.StoredProcedure;
+            DataTable dtThang = Connection.LoadDataTable(cmd);
             cbbMaThang.Items.Clear();
             cbbMaThang.DataSource = new BindingSource(dtThang, null);
             cbbMaThang.DisplayMember = "MoTa";

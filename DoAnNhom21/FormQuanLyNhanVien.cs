@@ -104,7 +104,7 @@ namespace DoAnNhom21
                 using (SqlConnection conn = Connection.getConnection())
                 {
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand("AddNhanVien");
+                    SqlCommand cmd = new SqlCommand("sp_AddNhanVien");
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@MaNV", this.txtMaNhanVien.Text);
                     cmd.Parameters.AddWithValue("@Ho", this.txtHoVaTenLot.Text);
@@ -136,7 +136,7 @@ namespace DoAnNhom21
         {
             try
             {
-                using (SqlCommand command = new SqlCommand("DeleteNhanVien"))
+                using (SqlCommand command = new SqlCommand("sp_DeleteNhanVien"))
                 {
                     command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@MaNV", this.txtMaNhanVien.Text);
@@ -225,7 +225,7 @@ namespace DoAnNhom21
         {
             try
             {
-                using (SqlCommand command = new SqlCommand("UpdateNhanVien"))
+                using (SqlCommand command = new SqlCommand("sp_UpdateNhanVien"))
                 {
                     command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@MaNV", this.txtMaNhanVien.Text);
