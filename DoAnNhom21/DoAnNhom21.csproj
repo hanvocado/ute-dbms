@@ -47,6 +47,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Guna.UI2, Version=2.0.4.6, Culture=neutral, PublicKeyToken=8b9d14aa5142e261, processorArchitecture=MSIL">
       <HintPath>..\packages\Guna.UI2.WinForms.2.0.4.6\lib\net48\Guna.UI2.dll</HintPath>
@@ -73,11 +76,35 @@
       <DependentUpon>AppDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="Connection.cs" />
+    <Compile Include="FormChiTietLuong.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormChiTietLuong.Designer.cs">
+      <DependentUpon>FormChiTietLuong.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormChucVu.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormChucVu.Designer.cs">
       <DependentUpon>FormChucVu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormDangNhap.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormDangNhap.Designer.cs">
+      <DependentUpon>FormDangNhap.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormHopDongNhanVien.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormHopDongNhanVien.Designer.cs">
+      <DependentUpon>FormHopDongNhanVien.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormLuongNhanVien.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormLuongNhanVien.Designer.cs">
+      <DependentUpon>FormLuongNhanVien.cs</DependentUpon>
     </Compile>
     <Compile Include="FormPhuCap.cs">
       <SubType>Form</SubType>
@@ -109,6 +136,24 @@
     <Compile Include="FormQuanLyChamCong.Designer.cs">
       <DependentUpon>FormQuanLyChamCong.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormQuanLyHopDong.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormQuanLyHopDong.Designer.cs">
+      <DependentUpon>FormQuanLyHopDong.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormQuanLyNguoiPhuThuoc.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormQuanLyNguoiPhuThuoc.Designer.cs">
+      <DependentUpon>FormQuanLyNguoiPhuThuoc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormQuanLyNhanVien.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormQuanLyNhanVien.Designer.cs">
+      <DependentUpon>FormQuanLyNhanVien.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormQuanLyThangCong.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -133,11 +178,29 @@
     <Compile Include="FormThongKeLuong.Designer.cs">
       <DependentUpon>FormThongKeLuong.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormThongTinNhanVien.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormThongTinNhanVien.Designer.cs">
+      <DependentUpon>FormThongTinNhanVien.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormThuongPhat.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormThuongPhat.Designer.cs">
       <DependentUpon>FormThuongPhat.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormTrangChuNhanVien.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormTrangChuNhanVien.Designer.cs">
+      <DependentUpon>FormTrangChuNhanVien.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormTrangChuQuanLy.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormTrangChuQuanLy.Designer.cs">
+      <DependentUpon>FormTrangChuQuanLy.cs</DependentUpon>
     </Compile>
     <Compile Include="FormXemChiTietPhongBan.cs">
       <SubType>Form</SubType>
@@ -147,12 +210,21 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="FormBaoHiemNV.resx">
-      <DependentUpon>FormBaoHiemNV.cs</DependentUpon>
-    </EmbeddedResource>
     <Compile Include="SessionInfo.cs" />
+    <EmbeddedResource Include="FormChiTietLuong.resx">
+      <DependentUpon>FormChiTietLuong.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormChucVu.resx">
       <DependentUpon>FormChucVu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormDangNhap.resx">
+      <DependentUpon>FormDangNhap.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormHopDongNhanVien.resx">
+      <DependentUpon>FormHopDongNhanVien.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormLuongNhanVien.resx">
+      <DependentUpon>FormLuongNhanVien.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormPhuCap.resx">
       <DependentUpon>FormPhuCap.cs</DependentUpon>
@@ -170,6 +242,15 @@
     <EmbeddedResource Include="FormQuanLyChamCong.resx">
       <DependentUpon>FormQuanLyChamCong.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormQuanLyHopDong.resx">
+      <DependentUpon>FormQuanLyHopDong.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormQuanLyNguoiPhuThuoc.resx">
+      <DependentUpon>FormQuanLyNguoiPhuThuoc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormQuanLyNhanVien.resx">
+      <DependentUpon>FormQuanLyNhanVien.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormQuanLyThangCong.resx">
       <DependentUpon>FormQuanLyThangCong.cs</DependentUpon>
     </EmbeddedResource>
@@ -181,9 +262,19 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormThongKeLuong.resx">
       <DependentUpon>FormThongKeLuong.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormThongTinNhanVien.resx">
+      <DependentUpon>FormThongTinNhanVien.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormThuongPhat.resx">
       <DependentUpon>FormThuongPhat.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormTrangChuNhanVien.resx">
+      <DependentUpon>FormTrangChuNhanVien.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormTrangChuQuanLy.resx">
+      <DependentUpon>FormTrangChuQuanLy.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormXemChiTietPhongBan.resx">
       <DependentUpon>FormXemChiTietPhongBan.cs</DependentUpon>
@@ -196,7 +287,9 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="app.manifest" />
     <None Include="AppDataSet.xsc">
       <DependentUpon>AppDataSet.xsd</DependentUpon>
     </None>
@@ -233,6 +326,15 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Img\27.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Img\profile.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Img\human.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

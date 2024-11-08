@@ -85,7 +85,7 @@ namespace DoAnNhom21
             this.groupBox2.Controls.Add(this.lblLoaiPhuCap);
             this.groupBox2.Controls.Add(this.lblMaPC);
             this.groupBox2.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.groupBox2.Location = new System.Drawing.Point(43, 70);
+            this.groupBox2.Location = new System.Drawing.Point(120, 46);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -138,7 +138,7 @@ namespace DoAnNhom21
             this.groupBox1.Controls.Add(this.btnThem);
             this.groupBox1.Controls.Add(this.btnXoa);
             this.groupBox1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.groupBox1.Location = new System.Drawing.Point(43, 228);
+            this.groupBox1.Location = new System.Drawing.Point(120, 235);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -161,6 +161,7 @@ namespace DoAnNhom21
             this.btnSua.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnSua.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSua.UseVisualStyleBackColor = false;
+            this.btnSua.Click += new System.EventHandler(this.btnSua_Click);
             // 
             // btnThem
             // 
@@ -176,6 +177,7 @@ namespace DoAnNhom21
             this.btnThem.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnThem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnThem.UseVisualStyleBackColor = false;
+            this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
             // 
             // btnXoa
             // 
@@ -191,12 +193,13 @@ namespace DoAnNhom21
             this.btnXoa.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnXoa.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnXoa.UseVisualStyleBackColor = false;
+            this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
             // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.dgvPhuCap);
             this.groupBox3.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.groupBox3.Location = new System.Drawing.Point(43, 347);
+            this.groupBox3.Location = new System.Drawing.Point(120, 352);
             this.groupBox3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -221,6 +224,7 @@ namespace DoAnNhom21
             this.dgvPhuCap.RowTemplate.Height = 24;
             this.dgvPhuCap.Size = new System.Drawing.Size(344, 199);
             this.dgvPhuCap.TabIndex = 0;
+            this.dgvPhuCap.DoubleClick += new System.EventHandler(this.dgvPhuCap_DoubleClick);
             // 
             // Column1
             // 
@@ -249,7 +253,7 @@ namespace DoAnNhom21
             this.groupBox4.Controls.Add(this.label1);
             this.groupBox4.Controls.Add(this.label2);
             this.groupBox4.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.groupBox4.Location = new System.Drawing.Point(420, 28);
+            this.groupBox4.Location = new System.Drawing.Point(548, 46);
             this.groupBox4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -342,7 +346,7 @@ namespace DoAnNhom21
             this.groupBox5.Controls.Add(this.btnThemct);
             this.groupBox5.Controls.Add(this.btnXoact);
             this.groupBox5.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.groupBox5.Location = new System.Drawing.Point(420, 235);
+            this.groupBox5.Location = new System.Drawing.Point(548, 257);
             this.groupBox5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -365,6 +369,7 @@ namespace DoAnNhom21
             this.btnLamMoi.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnLamMoi.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnLamMoi.UseVisualStyleBackColor = false;
+            this.btnLamMoi.Click += new System.EventHandler(this.btnLamMoi_Click);
             // 
             // btnLoc
             // 
@@ -395,6 +400,7 @@ namespace DoAnNhom21
             this.btnSuact.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnSuact.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSuact.UseVisualStyleBackColor = false;
+            this.btnSuact.Click += new System.EventHandler(this.btnSuact_Click);
             // 
             // btnThemct
             // 
@@ -410,6 +416,7 @@ namespace DoAnNhom21
             this.btnThemct.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnThemct.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnThemct.UseVisualStyleBackColor = false;
+            this.btnThemct.Click += new System.EventHandler(this.btnThemct_Click);
             // 
             // btnXoact
             // 
@@ -425,12 +432,13 @@ namespace DoAnNhom21
             this.btnXoact.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnXoact.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnXoact.UseVisualStyleBackColor = false;
+            this.btnXoact.Click += new System.EventHandler(this.btnXoact_Click);
             // 
             // groupBox6
             // 
             this.groupBox6.Controls.Add(this.dgvctPhuCap);
             this.groupBox6.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.groupBox6.Location = new System.Drawing.Point(420, 354);
+            this.groupBox6.Location = new System.Drawing.Point(542, 367);
             this.groupBox6.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -458,6 +466,7 @@ namespace DoAnNhom21
             this.dgvctPhuCap.RowTemplate.Height = 24;
             this.dgvctPhuCap.Size = new System.Drawing.Size(516, 192);
             this.dgvctPhuCap.TabIndex = 0;
+            this.dgvctPhuCap.DoubleClick += new System.EventHandler(this.dgvctPhuCap_DoubleClick);
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -503,16 +512,18 @@ namespace DoAnNhom21
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1042, 758);
+            this.ClientSize = new System.Drawing.Size(1256, 622);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox3);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "FormPhuCap";
             this.Text = "FormPhuCap";
+            this.Load += new System.EventHandler(this.FormPhuCap_Load);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);

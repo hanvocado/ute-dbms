@@ -2,6 +2,6 @@
 {
     internal class SessionInfo
     {
-        public static string MaNV = "NV03";
+        public static string MaNV = "NV01";
     }
 }

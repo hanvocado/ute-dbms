@@ -7,18 +7,31 @@ namespace DoAnNhom21
 {
     public partial class FormThongKeLuong : Form
     {
+
         public FormThongKeLuong()
         {
             InitializeComponent();
         }
+        private Form currentFormChild;
+        private void OpenForm(Form form)
+        {
+            if (currentFormChild != null)
+            {
+                currentFormChild.Close();
+            }
+            currentFormChild = form;
+            form.Show();
+        }
         void load()
         {
-            string queryAllThang = "SELECT MaThang, MoTa FROM Thang ORDER By MaThang DESC";
-            DataTable dtThang = Connection.LoadDataTable(queryAllThang);
+            SqlCommand cmd = new SqlCommand("sp_GetThang");
+            cmd.CommandType = CommandType.StoredProcedure;
+            DataTable dtThang = Connection.LoadDataTable(cmd);
             cbbMaThang.Items.Clear();
             cbbMaThang.DataSource = new BindingSource(dtThang, null);
             cbbMaThang.DisplayMember = "MoTa";
             cbbMaThang.ValueMember = "MaThang";
+            dgvLuong.AutoGenerateColumns = false;
         }
 
         private void FormThongKeLuong_Load(object sender, EventArgs e)
@@ -31,7 +44,15 @@ namespace DoAnNhom21
             SqlCommand cmd = new SqlCommand("sp_TinhLuongTheoThang");
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@MaThang", cbbMaThang.SelectedValue);
-            dgvLuong.DataSource = Connection.LoadDataTable(cmd);
+            //dgvLuong.DataSource = Connection.LoadDataTable(cmd);
         }
+
+        private void btnXemChiTiet_Click(object sender, EventArgs e)
+        {
+            FormChiTietLuong formChiTiet = new FormChiTietLuong();
+            formChiTiet.MaThang = (string)cbbMaThang.SelectedValue; 
+            formChiTiet.Show(); 
+        }
+
     }
 }
