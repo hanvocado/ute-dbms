@@ -1,13 +1,7 @@
 ﻿using DoAnNhom21;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace DoAnNhom9
@@ -22,9 +16,9 @@ namespace DoAnNhom9
         void load()
         {
             string data = "Select * from NguoiPhuThuoc";
-            dataGridViewNguoiPhuThuoc.DataSource = Connection.Docdulieu(data);
+            dataGridViewNguoiPhuThuoc.DataSource = Connection.LoadDataTable(data);
             string nhanVien = "select MaNV from NhanVien";
-            cbbMaNV.DataSource = Connection.Docdulieu(nhanVien);
+            cbbMaNV.DataSource = Connection.LoadDataTable(nhanVien);
             cbbMaNV.ValueMember = "MaNV";
             cbbMaNV.DisplayMember = "MaNV";
         }
