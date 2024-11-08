@@ -83,7 +83,7 @@
             this.lblNgay.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNgay.Location = new System.Drawing.Point(496, 129);
             this.lblNgay.Name = "lblNgay";
-            this.lblNgay.Size = new System.Drawing.Size(57, 22);
+            this.lblNgay.Size = new System.Drawing.Size(69, 27);
             this.lblNgay.TabIndex = 21;
             this.lblNgay.Text = "Ngày:";
             // 
@@ -91,7 +91,7 @@
             // 
             this.txtNgayCC.Location = new System.Drawing.Point(596, 126);
             this.txtNgayCC.Name = "txtNgayCC";
-            this.txtNgayCC.Size = new System.Drawing.Size(230, 30);
+            this.txtNgayCC.Size = new System.Drawing.Size(230, 35);
             this.txtNgayCC.TabIndex = 20;
             // 
             // cbbThang
@@ -100,7 +100,7 @@
             this.cbbThang.FormattingEnabled = true;
             this.cbbThang.Location = new System.Drawing.Point(596, 80);
             this.cbbThang.Name = "cbbThang";
-            this.cbbThang.Size = new System.Drawing.Size(230, 30);
+            this.cbbThang.Size = new System.Drawing.Size(230, 35);
             this.cbbThang.TabIndex = 19;
             // 
             // lblThang
@@ -109,7 +109,7 @@
             this.lblThang.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblThang.Location = new System.Drawing.Point(496, 80);
             this.lblThang.Name = "lblThang";
-            this.lblThang.Size = new System.Drawing.Size(64, 22);
+            this.lblThang.Size = new System.Drawing.Size(78, 27);
             this.lblThang.TabIndex = 14;
             this.lblThang.Text = "Tháng:";
             // 
@@ -119,7 +119,7 @@
             this.lblLoaiCong.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblLoaiCong.Location = new System.Drawing.Point(53, 134);
             this.lblLoaiCong.Name = "lblLoaiCong";
-            this.lblLoaiCong.Size = new System.Drawing.Size(94, 22);
+            this.lblLoaiCong.Size = new System.Drawing.Size(114, 27);
             this.lblLoaiCong.TabIndex = 15;
             this.lblLoaiCong.Text = "Loại công:";
             // 
@@ -129,7 +129,7 @@
             this.cbbMaNV.FormattingEnabled = true;
             this.cbbMaNV.Location = new System.Drawing.Point(216, 80);
             this.cbbMaNV.Name = "cbbMaNV";
-            this.cbbMaNV.Size = new System.Drawing.Size(195, 30);
+            this.cbbMaNV.Size = new System.Drawing.Size(195, 35);
             this.cbbMaNV.TabIndex = 17;
             // 
             // cbbLoaiCong
@@ -138,7 +138,7 @@
             this.cbbLoaiCong.FormattingEnabled = true;
             this.cbbLoaiCong.Location = new System.Drawing.Point(216, 126);
             this.cbbLoaiCong.Name = "cbbLoaiCong";
-            this.cbbLoaiCong.Size = new System.Drawing.Size(195, 30);
+            this.cbbLoaiCong.Size = new System.Drawing.Size(195, 35);
             this.cbbLoaiCong.TabIndex = 18;
             // 
             // lblMaNV
@@ -147,7 +147,7 @@
             this.lblMaNV.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMaNV.Location = new System.Drawing.Point(53, 80);
             this.lblMaNV.Name = "lblMaNV";
-            this.lblMaNV.Size = new System.Drawing.Size(127, 22);
+            this.lblMaNV.Size = new System.Drawing.Size(156, 27);
             this.lblMaNV.TabIndex = 16;
             this.lblMaNV.Text = "Mã nhân viên: ";
             // 
@@ -178,6 +178,7 @@
             this.btnLamMoi.Text = "Làm mới";
             this.btnLamMoi.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnLamMoi.UseVisualStyleBackColor = false;
+            this.btnLamMoi.Click += new System.EventHandler(this.btnLamMoi_Click);
             // 
             // btnSua
             // 
@@ -192,6 +193,7 @@
             this.btnSua.Text = "Sửa";
             this.btnSua.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSua.UseVisualStyleBackColor = false;
+            this.btnSua.Click += new System.EventHandler(this.btnSua_Click);
             // 
             // btnXoa
             // 
@@ -206,6 +208,7 @@
             this.btnXoa.Text = "Xóa";
             this.btnXoa.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnXoa.UseVisualStyleBackColor = false;
+            this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
             // 
             // btnTim
             // 
@@ -220,6 +223,7 @@
             this.btnTim.Text = "Tìm";
             this.btnTim.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnTim.UseVisualStyleBackColor = false;
+            this.btnTim.Click += new System.EventHandler(this.btnTim_Click);
             // 
             // btnThem
             // 
@@ -234,6 +238,7 @@
             this.btnThem.Text = "Thêm";
             this.btnThem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnThem.UseVisualStyleBackColor = false;
+            this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
             // 
             // guna2GroupBox1
             // 
@@ -267,6 +272,7 @@
             this.dataGVctChamCong.RowTemplate.Height = 24;
             this.dataGVctChamCong.Size = new System.Drawing.Size(865, 176);
             this.dataGVctChamCong.TabIndex = 6;
+            this.dataGVctChamCong.DoubleClick += new System.EventHandler(this.dataGVctChamCong_DoubleClick);
             // 
             // MaNV
             // 
@@ -310,7 +316,7 @@
             // 
             // FormQuanLyChamCong
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(234)))), ((int)(((byte)(220)))));
             this.ClientSize = new System.Drawing.Size(1413, 778);
