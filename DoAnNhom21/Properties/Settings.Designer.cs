@@ -26,7 +26,8 @@ namespace DoAnNhom21.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=MYLAP;Initial Catalog=QLNSG21_Data;Integrated Security=True;")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=PHUC-PC\\MSSQLSERVER22;Initial Catalog=QLNSG21_Data;Integrated Securit" +
+            "y=True;")]
         public string ConnectionString {
             get {
                 return ((string)(this["ConnectionString"]));

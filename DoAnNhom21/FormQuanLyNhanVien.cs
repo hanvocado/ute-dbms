@@ -32,37 +32,18 @@ namespace DoAnNhom21
             cbbChucVu.DataSource = Connection.LoadDataTable(chucvu);
             cbbChucVu.ValueMember = "MaCV";
             cbbChucVu.DisplayMember = "TenCV";
-        }
+
+        
+    }
 
         private void FormNhanVien_Load(object sender, EventArgs e)
         {
             load();
         }
-        private void btnSua_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnThem_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnXoa_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnThoat_Click(object sender, EventArgs e)
         {
             Close();
         }
-
-        private void btnLamMoi_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnXemChiTiet_Click(object sender, EventArgs e)
         {
             FormThongTinNhanVien formThongTinNhanVien = new FormThongTinNhanVien(tempMaNV);
@@ -92,11 +73,29 @@ namespace DoAnNhom21
             txtEmail.Text = dataGridViewNhanVien.CurrentRow.Cells[7].Value.ToString();
             txtSDT.Text = dataGridViewNhanVien.CurrentRow.Cells[8].Value.ToString();
             cbbPhongBan.Text = dataGridViewNhanVien.CurrentRow.Cells[9].Value.ToString();
-            cbbChucVu.Text = dataGridViewNhanVien.CurrentRow.Cells[10].Value.ToString();
+            cbbChucVu.SelectedValue = dataGridViewNhanVien.CurrentRow.Cells[10].Value.ToString();
             txtHopDong.Text = dataGridViewNhanVien.CurrentRow.Cells[11].Value.ToString();
             tempMaNV = txtMaNhanVien.Text;
-        }
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(Connection.connectString))
+                {
+                    string thamnien = "SELECT dbo.TinhThamNien(@MaNV)";
+                    using (SqlCommand command = new SqlCommand(thamnien, connection))
+                    {
+                        command.Parameters.AddWithValue("@MaNV", txtMaNhanVien.Text);
+                        connection.Open();
+                        int tenure = (int)command.ExecuteScalar();
 
+                        txtThamNien.Text = tenure.ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
         private void btnThem_Click(object sender, EventArgs e)
         {
             try
