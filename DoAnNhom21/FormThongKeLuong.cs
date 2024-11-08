@@ -50,8 +50,8 @@ namespace DoAnNhom21
         private void btnXemChiTiet_Click(object sender, EventArgs e)
         {
             FormChiTietLuong formChiTiet = new FormChiTietLuong();
-            formChiTiet.MaThang = (string)cbbMaThang.SelectedValue; // Giả sử selectedMaThang là giá trị mà bạn đã chọn ở form chính
-            formChiTiet.Show(); // Hoặc OpenForm(formChiTiet); nếu bạn đã có phương thức OpenForm
+            formChiTiet.MaThang = (string)cbbMaThang.SelectedValue; 
+            formChiTiet.Show(); 
         }
 
     }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DoAnNhom9;
+using System;
 using System.Windows.Forms;
 
 namespace DoAnNhom21
@@ -14,7 +15,7 @@ namespace DoAnNhom21
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new FormBaoHiemNV());
-            Application.Run(new FormThongKeLuong());
+            Application.Run(new FormTrangChuQuanLy());
         }
     }
 }
