@@ -67,6 +67,7 @@ namespace DoAnNhom21
             "Quản lý phụ cấp",
             "Quản lý hợp đồng",
             "Quản lý thưởng phạt",
+            "Quản lý tháng và công",
             "Quản lý bảo hiểm",
             "Quản lý phụ thuộc"});
             this.cbbQuanLy.ItemsAppearance.BackColor = System.Drawing.Color.White;

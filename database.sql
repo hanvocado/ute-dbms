@@ -278,7 +278,7 @@ GO
 -- Thêm dữ liệu cho bảng Thang
 INSERT INTO Thang (MaThang, MoTa, SoNgayCongChuan)
 VALUES
-('012023', N'Tháng 01 Năm 2023', 22),
+('102024', N'Tháng 10 Năm 2024', 22),
 ('022023', N'Tháng 02 Năm 2023', 20),
 ('032023', N'Tháng 03 Năm 2023', 23),
 ('042023', N'Tháng 04 Năm 2023', 21);
@@ -373,6 +373,7 @@ VALUES
 ('NV02', 'PC02', '022023', 15, 300000),
 ('NV03', 'PC03', '032023', 20, 400000),
 ('NV04', 'PC01', '042023', 25, 200000);
+GO
 
 -- TRIGGER --
 CREATE OR ALTER TRIGGER tr_TaiKhoan_CapNhatMatKhauDangNhap
@@ -403,7 +404,7 @@ AFTER INSERT
 AS
 BEGIN
 	INSERT INTO TaiKhoan(TenDangNhap, MatKhau, MaLoai)
-VALUES (i.MaNV, i.MaNV, 'NV')
+	VALUES (i.MaNV, i.MaNV, 'NV')
 	FROM inserted i;
 END;
 GO
@@ -430,7 +431,7 @@ BEGIN
 	-- Tách năm từ 4 ký tự cuối trong MaThang
     SELECT @Nam = SUBSTRING(@MaThang, 3, 4);
 
-    -- Đếm số ngày nghỉ phép trong năm
+    -- Đếm số ngày nghỉ phép trong năm của nhân viên đó
     SELECT @SoNgayDaNghi = COUNT(*)
     FROM NghiPhep
     WHERE MaNV = @MaNV AND RIGHT(MaThang, 4) = @Nam;
@@ -507,7 +508,64 @@ END;
 
 GO
 
--- VIEW --
+CREATE OR ALTER TRIGGER tr_AddctChamCong
+ON ctChamCong
+INSTEAD OF INSERT
+AS
+BEGIN
+	DECLARE @MaNV VARCHAR(10),
+            @MaCC VARCHAR(10),
+            @MaThang VARCHAR(6),
+            @NgayChamCong INT,
+			@SoNgayCongChuan INT = 0;
+
+	BEGIN TRANSACTION;
+	BEGIN TRY
+
+		SELECT @MaNV = inserted.MaNV, 
+			   @MaCC = inserted.MaCC, 
+			   @MaThang = inserted.MaThang, 
+			   @NgayChamCong = inserted.NgayChamCong
+		FROM inserted; 
+
+		-- Kiểm tra Thang Cham Cong đã tồn tại trong bảng tháng chưa
+		IF NOT EXISTS (SELECT 1 FROM Thang WHERE MaThang = @MaThang)
+		BEGIN
+			DECLARE @Thang NVARCHAR(2) = LEFT(@MaThang, 2);
+			DECLARE @Nam NVARCHAR(4) = RIGHT(@MaThang, 4);
+
+			SET @SoNgayCongChuan = dbo.ft_SoNgayCongChuan(@MaThang);
+
+			INSERT INTO Thang (MaThang, MoTa, SoNgayCongChuan) 
+			VALUES (@MaThang, N'Tháng ' + @Thang + N' năm ' + @Nam, @SoNgayCongChuan);
+		END
+
+		-- Kiểm tra và Thêm record vào bảng ctChamCong
+		IF NOT EXISTS (SELECT 1 FROM ctChamCong WHERE MaNV = @MaNV 
+												 AND MaThang = @MaThang 
+												 AND NgayChamCong = @NgayChamCong)
+		BEGIN
+			INSERT INTO ctChamCong (MaNV, MaCC, MaThang, NgayChamCong)
+			VALUES (@MaNV, @MaCC, @MaThang, @NgayChamCong);
+		END
+		ELSE
+		BEGIN
+			RAISERROR('Đã chấm công cho ngày này', 16, 1);
+			ROLLBACK TRANSACTION;
+			RETURN;
+		END
+		COMMIT TRANSACTION;
+	END TRY
+	BEGIN CATCH
+		RAISERROR('Có lỗi, vui lòng thử lại.', 16, 1);
+		ROLLBACK TRANSACTION;
+	END CATCH;
+END;
+GO
+
+--------- END TRIGGER -------------
+
+---------- VIEW -----------------
 
 CREATE OR ALTER VIEW vw_QuanLyNhanVien AS SELECT nv.MaNV, nv.Ho, nv.Ten, nv.GioiTinh, nv.NgaySinh, nv.DiaChi, nv.SDT, nv.Email, nv.CCCD, pb.TenPB AS TenPhongBan, cv.TenCV AS TenChucVu
 FROM NhanVien nv JOIN PhongBan pb ON nv.MaPB = pb.MaPB JOIN ChucVu cv ON nv.MaCV = cv.MaCV;
@@ -765,6 +823,7 @@ BEGIN
     DELETE FROM ThongBao WHERE Id = @Id;
 END;
 
+GO
 -- QUAN LY THUONG PHAT --
 
 CREATE OR ALTER PROCEDURE sp_ThemThuongPhat
@@ -1184,6 +1243,7 @@ BEGIN
 			ORDER BY thg.MaThang, ct.NgayChamCong DESC;
 		END
 END;
+GO
 
 -- QUAN LY BAO HIEM --
 CREATE OR ALTER PROCEDURE sp_GetctBaoHiemByMaNV
@@ -1413,33 +1473,173 @@ END;
 
 GO
 
+-----TINH LUONG TRA VE NHỈU BANG
+CREATE OR ALTER PROCEDURE sp_TinhLuongTheoThangTraVeNhieuBang
+    @MaThang VARCHAR(6),
+    @MaNV VARCHAR(10) = NULL 
+AS
+BEGIN
+    DECLARE @ChamCongThang TABLE (
+        MaNV VARCHAR(10),
+        SoNgayCong FLOAT
+    );
+    INSERT INTO @ChamCongThang (MaNV, SoNgayCong)
+    SELECT MaNV, SUM(HeSo)
+    FROM ctChamCong ct 
+    JOIN ChamCong cc ON ct.MaCC = cc.MaCC
+    WHERE MaThang = @MaThang 
+    AND (@MaNV IS NULL OR ct.MaNV = @MaNV) 
+    GROUP BY MaNV;
 
+    DECLARE @NguoiPhuThuoc TABLE (
+        MaNV VARCHAR(10),
+        SoNguoiPhuThuoc INT,
+        GiamTruGiaCanh INT
+    );
+    INSERT INTO @NguoiPhuThuoc (MaNV, SoNguoiPhuThuoc, GiamTruGiaCanh)
+    SELECT MaNV, COUNT(*), COUNT(*) * 4400000
+    FROM NguoiPhuThuoc
+    WHERE (@MaNV IS NULL OR MaNV = @MaNV)
+    GROUP BY MaNV;
 
+    DECLARE @PhuCapThang TABLE (
+        MaNV VARCHAR(10),
+        TongPhuCap INT DEFAULT 0
+    );
+    INSERT INTO @PhuCapThang (MaNV, TongPhuCap)
+    SELECT MaNV, ISNULL(SUM(SoTien), 0)
+    FROM ctPhuCap
+    WHERE MaThang = @MaThang
+    AND (@MaNV IS NULL OR MaNV = @MaNV)
+    GROUP BY MaNV;
+
+    DECLARE @ThuongPhatThang TABLE (
+        MaNV VARCHAR(10),
+        TongThuongPhat INT DEFAULT 0
+    );
+    INSERT INTO @ThuongPhatThang (MaNV, TongThuongPhat)
+    SELECT MaNV, ISNULL(SUM(SoTien), 0)
+    FROM ctThuongPhat ctp
+    JOIN ThuongPhat tp ON ctp.MaThuongPhat = tp.MaThuongPhat
+    WHERE MaThang = @MaThang
+    AND (@MaNV IS NULL OR ctp.MaNV = @MaNV)
+    GROUP BY MaNV;
+
+    DECLARE @BaoHiem TABLE (
+        MaNV VARCHAR(10),
+        BH01 FLOAT DEFAULT 0,
+        BH02 FLOAT DEFAULT 0,
+        BH03 FLOAT DEFAULT 0
+    );
+    INSERT INTO @BaoHiem (MaNV, BH01, BH02, BH03)
+    SELECT bh.MaNV,
+           SUM(CASE WHEN bh.MaLoai = 'BH01' THEN 0.015 * hd.LuongCoBan ELSE 0 END),
+           SUM(CASE WHEN bh.MaLoai = 'BH02' THEN 0.01 * hd.LuongCoBan ELSE 0 END),
+           SUM(CASE WHEN bh.MaLoai = 'BH03' THEN 0.08 * hd.LuongCoBan ELSE 0 END)
+    FROM ctBaoHiem bh
+    JOIN HopDong hd ON bh.MaNV = hd.MaNV
+    WHERE (@MaNV IS NULL OR bh.MaNV = @MaNV)
+    GROUP BY bh.MaNV;
+
+    DECLARE @SoNgayCongChuan INT;
+    SELECT @SoNgayCongChuan = SoNgayCongChuan
+    FROM Thang WHERE MaThang = @MaThang;
+
+    DECLARE @LuongChiuThue TABLE (
+        MaNV VARCHAR(10),
+        LuongCoBan INT,
+        GiamTruGiaCanh INT,
+        TongPhuCap INT,
+        TongThuongPhat INT,
+        BH01 INT, BH02 INT, BH03 INT,
+        TongTienBaoHiem INT,
+        SoNgayCong INT,
+        LuongChiuThue INT
+    );
+    INSERT INTO @LuongChiuThue (MaNV, LuongCoBan, GiamTruGiaCanh, TongPhuCap, TongThuongPhat, BH01, BH02, BH03, TongTienBaoHiem, SoNgayCong, LuongChiuThue)
+    SELECT 
+        nv.MaNV, LuongCoBan, ISNULL(npt.GiamTruGiaCanh, 0), ISNULL(pc.TongPhuCap, 0), ISNULL(tp.TongThuongPhat, 0),
+        BH01, BH02, BH03, ISNULL(bhct.BH01, 0) + ISNULL(bhct.BH02, 0) + ISNULL(bhct.BH03, 0), ISNULL(cc.SoNgayCong, 0),
+        ( ( (hd.LuongCoBan / @SoNgayCongChuan * ISNULL(cc.SoNgayCong, 0)) + ISNULL(pc.TongPhuCap, 0) + ISNULL(tp.TongThuongPhat, 0) )
+    - (ISNULL(bhct.BH01, 0) + ISNULL(bhct.BH02, 0) + ISNULL(bhct.BH03, 0)) - ISNULL(npt.GiamTruGiaCanh, 0))
+    FROM NhanVien nv
+    JOIN HopDong hd ON nv.MaNV = hd.MaNV
+    LEFT JOIN @ChamCongThang cc ON nv.MaNV = cc.MaNV
+    LEFT JOIN @NguoiPhuThuoc npt ON nv.MaNV = npt.MaNV
+    LEFT JOIN @PhuCapThang pc ON nv.MaNV = pc.MaNV
+    LEFT JOIN @ThuongPhatThang tp ON nv.MaNV = tp.MaNV
+    LEFT JOIN @BaoHiem bhct ON nv.MaNV = bhct.MaNV
+    WHERE @MaNV IS NULL OR nv.MaNV = @MaNV;
+
+    DECLARE @ThueThuNhapCaNhan TABLE (
+        MaNV VARCHAR(10),
+        Thue INT
+    );
+    INSERT INTO @ThueThuNhapCaNhan (MaNV, Thue)
+    SELECT nv.MaNV,
+        CASE
+            WHEN LuongChiuThue <= 5000000
+                THEN LuongChiuThue * 5 / 100
+            WHEN LuongChiuThue <= 10000000
+                THEN LuongChiuThue * 10 / 100
+            WHEN LuongChiuThue <= 18000000
+                THEN LuongChiuThue * 15 / 100
+            WHEN LuongChiuThue <= 32000000
+                THEN LuongChiuThue * 20 / 100
+            WHEN LuongChiuThue <= 52000000
+                THEN LuongChiuThue * 25 / 100
+            WHEN LuongChiuThue <= 80000000
+                THEN LuongChiuThue * 30 / 100
+            ELSE LuongChiuThue * 35 / 100
+        END AS Thue
+    FROM NhanVien nv
+    LEFT JOIN @LuongChiuThue lct ON nv.MaNV = lct.MaNV
+    WHERE @MaNV IS NULL OR nv.MaNV = @MaNV;
+
+    SELECT nv.MaNV, Ho, Ten, LuongCoBan, BH01, BH02, BH03,
+            (BH01 + BH02 + BH03) AS TongTienBaoHiem,
+            @SoNgayCongChuan AS SoNgayCongChuan,
+            TongPhuCap, GiamTruGiaCanh, LuongChiuThue, 
+            SoNgayCong, Thue, TongThuongPhat, (LuongChiuThue - Thue) AS LuongThucLanh
+    FROM NhanVien nv
+    LEFT JOIN @LuongChiuThue lct ON nv.MaNV = lct.MaNV
+    LEFT JOIN @ThueThuNhapCaNhan thue ON nv.MaNV = thue.MaNV
+    WHERE @MaNV IS NULL OR nv.MaNV = @MaNV;
+
+    SELECT * FROM @ChamCongThang; 
+    SELECT * FROM @PhuCapThang; 
+    SELECT * FROM @ThuongPhatThang; 
+    SELECT * FROM @BaoHiem; 
+END;
+
+--------
 INSERT INTO ctChamCong (MaNV, MaCC, MaThang, NgayChamCong)
-VALUES ('NV01', 'CC01', '032023', 1),
-('NV01', 'CC01', '032023', 2),
-('NV01', 'CC01', '032023', 3),
-('NV01', 'CC01', '032023', 4),
-('NV01', 'CC01', '032023', 5),
-('NV01', 'CC01', '032023', 6),
-('NV01', 'CC01', '032023', 7),
-('NV01', 'CC01', '032023', 8),
-('NV01', 'CC01', '032023', 9),
-('NV01', 'CC01', '032023', 10),
-('NV01', 'CC01', '032023', 11),
-('NV01', 'CC01', '032023', 12),
-('NV01', 'CC01', '032023', 13),
-('NV01', 'CC01', '032023', 14),
-('NV01', 'CC01', '032023', 15),
-('NV01', 'CC01', '032023', 16),
-('NV01', 'CC01', '032023', 17),
-('NV01', 'CC01', '032023', 18),
-('NV01', 'CC01', '032023', 19),
-('NV01', 'CC01', '032023', 20),
-('NV01', 'CC01', '032023', 21),
-('NV01', 'CC01', '032023', 22);
+VALUES ('NV01', 'CC01', '102024', 1),
+('NV01', 'CC01', '102024', 2),
+('NV01', 'CC01', '102024', 3),
+('NV01', 'CC01', '102024', 4),
+('NV01', 'CC01', '102024', 5),
+('NV01', 'CC01', '102024', 6),
+('NV01', 'CC01', '102024', 7),
+('NV01', 'CC01', '102024', 8),
+('NV01', 'CC01', '102024', 9),
+('NV01', 'CC01', '102024', 10),
+('NV01', 'CC01', '102024', 11),
+('NV01', 'CC01', '102024', 12),
+('NV01', 'CC01', '102024', 13),
+('NV01', 'CC01', '102024', 14),
+('NV01', 'CC01', '102024', 15),
+('NV01', 'CC01', '102024', 16),
+('NV01', 'CC01', '102024', 17),
+('NV01', 'CC01', '102024', 18),
+('NV01', 'CC01', '102024', 19),
+('NV01', 'CC01', '102024', 20),
+('NV01', 'CC01', '102024', 21),
+('NV01', 'CC01', '102024', 22);
 
-CREATE OR ALTER FUNCTION fn_TinhThamNien (@NgayBD DATE)
+GO
+
+CREATE OR ALTER FUNCTION ft_TinhThamNien (@NgayBD DATE)
 RETURNS INT
 AS
 BEGIN
@@ -1449,29 +1649,43 @@ BEGIN
 END;
 GO
 
---SELECT MaNV, NgayBD, dbo.fn_TinhThamNien(NgayBD) AS ThamNien
---FROM HopDong;
-CREATE OR ALTER TRIGGER tr_ctBaoHiem_KiemTraNgay
-ON ctBaoHiem
-AFTER INSERT, UPDATE
+CREATE FUNCTION dbo.ft_SoNgayCongChuan (@MaThang VARCHAR(6))
+RETURNS INT
 AS
 BEGIN
-    DECLARE @NgayBD date,
-            @NgayKT date;
+    DECLARE @SoNgayLamViec INT = 0;
+    DECLARE @NgayBatDau DATE;
+    DECLARE @NgayKetThuc DATE;
+    DECLARE @NgayHienTai DATE;
+    DECLARE @Thang INT;
+    DECLARE @Nam INT;
 
-    SELECT @NgayBD = i.NgayBD, @NgayKT = i.NgayKT
-    FROM inserted i;
+    -- Lấy tháng và năm từ MaThang
+    SET @Thang = CAST(SUBSTRING(@MaThang, 1, 2) AS INT);
+    SET @Nam = CAST(SUBSTRING(@MaThang, 3, 4) AS INT);
 
-    IF @NgayBD >= @NgayKT
+    -- Xác định ngày bắt đầu và ngày kết thúc của tháng
+    SET @NgayBatDau = DATEFROMPARTS(@Nam, @Thang, 1);
+    SET @NgayKetThuc = EOMONTH(@NgayBatDau);
+
+    -- Duyệt qua từng ngày trong tháng
+    SET @NgayHienTai = @NgayBatDau;
+    WHILE @NgayHienTai <= @NgayKetThuc
     BEGIN
-        RAISERROR('Ngày bắt đầu phải trước ngày kết thúc', 16, 1);
-        ROLLBACK TRANSACTION;
+        -- Nếu là thứ Hai đến thứ Sáu tăng biến đếm số ngày làm việc
+        IF DATEPART(WEEKDAY, @NgayHienTai) BETWEEN 2 AND 6
+        BEGIN
+            SET @SoNgayLamViec = @SoNgayLamViec + 1;
+        END
+        -- Chuyển sang ngày tiếp theo
+        SET @NgayHienTai = DATEADD(DAY, 1, @NgayHienTai);
     END
+
+    RETURN @SoNgayLamViec;
 END;
-GO
-
-
 
 GO
 
-SELECT * FROM vw_GetThang
+SELECT dbo.ft_SoNgayCongChuan('122024') AS SoNgayLamViec;
+
+DElete from ctChamCong WHERE MaNV = 'NV02';

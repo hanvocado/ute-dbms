@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DoAnNhom9;
+using System;
 using System.Windows.Forms;
 
 namespace DoAnNhom21
@@ -71,6 +72,14 @@ namespace DoAnNhom21
             {
                 OpenForm(new FormThuongPhat());
             }
+            else if (cbbQuanLy.SelectedItem.ToString() == "Quản lý phụ thuộc")
+            {
+                OpenForm(new FormQuanLyNguoiPhuThuoc());
+            }
+            else if (cbbQuanLy.SelectedItem.ToString() == "Quản lý tháng và công")
+            {
+                OpenForm(new FormQuanLyThangCong());
+            }
 
             }
 
@@ -79,6 +88,7 @@ namespace DoAnNhom21
             this.Hide();
             FormDangNhap form = new FormDangNhap();
             form.Show();
+            this.Close();
         }
         private void guna2ComboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {

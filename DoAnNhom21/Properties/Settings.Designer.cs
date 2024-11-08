@@ -26,9 +26,14 @@ namespace DoAnNhom21.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+<<<<<<< HEAD
 
         [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DESKTOP-0PJCAJ8\\SQLEXPRESS;Initial Catalog=QLNSG21_Data;Integrated Security=True;Encrypt=False")]
 
+=======
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=QLNSG21;Integrated Security=Tr" +
+            "ue;")]
+>>>>>>> 11c2d4997284f3855a956df3da760ef5a2026571
         public string ConnectionString {
             get {
                 return ((string)(this["ConnectionString"]));

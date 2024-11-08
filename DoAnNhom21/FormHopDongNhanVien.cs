@@ -23,7 +23,7 @@ namespace DoAnNhom21
             {
                 using (conn = Connection.getConnection())
                 {
-                    string query = "select *from HopDong join NhanVien on HopDong.MaNV = NhanVien.MaNV join ChucVu on NhanVien.MaCV = ChucVu.MaCV join PhongBan on PhongBan.MaPB = NhanVien.MaPB where HopDong.MaNV = @MaNV";
+                    string query = "select * from vw_ThongTinHopDong HD where HD.MaNV = @MaNV";
 
                     conn.Open();
                     SqlCommand cmd = new SqlCommand(query, conn);
@@ -33,10 +33,10 @@ namespace DoAnNhom21
                     {
                         txtMaNV.Text = reader["MaNV"].ToString();
                         txtLuongCoBan.Text = reader["LuongCoBan"].ToString();
-                        dateTimePickerNgayBD.Text = reader["NgayBD"].ToString();
-                        dateTimePickerNgayKT.Text = reader["NgayKT"].ToString();
-                        txtChucVu.Text = reader["TenCV"].ToString();
-                        txtPhongBan.Text = reader["TenPB"].ToString();
+                        dateTimePickerNgayBD.Text = reader["NgayBatDauHopDong"].ToString();
+                        dateTimePickerNgayKT.Text = reader["NgayKetThucHopDong"].ToString();
+                        txtChucVu.Text = reader["TenChucVu"].ToString();
+                        txtPhongBan.Text = reader["TenPhongBan"].ToString();
                         txtMaHD.Text = reader["MaHD"].ToString();
                     }
 
