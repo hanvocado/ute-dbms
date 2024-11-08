@@ -78,15 +78,5 @@ namespace DoAnNhom21
             }
 
         }
-        public static void ExecuteCommandAdmin(SqlCommand command)
-        {
-            using (SqlConnection connection = new SqlConnection(connectString))
-            {
-                command.Connection = connection;
-                connection.Open();
-                command.ExecuteNonQuery();
-                connection.Close();
-            }
-        }
     }
 }

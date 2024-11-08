@@ -373,6 +373,7 @@ VALUES
 ('NV02', 'PC02', '022023', 15, 300000),
 ('NV03', 'PC03', '032023', 20, 400000),
 ('NV04', 'PC01', '042023', 25, 200000);
+GO
 
 -- TRIGGER --
 CREATE OR ALTER TRIGGER tr_TaiKhoan_CapNhatMatKhauDangNhap
@@ -403,7 +404,7 @@ AFTER INSERT
 AS
 BEGIN
 	INSERT INTO TaiKhoan(TenDangNhap, MatKhau, MaLoai)
-VALUES (i.MaNV, i.MaNV, 'NV')
+	VALUES (i.MaNV, i.MaNV, 'NV')
 	FROM inserted i;
 END;
 GO
@@ -430,7 +431,7 @@ BEGIN
 	-- Tách năm từ 4 ký tự cuối trong MaThang
     SELECT @Nam = SUBSTRING(@MaThang, 3, 4);
 
-    -- Đếm số ngày nghỉ phép trong năm
+    -- Đếm số ngày nghỉ phép trong năm của nhân viên đó
     SELECT @SoNgayDaNghi = COUNT(*)
     FROM NghiPhep
     WHERE MaNV = @MaNV AND RIGHT(MaThang, 4) = @Nam;
@@ -507,7 +508,64 @@ END;
 
 GO
 
--- VIEW --
+CREATE OR ALTER TRIGGER tr_AddctChamCong
+ON ctChamCong
+INSTEAD OF INSERT
+AS
+BEGIN
+	DECLARE @MaNV VARCHAR(10),
+            @MaCC VARCHAR(10),
+            @MaThang VARCHAR(6),
+            @NgayChamCong INT,
+			@SoNgayCongChuan INT = 0;
+
+	BEGIN TRANSACTION;
+	BEGIN TRY
+
+		SELECT @MaNV = inserted.MaNV, 
+			   @MaCC = inserted.MaCC, 
+			   @MaThang = inserted.MaThang, 
+			   @NgayChamCong = inserted.NgayChamCong
+		FROM inserted; 
+
+		-- Kiểm tra Thang Cham Cong đã tồn tại trong bảng tháng chưa
+		IF NOT EXISTS (SELECT 1 FROM Thang WHERE MaThang = @MaThang)
+		BEGIN
+			DECLARE @Thang NVARCHAR(2) = LEFT(@MaThang, 2);
+			DECLARE @Nam NVARCHAR(4) = RIGHT(@MaThang, 4);
+
+			SET @SoNgayCongChuan = dbo.ft_SoNgayCongChuan(@MaThang);
+
+			INSERT INTO Thang (MaThang, MoTa, SoNgayCongChuan) 
+			VALUES (@MaThang, N'Tháng ' + @Thang + N' năm ' + @Nam, @SoNgayCongChuan);
+		END
+
+		-- Kiểm tra và Thêm record vào bảng ctChamCong
+		IF NOT EXISTS (SELECT 1 FROM ctChamCong WHERE MaNV = @MaNV 
+												 AND MaThang = @MaThang 
+												 AND NgayChamCong = @NgayChamCong)
+		BEGIN
+			INSERT INTO ctChamCong (MaNV, MaCC, MaThang, NgayChamCong)
+			VALUES (@MaNV, @MaCC, @MaThang, @NgayChamCong);
+		END
+		ELSE
+		BEGIN
+			RAISERROR('Đã chấm công cho ngày này', 16, 1);
+			ROLLBACK TRANSACTION;
+			RETURN;
+		END
+		COMMIT TRANSACTION;
+	END TRY
+	BEGIN CATCH
+		RAISERROR('Có lỗi, vui lòng thử lại.', 16, 1);
+		ROLLBACK TRANSACTION;
+	END CATCH;
+END;
+GO
+
+--------- END TRIGGER -------------
+
+---------- VIEW -----------------
 
 CREATE OR ALTER VIEW vw_QuanLyNhanVien AS SELECT nv.MaNV, nv.Ho, nv.Ten, nv.GioiTinh, nv.NgaySinh, nv.DiaChi, nv.SDT, nv.Email, nv.CCCD, pb.TenPB AS TenPhongBan, cv.TenCV AS TenChucVu
 FROM NhanVien nv JOIN PhongBan pb ON nv.MaPB = pb.MaPB JOIN ChucVu cv ON nv.MaCV = cv.MaCV;
@@ -765,6 +823,7 @@ BEGIN
     DELETE FROM ThongBao WHERE Id = @Id;
 END;
 
+GO
 -- QUAN LY THUONG PHAT --
 
 CREATE OR ALTER PROCEDURE sp_ThemThuongPhat
@@ -1184,6 +1243,7 @@ BEGIN
 			ORDER BY thg.MaThang, ct.NgayChamCong DESC;
 		END
 END;
+GO
 
 -- QUAN LY BAO HIEM --
 CREATE OR ALTER PROCEDURE sp_GetctBaoHiemByMaNV
@@ -1439,7 +1499,9 @@ VALUES ('NV01', 'CC01', '032023', 1),
 ('NV01', 'CC01', '032023', 21),
 ('NV01', 'CC01', '032023', 22);
 
-CREATE OR ALTER FUNCTION fn_TinhThamNien (@NgayBD DATE)
+GO
+
+CREATE OR ALTER FUNCTION ft_TinhThamNien (@NgayBD DATE)
 RETURNS INT
 AS
 BEGIN
@@ -1449,29 +1511,43 @@ BEGIN
 END;
 GO
 
---SELECT MaNV, NgayBD, dbo.fn_TinhThamNien(NgayBD) AS ThamNien
---FROM HopDong;
-CREATE OR ALTER TRIGGER tr_ctBaoHiem_KiemTraNgay
-ON ctBaoHiem
-AFTER INSERT, UPDATE
+CREATE FUNCTION dbo.ft_SoNgayCongChuan (@MaThang VARCHAR(6))
+RETURNS INT
 AS
 BEGIN
-    DECLARE @NgayBD date,
-            @NgayKT date;
+    DECLARE @SoNgayLamViec INT = 0;
+    DECLARE @NgayBatDau DATE;
+    DECLARE @NgayKetThuc DATE;
+    DECLARE @NgayHienTai DATE;
+    DECLARE @Thang INT;
+    DECLARE @Nam INT;
 
-    SELECT @NgayBD = i.NgayBD, @NgayKT = i.NgayKT
-    FROM inserted i;
+    -- Lấy tháng và năm từ MaThang
+    SET @Thang = CAST(SUBSTRING(@MaThang, 1, 2) AS INT);
+    SET @Nam = CAST(SUBSTRING(@MaThang, 3, 4) AS INT);
 
-    IF @NgayBD >= @NgayKT
+    -- Xác định ngày bắt đầu và ngày kết thúc của tháng
+    SET @NgayBatDau = DATEFROMPARTS(@Nam, @Thang, 1);
+    SET @NgayKetThuc = EOMONTH(@NgayBatDau);
+
+    -- Duyệt qua từng ngày trong tháng
+    SET @NgayHienTai = @NgayBatDau;
+    WHILE @NgayHienTai <= @NgayKetThuc
     BEGIN
-        RAISERROR('Ngày bắt đầu phải trước ngày kết thúc', 16, 1);
-        ROLLBACK TRANSACTION;
+        -- Nếu là thứ Hai đến thứ Sáu tăng biến đếm số ngày làm việc
+        IF DATEPART(WEEKDAY, @NgayHienTai) BETWEEN 2 AND 6
+        BEGIN
+            SET @SoNgayLamViec = @SoNgayLamViec + 1;
+        END
+        -- Chuyển sang ngày tiếp theo
+        SET @NgayHienTai = DATEADD(DAY, 1, @NgayHienTai);
     END
+
+    RETURN @SoNgayLamViec;
 END;
-GO
-
-
 
 GO
 
-SELECT * FROM vw_GetThang
+SELECT dbo.ft_SoNgayCongChuan('122024') AS SoNgayLamViec;
+
+DElete from ctChamCong WHERE MaNV = 'NV02';
