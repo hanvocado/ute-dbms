@@ -26,7 +26,7 @@ namespace DoAnNhom21
         {
             conn = Connection.getConnection();
             conn.Open();
-            string data = "Select * from view_ThongTinNhanVien where MaNV = '" + txtMaNV.Text + "'";
+            string data = "Select * from vw_ThongTinNhanVien where MaNV = '" + txtMaNV.Text + "'";
             SqlCommand cmd = new SqlCommand(data, conn);
 
             SqlDataReader reader = cmd.ExecuteReader();
