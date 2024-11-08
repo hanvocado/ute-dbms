@@ -7,9 +7,20 @@ namespace DoAnNhom21
 {
     public partial class FormThongKeLuong : Form
     {
+
         public FormThongKeLuong()
         {
             InitializeComponent();
+        }
+        private Form currentFormChild;
+        private void OpenForm(Form form)
+        {
+            if (currentFormChild != null)
+            {
+                currentFormChild.Close();
+            }
+            currentFormChild = form;
+            form.Show();
         }
         void load()
         {
@@ -33,7 +44,15 @@ namespace DoAnNhom21
             SqlCommand cmd = new SqlCommand("sp_TinhLuongTheoThang");
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@MaThang", cbbMaThang.SelectedValue);
-            dgvLuong.DataSource = Connection.LoadDataTable(cmd);
+            //dgvLuong.DataSource = Connection.LoadDataTable(cmd);
         }
+
+        private void btnXemChiTiet_Click(object sender, EventArgs e)
+        {
+            FormChiTietLuong formChiTiet = new FormChiTietLuong();
+            formChiTiet.MaThang = (string)cbbMaThang.SelectedValue; 
+            formChiTiet.Show(); 
+        }
+
     }
 }

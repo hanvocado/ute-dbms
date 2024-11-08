@@ -76,6 +76,12 @@
       <DependentUpon>AppDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="Connection.cs" />
+    <Compile Include="FormChiTietLuong.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormChiTietLuong.Designer.cs">
+      <DependentUpon>FormChiTietLuong.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormChucVu.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -135,6 +141,12 @@
     </Compile>
     <Compile Include="FormQuanLyHopDong.Designer.cs">
       <DependentUpon>FormQuanLyHopDong.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormQuanLyNguoiPhuThuoc.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormQuanLyNguoiPhuThuoc.Designer.cs">
+      <DependentUpon>FormQuanLyNguoiPhuThuoc.cs</DependentUpon>
     </Compile>
     <Compile Include="FormQuanLyNhanVien.cs">
       <SubType>Form</SubType>
@@ -199,6 +211,9 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SessionInfo.cs" />
+    <EmbeddedResource Include="FormChiTietLuong.resx">
+      <DependentUpon>FormChiTietLuong.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormChucVu.resx">
       <DependentUpon>FormChucVu.cs</DependentUpon>
     </EmbeddedResource>
@@ -229,6 +244,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormQuanLyHopDong.resx">
       <DependentUpon>FormQuanLyHopDong.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormQuanLyNguoiPhuThuoc.resx">
+      <DependentUpon>FormQuanLyNguoiPhuThuoc.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormQuanLyNhanVien.resx">
       <DependentUpon>FormQuanLyNhanVien.cs</DependentUpon>
@@ -314,6 +332,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Img\profile.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Img\human.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
