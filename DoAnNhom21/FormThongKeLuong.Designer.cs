@@ -43,6 +43,7 @@ namespace DoAnNhom21
             this.cbbMaThang = new System.Windows.Forms.ComboBox();
             this.lblNgayNghiPhep = new System.Windows.Forms.Label();
             this.btnXemLuong = new System.Windows.Forms.Button();
+            this.btnXemChiTiet = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLuong)).BeginInit();
             this.SuspendLayout();
             // 
@@ -141,12 +142,27 @@ namespace DoAnNhom21
             this.btnXemLuong.UseVisualStyleBackColor = false;
             this.btnXemLuong.Click += new System.EventHandler(this.btnXemLuong_Click);
             // 
+            // btnXemChiTiet
+            // 
+            this.btnXemChiTiet.BackColor = System.Drawing.Color.LavenderBlush;
+            this.btnXemChiTiet.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnXemChiTiet.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.btnXemChiTiet.Location = new System.Drawing.Point(644, 86);
+            this.btnXemChiTiet.Name = "btnXemChiTiet";
+            this.btnXemChiTiet.Size = new System.Drawing.Size(184, 40);
+            this.btnXemChiTiet.TabIndex = 11;
+            this.btnXemChiTiet.Text = "Xem chi tiết";
+            this.btnXemChiTiet.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnXemChiTiet.UseVisualStyleBackColor = false;
+            this.btnXemChiTiet.Click += new System.EventHandler(this.btnXemChiTiet_Click);
+            // 
             // FormThongKeLuong
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(234)))), ((int)(((byte)(220)))));
             this.ClientSize = new System.Drawing.Size(1042, 606);
+            this.Controls.Add(this.btnXemChiTiet);
             this.Controls.Add(this.btnXemLuong);
             this.Controls.Add(this.cbbMaThang);
             this.Controls.Add(this.lblNgayNghiPhep);
@@ -173,5 +189,6 @@ namespace DoAnNhom21
         private DataGridViewTextBoxColumn Thue;
         private DataGridViewTextBoxColumn LuongThucLanh;
         private DataGridView dgvLuong;
+        private Button btnXemChiTiet;
     }
 }
