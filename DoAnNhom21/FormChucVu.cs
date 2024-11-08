@@ -99,9 +99,10 @@ namespace DoAnNhom21
             //txtPhuCapCV.Text = dataGridViewChucVu.CurrentRow.Cells[2].Value.ToString();
         }
 
-        private void FormChucVu_Load_1(object sender, EventArgs e)
+        private void FormChucVu_Load(object sender, EventArgs e)
         {
             load();
         }
+
     }
 }

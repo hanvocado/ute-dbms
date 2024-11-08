@@ -161,6 +161,7 @@ namespace DoAnNhom21
             this.btnSua.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnSua.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSua.UseVisualStyleBackColor = false;
+            this.btnSua.Click += new System.EventHandler(this.btnSua_Click);
             // 
             // btnThem
             // 
@@ -176,6 +177,7 @@ namespace DoAnNhom21
             this.btnThem.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnThem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnThem.UseVisualStyleBackColor = false;
+            this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
             // 
             // btnXoa
             // 
@@ -191,6 +193,7 @@ namespace DoAnNhom21
             this.btnXoa.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnXoa.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnXoa.UseVisualStyleBackColor = false;
+            this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
             // 
             // groupBox3
             // 
@@ -221,6 +224,7 @@ namespace DoAnNhom21
             this.dgvPhuCap.RowTemplate.Height = 24;
             this.dgvPhuCap.Size = new System.Drawing.Size(344, 199);
             this.dgvPhuCap.TabIndex = 0;
+            this.dgvPhuCap.DoubleClick += new System.EventHandler(this.dgvPhuCap_DoubleClick);
             // 
             // Column1
             // 
@@ -365,6 +369,7 @@ namespace DoAnNhom21
             this.btnLamMoi.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnLamMoi.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnLamMoi.UseVisualStyleBackColor = false;
+            this.btnLamMoi.Click += new System.EventHandler(this.btnLamMoi_Click);
             // 
             // btnLoc
             // 
@@ -395,6 +400,7 @@ namespace DoAnNhom21
             this.btnSuact.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnSuact.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSuact.UseVisualStyleBackColor = false;
+            this.btnSuact.Click += new System.EventHandler(this.btnSuact_Click);
             // 
             // btnThemct
             // 
@@ -410,6 +416,7 @@ namespace DoAnNhom21
             this.btnThemct.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnThemct.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnThemct.UseVisualStyleBackColor = false;
+            this.btnThemct.Click += new System.EventHandler(this.btnThemct_Click);
             // 
             // btnXoact
             // 
@@ -425,6 +432,7 @@ namespace DoAnNhom21
             this.btnXoact.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnXoact.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnXoact.UseVisualStyleBackColor = false;
+            this.btnXoact.Click += new System.EventHandler(this.btnXoact_Click);
             // 
             // groupBox6
             // 
@@ -458,6 +466,7 @@ namespace DoAnNhom21
             this.dgvctPhuCap.RowTemplate.Height = 24;
             this.dgvctPhuCap.Size = new System.Drawing.Size(516, 192);
             this.dgvctPhuCap.TabIndex = 0;
+            this.dgvctPhuCap.DoubleClick += new System.EventHandler(this.dgvctPhuCap_DoubleClick);
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -514,6 +523,7 @@ namespace DoAnNhom21
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "FormPhuCap";
             this.Text = "FormPhuCap";
+            this.Load += new System.EventHandler(this.FormPhuCap_Load);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
