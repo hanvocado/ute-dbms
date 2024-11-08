@@ -80,7 +80,7 @@
             this.groupBox1.Controls.Add(this.lblLyDo);
             this.groupBox1.Controls.Add(this.lblNgayNghiPhep);
             this.groupBox1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(31, 28);
+            this.groupBox1.Location = new System.Drawing.Point(292, 161);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -91,7 +91,8 @@
             // 
             // txtLyDo
             // 
-            this.txtLyDo.Location = new System.Drawing.Point(673, 113);
+            this.txtLyDo.Location = new System.Drawing.Point(673, 112);
+            this.txtLyDo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtLyDo.Name = "txtLyDo";
             this.txtLyDo.Size = new System.Drawing.Size(282, 35);
             this.txtLyDo.TabIndex = 13;
@@ -99,6 +100,7 @@
             // txtNgayNghi
             // 
             this.txtNgayNghi.Location = new System.Drawing.Point(673, 48);
+            this.txtNgayNghi.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtNgayNghi.Name = "txtNgayNghi";
             this.txtNgayNghi.Size = new System.Drawing.Size(282, 35);
             this.txtNgayNghi.TabIndex = 12;
@@ -121,6 +123,7 @@
             // txtMaNV
             // 
             this.txtMaNV.Location = new System.Drawing.Point(142, 48);
+            this.txtMaNV.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtMaNV.Name = "txtMaNV";
             this.txtMaNV.ReadOnly = true;
             this.txtMaNV.Size = new System.Drawing.Size(282, 35);
@@ -150,6 +153,7 @@
             // 
             this.cbbThang.FormattingEnabled = true;
             this.cbbThang.Location = new System.Drawing.Point(142, 112);
+            this.cbbThang.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cbbThang.Name = "cbbThang";
             this.cbbThang.Size = new System.Drawing.Size(282, 34);
             this.cbbThang.TabIndex = 7;
@@ -158,11 +162,11 @@
             // 
             this.groupBox2.Controls.Add(this.dataGVoffHistory);
             this.groupBox2.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(31, 326);
+            this.groupBox2.Location = new System.Drawing.Point(292, 460);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox2.Size = new System.Drawing.Size(1004, 353);
+            this.groupBox2.Size = new System.Drawing.Size(1004, 352);
             this.groupBox2.TabIndex = 15;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "LỊCH SỬ XIN NGHỈ";
@@ -175,6 +179,7 @@
             this.Thang,
             this.LyDo});
             this.dataGVoffHistory.Location = new System.Drawing.Point(63, 52);
+            this.dataGVoffHistory.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dataGVoffHistory.Name = "dataGVoffHistory";
             this.dataGVoffHistory.RowHeadersWidth = 62;
             this.dataGVoffHistory.RowTemplate.Height = 28;
@@ -209,8 +214,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.ClientSize = new System.Drawing.Size(1060, 805);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(234)))), ((int)(((byte)(220)))));
+            this.ClientSize = new System.Drawing.Size(1590, 972);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
