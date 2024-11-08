@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DoAnNhom9;
+using System;
 using System.Windows.Forms;
 
 namespace DoAnNhom21
@@ -71,6 +72,10 @@ namespace DoAnNhom21
             {
                 OpenForm(new FormThuongPhat());
             }
+            else if (cbbQuanLy.SelectedItem.ToString() == "Quản lý phụ thuộc")
+            {
+                OpenForm(new FormQuanLyNguoiPhuThuoc());
+            }    
 
         }
 
