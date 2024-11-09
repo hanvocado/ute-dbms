@@ -57,5 +57,10 @@ namespace DoAnNhom21
         {
             OpenForm(new FormNghiPhep());
         }
+
+        private void btnThongBao_Click(object sender, EventArgs e)
+        {
+            OpenForm(new FormThongBao());
+        }
     }
 }

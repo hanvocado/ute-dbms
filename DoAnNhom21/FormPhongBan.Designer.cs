@@ -48,13 +48,13 @@ namespace DoAnNhom21
             this.txtMaPB = new System.Windows.Forms.TextBox();
             this.guna2GroupBox2 = new Guna.UI2.WinForms.Guna2GroupBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnThongBao = new System.Windows.Forms.Button();
             this.btnLamMoi = new System.Windows.Forms.Button();
             this.btnXemThongTin = new System.Windows.Forms.Button();
             this.btnThem = new System.Windows.Forms.Button();
             this.btnXoa = new System.Windows.Forms.Button();
             this.btnThoat = new System.Windows.Forms.Button();
             this.btnSua = new System.Windows.Forms.Button();
-            this.btnThongBao = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPhongBan)).BeginInit();
             this.guna2GroupBox1.SuspendLayout();
             this.guna2GroupBox2.SuspendLayout();
@@ -237,6 +237,21 @@ namespace DoAnNhom21
             this.panel1.Size = new System.Drawing.Size(1178, 148);
             this.panel1.TabIndex = 19;
             // 
+            // btnThongBao
+            // 
+            this.btnThongBao.BackColor = System.Drawing.Color.White;
+            this.btnThongBao.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnThongBao.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnThongBao.ForeColor = System.Drawing.Color.Black;
+            this.btnThongBao.Location = new System.Drawing.Point(538, 84);
+            this.btnThongBao.Name = "btnThongBao";
+            this.btnThongBao.Size = new System.Drawing.Size(220, 40);
+            this.btnThongBao.TabIndex = 12;
+            this.btnThongBao.Text = "Thông Báo";
+            this.btnThongBao.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnThongBao.UseVisualStyleBackColor = false;
+            this.btnThongBao.Click += new System.EventHandler(this.btnThongBao_Click_1);
+            // 
             // btnLamMoi
             // 
             this.btnLamMoi.BackColor = System.Drawing.Color.White;
@@ -315,20 +330,6 @@ namespace DoAnNhom21
             this.btnSua.Text = "Sửa";
             this.btnSua.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSua.UseVisualStyleBackColor = false;
-            // 
-            // btnThongBao
-            // 
-            this.btnThongBao.BackColor = System.Drawing.Color.White;
-            this.btnThongBao.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnThongBao.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnThongBao.ForeColor = System.Drawing.Color.Black;
-            this.btnThongBao.Location = new System.Drawing.Point(538, 84);
-            this.btnThongBao.Name = "btnThongBao";
-            this.btnThongBao.Size = new System.Drawing.Size(220, 40);
-            this.btnThongBao.TabIndex = 12;
-            this.btnThongBao.Text = "Thông Báo";
-            this.btnThongBao.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnThongBao.UseVisualStyleBackColor = false;
             // 
             // FormPhongBan
             // 

@@ -172,6 +172,12 @@
     <Compile Include="FormThongBao.Designer.cs">
       <DependentUpon>FormThongBao.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormThongBaoPhongBan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormThongBaoPhongBan.Designer.cs">
+      <DependentUpon>FormThongBaoPhongBan.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormThongKeLuong.cs">
       <SubType>Form</SubType>
     </Compile>

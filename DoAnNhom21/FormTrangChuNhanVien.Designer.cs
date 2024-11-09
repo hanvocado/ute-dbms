@@ -44,11 +44,12 @@
             this.guna2Panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(218)))), ((int)(((byte)(81)))), ((int)(((byte)(57)))));
             this.guna2Panel1.BorderColor = System.Drawing.Color.Black;
             this.guna2Panel1.BorderThickness = 1;
-            this.guna2Panel1.Controls.Add(this.btnChamCong);
-            this.guna2Panel1.Controls.Add(this.btnNghiPhep);
+            this.guna2Panel1.Controls.Add(this.btnThongBao);
+            this.guna2Panel1.Controls.Add(this.btnTrangChu);
             this.guna2Panel1.Controls.Add(this.btnHopDong);
             this.guna2Panel1.Controls.Add(this.btnXemLuong);
-            this.guna2Panel1.Controls.Add(this.btnTrangChu);
+            this.guna2Panel1.Controls.Add(this.btnChamCong);
+            this.guna2Panel1.Controls.Add(this.btnNghiPhep);
             this.guna2Panel1.Controls.Add(this.btnDangXuat);
             this.guna2Panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.guna2Panel1.Location = new System.Drawing.Point(0, 0);
@@ -86,7 +87,7 @@
             this.btnHopDong.Location = new System.Drawing.Point(437, 14);
             this.btnHopDong.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnHopDong.Name = "btnHopDong";
-            this.btnHopDong.Size = new System.Drawing.Size(176, 55);
+            this.btnHopDong.Size = new System.Drawing.Size(147, 55);
             this.btnHopDong.TabIndex = 7;
             this.btnHopDong.Text = "Hợp đồng";
             this.btnHopDong.Click += new System.EventHandler(this.btnHopDong_Click);
@@ -103,7 +104,7 @@
             this.btnXemLuong.Location = new System.Drawing.Point(233, 14);
             this.btnXemLuong.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnXemLuong.Name = "btnXemLuong";
-            this.btnXemLuong.Size = new System.Drawing.Size(176, 55);
+            this.btnXemLuong.Size = new System.Drawing.Size(147, 55);
             this.btnXemLuong.TabIndex = 6;
             this.btnXemLuong.Text = "Xem lương";
             this.btnXemLuong.Click += new System.EventHandler(this.btnXemLuong_Click);
@@ -120,7 +121,7 @@
             this.btnTrangChu.Location = new System.Drawing.Point(29, 14);
             this.btnTrangChu.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnTrangChu.Name = "btnTrangChu";
-            this.btnTrangChu.Size = new System.Drawing.Size(176, 55);
+            this.btnTrangChu.Size = new System.Drawing.Size(147, 55);
             this.btnTrangChu.TabIndex = 5;
             this.btnTrangChu.Text = "Trang chủ";
             this.btnTrangChu.Click += new System.EventHandler(this.btnTrangChu_Click);
@@ -137,7 +138,7 @@
             this.btnDangXuat.Location = new System.Drawing.Point(1246, 14);
             this.btnDangXuat.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnDangXuat.Name = "btnDangXuat";
-            this.btnDangXuat.Size = new System.Drawing.Size(151, 55);
+            this.btnDangXuat.Size = new System.Drawing.Size(147, 55);
             this.btnDangXuat.TabIndex = 4;
             this.btnDangXuat.Text = "Đăng xuất";
             // 
@@ -194,5 +195,6 @@
         private Guna.UI2.WinForms.Guna2Button btnDangXuat;
         private Guna.UI2.WinForms.Guna2Panel pnlContent;
         private Guna.UI2.WinForms.Guna2Button btnChamCong;
+        private Guna.UI2.WinForms.Guna2Button btnThongBao;
     }
 }
