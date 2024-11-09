@@ -44,7 +44,7 @@
             this.guna2Panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(218)))), ((int)(((byte)(81)))), ((int)(((byte)(57)))));
             this.guna2Panel1.BorderColor = System.Drawing.Color.Black;
             this.guna2Panel1.BorderThickness = 1;
-            this.guna2Panel1.Controls.Add(this.btnThongBao);
+            //this.guna2Panel1.Controls.Add(this.btnThongBao);
             this.guna2Panel1.Controls.Add(this.btnTrangChu);
             this.guna2Panel1.Controls.Add(this.btnHopDong);
             this.guna2Panel1.Controls.Add(this.btnXemLuong);
