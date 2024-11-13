@@ -101,6 +101,7 @@ CREATE TABLE ThuongPhat (
     LyDo NVARCHAR(MAX) NOT NULL
 );
 GO
+
 CREATE TABLE ctThuongPhat (
     MaNV NVARCHAR(10) NOT NULL,
     MaThuongPhat NVARCHAR(10) NOT NULL,
@@ -286,10 +287,10 @@ GO
 -- Thêm dữ liệu cho bảng ThuongPhat
 INSERT INTO ThuongPhat (MaThuongPhat, Loai, SoTien, LyDo)
 VALUES
-('TP01', 'Thưởng', 5000000, N'Hoàn thành công việc xuất sắc'),
-('TP02', 'Phạt', 1000000, N'Đi làm muộn'),
-('TP03', 'Thưởng', 2000000, N'Đóng góp ý tưởng tốt'),
-('TP04', 'Phạt', 500000, N'Không hoàn thành công việc đúng hạn');
+('TP01', N'Thưởng', 5000000, N'Hoàn thành công việc xuất sắc'),
+('TP02', N'Phạt', 1000000, N'Đi làm muộn'),
+('TP03', N'Thưởng', 2000000, N'Đóng góp ý tưởng tốt'),
+('TP04', N'Phạt', 500000, N'Không hoàn thành công việc đúng hạn');
 -- Thêm dữ liệu cho bảng ctThuongPhat
 -- nếu là 05 thì sai
 GO
@@ -382,7 +383,6 @@ AFTER UPDATE
 AS
 BEGIN
   SET NOCOUNT ON;
- 
   IF UPDATE(MatKhau)
   BEGIN
 	DECLARE @TenDangNhap varchar(10);
@@ -403,9 +403,11 @@ ON NhanVien
 AFTER INSERT
 AS
 BEGIN
+
 	INSERT INTO TaiKhoan(TenDangNhap, MatKhau, MaLoai)
-	VALUES (i.MaNV, i.MaNV, 'NV')
-	FROM inserted i;
+    SELECT i.MaNV, i.MaNV, 'NV'
+    FROM inserted i;
+
 END;
 GO
 
@@ -581,7 +583,7 @@ AS NgayBatDauHopDong, hd.NgayKT AS NgayKetThucHopDong FROM NhanVien nv JOIN HopD
 GO
 
 CREATE OR ALTER VIEW vw_ChamCongNhanVien AS
-SELECT nv.MaNV as MaNhanVien, nv.Ho as Ho, nv.Ten as Ten, cc.TinhTrang as TinhTrang, ctcc.NgayChamCong
+SELECT nv.MaNV as MaNhanVien, nv.Ho as Ho, nv.Ten as Ten, ctcc.NgayChamCong
 FROM ctChamCong ctcc
 join ChamCong cc on ctcc.MaCC = cc.MaCC
 join NhanVien nv on nv.MaNV = ctcc.MaNV;
@@ -788,17 +790,15 @@ END;
 GO
 
 -- THONG BAO PRECEDURE --
-
 CREATE OR ALTER PROCEDURE sp_ThemThongBao
     @TieuDe NVARCHAR(100),
     @NoiDung NVARCHAR(MAX),
-    @MaPB nvarchar(10),
+    @MaPB NVARCHAR(10),
     @NgayGui DATETIME
 AS
 BEGIN
     INSERT INTO ThongBao (TieuDe, NoiDung, MaPB, NgayGui)
-    VALUES (@TieuDe, @NoiDung, @MaPB, @NgayGui)
-	WHERE @MaPB = MaPB;
+    VALUES (@TieuDe, @NoiDung, @MaPB, @NgayGui);
 END;
 GO
 
@@ -896,21 +896,17 @@ BEGIN
     WHERE MaThuongPhat = @MaThuongPhat
 END
 GO
-
+-- PROCEDURE CÓ TRANSACTION:
 CREATE OR ALTER PROCEDURE sp_CapNhatNgayThangThuongPhat
     @MaNV NVARCHAR(10),
     @MaThuongPhat NVARCHAR(10),	 
     @MaThang NVARCHAR(6),
     @NgayThuongPhat INT
 AS
-BEGIN
-    
+BEGIN 
     BEGIN TRANSACTION;
-
-    
     DECLARE @OldMaThang NVARCHAR(6);
     DECLARE @OldNgayThuongPhat INT;
-
     SELECT @OldMaThang = MaThang, @OldNgayThuongPhat = NgayThuongPhat
     FROM ctThuongPhat
     WHERE MaThuongPhat = @MaThuongPhat AND MaNV = @MaNV;
@@ -956,25 +952,40 @@ BEGIN
 	WHERE MaNV=@MaNV and NgayThuongPhat = @NgayThuongPhat and MaThuongPhat = @MaTP and MaThang = @MaThang
 END
 GO
-
-CREATE OR ALTER PROCEDURE sp_LocctThuongPhat
-    @MaNV nvarchar(10)
+-- Hàm trả về 1 bảng có tham số - Inline table-valued
+CREATE OR ALTER FUNCTION dbo.ft_LocThuongPhatNhanVien(@MaNV NVARCHAR(10), @Loai NVARCHAR(50))
+RETURNS TABLE
 AS
-BEGIN
-	IF NOT EXISTS (SELECT 1 FROM ctThuongPhat WHERE MaNV = @MaNV)
-    BEGIN
-        -- Nếu mã nhân viên không tồn tại, trả về thông báo lỗi
-        RAISERROR('Mã nhân viên không tồn tại.', 16, 1);
-        RETURN;
-    END
-	ELSE
-	BEGIN
-		SELECT *
-		FROM ctThuongPhat
-		WHERE MaNV = @MaNV
-	END
-END
+RETURN 
+(
+    SELECT 
+        nv.MaNV AS MaNhanVien, 
+        nv.Ho AS Ho, 
+        nv.Ten AS Ten,  
+        tp.Loai AS Loai, 
+        tp.LyDo AS LyDo, 
+        tp.SoTien AS TienThuongPhat, 
+        cttp.MaThang AS MaThang,
+        cttp.NgayThuongPhat AS NgayThuongPhat,
+        cv.TenCV AS TenChucVu,
+        pb.TenPB AS TenPhongBan
+    FROM 
+        ctThuongPhat cttp
+    JOIN 
+        ThuongPhat tp ON cttp.MaThuongPhat = tp.MaThuongPhat
+    JOIN 
+        NhanVien nv ON cttp.MaNV = nv.MaNV
+    LEFT JOIN 
+        ChucVu cv ON nv.MaCV = cv.MaCV
+    LEFT JOIN 
+        PhongBan pb ON nv.MaPB = pb.MaPB
+    WHERE 
+        tp.Loai = @Loai AND nv.MaNV = @MaNV
+);
 GO
+SELECT * FROM dbo.ft_LocThuongPhatNhanVien('NV01', N'Thưởng')
+
+
 
 -- QUAN LY CHUC VU --
 
@@ -1686,6 +1697,10 @@ END;
 
 GO
 
+
+
+
 SELECT dbo.ft_SoNgayCongChuan('122024') AS SoNgayLamViec;
 
 DElete from ctChamCong WHERE MaNV = 'NV02';
+
