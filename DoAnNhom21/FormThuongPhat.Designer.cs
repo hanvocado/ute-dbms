@@ -69,10 +69,10 @@ namespace DoAnNhom21
             this.cbbMaNV = new System.Windows.Forms.ComboBox();
             this.lblNgay = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.btnXemThuongHayPhat = new System.Windows.Forms.Button();
-            this.rbThuong = new System.Windows.Forms.RadioButton();
-            this.rbPhat = new System.Windows.Forms.RadioButton();
-            this.panelFormCTThuongPhat = new System.Windows.Forms.Panel();
+            this.btnLoc = new System.Windows.Forms.Button();
+            this.btnSuaTPNV = new System.Windows.Forms.Button();
+            this.btnXoaTPNV = new System.Windows.Forms.Button();
+            this.btnThemTPNV = new System.Windows.Forms.Button();
             this.guna2GroupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTP)).BeginInit();
             this.guna2GroupBox2.SuspendLayout();
