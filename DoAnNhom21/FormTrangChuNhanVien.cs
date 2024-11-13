@@ -48,9 +48,14 @@ namespace DoAnNhom21
             OpenForm(new FormHopDongNhanVien(this.maNv));
         }
 
-        private void btnDangXuat_Click(object sender, EventArgs e)
+        private void btnChamCong_Click(object sender, EventArgs e)
         {
+            OpenForm(new FormChamCong());
+        }
 
+        private void btnNghiPhep_Click(object sender, EventArgs e)
+        {
+            OpenForm(new FormNghiPhep());
         }
 
         private void btnDangXuat_Click(object sender, EventArgs e)
