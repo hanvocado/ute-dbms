@@ -52,7 +52,6 @@ namespace DoAnNhom21
             this.txtTien = new System.Windows.Forms.TextBox();
             this.txtLyDo = new System.Windows.Forms.TextBox();
             this.guna2GroupBox2 = new Guna.UI2.WinForms.Guna2GroupBox();
-            this.btnLoc = new System.Windows.Forms.Button();
             this.btnSuaTPNV = new System.Windows.Forms.Button();
             this.btnXoaTPNV = new System.Windows.Forms.Button();
             this.btnThemTPNV = new System.Windows.Forms.Button();
@@ -69,10 +68,10 @@ namespace DoAnNhom21
             this.cbbMaNV = new System.Windows.Forms.ComboBox();
             this.lblNgay = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.btnLoc = new System.Windows.Forms.Button();
-            this.btnSuaTPNV = new System.Windows.Forms.Button();
-            this.btnXoaTPNV = new System.Windows.Forms.Button();
-            this.btnThemTPNV = new System.Windows.Forms.Button();
+            this.btnXemThuongHayPhat = new System.Windows.Forms.Button();
+            this.rbPhat = new System.Windows.Forms.RadioButton();
+            this.rbThuong = new System.Windows.Forms.RadioButton();
+            this.panelFormCTThuongPhat = new System.Windows.Forms.Panel();
             this.guna2GroupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTP)).BeginInit();
             this.guna2GroupBox2.SuspendLayout();
@@ -302,7 +301,6 @@ namespace DoAnNhom21
             // 
             this.guna2GroupBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(218)))), ((int)(((byte)(81)))), ((int)(((byte)(57)))));
             this.guna2GroupBox2.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(218)))), ((int)(((byte)(81)))), ((int)(((byte)(57)))));
-            this.guna2GroupBox2.Controls.Add(this.btnLoc);
             this.guna2GroupBox2.Controls.Add(this.btnSuaTPNV);
             this.guna2GroupBox2.Controls.Add(this.btnXoaTPNV);
             this.guna2GroupBox2.Controls.Add(this.btnThemTPNV);
@@ -324,27 +322,12 @@ namespace DoAnNhom21
             this.guna2GroupBox2.TabIndex = 39;
             this.guna2GroupBox2.Text = " CHI TIẾT THƯỞNG PHẠT";
             // 
-            // btnLoc
-            // 
-            this.btnLoc.BackColor = System.Drawing.Color.LavenderBlush;
-            this.btnLoc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLoc.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.btnLoc.Location = new System.Drawing.Point(405, 506);
-            this.btnLoc.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.btnLoc.Name = "btnLoc";
-            this.btnLoc.Size = new System.Drawing.Size(103, 39);
-            this.btnLoc.TabIndex = 61;
-            this.btnLoc.Text = "Lọc";
-            this.btnLoc.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnLoc.UseVisualStyleBackColor = false;
-            this.btnLoc.Click += new System.EventHandler(this.btnLoc_Click);
-            // 
             // btnSuaTPNV
             // 
             this.btnSuaTPNV.BackColor = System.Drawing.Color.LavenderBlush;
             this.btnSuaTPNV.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSuaTPNV.Font = new System.Drawing.Font("Times New Roman", 12F);
-            this.btnSuaTPNV.Location = new System.Drawing.Point(285, 506);
+            this.btnSuaTPNV.Location = new System.Drawing.Point(388, 506);
             this.btnSuaTPNV.Name = "btnSuaTPNV";
             this.btnSuaTPNV.Size = new System.Drawing.Size(103, 39);
             this.btnSuaTPNV.TabIndex = 58;
@@ -358,7 +341,7 @@ namespace DoAnNhom21
             this.btnXoaTPNV.BackColor = System.Drawing.Color.LavenderBlush;
             this.btnXoaTPNV.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnXoaTPNV.Font = new System.Drawing.Font("Times New Roman", 12F);
-            this.btnXoaTPNV.Location = new System.Drawing.Point(155, 506);
+            this.btnXoaTPNV.Location = new System.Drawing.Point(238, 506);
             this.btnXoaTPNV.Name = "btnXoaTPNV";
             this.btnXoaTPNV.Size = new System.Drawing.Size(103, 39);
             this.btnXoaTPNV.TabIndex = 59;
@@ -373,7 +356,7 @@ namespace DoAnNhom21
             this.btnThemTPNV.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnThemTPNV.Font = new System.Drawing.Font("Times New Roman", 12F);
             this.btnThemTPNV.ForeColor = System.Drawing.Color.Black;
-            this.btnThemTPNV.Location = new System.Drawing.Point(21, 506);
+            this.btnThemTPNV.Location = new System.Drawing.Point(90, 506);
             this.btnThemTPNV.Name = "btnThemTPNV";
             this.btnThemTPNV.Size = new System.Drawing.Size(103, 39);
             this.btnThemTPNV.TabIndex = 60;
@@ -523,18 +506,6 @@ namespace DoAnNhom21
             this.btnXemThuongHayPhat.UseVisualStyleBackColor = false;
             this.btnXemThuongHayPhat.Click += new System.EventHandler(this.btnXemThuongHayPhat_Click);
             // 
-            // rbThuong
-            // 
-            this.rbThuong.AutoSize = true;
-            this.rbThuong.Location = new System.Drawing.Point(940, 590);
-            this.rbThuong.Name = "rbThuong";
-            this.rbThuong.Size = new System.Drawing.Size(74, 20);
-            this.rbThuong.TabIndex = 41;
-            this.rbThuong.TabStop = true;
-            this.rbThuong.Text = "Thưởng";
-            this.rbThuong.UseVisualStyleBackColor = true;
-            this.rbThuong.CheckedChanged += new System.EventHandler(this.rbThuongPhat_CheckedChanged);
-            // 
             // rbPhat
             // 
             this.rbPhat.AutoSize = true;
@@ -547,10 +518,27 @@ namespace DoAnNhom21
             this.rbPhat.UseVisualStyleBackColor = true;
             this.rbPhat.CheckedChanged += new System.EventHandler(this.rbThuongPhat_CheckedChanged);
             // 
+            // rbThuong
+            // 
+            this.rbThuong.AutoSize = true;
+            this.rbThuong.Location = new System.Drawing.Point(940, 590);
+            this.rbThuong.Name = "rbThuong";
+            this.rbThuong.Size = new System.Drawing.Size(74, 20);
+            this.rbThuong.TabIndex = 41;
+            this.rbThuong.TabStop = true;
+            this.rbThuong.Text = "Thưởng";
+            this.rbThuong.UseVisualStyleBackColor = true;
+            this.rbThuong.CheckedChanged += new System.EventHandler(this.rbThuongPhat_CheckedChanged);
+            // 
             // panelFormCTThuongPhat
             // 
+            this.panelFormCTThuongPhat.AccessibleRole = System.Windows.Forms.AccessibleRole.Column;
+            this.panelFormCTThuongPhat.AllowDrop = true;
+            this.panelFormCTThuongPhat.AutoSize = true;
+            this.panelFormCTThuongPhat.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelFormCTThuongPhat.Location = new System.Drawing.Point(57, 244);
             this.panelFormCTThuongPhat.Name = "panelFormCTThuongPhat";
+            this.panelFormCTThuongPhat.Padding = new System.Windows.Forms.Padding(5);
             this.panelFormCTThuongPhat.Size = new System.Drawing.Size(1142, 325);
             this.panelFormCTThuongPhat.TabIndex = 0;
             this.panelFormCTThuongPhat.Visible = false;
@@ -607,7 +595,6 @@ namespace DoAnNhom21
         private TextBox txtTien;
         private TextBox txtLyDo;
         private Guna.UI2.WinForms.Guna2GroupBox guna2GroupBox2;
-        private Button btnLoc;
         private Button btnSuaTPNV;
         private Button btnXoaTPNV;
         private Button btnThemTPNV;

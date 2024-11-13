@@ -896,21 +896,17 @@ BEGIN
     WHERE MaThuongPhat = @MaThuongPhat
 END
 GO
-
+-- PROCEDURE CÓ TRANSACTION:
 CREATE OR ALTER PROCEDURE sp_CapNhatNgayThangThuongPhat
     @MaNV NVARCHAR(10),
     @MaThuongPhat NVARCHAR(10),	 
     @MaThang NVARCHAR(6),
     @NgayThuongPhat INT
 AS
-BEGIN
-    
+BEGIN 
     BEGIN TRANSACTION;
-
-    
     DECLARE @OldMaThang NVARCHAR(6);
     DECLARE @OldNgayThuongPhat INT;
-
     SELECT @OldMaThang = MaThang, @OldNgayThuongPhat = NgayThuongPhat
     FROM ctThuongPhat
     WHERE MaThuongPhat = @MaThuongPhat AND MaNV = @MaNV;
@@ -956,6 +952,38 @@ BEGIN
 	WHERE MaNV=@MaNV and NgayThuongPhat = @NgayThuongPhat and MaThuongPhat = @MaTP and MaThang = @MaThang
 END
 GO
+-- Hàm trả về 1 bảng có tham số - Inline table-valued
+CREATE OR ALTER FUNCTION dbo.ft_LocThuongPhatNhanVien(@MaNV NVARCHAR(10), @Loai NVARCHAR(50))
+RETURNS TABLE
+AS
+RETURN 
+(
+    SELECT 
+        nv.MaNV AS MaNhanVien, 
+        nv.Ho AS Ho, 
+        nv.Ten AS Ten,  
+        tp.Loai AS Loai, 
+        tp.LyDo AS LyDo, 
+        tp.SoTien AS TienThuongPhat, 
+        cttp.MaThang AS MaThang,
+        cttp.NgayThuongPhat AS NgayThuongPhat,
+        cv.TenCV AS TenChucVu,
+        pb.TenPB AS TenPhongBan
+    FROM 
+        ctThuongPhat cttp
+    JOIN 
+        ThuongPhat tp ON cttp.MaThuongPhat = tp.MaThuongPhat
+    JOIN 
+        NhanVien nv ON cttp.MaNV = nv.MaNV
+    LEFT JOIN 
+        ChucVu cv ON nv.MaCV = cv.MaCV
+    LEFT JOIN 
+        PhongBan pb ON nv.MaPB = pb.MaPB
+    WHERE 
+        tp.Loai = @Loai AND nv.MaNV = @MaNV
+);
+GO
+SELECT * FROM dbo.ft_LocThuongPhatNhanVien('NV01', N'Thưởng')
 
 
 
@@ -1670,38 +1698,6 @@ END;
 GO
 
 
-GO
-CREATE OR ALTER FUNCTION dbo.ft_LocThuongPhatNhanVien(@MaNV NVARCHAR(10), @Loai NVARCHAR(50))
-RETURNS TABLE
-AS
-RETURN 
-(
-    SELECT 
-        nv.MaNV AS MaNhanVien, 
-        nv.Ho AS Ho, 
-        nv.Ten AS Ten,  
-        tp.Loai AS Loai, 
-        tp.LyDo AS LyDo, 
-        tp.SoTien AS TienThuongPhat, 
-        cttp.MaThang AS MaThang,
-        cttp.NgayThuongPhat AS NgayThuongPhat,
-        cv.TenCV AS TenChucVu,
-        pb.TenPB AS TenPhongBan
-    FROM 
-        ctThuongPhat cttp
-    JOIN 
-        ThuongPhat tp ON cttp.MaThuongPhat = tp.MaThuongPhat
-    JOIN 
-        NhanVien nv ON cttp.MaNV = nv.MaNV
-    LEFT JOIN 
-        ChucVu cv ON nv.MaCV = cv.MaCV
-    LEFT JOIN 
-        PhongBan pb ON nv.MaPB = pb.MaPB
-    WHERE 
-        tp.Loai = @Loai AND nv.MaNV = @MaNV
-);
-GO
-SELECT * FROM dbo.ft_LocThuongPhatNhanVien('NV01', N'Thưởng')
 
 
 SELECT dbo.ft_SoNgayCongChuan('122024') AS SoNgayLamViec;
