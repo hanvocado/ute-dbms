@@ -17,19 +17,16 @@ namespace DoAnNhom21
         {
             InitializeComponent();
         }
-        public string MaThang { get; set; }
         void load()
         {
-                SqlCommand cmd = new SqlCommand("sp_TinhLuongTheoThangTraVeNhieuBang");
-                string connectionString = Properties.Settings.Default.ConnectionString;
+                SqlCommand cmd = new SqlCommand("sp_TinhLuongChiTietTatCaNhanVien");
                 DataSet dataSet = new DataSet();
 
-                using (SqlConnection connection = new SqlConnection(connectionString))
+                using (SqlConnection connection = new SqlConnection(Connection.connectString))
                 {
-                    using (SqlCommand command = new SqlCommand("sp_TinhLuongTheoThangTraVeNhieuBang", connection))
+                    using (SqlCommand command = new SqlCommand("sp_TinhLuongChiTietTatCaNhanVien", connection))
                     {
                         command.CommandType = CommandType.StoredProcedure;
-                        command.Parameters.AddWithValue("@MaThang", MaThang);
                         SqlDataAdapter adapter = new SqlDataAdapter(command);
 
                         try
@@ -45,12 +42,14 @@ namespace DoAnNhom21
                 }
                 if (dataSet.Tables.Count > 0)
                 {
-                    dataGridViewChamCong.DataSource = dataSet.Tables[1];
-                    dataGridViewPhuCapThang.DataSource = dataSet.Tables[2];
-                    dataGridViewThuongPhatThang.DataSource = dataSet.Tables[3];
-                    dataGridViewBaoHiem.DataSource = dataSet.Tables[4];
+                    dataGridViewLuongChiuThue.DataSource = dataSet.Tables[0];
+                    dataGridViewLuongThucLanh.DataSource = dataSet.Tables[1];
+                    dataGridViewChamCong.DataSource = dataSet.Tables[2];
+                    dataGridViewPhuCap.DataSource = dataSet.Tables[3];
+                    dataGridViewThuongPhat.DataSource = dataSet.Tables[4];
+                    dataGridViewBaoHiem.DataSource = dataSet.Tables[5];
 
-                }
+            }
                 else
                 {
                     MessageBox.Show("Không có dữ liệu trả về.");
