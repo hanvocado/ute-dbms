@@ -16,8 +16,7 @@ namespace DoAnNhom21
         public FormThuongPhat()
         {
             InitializeComponent();
-            
-            
+
         }
         private void FormThuongPhat_Load(object sender, EventArgs e)
         {
@@ -165,6 +164,9 @@ namespace DoAnNhom21
                 MessageBox.Show("Lỗi: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        
+
         private void btnXoaTPNV_Click(object sender, EventArgs e)
         {
             try
@@ -196,7 +198,7 @@ namespace DoAnNhom21
             cbbMaTP.Text = cbbMaNV.Text = cbbMaThang.Text = txtNgayTP.Text = " ";
             this.panelFormCTThuongPhat.Visible = false;
             load();
-        }
+                    }
 
         private void btnLoc_Click(object sender, EventArgs e)
         {
@@ -245,9 +247,9 @@ namespace DoAnNhom21
                     cmd.CommandType = CommandType.Text;
                     cmd.Parameters.AddWithValue("@MaNV", cbbMaNV.Text);
                     cmd.Parameters.AddWithValue("@Loai", loai);
-                    
-                    // Hiển thị FormCTThuongPhat trong Panel
-                    this.panelFormCTThuongPhat.Visible = true;
+
+                     // Hiển thị FormCTThuongPhat trong Panel
+                     this.panelFormCTThuongPhat.Visible = true;
                     FormCTThuongPhat formCTThuongPhat = new FormCTThuongPhat();
                     formCTThuongPhat.TopLevel = false;
                     formCTThuongPhat.FormBorderStyle = FormBorderStyle.None;
@@ -256,6 +258,7 @@ namespace DoAnNhom21
                     this.panelFormCTThuongPhat.Controls.Add(formCTThuongPhat);
                     formCTThuongPhat.dataGridView1.DataSource = Connection.LoadDataTable(cmd);
                     formCTThuongPhat.Show();
+                    
                 }
             }
             catch (Exception ex)
@@ -264,6 +267,6 @@ namespace DoAnNhom21
             }
         }
 
-        
+       
     }
 }
