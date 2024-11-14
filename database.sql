@@ -357,8 +357,8 @@ INSERT INTO TaiKhoan (TenDangNhap, MatKhau, MaLoai)
 VALUES
 ('NV01', 'password1', 'LTK01'),
 ('NV02', 'password2', 'LTK02'),
-('NV03', 'password3', 'LTK02'),
-('NV04', 'password4', 'LTK02');
+('NV03', 'password3', 'LTK03'),
+('NV04', 'password4', 'LTK03');
 GO
 -- Thêm dữ liệu cho bảng PhuCap
 INSERT INTO PhuCap (MaPhuCap, LoaiPhuCap)
