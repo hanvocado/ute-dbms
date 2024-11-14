@@ -32,7 +32,6 @@ namespace DoAnNhom21
         private void InitializeComponent()
         {
             this.guna2GroupBox1 = new Guna.UI2.WinForms.Guna2GroupBox();
-            this.lblId = new System.Windows.Forms.Label();
             this.cbbId = new System.Windows.Forms.ComboBox();
             this.cbbMaPB = new System.Windows.Forms.ComboBox();
             this.dtpNgayGui = new System.Windows.Forms.DateTimePicker();
@@ -53,6 +52,7 @@ namespace DoAnNhom21
             this.btnXoa = new System.Windows.Forms.Button();
             this.btnThoat = new System.Windows.Forms.Button();
             this.btnSua = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.guna2GroupBox1.SuspendLayout();
             this.guna2GroupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewThongBao)).BeginInit();
@@ -63,7 +63,7 @@ namespace DoAnNhom21
             // 
             this.guna2GroupBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(218)))), ((int)(((byte)(81)))), ((int)(((byte)(57)))));
             this.guna2GroupBox1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(218)))), ((int)(((byte)(81)))), ((int)(((byte)(57)))));
-            this.guna2GroupBox1.Controls.Add(this.lblId);
+            this.guna2GroupBox1.Controls.Add(this.label1);
             this.guna2GroupBox1.Controls.Add(this.cbbId);
             this.guna2GroupBox1.Controls.Add(this.cbbMaPB);
             this.guna2GroupBox1.Controls.Add(this.dtpNgayGui);
@@ -82,22 +82,12 @@ namespace DoAnNhom21
             this.guna2GroupBox1.TabIndex = 24;
             this.guna2GroupBox1.Text = "THÔNG BÁO ";
             // 
-            // lblId
-            // 
-            this.lblId.AutoSize = true;
-            this.lblId.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblId.Location = new System.Drawing.Point(467, 183);
-            this.lblId.Name = "lblId";
-            this.lblId.Size = new System.Drawing.Size(30, 22);
-            this.lblId.TabIndex = 18;
-            this.lblId.Text = "ID";
-            // 
             // cbbId
             // 
             this.cbbId.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbbId.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.cbbId.FormattingEnabled = true;
-            this.cbbId.Location = new System.Drawing.Point(635, 183);
+            this.cbbId.Location = new System.Drawing.Point(238, 175);
             this.cbbId.Name = "cbbId";
             this.cbbId.Size = new System.Drawing.Size(196, 30);
             this.cbbId.Sorted = true;
@@ -228,7 +218,7 @@ namespace DoAnNhom21
             // 
             // Column3
             // 
-            this.Column3.DataPropertyName = "PBGoi";
+            this.Column3.DataPropertyName = "MaPB";
             this.Column3.HeaderText = "Phòng ban gửi";
             this.Column3.MinimumWidth = 6;
             this.Column3.Name = "Column3";
@@ -268,6 +258,7 @@ namespace DoAnNhom21
             this.btnThem.Text = "Thêm";
             this.btnThem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnThem.UseVisualStyleBackColor = false;
+            this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
             // 
             // btnXoa
             // 
@@ -281,6 +272,7 @@ namespace DoAnNhom21
             this.btnXoa.Text = "Xoá";
             this.btnXoa.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnXoa.UseVisualStyleBackColor = false;
+            this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
             // 
             // btnThoat
             // 
@@ -294,6 +286,7 @@ namespace DoAnNhom21
             this.btnThoat.Text = "Thoát";
             this.btnThoat.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnThoat.UseVisualStyleBackColor = false;
+            this.btnThoat.Click += new System.EventHandler(this.btnThoat_Click);
             // 
             // btnSua
             // 
@@ -307,6 +300,17 @@ namespace DoAnNhom21
             this.btnSua.Text = "Sửa";
             this.btnSua.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSua.UseVisualStyleBackColor = false;
+            this.btnSua.Click += new System.EventHandler(this.btnSua_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(45, 183);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(175, 22);
+            this.label1.TabIndex = 19;
+            this.label1.Text = "Xóa thông báo có Id:";
             // 
             // FormThongBao
             // 
@@ -328,6 +332,7 @@ namespace DoAnNhom21
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewThongBao)).EndInit();
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.Load += new System.EventHandler(this.FormThongBao_Load);
 
         }
 
@@ -338,7 +343,6 @@ namespace DoAnNhom21
         #endregion
 
         private Guna.UI2.WinForms.Guna2GroupBox guna2GroupBox1;
-        private Label lblId;
         private ComboBox cbbId;
         private ComboBox cbbMaPB;
         private DateTimePicker dtpNgayGui;
@@ -359,6 +363,7 @@ namespace DoAnNhom21
         private Button btnXoa;
         private Button btnThoat;
         private Button btnSua;
+        private Label label1;
     }
     
     
