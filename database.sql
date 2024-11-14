@@ -1529,6 +1529,8 @@ BEGIN
     INSERT INTO @ThueThuNhapCaNhan (MaNV, Thue)
     SELECT nv.MaNV,
         CASE
+			WHEN LuongChiuThue <= 0 
+				THEN 0
             WHEN LuongChiuThue <= 5000000
                 THEN LuongChiuThue * 5 / 100
             WHEN LuongChiuThue <= 10000000
@@ -1666,6 +1668,8 @@ BEGIN
     INSERT INTO @ThueThuNhapCaNhan (MaNV, Thue)
     SELECT nv.MaNV,
         CASE
+			WHEN LuongChiuThue <= 0 
+				THEN 0
             WHEN LuongChiuThue <= 5000000
                 THEN LuongChiuThue * 5 / 100
             WHEN LuongChiuThue <= 10000000
@@ -1700,7 +1704,7 @@ BEGIN
     SELECT * FROM @BaoHiem; 
 END;
 GO
-EXEC sp_TinhLuongTheoThangTraVeNhieuBang @MaThang = '032023'
+-- EXEC sp_TinhLuongTheoThangTraVeNhieuBang @MaThang = '032023'
 
 --------
 INSERT INTO ctChamCong (MaNV, MaCC, MaThang, NgayChamCong)
