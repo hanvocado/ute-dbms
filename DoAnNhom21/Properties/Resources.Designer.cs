@@ -73,6 +73,16 @@ namespace DoAnNhom21.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap AnhNen {
+            get {
+                object obj = ResourceManager.GetObject("AnhNen", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap human {
             get {
                 object obj = ResourceManager.GetObject("human", resourceCulture);
