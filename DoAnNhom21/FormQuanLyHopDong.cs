@@ -34,9 +34,9 @@ namespace DoAnNhom21
                 using (SqlConnection conn = Connection.getConnection())
                 {
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand("AddHopDong");
+                    SqlCommand cmd = new SqlCommand("sp_AddHopDong");
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@MaNV", this.txtMaNhanVien.ToString());
+                    cmd.Parameters.AddWithValue("@MaNV", this.txtMaNhanVien.Text);
                     cmd.Parameters.AddWithValue("@MaHD", this.txtMaHopDong.Text);
                     cmd.Parameters.AddWithValue("@LuongCoBan", this.txtLuongCoBan.Text);
                     cmd.Parameters.AddWithValue("@NgayBD", this.dtpNgayBd.Value);
@@ -59,7 +59,7 @@ namespace DoAnNhom21
         {
             try
             {
-                using (SqlCommand command = new SqlCommand("DeleteHopDong"))
+                using (SqlCommand command = new SqlCommand("sp_DeleteHopDong"))
                 {
                     command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@MaHD", this.txtMaHopDong.Text);
@@ -92,7 +92,7 @@ namespace DoAnNhom21
         {
             try
             {
-                using (SqlCommand command = new SqlCommand("UpdateHopDong"))
+                using (SqlCommand command = new SqlCommand("sp_UpdateHopDong"))
                 {
                     command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@MaHD", this.txtMaHopDong.Text);
