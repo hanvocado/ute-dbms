@@ -812,7 +812,7 @@ BEGIN
         pb.MaTrP, 
         COUNT(nv.MaNV) AS SoNV, 
         COUNT(CASE WHEN nv.GioiTinh = 'Nam' THEN 1 END) AS SoNVNam,
-        COUNT(CASE WHEN nv.GioiTinh = 'Nu' THEN 1 END) AS SoNVNu
+        COUNT(CASE WHEN nv.GioiTinh = 'Nu' THEN 1 END) AS SoNVNu,
     FROM 
         PhongBan pb 
     JOIN 
@@ -841,7 +841,9 @@ SELECT
     GROUP BY 
         pb.MaPB, pb.MaTrP;
 GO
--- Hàm nhận thông báo 
+
+---//------
+-- Hàm nhận thông báo _ multi statement table-valued có para 
 CREATE OR ALTER FUNCTION dbo.ft_NhanVienNhanThongBao(@MaNV nvarchar(10))
 RETURNS @ThongBaoNhanVien TABLE (
 	TieuDe nvarchar(100),
@@ -863,10 +865,9 @@ BEGIN
 	RETURN;
 END;
 GO
-SELECT * FROM dbo.ft_NhanVienNhanThongBao('NV03')
-	
+SELECT * FROM dbo.ft_NhanVienNhanThongBao('NV03')	
 
--- THONG BAO PRECEDURE --
+-- QUAN LY THONG BAO PRECEDURE --
 CREATE OR ALTER PROCEDURE sp_ThemThongBao
     @TieuDe NVARCHAR(100),
     @NoiDung NVARCHAR(MAX),
