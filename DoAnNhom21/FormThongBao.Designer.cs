@@ -326,6 +326,7 @@ namespace DoAnNhom21
             this.Name = "FormThongBao";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Thông Báo";
+            this.Load += new System.EventHandler(this.FormThongBao_Load_1);
             this.guna2GroupBox1.ResumeLayout(false);
             this.guna2GroupBox1.PerformLayout();
             this.guna2GroupBox2.ResumeLayout(false);

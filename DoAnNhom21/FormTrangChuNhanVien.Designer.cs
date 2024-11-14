@@ -61,7 +61,8 @@ namespace DoAnNhom21
             this.guna2Panel1.Controls.Add(this.btnNghiPhep);
             this.guna2Panel1.Controls.Add(this.btnHopDong);
             this.guna2Panel1.Controls.Add(this.btnXemLuong);
-            this.guna2Panel1.Controls.Add(this.btnTrangChu);
+            this.guna2Panel1.Controls.Add(this.btnChamCong);
+            this.guna2Panel1.Controls.Add(this.btnNghiPhep);
             this.guna2Panel1.Controls.Add(this.btnDangXuat);
             this.guna2Panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.guna2Panel1.Location = new System.Drawing.Point(0, 0);

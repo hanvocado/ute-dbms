@@ -414,13 +414,14 @@ namespace DoAnNhom21
             this.dataGridViewTextBoxColumn2,
             this.dataGridViewTextBoxColumn3,
             this.dataGridViewTextBoxColumn4});
-            this.dataGridViewCTTP.Location = new System.Drawing.Point(29, 232);
+            this.dataGridViewCTTP.Location = new System.Drawing.Point(38, 232);
             this.dataGridViewCTTP.Name = "dataGridViewCTTP";
             this.dataGridViewCTTP.RowHeadersVisible = false;
             this.dataGridViewCTTP.RowHeadersWidth = 51;
             this.dataGridViewCTTP.RowTemplate.Height = 24;
             this.dataGridViewCTTP.Size = new System.Drawing.Size(479, 255);
             this.dataGridViewCTTP.TabIndex = 52;
+            this.dataGridViewCTTP.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewCTTP_CellContentClick);
             // 
             // dataGridViewTextBoxColumn1
             // 
