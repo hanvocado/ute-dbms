@@ -58,9 +58,12 @@ namespace DoAnNhom21
             OpenForm(new FormNghiPhep());
         }
 
-        private void btnThongBao_Click(object sender, EventArgs e)
+        private void btnDangXuat_Click(object sender, EventArgs e)
         {
-            OpenForm(new FormThongBao());
+            this.Hide();
+            FormDangNhap form = new FormDangNhap();
+            form.Show();
+            this.Close();
         }
     }
 }

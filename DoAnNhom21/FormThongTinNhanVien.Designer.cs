@@ -41,7 +41,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.guna2GroupBox1 = new Guna.UI2.WinForms.Guna2GroupBox();
             this.txtSDT = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
@@ -55,8 +54,9 @@
             this.label11 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.guna2GroupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // txtTen
@@ -206,19 +206,6 @@
             this.label1.Text = "     Mã nhân viên: ";
             this.label1.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox1.Image = global::DoAnNhom21.Properties.Resources.profile;
-            this.pictureBox1.Location = new System.Drawing.Point(182, 24);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(270, 232);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 15;
-            this.pictureBox1.TabStop = false;
-            // 
             // guna2GroupBox1
             // 
             this.guna2GroupBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(218)))), ((int)(((byte)(81)))), ((int)(((byte)(57)))));
@@ -238,11 +225,11 @@
             this.guna2GroupBox1.CustomBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(218)))), ((int)(((byte)(81)))), ((int)(((byte)(57)))));
             this.guna2GroupBox1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
             this.guna2GroupBox1.ForeColor = System.Drawing.Color.Black;
-            this.guna2GroupBox1.Location = new System.Drawing.Point(147, 296);
+            this.guna2GroupBox1.Location = new System.Drawing.Point(147, 302);
             this.guna2GroupBox1.Name = "guna2GroupBox1";
             this.guna2GroupBox1.Size = new System.Drawing.Size(962, 237);
             this.guna2GroupBox1.TabIndex = 31;
-            this.guna2GroupBox1.Text = "THÔNG BÁO ";
+            this.guna2GroupBox1.Text = "THÔNG TIN CÁ NHÂN ";
             // 
             // txtSDT
             // 
@@ -383,6 +370,19 @@
             this.label7.Text = "     Ngày sinh: ";
             this.label7.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox1.Image = global::DoAnNhom21.Properties.Resources.human;
+            this.pictureBox1.Location = new System.Drawing.Point(182, 24);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(270, 232);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 15;
+            this.pictureBox1.TabStop = false;
+            // 
             // FormThongTinNhanVien
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -409,9 +409,9 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormThongTinNhanVien";
             this.Load += new System.EventHandler(this.FormThongTinNhanVien_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.guna2GroupBox1.ResumeLayout(false);
             this.guna2GroupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

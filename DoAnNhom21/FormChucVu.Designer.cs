@@ -142,6 +142,7 @@ namespace DoAnNhom21
             // 
             // guna2Panel1
             // 
+            this.guna2Panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(218)))), ((int)(((byte)(81)))), ((int)(((byte)(57)))));
             this.guna2Panel1.BorderColor = System.Drawing.Color.Black;
             this.guna2Panel1.BorderThickness = 1;
             this.guna2Panel1.Controls.Add(this.btnLamMoi);
@@ -246,6 +247,7 @@ namespace DoAnNhom21
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(234)))), ((int)(((byte)(220)))));
             this.ClientSize = new System.Drawing.Size(1256, 622);
             this.Controls.Add(this.guna2GroupBox2);
             this.Controls.Add(this.guna2Panel1);

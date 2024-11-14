@@ -78,30 +78,5 @@ namespace DoAnNhom21
             }
 
         }
-        public static void ExecuteCommandAdmin(SqlCommand command)
-        {
-            using (SqlConnection connection = new SqlConnection(connectString))
-            {
-                command.Connection = connection;
-                connection.Open();
-                command.ExecuteNonQuery();
-                connection.Close();
-            }
-        }
-        public static DataTable Docdulieu(string query)
-        {
-            // Cập nhật chuỗi kết nối cho việc đọc dữ liệu
-            string ketnoi = GetConnectionString(user, pass);
-
-            SqlConnection conn = new SqlConnection(ketnoi);
-            conn.Open();
-            SqlCommand cmd = new SqlCommand(query, conn);
-            DataTable data = new DataTable();
-            SqlDataAdapter adapter = new SqlDataAdapter(cmd);
-            adapter.Fill(data);
-            cmd.Dispose();
-            conn.Close();
-            return data;
-        }
     }
 }

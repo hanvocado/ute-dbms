@@ -57,12 +57,12 @@
             this.Ngay,
             this.Thang,
             this.LyDo});
-            this.dataGVoffHistory.Location = new System.Drawing.Point(35, 71);
+            this.dataGVoffHistory.Location = new System.Drawing.Point(39, 89);
             this.dataGVoffHistory.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dataGVoffHistory.Name = "dataGVoffHistory";
             this.dataGVoffHistory.RowHeadersWidth = 62;
             this.dataGVoffHistory.RowTemplate.Height = 28;
-            this.dataGVoffHistory.Size = new System.Drawing.Size(769, 193);
+            this.dataGVoffHistory.Size = new System.Drawing.Size(865, 241);
             this.dataGVoffHistory.TabIndex = 0;
             // 
             // Ngay
@@ -102,26 +102,27 @@
             this.guna2GroupBox1.CustomBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(218)))), ((int)(((byte)(81)))), ((int)(((byte)(57)))));
             this.guna2GroupBox1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
             this.guna2GroupBox1.ForeColor = System.Drawing.Color.Black;
-            this.guna2GroupBox1.Location = new System.Drawing.Point(260, 31);
+            this.guna2GroupBox1.Location = new System.Drawing.Point(292, 39);
+            this.guna2GroupBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.guna2GroupBox1.Name = "guna2GroupBox1";
-            this.guna2GroupBox1.Size = new System.Drawing.Size(892, 304);
+            this.guna2GroupBox1.Size = new System.Drawing.Size(1004, 380);
             this.guna2GroupBox1.TabIndex = 16;
             this.guna2GroupBox1.Text = "ĐĂNG KÝ NGHỈ PHÉP ";
             // 
             // txtLyDo
             // 
-            this.txtLyDo.Location = new System.Drawing.Point(614, 129);
+            this.txtLyDo.Location = new System.Drawing.Point(691, 161);
             this.txtLyDo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtLyDo.Name = "txtLyDo";
-            this.txtLyDo.Size = new System.Drawing.Size(251, 30);
+            this.txtLyDo.Size = new System.Drawing.Size(282, 35);
             this.txtLyDo.TabIndex = 22;
             // 
             // txtNgayNghi
             // 
-            this.txtNgayNghi.Location = new System.Drawing.Point(614, 77);
+            this.txtNgayNghi.Location = new System.Drawing.Point(691, 96);
             this.txtNgayNghi.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtNgayNghi.Name = "txtNgayNghi";
-            this.txtNgayNghi.Size = new System.Drawing.Size(251, 30);
+            this.txtNgayNghi.Size = new System.Drawing.Size(282, 35);
             this.txtNgayNghi.TabIndex = 21;
             // 
             // btnNghiPhep
@@ -129,21 +130,23 @@
             this.btnNghiPhep.BackColor = System.Drawing.Color.LavenderBlush;
             this.btnNghiPhep.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNghiPhep.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.btnNghiPhep.Location = new System.Drawing.Point(348, 187);
+            this.btnNghiPhep.Location = new System.Drawing.Point(392, 234);
+            this.btnNghiPhep.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnNghiPhep.Name = "btnNghiPhep";
-            this.btnNghiPhep.Size = new System.Drawing.Size(184, 40);
+            this.btnNghiPhep.Size = new System.Drawing.Size(207, 50);
             this.btnNghiPhep.TabIndex = 15;
             this.btnNghiPhep.Text = "Đăng ký nghỉ";
             this.btnNghiPhep.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnNghiPhep.UseVisualStyleBackColor = false;
+            this.btnNghiPhep.Click += new System.EventHandler(this.btnNghiPhep_Click);
             // 
             // txtMaNV
             // 
-            this.txtMaNV.Location = new System.Drawing.Point(142, 77);
+            this.txtMaNV.Location = new System.Drawing.Point(160, 96);
             this.txtMaNV.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtMaNV.Name = "txtMaNV";
             this.txtMaNV.ReadOnly = true;
-            this.txtMaNV.Size = new System.Drawing.Size(251, 30);
+            this.txtMaNV.Size = new System.Drawing.Size(282, 35);
             this.txtMaNV.TabIndex = 20;
             // 
             // tblMaNV
@@ -151,9 +154,9 @@
             this.tblMaNV.AutoSize = true;
             this.tblMaNV.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(234)))), ((int)(((byte)(220)))));
             this.tblMaNV.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.tblMaNV.Location = new System.Drawing.Point(31, 80);
+            this.tblMaNV.Location = new System.Drawing.Point(35, 100);
             this.tblMaNV.Name = "tblMaNV";
-            this.tblMaNV.Size = new System.Drawing.Size(78, 22);
+            this.tblMaNV.Size = new System.Drawing.Size(93, 27);
             this.tblMaNV.TabIndex = 19;
             this.tblMaNV.Text = "Mã NV: ";
             // 
@@ -162,19 +165,19 @@
             this.lblNgayNghi.AutoSize = true;
             this.lblNgayNghi.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(234)))), ((int)(((byte)(220)))));
             this.lblNgayNghi.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.lblNgayNghi.Location = new System.Drawing.Point(503, 80);
+            this.lblNgayNghi.Location = new System.Drawing.Point(566, 100);
             this.lblNgayNghi.Name = "lblNgayNghi";
-            this.lblNgayNghi.Size = new System.Drawing.Size(62, 22);
+            this.lblNgayNghi.Size = new System.Drawing.Size(75, 27);
             this.lblNgayNghi.TabIndex = 18;
             this.lblNgayNghi.Text = "Ngày: ";
             // 
             // cbbThang
             // 
             this.cbbThang.FormattingEnabled = true;
-            this.cbbThang.Location = new System.Drawing.Point(142, 129);
+            this.cbbThang.Location = new System.Drawing.Point(160, 161);
             this.cbbThang.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cbbThang.Name = "cbbThang";
-            this.cbbThang.Size = new System.Drawing.Size(251, 31);
+            this.cbbThang.Size = new System.Drawing.Size(282, 34);
             this.cbbThang.TabIndex = 17;
             // 
             // lblLyDo
@@ -182,9 +185,9 @@
             this.lblLyDo.AutoSize = true;
             this.lblLyDo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(234)))), ((int)(((byte)(220)))));
             this.lblLyDo.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.lblLyDo.Location = new System.Drawing.Point(503, 132);
+            this.lblLyDo.Location = new System.Drawing.Point(566, 165);
             this.lblLyDo.Name = "lblLyDo";
-            this.lblLyDo.Size = new System.Drawing.Size(67, 22);
+            this.lblLyDo.Size = new System.Drawing.Size(81, 27);
             this.lblLyDo.TabIndex = 16;
             this.lblLyDo.Text = "Lý do: ";
             // 
@@ -193,9 +196,9 @@
             this.lblNgayNghiPhep.AutoSize = true;
             this.lblNgayNghiPhep.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(234)))), ((int)(((byte)(220)))));
             this.lblNgayNghiPhep.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.lblNgayNghiPhep.Location = new System.Drawing.Point(28, 134);
+            this.lblNgayNghiPhep.Location = new System.Drawing.Point(32, 168);
             this.lblNgayNghiPhep.Name = "lblNgayNghiPhep";
-            this.lblNgayNghiPhep.Size = new System.Drawing.Size(69, 22);
+            this.lblNgayNghiPhep.Size = new System.Drawing.Size(84, 27);
             this.lblNgayNghiPhep.TabIndex = 14;
             this.lblNgayNghiPhep.Text = "Tháng: ";
             // 
@@ -207,21 +210,23 @@
             this.guna2GroupBox2.CustomBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(218)))), ((int)(((byte)(81)))), ((int)(((byte)(57)))));
             this.guna2GroupBox2.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
             this.guna2GroupBox2.ForeColor = System.Drawing.Color.Black;
-            this.guna2GroupBox2.Location = new System.Drawing.Point(260, 373);
+            this.guna2GroupBox2.Location = new System.Drawing.Point(292, 466);
+            this.guna2GroupBox2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.guna2GroupBox2.Name = "guna2GroupBox2";
-            this.guna2GroupBox2.Size = new System.Drawing.Size(892, 304);
+            this.guna2GroupBox2.Size = new System.Drawing.Size(1004, 380);
             this.guna2GroupBox2.TabIndex = 17;
             this.guna2GroupBox2.Text = "LỊCH SỬ XIN NGHỈ PHÉP ";
             // 
             // FormNghiPhep
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(234)))), ((int)(((byte)(220)))));
-            this.ClientSize = new System.Drawing.Size(1413, 778);
+            this.ClientSize = new System.Drawing.Size(1590, 972);
             this.Controls.Add(this.guna2GroupBox2);
             this.Controls.Add(this.guna2GroupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "FormNghiPhep";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormNghiPhep";

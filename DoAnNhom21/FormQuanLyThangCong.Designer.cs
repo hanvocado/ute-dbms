@@ -98,6 +98,7 @@
             this.btnLamMoi.Text = "Làm mới";
             this.btnLamMoi.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnLamMoi.UseVisualStyleBackColor = false;
+            this.btnLamMoi.Click += new System.EventHandler(this.btnLamMoi_Click);
             // 
             // dataGVThang
             // 
@@ -115,6 +116,7 @@
             this.dataGVThang.RowTemplate.Height = 24;
             this.dataGVThang.Size = new System.Drawing.Size(584, 234);
             this.dataGVThang.TabIndex = 19;
+            this.dataGVThang.DoubleClick += new System.EventHandler(this.dataGVThang_DoubleClick);
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -153,6 +155,7 @@
             this.btnSuaThang.Text = "Sửa";
             this.btnSuaThang.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSuaThang.UseVisualStyleBackColor = false;
+            this.btnSuaThang.Click += new System.EventHandler(this.btnSuaThang_Click);
             // 
             // txtMoTa
             // 
@@ -160,7 +163,7 @@
             this.txtMoTa.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtMoTa.Location = new System.Drawing.Point(196, 97);
             this.txtMoTa.Name = "txtMoTa";
-            this.txtMoTa.Size = new System.Drawing.Size(202, 30);
+            this.txtMoTa.Size = new System.Drawing.Size(202, 35);
             this.txtMoTa.TabIndex = 18;
             // 
             // txtMaThang
@@ -169,7 +172,7 @@
             this.txtMaThang.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtMaThang.Location = new System.Drawing.Point(196, 43);
             this.txtMaThang.Name = "txtMaThang";
-            this.txtMaThang.Size = new System.Drawing.Size(202, 30);
+            this.txtMaThang.Size = new System.Drawing.Size(202, 35);
             this.txtMaThang.TabIndex = 16;
             // 
             // lblSoNgayCong
@@ -178,7 +181,7 @@
             this.lblSoNgayCong.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSoNgayCong.Location = new System.Drawing.Point(33, 159);
             this.lblSoNgayCong.Name = "lblSoNgayCong";
-            this.lblSoNgayCong.Size = new System.Drawing.Size(175, 22);
+            this.lblSoNgayCong.Size = new System.Drawing.Size(216, 27);
             this.lblSoNgayCong.TabIndex = 11;
             this.lblSoNgayCong.Text = "Số ngày công chuẩn: ";
             // 
@@ -195,6 +198,7 @@
             this.btnThemThang.Text = "Thêm";
             this.btnThemThang.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnThemThang.UseVisualStyleBackColor = false;
+            this.btnThemThang.Click += new System.EventHandler(this.btnThemThang_Click);
             // 
             // lblMoTa
             // 
@@ -202,7 +206,7 @@
             this.lblMoTa.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMoTa.Location = new System.Drawing.Point(33, 105);
             this.lblMoTa.Name = "lblMoTa";
-            this.lblMoTa.Size = new System.Drawing.Size(67, 22);
+            this.lblMoTa.Size = new System.Drawing.Size(81, 27);
             this.lblMoTa.TabIndex = 12;
             this.lblMoTa.Text = "Mô tả: ";
             // 
@@ -212,7 +216,7 @@
             this.txtSoNgayCong.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSoNgayCong.Location = new System.Drawing.Point(239, 157);
             this.txtSoNgayCong.Name = "txtSoNgayCong";
-            this.txtSoNgayCong.Size = new System.Drawing.Size(159, 30);
+            this.txtSoNgayCong.Size = new System.Drawing.Size(159, 35);
             this.txtSoNgayCong.TabIndex = 14;
             // 
             // lblMaThang
@@ -221,7 +225,7 @@
             this.lblMaThang.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMaThang.Location = new System.Drawing.Point(33, 51);
             this.lblMaThang.Name = "lblMaThang";
-            this.lblMaThang.Size = new System.Drawing.Size(93, 22);
+            this.lblMaThang.Size = new System.Drawing.Size(115, 27);
             this.lblMaThang.TabIndex = 13;
             this.lblMaThang.Text = "Mã tháng: ";
             // 
@@ -261,6 +265,7 @@
             this.btnLamMoiCong.Text = "Làm mới";
             this.btnLamMoiCong.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnLamMoiCong.UseVisualStyleBackColor = false;
+            this.btnLamMoiCong.Click += new System.EventHandler(this.btnLamMoiCong_Click);
             // 
             // dataGVCong
             // 
@@ -278,6 +283,7 @@
             this.dataGVCong.RowTemplate.Height = 24;
             this.dataGVCong.Size = new System.Drawing.Size(590, 210);
             this.dataGVCong.TabIndex = 19;
+            this.dataGVCong.DoubleClick += new System.EventHandler(this.dataGVCong_DoubleClick);
             // 
             // dataGridViewTextBoxColumn4
             // 
@@ -316,6 +322,7 @@
             this.btnSuaCong.Text = "Sửa";
             this.btnSuaCong.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSuaCong.UseVisualStyleBackColor = false;
+            this.btnSuaCong.Click += new System.EventHandler(this.btnSuaCong_Click);
             // 
             // txtMoTaCong
             // 
@@ -323,7 +330,7 @@
             this.txtMoTaCong.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtMoTaCong.Location = new System.Drawing.Point(196, 120);
             this.txtMoTaCong.Name = "txtMoTaCong";
-            this.txtMoTaCong.Size = new System.Drawing.Size(198, 30);
+            this.txtMoTaCong.Size = new System.Drawing.Size(198, 35);
             this.txtMoTaCong.TabIndex = 18;
             // 
             // btnThemCong
@@ -339,6 +346,7 @@
             this.btnThemCong.Text = "Thêm";
             this.btnThemCong.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnThemCong.UseVisualStyleBackColor = false;
+            this.btnThemCong.Click += new System.EventHandler(this.btnThemCong_Click);
             // 
             // txtMaCC
             // 
@@ -346,7 +354,7 @@
             this.txtMaCC.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtMaCC.Location = new System.Drawing.Point(196, 66);
             this.txtMaCC.Name = "txtMaCC";
-            this.txtMaCC.Size = new System.Drawing.Size(198, 30);
+            this.txtMaCC.Size = new System.Drawing.Size(198, 35);
             this.txtMaCC.TabIndex = 17;
             // 
             // label1
@@ -355,7 +363,7 @@
             this.label1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(33, 182);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(62, 22);
+            this.label1.Size = new System.Drawing.Size(73, 27);
             this.label1.TabIndex = 13;
             this.label1.Text = "Hệ số:";
             // 
@@ -365,7 +373,7 @@
             this.label2.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(33, 128);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(67, 22);
+            this.label2.Size = new System.Drawing.Size(81, 27);
             this.label2.TabIndex = 14;
             this.label2.Text = "Mô tả: ";
             // 
@@ -375,7 +383,7 @@
             this.txtHeSo.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtHeSo.Location = new System.Drawing.Point(239, 180);
             this.txtHeSo.Name = "txtHeSo";
-            this.txtHeSo.Size = new System.Drawing.Size(155, 30);
+            this.txtHeSo.Size = new System.Drawing.Size(155, 35);
             this.txtHeSo.TabIndex = 16;
             // 
             // label3
@@ -384,13 +392,13 @@
             this.label3.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(33, 74);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(135, 22);
+            this.label3.Size = new System.Drawing.Size(166, 27);
             this.label3.TabIndex = 15;
             this.label3.Text = "Mã chấm công: ";
             // 
             // FormQuanLyThangCong
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(234)))), ((int)(((byte)(220)))));
             this.ClientSize = new System.Drawing.Size(1060, 805);
