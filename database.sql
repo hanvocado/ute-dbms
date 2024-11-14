@@ -349,7 +349,8 @@ GO
 INSERT INTO LoaiTaiKhoan (MaLoai, Ten)
 VALUES
 ('LTK01', 'Admin'),
-('LTK02', 'User');
+('LTK02', 'User'),
+('LTK03', 'NhanVien');
 GO
 -- Thêm dữ liệu cho bảng TaiKhoan
 INSERT INTO TaiKhoan (TenDangNhap, MatKhau, MaLoai)
