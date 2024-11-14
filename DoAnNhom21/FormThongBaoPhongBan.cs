@@ -23,7 +23,7 @@ namespace DoAnNhom21
             InitializeComponent();
             this.manv = manv;
         }
-        private void guna2Button1_Click(object sender, EventArgs e)
+        private void btnXemThongBao_Click(object sender, EventArgs e)
         {
             try
             {

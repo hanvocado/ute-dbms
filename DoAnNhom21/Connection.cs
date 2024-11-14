@@ -10,7 +10,12 @@ namespace DoAnNhom21
         public static string user;
         public static string pass;
 
-        public static string connectString = Properties.Settings.Default.ConnectionString;
+        // public static string connectString = Properties.Settings.Default.ConnectionString;
+        public static string connectString = Properties.Settings.Default.AuthConnStr;
+        //public static string connectString = @"Data Source = PHUC - PC\MSSQLSERVER22;Initial Catalog = QLNSG21_Data;  Encrypt=False;" + ";User Id=" + user + ";Password=" + pass;
+        // public static string connectString = @"Data Source=PHUC-PC\MSSQLSERVER22;Initial Catalog=QLNSG21_Data;Encrypt=False;User Id=nv01;Password=password1";
+
+       // public static string connectString = string.Format(@"Data Source=PHUC-PC\MSSQLSERVER22;Initial Catalog=QLNSG21_Data;Encrypt=False;User Id={0};Password={1}", user, pass);
 
         public static string GetConnectionString(string user, string pass)
         {
@@ -72,7 +77,6 @@ namespace DoAnNhom21
             connectString = GetConnectionString(user, pass);
             using (SqlConnection connection = new SqlConnection(connectString))
             {
-                MessageBox.Show(connectString);
                 command.Connection = connection;
                 connection.Open();
                 command.ExecuteNonQuery();

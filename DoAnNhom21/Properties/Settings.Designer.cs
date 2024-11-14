@@ -33,5 +33,15 @@ namespace DoAnNhom21.Properties {
                 return ((string)(this["ConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=PHUC-PC\\MSSQLSERVER22;Initial Catalog=QLNSG21_Data;Encrypt=False;")]
+        public string AuthConnStr {
+            get {
+                return ((string)(this["AuthConnStr"]));
+            }
+        }
     }
 }

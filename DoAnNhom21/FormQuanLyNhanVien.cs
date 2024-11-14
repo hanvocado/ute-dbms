@@ -80,7 +80,7 @@ namespace DoAnNhom21
             {
                 using (SqlConnection connection = new SqlConnection(Connection.connectString))
                 {
-                    string thamnien = "SELECT dbo.TinhThamNien(@MaNV)";
+                    string thamnien = "SELECT dbo.ft_TinhThamNien(@MaNV)";
                     using (SqlCommand command = new SqlCommand(thamnien, connection))
                     {
                         command.Parameters.AddWithValue("@MaNV", txtMaNhanVien.Text);
