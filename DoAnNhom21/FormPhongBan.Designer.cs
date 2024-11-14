@@ -250,7 +250,7 @@ namespace DoAnNhom21
             this.btnThongBao.Text = "Thông Báo";
             this.btnThongBao.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnThongBao.UseVisualStyleBackColor = false;
-            this.btnThongBao.Click += new System.EventHandler(this.btnThongBao_Click_1);
+            this.btnThongBao.Click += new System.EventHandler(this.btnThongBao_Click);
             // 
             // btnLamMoi
             // 
@@ -264,6 +264,7 @@ namespace DoAnNhom21
             this.btnLamMoi.Text = "Làm mới";
             this.btnLamMoi.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnLamMoi.UseVisualStyleBackColor = false;
+            this.btnLamMoi.Click += new System.EventHandler(this.btnLamMoi_Click);
             // 
             // btnXemThongTin
             // 
@@ -277,6 +278,7 @@ namespace DoAnNhom21
             this.btnXemThongTin.Text = "Xem thông tin chi tiết";
             this.btnXemThongTin.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnXemThongTin.UseVisualStyleBackColor = false;
+            this.btnXemThongTin.Click += new System.EventHandler(this.btnXemThongTin_Click);
             // 
             // btnThem
             // 
@@ -291,6 +293,7 @@ namespace DoAnNhom21
             this.btnThem.Text = "Thêm";
             this.btnThem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnThem.UseVisualStyleBackColor = false;
+            this.btnThem.Click+= new System.EventHandler(this.btnThem_Click);
             // 
             // btnXoa
             // 
@@ -304,6 +307,7 @@ namespace DoAnNhom21
             this.btnXoa.Text = "Xoá";
             this.btnXoa.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnXoa.UseVisualStyleBackColor = false;
+            this.btnXoa.Click+= new System.EventHandler(this.btnXoa_Click);
             // 
             // btnThoat
             // 
@@ -317,6 +321,7 @@ namespace DoAnNhom21
             this.btnThoat.Text = "Thoát";
             this.btnThoat.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnThoat.UseVisualStyleBackColor = false;
+            this.btnThoat.Click += new System.EventHandler(this.btnThoat_Click);
             // 
             // btnSua
             // 
@@ -330,6 +335,7 @@ namespace DoAnNhom21
             this.btnSua.Text = "Sửa";
             this.btnSua.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSua.UseVisualStyleBackColor = false;
+            this.btnSua.Click += new System.EventHandler(this.btnSua_Click);
             // 
             // FormPhongBan
             // 

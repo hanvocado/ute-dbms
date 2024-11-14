@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security.Cryptography;
 using System.Windows.Forms;
 
 namespace DoAnNhom21
@@ -51,7 +52,6 @@ namespace DoAnNhom21
             this.txtTien = new System.Windows.Forms.TextBox();
             this.txtLyDo = new System.Windows.Forms.TextBox();
             this.guna2GroupBox2 = new Guna.UI2.WinForms.Guna2GroupBox();
-            this.btnLoc = new System.Windows.Forms.Button();
             this.btnSuaTPNV = new System.Windows.Forms.Button();
             this.btnXoaTPNV = new System.Windows.Forms.Button();
             this.btnThemTPNV = new System.Windows.Forms.Button();
@@ -68,6 +68,10 @@ namespace DoAnNhom21
             this.cbbMaNV = new System.Windows.Forms.ComboBox();
             this.lblNgay = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.btnXemThuongHayPhat = new System.Windows.Forms.Button();
+            this.rbPhat = new System.Windows.Forms.RadioButton();
+            this.rbThuong = new System.Windows.Forms.RadioButton();
+            this.panelFormCTThuongPhat = new System.Windows.Forms.Panel();
             this.guna2GroupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTP)).BeginInit();
             this.guna2GroupBox2.SuspendLayout();
@@ -121,7 +125,7 @@ namespace DoAnNhom21
             this.btnLamMoi.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.btnLamMoi.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLamMoi.Font = new System.Drawing.Font("Times New Roman", 12F);
-            this.btnLamMoi.Location = new System.Drawing.Point(640, 581);
+            this.btnLamMoi.Location = new System.Drawing.Point(57, 581);
             this.btnLamMoi.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnLamMoi.Name = "btnLamMoi";
             this.btnLamMoi.Size = new System.Drawing.Size(257, 40);
@@ -136,7 +140,7 @@ namespace DoAnNhom21
             this.btnThoat.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.btnThoat.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnThoat.Font = new System.Drawing.Font("Times New Roman", 12F);
-            this.btnThoat.Location = new System.Drawing.Point(926, 581);
+            this.btnThoat.Location = new System.Drawing.Point(344, 581);
             this.btnThoat.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnThoat.Name = "btnThoat";
             this.btnThoat.Size = new System.Drawing.Size(257, 40);
@@ -297,7 +301,6 @@ namespace DoAnNhom21
             // 
             this.guna2GroupBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(218)))), ((int)(((byte)(81)))), ((int)(((byte)(57)))));
             this.guna2GroupBox2.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(218)))), ((int)(((byte)(81)))), ((int)(((byte)(57)))));
-            this.guna2GroupBox2.Controls.Add(this.btnLoc);
             this.guna2GroupBox2.Controls.Add(this.btnSuaTPNV);
             this.guna2GroupBox2.Controls.Add(this.btnXoaTPNV);
             this.guna2GroupBox2.Controls.Add(this.btnThemTPNV);
@@ -319,45 +322,33 @@ namespace DoAnNhom21
             this.guna2GroupBox2.TabIndex = 39;
             this.guna2GroupBox2.Text = " CHI TIẾT THƯỞNG PHẠT";
             // 
-            // btnLoc
-            // 
-            this.btnLoc.BackColor = System.Drawing.Color.LavenderBlush;
-            this.btnLoc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLoc.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.btnLoc.Location = new System.Drawing.Point(412, 506);
-            this.btnLoc.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.btnLoc.Name = "btnLoc";
-            this.btnLoc.Size = new System.Drawing.Size(112, 39);
-            this.btnLoc.TabIndex = 61;
-            this.btnLoc.Text = "Lọc";
-            this.btnLoc.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnLoc.UseVisualStyleBackColor = false;
-            // 
             // btnSuaTPNV
             // 
             this.btnSuaTPNV.BackColor = System.Drawing.Color.LavenderBlush;
             this.btnSuaTPNV.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSuaTPNV.Font = new System.Drawing.Font("Times New Roman", 12F);
-            this.btnSuaTPNV.Location = new System.Drawing.Point(285, 506);
+            this.btnSuaTPNV.Location = new System.Drawing.Point(388, 506);
             this.btnSuaTPNV.Name = "btnSuaTPNV";
             this.btnSuaTPNV.Size = new System.Drawing.Size(103, 39);
             this.btnSuaTPNV.TabIndex = 58;
             this.btnSuaTPNV.Text = "Sửa";
             this.btnSuaTPNV.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSuaTPNV.UseVisualStyleBackColor = false;
+            this.btnSuaTPNV.Click += new System.EventHandler(this.btnSuaTPNV_Click);
             // 
             // btnXoaTPNV
             // 
             this.btnXoaTPNV.BackColor = System.Drawing.Color.LavenderBlush;
             this.btnXoaTPNV.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnXoaTPNV.Font = new System.Drawing.Font("Times New Roman", 12F);
-            this.btnXoaTPNV.Location = new System.Drawing.Point(155, 506);
+            this.btnXoaTPNV.Location = new System.Drawing.Point(238, 506);
             this.btnXoaTPNV.Name = "btnXoaTPNV";
             this.btnXoaTPNV.Size = new System.Drawing.Size(103, 39);
             this.btnXoaTPNV.TabIndex = 59;
             this.btnXoaTPNV.Text = "Xoá";
             this.btnXoaTPNV.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnXoaTPNV.UseVisualStyleBackColor = false;
+            this.btnXoaTPNV.Click += new System.EventHandler(this.btnXoaTPNV_Click);
             // 
             // btnThemTPNV
             // 
@@ -365,13 +356,14 @@ namespace DoAnNhom21
             this.btnThemTPNV.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnThemTPNV.Font = new System.Drawing.Font("Times New Roman", 12F);
             this.btnThemTPNV.ForeColor = System.Drawing.Color.Black;
-            this.btnThemTPNV.Location = new System.Drawing.Point(21, 506);
+            this.btnThemTPNV.Location = new System.Drawing.Point(90, 506);
             this.btnThemTPNV.Name = "btnThemTPNV";
             this.btnThemTPNV.Size = new System.Drawing.Size(103, 39);
             this.btnThemTPNV.TabIndex = 60;
             this.btnThemTPNV.Text = "Thêm";
             this.btnThemTPNV.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnThemTPNV.UseVisualStyleBackColor = false;
+            this.btnThemTPNV.Click += new System.EventHandler(this.btnThemTPNV_Click);
             // 
             // txtNgayTP
             // 
@@ -500,12 +492,68 @@ namespace DoAnNhom21
             this.label2.TabIndex = 45;
             this.label2.Text = "Mã thưởng phạt:";
             // 
+            // btnXemThuongHayPhat
+            // 
+            this.btnXemThuongHayPhat.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
+            this.btnXemThuongHayPhat.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnXemThuongHayPhat.Font = new System.Drawing.Font("Times New Roman", 12F);
+            this.btnXemThuongHayPhat.Location = new System.Drawing.Point(655, 581);
+            this.btnXemThuongHayPhat.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnXemThuongHayPhat.Name = "btnXemThuongHayPhat";
+            this.btnXemThuongHayPhat.Size = new System.Drawing.Size(257, 40);
+            this.btnXemThuongHayPhat.TabIndex = 40;
+            this.btnXemThuongHayPhat.Text = "Lọc loại thưởng/phạt";
+            this.btnXemThuongHayPhat.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnXemThuongHayPhat.UseVisualStyleBackColor = false;
+            this.btnXemThuongHayPhat.Click += new System.EventHandler(this.btnXemThuongHayPhat_Click);
+            // 
+            // rbPhat
+            // 
+            this.rbPhat.AutoSize = true;
+            this.rbPhat.Location = new System.Drawing.Point(1060, 590);
+            this.rbPhat.Name = "rbPhat";
+            this.rbPhat.Size = new System.Drawing.Size(55, 20);
+            this.rbPhat.TabIndex = 42;
+            this.rbPhat.TabStop = true;
+            this.rbPhat.Text = "Phạt";
+            this.rbPhat.UseVisualStyleBackColor = true;
+            this.rbPhat.CheckedChanged += new System.EventHandler(this.rbThuongPhat_CheckedChanged);
+            // 
+            // rbThuong
+            // 
+            this.rbThuong.AutoSize = true;
+            this.rbThuong.Location = new System.Drawing.Point(940, 590);
+            this.rbThuong.Name = "rbThuong";
+            this.rbThuong.Size = new System.Drawing.Size(74, 20);
+            this.rbThuong.TabIndex = 41;
+            this.rbThuong.TabStop = true;
+            this.rbThuong.Text = "Thưởng";
+            this.rbThuong.UseVisualStyleBackColor = true;
+            this.rbThuong.CheckedChanged += new System.EventHandler(this.rbThuongPhat_CheckedChanged);
+            // 
+            // panelFormCTThuongPhat
+            // 
+            this.panelFormCTThuongPhat.AccessibleRole = System.Windows.Forms.AccessibleRole.Column;
+            this.panelFormCTThuongPhat.AllowDrop = true;
+            this.panelFormCTThuongPhat.AutoSize = true;
+            this.panelFormCTThuongPhat.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelFormCTThuongPhat.Location = new System.Drawing.Point(57, 244);
+            this.panelFormCTThuongPhat.Name = "panelFormCTThuongPhat";
+            this.panelFormCTThuongPhat.Padding = new System.Windows.Forms.Padding(5);
+            this.panelFormCTThuongPhat.Size = new System.Drawing.Size(1142, 325);
+            this.panelFormCTThuongPhat.TabIndex = 0;
+            this.panelFormCTThuongPhat.Visible = false;
+            // 
             // FormThuongPhat
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(234)))), ((int)(((byte)(220)))));
             this.ClientSize = new System.Drawing.Size(1256, 622);
+            this.Controls.Add(this.panelFormCTThuongPhat);
+            this.Controls.Add(this.rbPhat);
+            this.Controls.Add(this.rbThuong);
+            this.Controls.Add(this.btnXemThuongHayPhat);
             this.Controls.Add(this.btnLamMoi);
             this.Controls.Add(this.btnThoat);
             this.Controls.Add(this.guna2GroupBox2);
@@ -522,6 +570,7 @@ namespace DoAnNhom21
             this.guna2GroupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCTTP)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -547,7 +596,6 @@ namespace DoAnNhom21
         private TextBox txtTien;
         private TextBox txtLyDo;
         private Guna.UI2.WinForms.Guna2GroupBox guna2GroupBox2;
-        private Button btnLoc;
         private Button btnSuaTPNV;
         private Button btnXoaTPNV;
         private Button btnThemTPNV;
@@ -564,5 +612,9 @@ namespace DoAnNhom21
         private ComboBox cbbMaNV;
         private Label lblNgay;
         private Label label2;
+        private Button btnXemThuongHayPhat;
+        private RadioButton rbThuong;
+        private RadioButton rbPhat;
+        private Panel panelFormCTThuongPhat;
     }
 }

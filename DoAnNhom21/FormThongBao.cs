@@ -15,10 +15,7 @@ namespace DoAnNhom21
     {
         public FormThongBao()
         {
-
             InitializeComponent();
-            
-
         }
         private void FormThongBao_Load(object sender, EventArgs e)
         {
@@ -39,7 +36,7 @@ namespace DoAnNhom21
         {
             try
             {
-                SqlCommand cmd = new SqlCommand("ThemThongBao");
+                SqlCommand cmd = new SqlCommand("sp_ThemThongBao");
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@TieuDe", txtTieuDe.Text);
                 cmd.Parameters.AddWithValue("@NoiDung", txtNoiDung.Text);
@@ -69,7 +66,7 @@ namespace DoAnNhom21
         {
             try
             {
-                SqlCommand cmd = new SqlCommand("ThemThongBao");
+                SqlCommand cmd = new SqlCommand("sp_CapNhatThongBao");
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@TieuDe", txtTieuDe.Text);
                 cmd.Parameters.AddWithValue("@NoiDung", txtNoiDung.Text);
@@ -90,7 +87,7 @@ namespace DoAnNhom21
         {
             try
             {
-                SqlCommand cmd = new SqlCommand("XoaThongBao");
+                SqlCommand cmd = new SqlCommand("sp_XoaThongBao");
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@Id", cbbId.Text);
                 Connection.ExecuteCommand(cmd);

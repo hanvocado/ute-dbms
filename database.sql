@@ -101,6 +101,7 @@ CREATE TABLE ThuongPhat (
     LyDo NVARCHAR(MAX) NOT NULL
 );
 GO
+
 CREATE TABLE ctThuongPhat (
     MaNV NVARCHAR(10) NOT NULL,
     MaThuongPhat NVARCHAR(10) NOT NULL,
@@ -286,10 +287,10 @@ GO
 -- Thêm dữ liệu cho bảng ThuongPhat
 INSERT INTO ThuongPhat (MaThuongPhat, Loai, SoTien, LyDo)
 VALUES
-('TP01', 'Thưởng', 5000000, N'Hoàn thành công việc xuất sắc'),
-('TP02', 'Phạt', 1000000, N'Đi làm muộn'),
-('TP03', 'Thưởng', 2000000, N'Đóng góp ý tưởng tốt'),
-('TP04', 'Phạt', 500000, N'Không hoàn thành công việc đúng hạn');
+('TP01', N'Thưởng', 5000000, N'Hoàn thành công việc xuất sắc'),
+('TP02', N'Phạt', 1000000, N'Đi làm muộn'),
+('TP03', N'Thưởng', 2000000, N'Đóng góp ý tưởng tốt'),
+('TP04', N'Phạt', 500000, N'Không hoàn thành công việc đúng hạn');
 -- Thêm dữ liệu cho bảng ctThuongPhat
 -- nếu là 05 thì sai
 GO
@@ -374,7 +375,13 @@ VALUES
 ('NV03', 'PC03', '032023', 20, 400000),
 ('NV04', 'PC01', '042023', 25, 200000);
 GO
-
+-- Chèn dữ liệu cho bảng Thông báo
+INSERT INTO ThongBao (TieuDe, NoiDung, MaPB, NgayGui)
+VALUES 
+('Thông báo 1', 'Nội dung thông báo 1', 'PB01', GETDATE()),
+('Thông báo 2', 'Nội dung thông báo 2', 'PB01', GETDATE()),
+('Thông báo 3', 'Nội dung thông báo 3', 'PB02', GETDATE());
+GO
 -- TRIGGER --
 CREATE OR ALTER TRIGGER tr_TaiKhoan_CapNhatMatKhauDangNhap
 ON TaiKhoan
@@ -382,7 +389,6 @@ AFTER UPDATE
 AS
 BEGIN
   SET NOCOUNT ON;
- 
   IF UPDATE(MatKhau)
   BEGIN
 	DECLARE @TenDangNhap varchar(10);
@@ -403,9 +409,11 @@ ON NhanVien
 AFTER INSERT
 AS
 BEGIN
+
 	INSERT INTO TaiKhoan(TenDangNhap, MatKhau, MaLoai)
-	VALUES (i.MaNV, i.MaNV, 'NV')
-	FROM inserted i;
+    SELECT i.MaNV, i.MaNV, 'NV'
+    FROM inserted i;
+
 END;
 GO
 
@@ -505,7 +513,9 @@ BEGIN
         	WHERE PhongBan.MaPB IN (SELECT MaPB FROM inserted);
     	END
 END;
-
+GO
+SELECT * FROM PhongBan;
+SELECT * FROM NhanVien;
 GO
 
 CREATE OR ALTER TRIGGER tr_AddctChamCong
@@ -581,7 +591,7 @@ AS NgayBatDauHopDong, hd.NgayKT AS NgayKetThucHopDong FROM NhanVien nv JOIN HopD
 GO
 
 CREATE OR ALTER VIEW vw_ChamCongNhanVien AS
-SELECT nv.MaNV as MaNhanVien, nv.Ho as Ho, nv.Ten as Ten, cc.TinhTrang as TinhTrang, ctcc.NgayChamCong
+SELECT nv.MaNV as MaNhanVien, nv.Ho as Ho, nv.Ten as Ten, ctcc.NgayChamCong
 FROM ctChamCong ctcc
 join ChamCong cc on ctcc.MaCC = cc.MaCC
 join NhanVien nv on nv.MaNV = ctcc.MaNV;
@@ -595,7 +605,7 @@ join NhanVien nv on cttp.MaNV = nv.MaNV;
 GO
 
 CREATE OR ALTER VIEW vw_PhuCapNhanVien AS
-SELECT nv.MaNV as MaNhanVien, nv.Ho as Ho, nv.Ten as Ten,  pc.Loai as Loai, ctpc.SoTien as TienPhuCap, ctpc.NgayPhuCap  as NgayPhuCap
+SELECT nv.MaNV as MaNhanVien, nv.Ho as Ho, nv.Ten as Ten,  pc.LoaiPhuCap as Loai, ctpc.SoTien as TienPhuCap, ctpc.NgayPhuCap  as NgayPhuCap
 FROM ctPhuCap ctpc
 join PhuCap pc on ctpc.MaPhuCap = pc.MaPhuCap
 join NhanVien nv on ctpc.MaNV = nv.MaNV;
@@ -777,28 +787,95 @@ BEGIN
    	WHERE MaPB = @MaPB;
 END
 GO
-
+-- Pro
 CREATE OR ALTER  PROCEDURE sp_XemThongTinChiTietPhongBan
     @MaPB nvarchar(10)
 AS
 BEGIN
     SELECT * FROM vw_ThongTinPhongBan WHERE MaPB = @MaPB;
 END;
-
 GO
+--- Hàm XemChiTietPhongBan - Multible statement table-valued có para
+CREATE OR ALTER FUNCTION dbo.ft_XemChiTietPhongBan(@MaPB nvarchar(10))
+RETURNS @PhongBanChiTiet TABLE (
+    MaPB nvarchar(10),
+    MaTrP nvarchar(10),
+    SoNV INT,
+    SoNVNam INT,
+    SoNVNu INT
+)
+AS
+BEGIN
+    INSERT INTO @PhongBanChiTiet (MaPB, MaTrP, SoNV, SoNVNam, SoNVNu)
+    SELECT 
+        pb.MaPB, 
+        pb.MaTrP, 
+        COUNT(nv.MaNV) AS SoNV, 
+        COUNT(CASE WHEN nv.GioiTinh = 'Nam' THEN 1 END) AS SoNVNam,
+        COUNT(CASE WHEN nv.GioiTinh = 'Nu' THEN 1 END) AS SoNVNu
+    FROM 
+        PhongBan pb 
+    JOIN 
+		ThongBao tb ON tb.MaPB = pb.MaPB
+	JOIN
+        NhanVien nv ON pb.MaPB = nv.MaPB
+    WHERE 
+        pb.MaPB = @MaPB
+    GROUP BY 
+        pb.MaPB, pb.MaTrP;
+
+    RETURN;
+END;
+SELECT * FROM dbo.ft_XemChiTietPhongBan('PB01')
+
+SELECT 
+        *
+    FROM 
+        PhongBan pb 
+    LEFT JOIN 
+		ThongBao tb ON tb.MaPB = pb.MaPB
+	JOIN
+        NhanVien nv ON pb.MaPB = nv.MaPB
+    WHERE 
+        pb.MaPB = 'PB01'
+    GROUP BY 
+        pb.MaPB, pb.MaTrP;
+GO
+-- Hàm nhận thông báo 
+CREATE OR ALTER FUNCTION dbo.ft_NhanVienNhanThongBao(@MaNV nvarchar(10))
+RETURNS @ThongBaoNhanVien TABLE (
+	TieuDe nvarchar(100),
+	NoiDung nvarchar(MAX),
+	NgayGui DATE
+	)
+AS
+BEGIN
+    INSERT INTO @ThongBaoNhanVien (TieuDe, NoiDung, NgayGui)
+    SELECT tb.TieuDe, tb.NoiDung, tb.NgayGui
+	FROM 
+        PhongBan pb 
+    LEFT JOIN 
+		ThongBao tb ON tb.MaPB = pb.MaPB
+	JOIN
+        NhanVien nv ON pb.MaPB = nv.MaPB
+    WHERE 
+        nv.MaNV = @MaNV
+	RETURN;
+END;
+GO
+SELECT * FROM dbo.ft_NhanVienNhanThongBao('NV03')
+	
 
 -- THONG BAO PRECEDURE --
-
 CREATE OR ALTER PROCEDURE sp_ThemThongBao
     @TieuDe NVARCHAR(100),
     @NoiDung NVARCHAR(MAX),
-    @MaPB nvarchar(10),
+    @MaPB NVARCHAR(10),
     @NgayGui DATETIME
 AS
 BEGIN
     INSERT INTO ThongBao (TieuDe, NoiDung, MaPB, NgayGui)
-    VALUES (@TieuDe, @NoiDung, @MaPB, @NgayGui)
-	WHERE @MaPB = MaPB;
+    VALUES (@TieuDe, @NoiDung, @MaPB, @NgayGui);
 END;
 GO
 
@@ -896,21 +973,17 @@ BEGIN
     WHERE MaThuongPhat = @MaThuongPhat
 END
 GO
-
+-- PROCEDURE CÓ TRANSACTION:
 CREATE OR ALTER PROCEDURE sp_CapNhatNgayThangThuongPhat
     @MaNV NVARCHAR(10),
     @MaThuongPhat NVARCHAR(10),	 
     @MaThang NVARCHAR(6),
     @NgayThuongPhat INT
 AS
-BEGIN
-    
+BEGIN 
     BEGIN TRANSACTION;
-
-    
     DECLARE @OldMaThang NVARCHAR(6);
     DECLARE @OldNgayThuongPhat INT;
-
     SELECT @OldMaThang = MaThang, @OldNgayThuongPhat = NgayThuongPhat
     FROM ctThuongPhat
     WHERE MaThuongPhat = @MaThuongPhat AND MaNV = @MaNV;
@@ -956,25 +1029,40 @@ BEGIN
 	WHERE MaNV=@MaNV and NgayThuongPhat = @NgayThuongPhat and MaThuongPhat = @MaTP and MaThang = @MaThang
 END
 GO
-
-CREATE OR ALTER PROCEDURE sp_LocctThuongPhat
-    @MaNV nvarchar(10)
+-- Hàm trả về 1 bảng có tham số - Inline table-valued
+CREATE OR ALTER FUNCTION dbo.ft_LocThuongPhatNhanVien(@MaNV NVARCHAR(10), @Loai NVARCHAR(50))
+RETURNS TABLE
 AS
-BEGIN
-	IF NOT EXISTS (SELECT 1 FROM ctThuongPhat WHERE MaNV = @MaNV)
-    BEGIN
-        -- Nếu mã nhân viên không tồn tại, trả về thông báo lỗi
-        RAISERROR('Mã nhân viên không tồn tại.', 16, 1);
-        RETURN;
-    END
-	ELSE
-	BEGIN
-		SELECT *
-		FROM ctThuongPhat
-		WHERE MaNV = @MaNV
-	END
-END
+RETURN 
+(
+    SELECT 
+        nv.MaNV AS MaNhanVien, 
+        nv.Ho AS Ho, 
+        nv.Ten AS Ten,  
+        tp.Loai AS Loai, 
+        tp.LyDo AS LyDo, 
+        tp.SoTien AS TienThuongPhat, 
+        cttp.MaThang AS MaThang,
+        cttp.NgayThuongPhat AS NgayThuongPhat,
+        cv.TenCV AS TenChucVu,
+        pb.TenPB AS TenPhongBan
+    FROM 
+        ctThuongPhat cttp
+    JOIN 
+        ThuongPhat tp ON cttp.MaThuongPhat = tp.MaThuongPhat
+    JOIN 
+        NhanVien nv ON cttp.MaNV = nv.MaNV
+    LEFT JOIN 
+        ChucVu cv ON nv.MaCV = cv.MaCV
+    LEFT JOIN 
+        PhongBan pb ON nv.MaPB = pb.MaPB
+    WHERE 
+        tp.Loai = @Loai AND nv.MaNV = @MaNV
+);
 GO
+SELECT * FROM dbo.ft_LocThuongPhatNhanVien('NV01', N'Thưởng')
+
+
 
 -- QUAN LY CHUC VU --
 
@@ -1611,6 +1699,8 @@ BEGIN
     SELECT * FROM @ThuongPhatThang; 
     SELECT * FROM @BaoHiem; 
 END;
+GO
+EXEC sp_TinhLuongTheoThangTraVeNhieuBang @MaThang = '032023'
 
 --------
 INSERT INTO ctChamCong (MaNV, MaCC, MaThang, NgayChamCong)
@@ -1686,6 +1776,10 @@ END;
 
 GO
 
+
+
+
 SELECT dbo.ft_SoNgayCongChuan('122024') AS SoNgayLamViec;
 
 DElete from ctChamCong WHERE MaNV = 'NV02';
+

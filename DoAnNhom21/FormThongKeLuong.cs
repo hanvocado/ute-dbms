@@ -12,16 +12,7 @@ namespace DoAnNhom21
         {
             InitializeComponent();
         }
-        private Form currentFormChild;
-        private void OpenForm(Form form)
-        {
-            if (currentFormChild != null)
-            {
-                currentFormChild.Close();
-            }
-            currentFormChild = form;
-            form.Show();
-        }
+        
         void load()
         {
             SqlCommand cmd = new SqlCommand("sp_GetThang");
@@ -50,7 +41,6 @@ namespace DoAnNhom21
         private void btnXemChiTiet_Click(object sender, EventArgs e)
         {
             FormChiTietLuong formChiTiet = new FormChiTietLuong();
-            formChiTiet.MaThang = (string)cbbMaThang.SelectedValue; 
             formChiTiet.Show(); 
         }
 
