@@ -11,6 +11,7 @@ namespace DoAnNhom21
         public static string pass;
 
         public static string connectString = Properties.Settings.Default.ConnectionString;
+
         public static string GetConnectionString(string user, string pass)
         {
             return connectString + ";User Id=" + user + ";Password=" + pass;
@@ -71,6 +72,7 @@ namespace DoAnNhom21
             connectString = GetConnectionString(user, pass);
             using (SqlConnection connection = new SqlConnection(connectString))
             {
+                MessageBox.Show(connectString);
                 command.Connection = connection;
                 connection.Open();
                 command.ExecuteNonQuery();

@@ -86,5 +86,20 @@ namespace DoAnNhom21
         {
             Close();
         }
+
+        private void guna2ControlBox1_Click_1(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+        private void txtPassword_KeyDown(object sender, KeyEventArgs e)
+        {
+            
+            if (e.KeyCode == Keys.Enter)
+            {
+                btnLogin.PerformClick();
+                e.SuppressKeyPress = true; // Ngăn chặn âm thanh 'ding' khi nhấn Enter
+            }
+        }
+
     }
 }
