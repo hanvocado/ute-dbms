@@ -20,21 +20,22 @@ namespace DoAnNhom21
             if (string.IsNullOrEmpty(tenDangNhap) || string.IsNullOrEmpty(matKhau))
             {
                 MessageBox.Show("Vui lòng nhập đầy đủ thông tin!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
                 return;
             }
-
-     
-
-
-
-
+            Connection.user = tenDangNhap;
+            Connection.pass = matKhau;
+           // Connection.connectString = 
+           //     string.Format(@"Data Source=PHUC-PC\MSSQLSERVER22;Initial Catalog=QLNSG21_Data;Encrypt=False;User Id={0};Password={1}", tenDangNhap, matKhau);
+           Connection.connectString = Connection.GetConnectionString(tenDangNhap,matKhau);
+            
             // Truy vấn dữ liệu từ cơ sở dữ liệu
-            using (SqlConnection conn = Connection.getConnection())
+            using (SqlConnection conn = new SqlConnection(Connection.connectString))
             {
                 try
                 {
                     conn.Open();
-
+                   
                     // Câu truy vấn SQL để lấy dữ liệu từ bảng taikhoan
                     string query = "SELECT MaLoai FROM taikhoan WHERE tendangnhap = @tendangnhap AND matkhau  = @matkhau";
 
@@ -51,6 +52,7 @@ namespace DoAnNhom21
 
                             string loaiTaiKhoan = result.ToString();
                             SessionInfo.MaNV = tenDangNhap;
+                           
 
                             // Điều hướng sang form tương ứng dựa trên LoaiTaiKhoan
                             if (loaiTaiKhoan == "LTK01")
@@ -59,7 +61,7 @@ namespace DoAnNhom21
                                 FormTrangChuQuanLy form1 = new FormTrangChuQuanLy();
                                 form1.Show();
                             }
-                            else if (loaiTaiKhoan == "LTK02")
+                            else
                             {
                                 // Mở Form2
                                 FormTrangChuNhanVien form2 = new FormTrangChuNhanVien(tenDangNhap);
@@ -78,6 +80,7 @@ namespace DoAnNhom21
                 catch (Exception ex)
                 {
                     MessageBox.Show("Lỗi kết nối: " + ex.Message, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                   // MessageBox.Show(Connection.connectString);
                 }
             }
         }
@@ -86,5 +89,20 @@ namespace DoAnNhom21
         {
             Close();
         }
+
+        private void guna2ControlBox1_Click_1(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+        private void txtPassword_KeyDown(object sender, KeyEventArgs e)
+        {
+            
+            if (e.KeyCode == Keys.Enter)
+            {
+                btnLogin.PerformClick();
+                e.SuppressKeyPress = true; // Ngăn chặn âm thanh 'ding' khi nhấn Enter
+            }
+        }
+
     }
 }

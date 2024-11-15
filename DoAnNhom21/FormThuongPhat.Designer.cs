@@ -421,7 +421,6 @@ namespace DoAnNhom21
             this.dataGridViewCTTP.RowTemplate.Height = 24;
             this.dataGridViewCTTP.Size = new System.Drawing.Size(479, 255);
             this.dataGridViewCTTP.TabIndex = 52;
-            this.dataGridViewCTTP.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewCTTP_CellContentClick);
             // 
             // dataGridViewTextBoxColumn1
             // 

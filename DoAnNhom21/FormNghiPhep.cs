@@ -19,7 +19,7 @@ namespace DoAnNhom21
             cbbThang.Items.Clear();
             cbbThang.DataSource = new BindingSource(dtThang, null);
             cbbThang.DisplayMember = "MoTa";
-            //cbbThang.ValueMember = "MaThang";
+            cbbThang.ValueMember = "MaThang";
         }
 
         private void btnNghiPhep_Click(object sender, System.EventArgs e)

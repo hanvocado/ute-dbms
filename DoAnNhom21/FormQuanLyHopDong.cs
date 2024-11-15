@@ -22,7 +22,6 @@ namespace DoAnNhom21
         {
             string query = "select * from HopDong";
             this.dataGridViewHopDong.DataSource = Connection.LoadDataTable(query);
-
         }
         private void btnXemChiTiet_Click(object sender, EventArgs e)
         {
@@ -35,7 +34,7 @@ namespace DoAnNhom21
                 using (SqlConnection conn = Connection.getConnection())
                 {
                     conn.Open();
-                    SqlCommand cmd = new SqlCommand("AddHopDong");
+                    SqlCommand cmd = new SqlCommand("sp_AddHopDong");
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@MaNV", this.txtMaNhanVien.Text);
                     cmd.Parameters.AddWithValue("@MaHD", this.txtMaHopDong.Text);
@@ -60,7 +59,7 @@ namespace DoAnNhom21
         {
             try
             {
-                using (SqlCommand command = new SqlCommand("DeleteHopDong"))
+                using (SqlCommand command = new SqlCommand("sp_DeleteHopDong"))
                 {
                     command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@MaHD", this.txtMaHopDong.Text);
@@ -93,12 +92,13 @@ namespace DoAnNhom21
         {
             try
             {
-                using (SqlCommand command = new SqlCommand("UpdateHopDong"))
+                using (SqlCommand command = new SqlCommand("sp_UpdateHopDong"))
                 {
                     command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@MaHD", this.txtMaHopDong.Text);
                     command.Parameters.AddWithValue("@NgayBD", this.dtpNgayBd.Value);
                     command.Parameters.AddWithValue("@NgayKT", this.dtpNgayKt.Value);
+                    command.Parameters.AddWithValue("@LuongCoBan", this.txtLuongCoBan.Text);
                     Connection.ExecuteCommand(command);
                     MessageBox.Show("Cập nhật thành công");
 
@@ -121,6 +121,11 @@ namespace DoAnNhom21
         {
             FormHopDongNhanVien form = new FormHopDongNhanVien(this.txtMaNhanVien.Text);
             form.ShowDialog();
+        }
+
+        private void cbbMaNV_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txtLuongCoBan.Text = txtMaHopDong.Text = txtMaNhanVien.Text = "";
         }
     }
     }
