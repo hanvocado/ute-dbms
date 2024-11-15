@@ -62,7 +62,7 @@ namespace DoAnNhom21
             load();
         }
 
-        private void btnThem_Click_1(object sender, EventArgs e)
+        /*private void btnThem_Click_1(object sender, EventArgs e)
         {
             try
             {
@@ -81,7 +81,7 @@ namespace DoAnNhom21
             {
                 MessageBox.Show("Lỗi:" + ex.Message, "Thông báo lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
+        }*/
 
         private void btnXoa_Click_1(object sender, EventArgs e)
         {
@@ -109,7 +109,7 @@ namespace DoAnNhom21
         {
             try
             {
-                SqlCommand cmd = new SqlCommand("CapNhatThongBao");
+                SqlCommand cmd = new SqlCommand("sp_CapNhatThongBao");
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@Id", cbbId.Text);
                 cmd.Parameters.AddWithValue("@TieuDe", txtTieuDe.Text);

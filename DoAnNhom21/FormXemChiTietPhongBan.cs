@@ -24,7 +24,7 @@ namespace DoAnNhom21
             listView.FullRowSelect = true;
             listView.GridLines = true;
 
-            // Add columns to ListView
+            /*// Add columns to ListView
             foreach (DataColumn column in dataTable.Columns)
             {
                 listView.Columns.Add(column.ColumnName);
@@ -45,8 +45,12 @@ namespace DoAnNhom21
             foreach (ColumnHeader column in listView.Columns)
             {
                 column.Width = -2;
-            }
+            }*/
         }
 
+        private void btnThoat_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }
