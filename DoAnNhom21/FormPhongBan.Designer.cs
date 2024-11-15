@@ -357,6 +357,7 @@ namespace DoAnNhom21
             this.guna2GroupBox2.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.Load += new System.EventHandler(this.FormPhongBan_Load);
 
         }
 
