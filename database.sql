@@ -926,7 +926,9 @@ END;
 SELECT * FROM dbo.ft_XemChiTietPhongBan()
 
 GO
--- Hàm nhận thông báo 
+
+---//------
+-- Hàm nhận thông báo _ multi statement table-valued có para 
 CREATE OR ALTER FUNCTION dbo.ft_NhanVienNhanThongBao(@MaNV nvarchar(10))
 RETURNS @ThongBaoNhanVien TABLE (
 	TieuDe nvarchar(100),
@@ -948,10 +950,9 @@ BEGIN
 	RETURN;
 END;
 GO
-SELECT * FROM dbo.ft_NhanVienNhanThongBao('NV03')
-	
+SELECT * FROM dbo.ft_NhanVienNhanThongBao('NV03')	
 
--- THONG BAO PRECEDURE --
+-- QUAN LY THONG BAO PRECEDURE --
 CREATE OR ALTER PROCEDURE sp_ThemThongBao
     @TieuDe NVARCHAR(100),
     @NoiDung NVARCHAR(MAX),
