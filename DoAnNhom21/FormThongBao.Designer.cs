@@ -32,6 +32,7 @@ namespace DoAnNhom21
         private void InitializeComponent()
         {
             this.guna2GroupBox1 = new Guna.UI2.WinForms.Guna2GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.cbbId = new System.Windows.Forms.ComboBox();
             this.cbbMaPB = new System.Windows.Forms.ComboBox();
             this.dtpNgayGui = new System.Windows.Forms.DateTimePicker();
@@ -52,7 +53,6 @@ namespace DoAnNhom21
             this.btnXoa = new System.Windows.Forms.Button();
             this.btnThoat = new System.Windows.Forms.Button();
             this.btnSua = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.guna2GroupBox1.SuspendLayout();
             this.guna2GroupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewThongBao)).BeginInit();
@@ -81,6 +81,16 @@ namespace DoAnNhom21
             this.guna2GroupBox1.Size = new System.Drawing.Size(877, 225);
             this.guna2GroupBox1.TabIndex = 24;
             this.guna2GroupBox1.Text = "THÔNG BÁO ";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(45, 183);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(175, 22);
+            this.label1.TabIndex = 19;
+            this.label1.Text = "Xóa thông báo có Id:";
             // 
             // cbbId
             // 
@@ -199,6 +209,7 @@ namespace DoAnNhom21
             this.dataGridViewThongBao.RowTemplate.Height = 24;
             this.dataGridViewThongBao.Size = new System.Drawing.Size(839, 286);
             this.dataGridViewThongBao.TabIndex = 5;
+            this.dataGridViewThongBao.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewThongBao_CellContentClick);
             // 
             // Column1
             // 
@@ -302,16 +313,6 @@ namespace DoAnNhom21
             this.btnSua.UseVisualStyleBackColor = false;
             this.btnSua.Click += new System.EventHandler(this.btnSua_Click_1);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(45, 183);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(175, 22);
-            this.label1.TabIndex = 19;
-            this.label1.Text = "Xóa thông báo có Id:";
-            // 
             // FormThongBao
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
@@ -326,14 +327,13 @@ namespace DoAnNhom21
             this.Name = "FormThongBao";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Thông Báo";
-            this.Load += new System.EventHandler(this.FormThongBao_Load_1);
+            this.Load += new System.EventHandler(this.FormThongBao_Load);
             this.guna2GroupBox1.ResumeLayout(false);
             this.guna2GroupBox1.PerformLayout();
             this.guna2GroupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewThongBao)).EndInit();
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.Load += new System.EventHandler(this.FormThongBao_Load);
 
         }
 

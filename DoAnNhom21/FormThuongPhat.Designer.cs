@@ -191,6 +191,7 @@ namespace DoAnNhom21
             this.dataGridViewTP.RowTemplate.Height = 24;
             this.dataGridViewTP.Size = new System.Drawing.Size(478, 255);
             this.dataGridViewTP.TabIndex = 41;
+            this.dataGridViewTP.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewTP_CellContentClick);
             // 
             // Column1
             // 
@@ -421,6 +422,7 @@ namespace DoAnNhom21
             this.dataGridViewCTTP.RowTemplate.Height = 24;
             this.dataGridViewCTTP.Size = new System.Drawing.Size(479, 255);
             this.dataGridViewCTTP.TabIndex = 52;
+            this.dataGridViewCTTP.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewCTTP_CellContentClick);
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -549,7 +551,6 @@ namespace DoAnNhom21
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(234)))), ((int)(((byte)(220)))));
             this.ClientSize = new System.Drawing.Size(1256, 622);
-            this.Controls.Add(this.panelFormCTThuongPhat);
             this.Controls.Add(this.rbPhat);
             this.Controls.Add(this.rbThuong);
             this.Controls.Add(this.btnXemThuongHayPhat);
@@ -557,6 +558,7 @@ namespace DoAnNhom21
             this.Controls.Add(this.btnThoat);
             this.Controls.Add(this.guna2GroupBox2);
             this.Controls.Add(this.guna2GroupBox1);
+            this.Controls.Add(this.panelFormCTThuongPhat);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormThuongPhat";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

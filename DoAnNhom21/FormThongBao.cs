@@ -125,5 +125,16 @@ namespace DoAnNhom21
                 MessageBox.Show("Lỗi:" + ex.Message, "Thông báo lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void dataGridViewThongBao_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridViewRow row = dataGridViewThongBao.Rows[e.RowIndex];
+            cbbId.Text = row.Cells[0].Value.ToString();
+            txtTieuDe.Text = row.Cells[1].Value.ToString();
+            txtNoiDung.Text = row.Cells[2].Value.ToString();
+            cbbMaPB.Text = row.Cells[3].Value.ToString();
+            dtpNgayGui.Text = row.Cells[4].Value.ToString();
+
+        }
     }
 }

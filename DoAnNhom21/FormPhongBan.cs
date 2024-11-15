@@ -142,5 +142,14 @@ namespace DoAnNhom21
 
         }
 
+        private void dataGridViewPhongBan_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridViewRow row = dataGridViewPhongBan.Rows[e.RowIndex];
+            txtMaPB.Text = row.Cells[0].Value.ToString();
+            txtTenPB.Text = row.Cells[1].Value.ToString();
+            txtSDT.Text = row.Cells[2].Value.ToString();
+            cbbMaTrP.Text = row.Cells[3].Value.ToString();
+
+        }
     }
 }

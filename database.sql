@@ -698,6 +698,35 @@ GROUP BY
 GO
 
 -- PROCEDURE --
+
+-- CAP NHAT MAT KHAU--
+
+CREATE OR ALTER PROCEDURE sp_CapNhatMatKhauDangNhap
+    @TenDangNhap nvarchar(10),
+    @MatKhau nvarchar(255)
+AS
+BEGIN
+--Ngăn không cho trả về thông báo về số hàng bị ảnh hưởng bởi một câu lệnh T-SQL.--
+    SET NOCOUNT ON;
+
+    BEGIN TRANSACTION;
+
+    BEGIN TRY
+        -- Update the password in the TaiKhoan table
+        UPDATE TaiKhoan
+        SET MatKhau = @MatKhau
+        WHERE TenDangNhap = @TenDangNhap;
+
+        COMMIT TRANSACTION;
+    END TRY
+    BEGIN CATCH
+        ROLLBACK TRANSACTION;
+        THROW;
+    END CATCH
+END;
+GO
+EXEC sp_CapNhatMatKhauDangNhap @TenDangNhap = 'NV04', @MatKhau = 'NV04';
+GO
 -- QUAN LY NHAN VIEN --
 CREATE OR ALTER PROCEDURE sp_AddNhanVien
     @MaNV NVARCHAR(10),
@@ -1940,6 +1969,7 @@ GRANT EXECUTE ON sp_GetChamCongByMaNV to Employee;
 GRANT EXECUTE ON sp_AddctChamCong to Employee; 
 GRANT EXECUTE ON sp_TinhLuongTheoThang to Employee;
 GRANT EXECUTE ON sp_GetThang to Employee;
+
 
 
 
