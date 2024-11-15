@@ -36,7 +36,7 @@ namespace DoAnNhom21
         {
             try
             {
-                using (SqlCommand command = new SqlCommand("ThemPhongBan"))
+                using (SqlCommand command = new SqlCommand("sp_ThemPhongBan"))
                 {
                     command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@MaPB", this.txtMaPB.Text);
@@ -58,7 +58,7 @@ namespace DoAnNhom21
         {
             try
             {
-                using (SqlCommand command = new SqlCommand("CapNhatPhongBan"))
+                using (SqlCommand command = new SqlCommand("sp_CapNhatPhongBan"))
                 {
                     command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@MaPB", this.txtMaPB.Text);
@@ -68,6 +68,7 @@ namespace DoAnNhom21
 
                     Connection.ExecuteCommand(command);
                     MessageBox.Show("Sửa thành công!");
+                    load();
                 }
             }
             catch (SqlException ex)
@@ -79,7 +80,7 @@ namespace DoAnNhom21
         {
             try
             {
-                using (SqlCommand command = new SqlCommand("XoaPhongBan"))
+                using (SqlCommand command = new SqlCommand("sp_XoaPhongBan"))
                 {
                     command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@MaPB", this.txtMaPB.Text);
@@ -100,7 +101,7 @@ namespace DoAnNhom21
 
             try
             {
-                using (SqlCommand command = new SqlCommand("XemThongTinChiTietPhongBan"))
+                using (SqlCommand command = new SqlCommand("sp_XemThongTinChiTietPhongBan"))
                 {
                     
                     command.CommandType = CommandType.StoredProcedure;
