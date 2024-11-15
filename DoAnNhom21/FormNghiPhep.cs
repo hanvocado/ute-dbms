@@ -34,9 +34,9 @@ namespace DoAnNhom21
                     command.Parameters.AddWithValue("@NgayNghiPhep", this.txtNgayNghi.Text);
                     command.Parameters.AddWithValue("@GhiChu", this.txtLyDo.Text);
                     Connection.ExecuteCommand(command);
+                    load();
                     MessageBox.Show("Đăng ký nghỉ thành công");
                     txtNgayNghi.Text = txtLyDo.Text = "";
-                    load();
                 }
             }
             catch (Exception ex)
