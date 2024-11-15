@@ -97,5 +97,11 @@ namespace DoAnNhom21
                 OpenForm(new FormThongKeLuong());
             }
         }
+
+        private void btnThongKeLuong_Click(object sender, EventArgs e)
+        {
+            OpenForm(new FormThongKeLuong());
+        }
+
     }
 }

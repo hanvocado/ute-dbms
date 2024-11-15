@@ -349,15 +349,16 @@ GO
 INSERT INTO LoaiTaiKhoan (MaLoai, Ten)
 VALUES
 ('LTK01', 'Admin'),
-('LTK02', 'User');
+('LTK02', 'User'),
+('LTK03', 'NhanVien');
 GO
 -- Thêm dữ liệu cho bảng TaiKhoan
 INSERT INTO TaiKhoan (TenDangNhap, MatKhau, MaLoai)
 VALUES
 ('NV01', 'password1', 'LTK01'),
 ('NV02', 'password2', 'LTK02'),
-('NV03', 'password3', 'LTK02'),
-('NV04', 'password4', 'LTK02');
+('NV03', 'password3', 'LTK03'),
+('NV04', 'password4', 'LTK03');
 GO
 -- Thêm dữ liệu cho bảng PhuCap
 INSERT INTO PhuCap (MaPhuCap, LoaiPhuCap)
@@ -383,24 +384,89 @@ VALUES
 ('Thông báo 3', 'Nội dung thông báo 3', 'PB02', GETDATE());
 GO
 -- TRIGGER --
-CREATE OR ALTER TRIGGER tr_TaiKhoan_CapNhatMatKhauDangNhap
+CREATE OR ALTER TRIGGER tg_TaiKhoan_UpdateMatKhauLogin
 ON TaiKhoan
 AFTER UPDATE
 AS
 BEGIN
   SET NOCOUNT ON;
+
   IF UPDATE(MatKhau)
   BEGIN
-	DECLARE @TenDangNhap varchar(10);
-	DECLARE @MatKhau varchar(20);
+    DECLARE @TenDangNhap nvarchar(10);
+    DECLARE @MatKhau nvarchar(255);
 
-	SELECT @TenDangNhap = i.TenDangNhap, @MatKhau = i.MatKhau
-	FROM inserted i;
- 
-	DECLARE @sqlString varchar(2000);
-	SET @sqlString = 'ALTER LOGIN [' + @TenDangNhap + '] WITH PASSWORD=''' + @MatKhau + '''';
-	EXEC (@sqlString);
+    SELECT @TenDangNhap = i.TenDangNhap, @MatKhau = i.MatKhau
+    FROM inserted i;
+
+    DECLARE @sqlString nvarchar(2000);
+    SET @sqlString = 'ALTER LOGIN [' + @TenDangNhap + '] WITH PASSWORD=''' + @MatKhau + '''';
+    EXEC (@sqlString);
   END
+END;
+GO
+CREATE OR ALTER TRIGGER tg_TaiKhoan_ThemQuyen 
+ON TaiKhoan
+AFTER INSERT
+AS
+BEGIN
+    DECLARE @tendangnhap NVARCHAR(10), 
+            @matkhau NVARCHAR(255), 
+            @maloai NVARCHAR(10),
+            @sqlString NVARCHAR(2000);
+
+    SELECT @tendangnhap = TenDangNhap, 
+           @matkhau = MatKhau, 
+           @maloai = MaLoai
+    FROM inserted;
+
+    BEGIN TRY
+        -- Create Login
+        SET @sqlString = 'CREATE LOGIN ' + QUOTENAME(@tendangnhap) + 
+                         ' WITH PASSWORD = ''' + @matkhau + ''', DEFAULT_DATABASE = [QLNSG21], CHECK_EXPIRATION = OFF, CHECK_POLICY = OFF';
+        EXEC sp_executesql @sqlString;
+
+        -- Create User
+        SET @sqlString = 'CREATE USER ' + QUOTENAME(@tendangnhap) + ' FOR LOGIN ' + QUOTENAME(@tendangnhap);
+        EXEC sp_executesql @sqlString;
+
+        -- Assign Role 
+        IF @maloai = 'LTK01'
+        BEGIN
+            SET @sqlString = 'ALTER SERVER ROLE sysadmin ADD MEMBER ' + QUOTENAME(@tendangnhap);
+            EXEC sp_executesql @sqlString;
+        END
+	 IF @maloai = 'LTK02'
+        BEGIN
+            SET @sqlString = 'ALTER ROLE DepartmentHead ADD MEMBER ' + QUOTENAME(@tendangnhap);
+            EXEC sp_executesql @sqlString;
+        END
+        ELSE 
+        BEGIN
+            SET @sqlString = 'ALTER ROLE Employee ADD MEMBER ' + QUOTENAME(@tendangnhap);
+            EXEC sp_executesql @sqlString;
+        END
+    END TRY
+    BEGIN CATCH
+        PRINT 'Loi khi them quyen cho tai khoan';
+    END CATCH
+END;
+GO
+CREATE OR ALTER TRIGGER tg_NhanVien_ThemTaiKhoan
+ON NhanVien
+AFTER INSERT
+AS
+BEGIN
+	INSERT INTO TaiKhoan(TenDangNhap, MatKhau, MaLoai)
+	SELECT
+        inserted.MaNV,'123',
+        CASE
+            WHEN NhanVien.MaCV = 'CV01' THEN 'LTK01'
+            WHEN NhanVien.MaCV = 'CV02' THEN 'LTK02'
+		ELSE 'LTK03'
+        END AS MaLoai
+	FROM inserted
+	JOIN NhanVien ON inserted.MaNV = NhanVien.MaNV;
 END;
 GO
 
@@ -741,10 +807,40 @@ CREATE OR ALTER PROCEDURE sp_DeleteNhanVien
     @MaNV nvarchar(10)
 AS
 BEGIN
-	DELETE FROM NhanVien 
-	WHERE MaNV = @MaNV;
-END
-GO
+	SET NOCOUNT ON;
+	DECLARE @TenTaiKhoan varchar(10);
+	SELECT @TenTaiKhoan=TenDangNhap FROM TaiKhoan WHERE TenDangNhap=@MaNV
+	DECLARE @sql varchar(100)
+	DECLARE @SessionID INT;
+	SELECT @SessionID = session_id
+	FROM sys.dm_exec_sessions
+	WHERE login_name = @TenTaiKhoan;
+	IF @SessionID IS NOT NULL
+	BEGIN
+		SET @sql = 'kill ' + Convert(NVARCHAR(20), @SessionID)
+		exec(@sql)
+	END
+	BEGIN TRANSACTION;
+	BEGIN TRY
+		DELETE FROM NhanVien WHERE MaNV = @MaNV;
+		--
+		SET @sql = 'DROP USER '+ @TenTaiKhoan
+		exec (@sql)
+		--
+		SET @sql = 'DROP LOGIN '+ @TenTaiKhoan
+		exec (@sql)
+	END TRY
+	BEGIN CATCH
+		DECLARE @err NVARCHAR(MAX)
+		SELECT @err = N'Lỗi ' + ERROR_MESSAGE()
+		RAISERROR(@err, 16, 1)
+		ROLLBACK TRANSACTION;
+	THROW;
+	END CATCH
+	COMMIT TRANSACTION;
+END;
+GO 
+
 
 -- QUAN LY PHONG BAN
 CREATE OR ALTER PROCEDURE sp_ThemPhongBan
@@ -901,6 +997,55 @@ BEGIN
     DELETE FROM ThongBao WHERE Id = @Id;
 END;
 
+GO
+-- QUAN LY HOP DONG -- 
+CREATE OR ALTER PROCEDURE sp_AddHopDong 
+    @MaHD NVARCHAR(10),
+    @MaNV NVARCHAR(10),
+    @LuongCoBan INT,
+    @NgayBD DATE,
+    @NgayKT DATE
+AS
+BEGIN
+    -- Kiểm tra các tham số có trống hoặc NULL không
+    IF (@MaHD = '' OR @MaNV = '' OR @LuongCoBan IS NULL OR @NgayBD IS NULL OR @NgayKT IS NULL)
+    BEGIN
+        THROW 50000, 'Các thuộc tính bắt buộc không được để trống', 1;
+        RETURN;
+    END
+    
+    -- Chèn dữ liệu vào bảng HopDong
+    INSERT INTO HopDong (MaHD, MaNV, LuongCoBan, NgayBD, NgayKT)
+    VALUES (@MaHD, @MaNV, @LuongCoBan, @NgayBD, @NgayKT);
+END
+GO
+
+CREATE OR ALTER   PROCEDURE sp_UpdateHopDong
+    @MaHD nvarchar(10),
+    @NgayBD DATE,
+    @NgayKT DATE,
+	@LuongCoBan int
+AS
+BEGIN
+
+	IF @NgayBD IS NULL OR @NgayBD = '' OR @NgayKT IS NULL OR @NgayKT = ''
+    BEGIN
+        RAISERROR('Vui lòng điền đầy đủ thông tin cho tất cả các trường', 16, 1)
+        RETURN;
+    END
+	ELSE
+	UPDATE HopDong 
+	SET NgayBD = @NgayBD, NgayKT = @NgayKT, LuongCoBan = @LuongCoBan 
+	WHERE MaHD = @MaHD;    
+END
+GO
+
+CREATE OR ALTER   PROCEDURE sp_DeleteHopDong
+    @MaHD nvarchar(10)
+AS
+BEGIN
+	DELETE FROM HopDong 
+	WHERE MaHD = @MaHD;
 GO
 -- QUAN LY THUONG PHAT --
 
@@ -1530,6 +1675,8 @@ BEGIN
     INSERT INTO @ThueThuNhapCaNhan (MaNV, Thue)
     SELECT nv.MaNV,
         CASE
+			WHEN LuongChiuThue <= 0 
+				THEN 0
             WHEN LuongChiuThue <= 5000000
                 THEN LuongChiuThue * 5 / 100
             WHEN LuongChiuThue <= 10000000
@@ -1667,6 +1814,8 @@ BEGIN
     INSERT INTO @ThueThuNhapCaNhan (MaNV, Thue)
     SELECT nv.MaNV,
         CASE
+			WHEN LuongChiuThue <= 0 
+				THEN 0
             WHEN LuongChiuThue <= 5000000
                 THEN LuongChiuThue * 5 / 100
             WHEN LuongChiuThue <= 10000000
@@ -1701,7 +1850,7 @@ BEGIN
     SELECT * FROM @BaoHiem; 
 END;
 GO
-EXEC sp_TinhLuongTheoThangTraVeNhieuBang @MaThang = '032023'
+-- EXEC sp_TinhLuongTheoThangTraVeNhieuBang @MaThang = '032023'
 
 --------
 INSERT INTO ctChamCong (MaNV, MaCC, MaThang, NgayChamCong)
@@ -1783,4 +1932,59 @@ GO
 SELECT dbo.ft_SoNgayCongChuan('122024') AS SoNgayLamViec;
 
 DElete from ctChamCong WHERE MaNV = 'NV02';
+-- Phan Quyen --
+
+CREATE ROLE Employee
+GO
+GRANT SELECT, REFERENCES ON NhanVien TO Employee
+GRANT SELECT, REFERENCES ON ctChamCong TO Employee
+GRANT SELECT, REFERENCES ON ctBaoHiem TO Employee
+GRANT SELECT, INSERT, REFERENCES ON NghiPhep TO Employee
+GRANT SELECT, UPDATE, REFERENCES ON TaiKhoan TO Employee
+
+GRANT SELECT ON  vw_ThongTinNhanVien to Employee
+GRANT SELECT ON  vw_ThongTinHopDong to Employee
+
+Deny select on ft_NhanVienNhanThongBao to Employee;
+GRANT EXECUTE ON sp_GetNghiPhepByMaNV to Employee;
+GRANT EXECUTE ON sp_GetChamCongByMaNV to Employee;
+GRANT EXECUTE ON sp_AddctChamCong to Employee; 
+GRANT EXECUTE ON sp_TinhLuongTheoThang to Employee;
+GRANT EXECUTE ON sp_GetThang to Employee;
+
+
+
+CREATE ROLE DepartmentHead
+GO
+GRANT SELECT, REFERENCES ON NhanVien TO DepartmentHead
+GRANT SELECT, REFERENCES ON ctChamCong TO DepartmentHead
+GRANT SELECT, REFERENCES ON ctBaoHiem TO DepartmentHead
+GRANT SELECT, INSERT, REFERENCES ON NghiPhep TO DepartmentHead
+GRANT SELECT, UPDATE, REFERENCES ON TaiKhoan TO DepartmentHead
+
+GRANT SELECT ON  vw_ThongTinNhanVien to DepartmentHead
+GRANT SELECT ON  vw_ThongTinHopDong to DepartmentHead
+
+GRANT SELECT ON ft_NhanVienNhanThongBao TO DepartmentHead;
+GRANT EXECUTE ON sp_GetNghiPhepByMaNV to DepartmentHead;
+GRANT EXECUTE ON sp_GetChamCongByMaNV to DepartmentHead;
+GRANT EXECUTE ON sp_AddctChamCong to DepartmentHead; 
+GRANT EXECUTE ON sp_TinhLuongTheoThang to DepartmentHead;
+GRANT EXECUTE ON sp_GetThang to DepartmentHead;
+
+
+
+GO
+-- Quan ly
+CREATE LOGIN  NV01 WITH PASSWORD = 'password1', DEFAULT_DATABASE = [QLNSG21], CHECK_EXPIRATION = OFF, CHECK_POLICY = OFF;
+CREATE USER  NV01  FOR LOGIN  NV01;
+ALTER SERVER ROLE sysadmin ADD MEMBER NV01
+-- Truong Phong
+CREATE LOGIN  NV02 WITH PASSWORD = 'password2', DEFAULT_DATABASE = [QLNSG21], CHECK_EXPIRATION = OFF, CHECK_POLICY = OFF;
+CREATE USER  NV02  FOR LOGIN  NV02;
+ALTER ROLE DepartmentHead ADD MEMBER NV02
+-- NhanVien
+CREATE LOGIN  NV03 WITH PASSWORD = 'password3', DEFAULT_DATABASE = [QLNSG21], CHECK_EXPIRATION = OFF, CHECK_POLICY = OFF;
+CREATE USER  NV03  FOR LOGIN  NV03;
+ALTER ROLE Employee ADD MEMBER NV03
 

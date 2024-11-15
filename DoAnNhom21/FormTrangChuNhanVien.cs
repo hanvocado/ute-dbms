@@ -70,21 +70,8 @@ namespace DoAnNhom21
 
         private void btnXemThongBao_Click(object sender, EventArgs e)
         {
-            try
-            {
-                using (SqlCommand command = new SqlCommand("SELECT * FROM dbo.ft_NhanVienNhanThongBao(@MaNV)"))
-                {
-                    command.CommandType = CommandType.Text;
-                    command.Parameters.AddWithValue("@MaNV", this.maNv);
-                    Connection.ExecuteCommand(command);
-                    guna2DataGridViewThongBao.Visible = true;
-                    guna2DataGridViewThongBao.DataSource = Connection.LoadDataTable(command);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Lỗi: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            OpenForm(new FormThongBaoPhongBan(this.maNv));
+           
         }
     }
 }
