@@ -14,7 +14,8 @@ namespace DoAnNhom21
 {
     public partial class FormPhongBan : Form
     {
-       
+        
+
         public FormPhongBan()
         {
             InitializeComponent();
@@ -36,7 +37,7 @@ namespace DoAnNhom21
         {
             try
             {
-                using (SqlCommand command = new SqlCommand("ThemPhongBan"))
+                using (SqlCommand command = new SqlCommand("sp_ThemPhongBan"))
                 {
                     command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@MaPB", this.txtMaPB.Text);
@@ -58,7 +59,7 @@ namespace DoAnNhom21
         {
             try
             {
-                using (SqlCommand command = new SqlCommand("CapNhatPhongBan"))
+                using (SqlCommand command = new SqlCommand("sp_CapNhatPhongBan"))
                 {
                     command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@MaPB", this.txtMaPB.Text);
@@ -68,6 +69,7 @@ namespace DoAnNhom21
 
                     Connection.ExecuteCommand(command);
                     MessageBox.Show("Sửa thành công!");
+                    load();
                 }
             }
             catch (SqlException ex)
@@ -79,7 +81,7 @@ namespace DoAnNhom21
         {
             try
             {
-                using (SqlCommand command = new SqlCommand("XoaPhongBan"))
+                using (SqlCommand command = new SqlCommand("sp_XoaPhongBan"))
                 {
                     command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@MaPB", this.txtMaPB.Text);
@@ -100,21 +102,16 @@ namespace DoAnNhom21
 
             try
             {
-                using (SqlCommand command = new SqlCommand("XemThongTinChiTietPhongBan"))
+                using (SqlCommand command = new SqlCommand("SELECT * FROM dbo.ft_XemChiTietPhongBan()"))
                 {
                     
-                    command.CommandType = CommandType.StoredProcedure;
-                    if (string.IsNullOrEmpty(this.txtMaPB.Text))
-                    {
-                        MessageBox.Show("Hãy điền vào MaPB.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        return;
-                    }
-                    command.Parameters.AddWithValue("@MaPB", this.txtMaPB.Text);
+                    command.CommandType = CommandType.Text;
                     Connection.ExecuteCommand(command);
 
                     FormXemChiTietPhongBan formXemChiTietPhongBan = new FormXemChiTietPhongBan();
 
-                    formXemChiTietPhongBan.PopulateListView(formXemChiTietPhongBan.listViewPBChiTiet, Connection.LoadDataTable(command));
+                    formXemChiTietPhongBan.dataGridViewTTPB.DataSource = Connection.LoadDataTable(command);
+                    
                     formXemChiTietPhongBan.Show();
                 }
             }
