@@ -73,10 +73,5 @@ namespace DoAnNhom21
             OpenForm(new FormThongBaoPhongBan(this.maNv));
            
         }
-
-        private void guna2Button1_Click(object sender, EventArgs e)
-        {
-            OpenForm(new FormCapNhatMatKhau(this.maNv));
-        }
     }
 }
