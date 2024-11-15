@@ -78,6 +78,7 @@
             this.guna2ControlBox1.Name = "guna2ControlBox1";
             this.guna2ControlBox1.Size = new System.Drawing.Size(39, 25);
             this.guna2ControlBox1.TabIndex = 20;
+            this.guna2ControlBox1.Click += new System.EventHandler(this.guna2ControlBox1_Click_1);
             // 
             // guna2Panel3
             // 
@@ -157,6 +158,7 @@
             this.txtPassword.TabIndex = 3;
             this.txtPassword.TextOffset = new System.Drawing.Point(5, 0);
             this.txtPassword.UseSystemPasswordChar = true;
+            this.txtPassword.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtPassword_KeyDown);
             // 
             // txtMaNhanVien
             // 
@@ -195,13 +197,13 @@
             // 
             // guna2PictureBox1
             // 
-            this.guna2PictureBox1.Image = global::DoAnNhom21.Properties.Resources._27;
+            this.guna2PictureBox1.Image = global::DoAnNhom21.Properties.Resources.AnhNen;
             this.guna2PictureBox1.ImageRotate = 0F;
-            this.guna2PictureBox1.Location = new System.Drawing.Point(24, 34);
+            this.guna2PictureBox1.Location = new System.Drawing.Point(0, 2);
             this.guna2PictureBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.guna2PictureBox1.Name = "guna2PictureBox1";
-            this.guna2PictureBox1.Size = new System.Drawing.Size(411, 519);
-            this.guna2PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.guna2PictureBox1.Size = new System.Drawing.Size(463, 515);
+            this.guna2PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.guna2PictureBox1.TabIndex = 0;
             this.guna2PictureBox1.TabStop = false;
             // 
