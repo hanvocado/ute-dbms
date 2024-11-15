@@ -891,53 +891,44 @@ BEGIN
     SELECT * FROM vw_ThongTinPhongBan WHERE MaPB = @MaPB;
 END;
 GO
---- Hàm XemChiTietPhongBan - Multible statement table-valued có para
-CREATE OR ALTER FUNCTION dbo.ft_XemChiTietPhongBan(@MaPB nvarchar(10))
+--- Hàm XemChiTietPhongBan - Multible statement table-valued không para
+CREATE OR ALTER FUNCTION dbo.ft_XemChiTietPhongBan()
 RETURNS @PhongBanChiTiet TABLE (
     MaPB nvarchar(10),
     MaTrP nvarchar(10),
     SoNV INT,
     SoNVNam INT,
-    SoNVNu INT
+    SoNVNu INT,
+	SoThongBao INT
 )
 AS
 BEGIN
-    INSERT INTO @PhongBanChiTiet (MaPB, MaTrP, SoNV, SoNVNam, SoNVNu)
+    INSERT INTO @PhongBanChiTiet (MaPB, MaTrP, SoNV, SoNVNam, SoNVNu, SoThongBao)
     SELECT 
-        pb.MaPB, 
-        pb.MaTrP, 
+        t.MaPB,
+		t.MaTrP,
         COUNT(nv.MaNV) AS SoNV, 
-        COUNT(CASE WHEN nv.GioiTinh = 'Nam' THEN 1 END) AS SoNVNam,
-        COUNT(CASE WHEN nv.GioiTinh = 'Nu' THEN 1 END) AS SoNVNu
+        COUNT(CASE WHEN nv.GioiTinh LIKE  N'Nam' THEN 1 END) AS SoNV_Nam,
+        COUNT(CASE WHEN nv.GioiTinh LIKE N'Nữ' THEN 1 END) AS SoNV_Nu,
+		t.SoThongBao
     FROM 
-        PhongBan pb 
-    JOIN 
-		ThongBao tb ON tb.MaPB = pb.MaPB
-	JOIN
-        NhanVien nv ON pb.MaPB = nv.MaPB
-    WHERE 
-        pb.MaPB = @MaPB
-    GROUP BY 
-        pb.MaPB, pb.MaTrP;
-
+        (SELECT pb.MaPB, pb.MaTrP, COUNT (tb.Id) as SoThongBao  
+		FROM	
+		PhongBan pb 
+		LEFT JOIN 
+		ThongBao tb ON tb.MaPB = pb.MaPB 
+		GROUP BY pb.MaPB, pb.MaTrP) as t 
+		LEFT JOIN
+        NhanVien nv ON t.MaPB = nv.MaPB
+		GROUP BY t.MaPB, t.SoThongBao, t.MaTrP
     RETURN;
 END;
-SELECT * FROM dbo.ft_XemChiTietPhongBan('PB01')
+SELECT * FROM dbo.ft_XemChiTietPhongBan()
 
-SELECT 
-        *
-    FROM 
-        PhongBan pb 
-    LEFT JOIN 
-		ThongBao tb ON tb.MaPB = pb.MaPB
-	JOIN
-        NhanVien nv ON pb.MaPB = nv.MaPB
-    WHERE 
-        pb.MaPB = 'PB01'
-    GROUP BY 
-        pb.MaPB, pb.MaTrP;
 GO
--- Hàm nhận thông báo 
+
+---//------
+-- Hàm nhận thông báo _ multi statement table-valued có para 
 CREATE OR ALTER FUNCTION dbo.ft_NhanVienNhanThongBao(@MaNV nvarchar(10))
 RETURNS @ThongBaoNhanVien TABLE (
 	TieuDe nvarchar(100),
@@ -959,10 +950,9 @@ BEGIN
 	RETURN;
 END;
 GO
-SELECT * FROM dbo.ft_NhanVienNhanThongBao('NV03')
-	
+SELECT * FROM dbo.ft_NhanVienNhanThongBao('NV03')	
 
--- THONG BAO PRECEDURE --
+-- QUAN LY THONG BAO PRECEDURE --
 CREATE OR ALTER PROCEDURE sp_ThemThongBao
     @TieuDe NVARCHAR(100),
     @NoiDung NVARCHAR(MAX),
