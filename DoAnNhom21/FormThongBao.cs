@@ -52,21 +52,30 @@ namespace DoAnNhom21
                 MessageBox.Show("Lỗi:" + ex.Message, "Thông báo lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        private void btnThoat_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
 
-        private void btnSua_Click(object sender, EventArgs e)
+        private void FormThongBao_Load_1(object sender, EventArgs e)
+        {
+            load();
+        }
+
+        private void btnThem_Click_1(object sender, EventArgs e)
         {
             try
             {
                 SqlCommand cmd = new SqlCommand("sp_CapNhatThongBao");
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@Id", cbbId.Text);
                 cmd.Parameters.AddWithValue("@TieuDe", txtTieuDe.Text);
                 cmd.Parameters.AddWithValue("@NoiDung", txtNoiDung.Text);
                 cmd.Parameters.AddWithValue("@MaPB", cbbMaPB.Text);
                 cmd.Parameters.AddWithValue("@NgayGui", dtpNgayGui.Value);
                 Connection.ExecuteCommand(cmd);
                 load();
-                MessageBox.Show("Sửa thành công!");
+                MessageBox.Show("Thêm thành công!");
+
             }
             catch (SqlException ex)
             {
@@ -74,7 +83,7 @@ namespace DoAnNhom21
             }
         }
 
-        private void btnXoa_Click(object sender, EventArgs e)
+        private void btnXoa_Click_1(object sender, EventArgs e)
         {
             try
             {
@@ -91,11 +100,30 @@ namespace DoAnNhom21
             }
         }
 
-        private void btnThoat_Click(object sender, EventArgs e)
+        private void btnThoat_Click_1(object sender, EventArgs e)
         {
             Close();
         }
 
-        
+        private void btnSua_Click_1(object sender, EventArgs e)
+        {
+            try
+            {
+                SqlCommand cmd = new SqlCommand("CapNhatThongBao");
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@Id", cbbId.Text);
+                cmd.Parameters.AddWithValue("@TieuDe", txtTieuDe.Text);
+                cmd.Parameters.AddWithValue("@NoiDung", txtNoiDung.Text);
+                cmd.Parameters.AddWithValue("@MaPB", cbbMaPB.Text);
+                cmd.Parameters.AddWithValue("@NgayGui", dtpNgayGui.Value);
+                Connection.ExecuteCommand(cmd);
+                load();
+                MessageBox.Show("Sửa thành công!");
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show("Lỗi:" + ex.Message, "Thông báo lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

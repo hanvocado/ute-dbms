@@ -414,7 +414,7 @@ namespace DoAnNhom21
             this.dataGridViewTextBoxColumn2,
             this.dataGridViewTextBoxColumn3,
             this.dataGridViewTextBoxColumn4});
-            this.dataGridViewCTTP.Location = new System.Drawing.Point(29, 232);
+            this.dataGridViewCTTP.Location = new System.Drawing.Point(38, 232);
             this.dataGridViewCTTP.Name = "dataGridViewCTTP";
             this.dataGridViewCTTP.RowHeadersVisible = false;
             this.dataGridViewCTTP.RowHeadersWidth = 51;
