@@ -223,10 +223,10 @@ GO
 -- Thêm dữ liệu cho bảng NhanVien
 INSERT INTO NhanVien (MaNV, Ho, Ten, GioiTinh, NgaySinh, DiaChi, SDT, Email, CCCD, MaPB, MaCV, MaHD)
 VALUES
-('NV01', 'Nguyen', 'Anh', 'Nam', '1990-05-12', '123 ABC Street', '0123456789', 'anh.nguyen@gmail.com', '123456789012',NULL, 'CV01', NULL),
-('NV02', 'Le', 'Bao', 'Nam', '1985-10-23', '456 DEF Street', '0987654321', 'bao.le@gmail.com', '234567890123', NULL, 'CV02', NULL),
-('NV03', 'Tran', 'Chi', 'Nữ', '1992-07-15', '789 GHI Street', '0123456790', 'chi.tran@gmail.com', '345678901234', NULL, 'CV03', NULL),
-('NV04', 'Pham', 'Dung', 'Nữ', '1995-03-10', '101 JKL Street', '0987654322', 'dung.pham@gmail.com', '456789012345', NULL, 'CV04', NULL);
+('NV01', N'Đỗ Ngọc', N'Hân', N'Nữ', '1990-05-12', 'Thủ Đức, TP. Hồ Chí Minh', '0123456789', 'han.do@gmail.com', '087304000481',NULL, 'CV01', NULL),
+('NV02', N'Nguyễn Thị Hồng', N'Thơ', N'Nữ', '1985-10-23', 'Hà Nội', '0987654321', 'tho.nguyen@gmail.com', '087304000482', NULL, 'CV02', NULL),
+('NV03', N'Nguyễn Thị Ngọc', N'Hân', N'Nữ', '1992-07-15', 'Linh Chiểu, TP. Thủ Đức', '0123456790', 'han.nguyen@gmail.com', '087304000483', NULL, 'CV03', NULL),
+('NV04', N'Võ Triệu', N'Phúc', N'Nam', '1995-03-10', 'Đồng Nai', '0987654322', 'phuc.vo@gmail.com', '087304000484', NULL, 'CV04', NULL);
 GO
 -- Thêm dữ liệu cho bảng PhongBan
 INSERT INTO PhongBan (MaPB, TenPB, SDT, MaTrP)
@@ -289,6 +289,7 @@ VALUES
 ('TP03', N'Thưởng', 2000000, N'Đóng góp ý tưởng tốt'),
 ('TP04', N'Phạt', 500000, N'Không hoàn thành công việc đúng hạn');
 -- Thêm dữ liệu cho bảng ctThuongPhat
+-- nếu là 05 thì sai
 GO
 INSERT INTO ctThuongPhat (MaNV, MaThuongPhat, MaThang, NgayThuongPhat)
 VALUES
@@ -297,6 +298,7 @@ VALUES
 ('NV03', 'TP03', '032023', '20'),
 ('NV04', 'TP04', '042023', '05');
 GO
+-- drop table ctThuongPhat
 -- Thêm dữ liệu cho bảng ChamCong
 INSERT INTO ChamCong (MaCC, MoTa, HeSo)
 VALUES
@@ -313,8 +315,30 @@ VALUES
 ('NV01', 'CC01', '102024', '20'),
 ('NV02', 'CC03', '022023', '18'),
 ('NV03', 'CC02', '032023', '10'),
-('NV04', 'CC04', '042023', '15');
--- drop table ctChamCong
+('NV04', 'CC04', '042023', '15'),
+('NV01', 'CC01', '102024', 1),
+('NV01', 'CC01', '102024', 2),
+('NV01', 'CC01', '102024', 3),
+('NV01', 'CC01', '102024', 4),
+('NV01', 'CC01', '102024', 5),
+('NV01', 'CC01', '102024', 6),
+('NV01', 'CC01', '102024', 7),
+('NV01', 'CC01', '102024', 8),
+('NV01', 'CC01', '102024', 9),
+('NV01', 'CC01', '102024', 10),
+('NV01', 'CC01', '102024', 11),
+('NV01', 'CC01', '102024', 12),
+('NV01', 'CC01', '102024', 13),
+('NV01', 'CC01', '102024', 14),
+('NV01', 'CC01', '102024', 15),
+('NV01', 'CC01', '102024', 16),
+('NV01', 'CC01', '102024', 17),
+('NV01', 'CC01', '102024', 18),
+('NV01', 'CC01', '102024', 19),
+('NV01', 'CC01', '102024', 20),
+('NV01', 'CC01', '102024', 21),
+('NV01', 'CC01', '102024', 22);
+
 GO
 -- Thêm dữ liệu cho bảng BaoHiem
 INSERT INTO BaoHiem (MaLoai, TenBH)
