@@ -409,7 +409,7 @@ VALUES
 (N'Triển khai dự án mới', 
  N'Phòng Kỹ Thuật sẽ triển khai dự án cải tiến hệ thống quản lý nhân sự từ tháng 12/2024. Liên hệ Trưởng phòng để biết thêm chi tiết.', 
  'PB03', GETDATE());
-GOs
+GO
 -- TRIGGER --
 CREATE OR ALTER TRIGGER tg_TaiKhoan_UpdateMatKhauLogin
 ON TaiKhoan
@@ -1043,25 +1043,6 @@ GO
 
 -- PROCEDURE --
 
--- CAP NHAT MAT KHAU--
-
-CREATE OR ALTER PROCEDURE sp_CapNhatMatKhauDangNhap
-    @TenDangNhap nvarchar(10),
-    @MatKhau nvarchar(255)
-AS
-BEGIN
-   
-        -- Update the password in the TaiKhoan table
-        UPDATE TaiKhoan
-        SET MatKhau = @MatKhau
-        WHERE TenDangNhap = @TenDangNhap;
-
-        
-END;
-GO
-EXEC sp_CapNhatMatKhauDangNhap @TenDangNhap = 'NV03', @MatKhau = 'NV04';
-SELECT * FROM TaiKhoan WHERE TenDangNhap = 'NV03';
-GO
 -- QUAN LY NHAN VIEN --
 CREATE OR ALTER PROCEDURE sp_AddNhanVien
     @MaNV NVARCHAR(10),
