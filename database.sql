@@ -1317,7 +1317,7 @@ BEGIN
     VALUES (@TieuDe, @NoiDung, @MaPB, @NgayGui);
 END;
 GO
--- 
+-- Trigger Cập Nhật Thông Báo--
 CREATE OR ALTER PROCEDURE sp_CapNhatThongBao
     @Id INT,
     @TieuDe NVARCHAR(100),
@@ -1331,6 +1331,7 @@ BEGIN
     WHERE Id = @Id;
 END;
 GO
+-- TRIGGER Xóa Thông Báo--
 --
 CREATE OR ALTER PROCEDURE sp_XoaThongBao
     @Id INT
