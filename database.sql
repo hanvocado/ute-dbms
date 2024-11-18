@@ -568,46 +568,6 @@ BEGIN
 END;
 
 GO
-
-CREATE OR ALTER TRIGGER tr_NhanVien_CapNhatThongTinTruongPhong
-ON NhanVien
-AFTER UPDATE
-AS
-BEGIN
-	-- Đảm bảo mỗi phòng ban chỉ có một trưởng phòng
-    	IF EXISTS (
-        	SELECT MaPB
-        	FROM NhanVien
-        	WHERE MaCV IN (SELECT MaCV FROM ChucVu WHERE TenCV LIKE N'Trưởng Phòng')
-        	GROUP BY MaPB
-        	HAVING COUNT(*) > 1
-    	)
-    	BEGIN
-        	RAISERROR ('Mỗi phòng ban chỉ được có duy nhất một trưởng phòng.', 16, 1);
-        	ROLLBACK TRANSACTION;
-        	RETURN;
-    	END
- 
-    	-- Cập nhật thông tin trưởng phòng cho phòng ban mới 
-    	IF EXISTS (
-        	SELECT 1
-        	FROM inserted i
-        	JOIN PhongBan pb ON i.MaPB = pb.MaPB
-    	)
-    	BEGIN
-        	UPDATE PhongBan
-        	SET MaTrP = (
-            	SELECT TOP 1 nv.MaNV
-            	FROM NhanVien nv
-            	JOIN ChucVu cv ON nv.MaCV = cv.MaCV
-            	WHERE nv.MaPB = PhongBan.MaPB
-              	AND cv.TenCV LIKE N'Trưởng Phòng'
-        	)
-        	WHERE PhongBan.MaPB IN (SELECT MaPB FROM inserted);
-    	END
-END;
-
-
 CREATE OR ALTER TRIGGER tr_NhanVien_CapNhatThongTinTruongPhong
 ON NhanVien
 AFTER UPDATE
@@ -625,6 +585,19 @@ BEGIN
     )
     BEGIN
         RAISERROR ('Mỗi phòng ban chỉ được có duy nhất một trưởng phòng.', 16, 1);
+        ROLLBACK TRANSACTION;
+        RETURN;
+    END
+	-- Đảm bảo các trưởng phòng không giống nhau giữa các phòng ban (unique xử lý có null)
+	IF EXISTS (
+        SELECT pb.MaTrP, COUNT(*)
+        FROM PhongBan pb
+		WHERE pb.MaTrP IS NOT NULL
+        GROUP BY MaTrP
+		HAVING COUNT(*)>1
+    )
+    BEGIN
+        RAISERROR ('Trưởng phòng của các phòng ban phải khác nhau', 16, 1);
         ROLLBACK TRANSACTION;
         RETURN;
     END
@@ -698,9 +671,251 @@ BEGIN
     END
 END;
 GO
+-- TRIGGER THÊM THÔNG BÁO CHO NHÂN VIÊN NẾU CÓ THÊM THƯỞNG PHẠT--
+CREATE OR ALTER TRIGGER tr_ctThuongPhat_ThemThongBaoThuongPhat
+ON ctThuongPhat
+AFTER INSERT
+AS
+BEGIN
+    DECLARE @MaNV NVARCHAR(10);
+    DECLARE @MaPB NVARCHAR(10);
+    DECLARE @NgayGui DATETIME;
+    DECLARE @TieuDe NVARCHAR(100);
+    DECLARE @NoiDung NVARCHAR(MAX);
+    DECLARE @Loai NVARCHAR(50);
+
+    -- Lấy thông tin từ bản ghi vừa được thêm vào bảng ctThuongPhat
+    SELECT @MaNV = inserted.MaNV, @Loai = tp.Loai
+    FROM inserted
+    JOIN ThuongPhat tp ON inserted.MaThuongPhat = tp.MaThuongPhat;
+
+    -- Lấy mã phòng ban của nhân viên
+    SELECT @MaPB = MaPB
+    FROM NhanVien
+    WHERE MaNV = @MaNV;
+
+    -- Tạo thông báo dựa trên loại thưởng/phạt
+    SET @NgayGui = GETDATE();
+    IF @Loai = N'Phạt'
+    BEGIN
+        SET @TieuDe = N'Có hình phạt';
+        SET @NoiDung = N'Nhân viên ' + @MaNV + N' đã nhận được một hình phạt.';
+    END
+    ELSE IF @Loai = N'Thưởng'
+    BEGIN
+        SET @TieuDe = N'Có thưởng';
+        SET @NoiDung = N'Nhân viên ' + @MaNV + N' đã nhận được một phần thưởng.';
+    END
+
+    -- Thêm thông báo vào bảng ThongBao
+    INSERT INTO ThongBao (TieuDe, NoiDung, MaPB, NgayGui)
+    VALUES (@TieuDe, @NoiDung, @MaPB, @NgayGui);
+END;
+GO
+-- Chèn dữ liệu vào bảng Thang
+INSERT INTO Thang (MaThang, MoTa, SoNgayCongChuan) VALUES ('202301', 'Tháng 1 năm 2023', 31);
+INSERT INTO Thang (MaThang, MoTa, SoNgayCongChuan) VALUES ('202302', 'Tháng 2 năm 2023', 28);
+-- Chèn dữ liệu vào bảng ctThuongPhat
+INSERT INTO ctThuongPhat (MaNV, MaThuongPhat, MaThang, NgayThuongPhat) VALUES ('NV01', 'TP01', '202301', 15);
+INSERT INTO ctThuongPhat (MaNV, MaThuongPhat, MaThang, NgayThuongPhat) VALUES ('NV02', 'TP02', '202301', 20);
+GO
+-- TRIGGER THÊM THÔNG BÁO CHO NHÂN VIÊN NẾU NHẬN ĐƯỢC PHỤ CẤP--
+CREATE OR ALTER TRIGGER tr_ctPhuCap_ThemThongBaoPhuCap
+ON ctPhuCap
+AFTER INSERT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    DECLARE @MaNV NVARCHAR(10),
+            @MaPhuCap NVARCHAR(10),
+            @LoaiPhuCap NVARCHAR(50),
+            @NgayPhuCap INT,
+            @NoiDung NVARCHAR(MAX),
+			@Ho NVARCHAR(50),
+			@Ten NVARCHAR(50);
+
+    SELECT @MaNV = i.MaNV, @MaPhuCap = i.MaPhuCap, @NgayPhuCap = i.NgayPhuCap, @Ho = nv.Ho, @Ten = nv.Ten
+    FROM inserted i JOIN NhanVien nv ON i.MaNV = nv.MaNV;
+
+    SELECT @LoaiPhuCap = p.LoaiPhuCap
+    FROM PhuCap p 
+    WHERE p.MaPhuCap = @MaPhuCap;
+
+    SET @NoiDung = @Ho + ' ' + @Ten + N' đã nhận được phụ cấp: ' + @LoaiPhuCap;
+
+    INSERT INTO ThongBao (TieuDe, NoiDung, MaPB, NgayGui)
+    VALUES (N'Thông báo phụ cấp', @NoiDung, (SELECT MaPB FROM NhanVien WHERE MaNV = @MaNV), GETDATE());
+END;
+GO
+-- TRIGGER THÊM THÔNG BÁO CHO NHÂN VIÊN NẾU NHÂN VIÊN ĐĂNG KÝ NGHỈ PHÉP--
+CREATE OR ALTER TRIGGER tr_NghiPhep_ThongBao
+ON NghiPhep
+AFTER INSERT
+AS
+BEGIN
+    DECLARE @MaNV NVARCHAR(10), @Ho NVARCHAR(50), @Ten NVARCHAR(50), @NgayNghiPhep INT, @MoTa NVARCHAR(MAX), @MaPB NVARCHAR(10);
+    DECLARE @TieuDe NVARCHAR(100), @NoiDung NVARCHAR(MAX);
+    
+    -- Lấy thông tin nhân viên từ bảng NhanVien và thông tin ngày nghỉ phép
+    SELECT 
+        @MaNV = MaNV,
+        @NgayNghiPhep = NgayNghiPhep
+    FROM inserted;
+    
+    -- Lấy tên, phòng ban và các thông tin khác của nhân viên
+    SELECT 
+        @Ho = Ho, 
+        @Ten = Ten, 
+        @MoTa = MoTa,
+        @MaPB = MaPB
+    FROM NhanVien nv 
+    JOIN NghiPhep np ON nv.MaNV = np.MaNV
+    LEFT JOIN Thang t ON np.MaThang = t.MaThang
+    WHERE nv.MaNV = @MaNV;
+    
+    -- Tạo tiêu đề và nội dung thông báo
+    SET @TieuDe = N'Thông Báo Nghỉ Phép: ' + @Ho + ' ' + @Ten;
+    SET @NoiDung = @Ho + ' ' + @Ten + N' đã đăng ký nghỉ phép vào ngày ' + CAST(@NgayNghiPhep AS NVARCHAR(10)) + ' ' + @MoTa + '.';
+
+    -- Chèn thông báo vào bảng ThongBao
+    INSERT INTO ThongBao (TieuDe, NoiDung, MaPB, NgayGui)
+    VALUES (@TieuDe, @NoiDung, @MaPB, GETDATE());
+END;
+GO
+
+-- TRIGGER THÊM THÔNG BÁO CHO NHÂN VIÊN NẾU NHÂN VIÊN CHẤM CÔNG--
+CREATE OR ALTER TRIGGER tr_ctChamCong_ThongBao
+ON ctChamCong
+AFTER INSERT
+AS
+BEGIN
+    DECLARE @MaNV NVARCHAR(10), @Ho NVARCHAR(50), @Ten NVARCHAR(50), @MoTa NVARCHAR(MAX), @NgayChamCong INT, @MaPB NVARCHAR(10);
+    DECLARE @TieuDe NVARCHAR(100), @NoiDung NVARCHAR(MAX);
+    
+    -- Lấy thông tin nhân viên từ bảng NhanVien và thông tin ngày chấm công
+    SELECT 
+        @MaNV = MaNV,
+        @NgayChamCong = NgayChamCong
+    FROM inserted;
+    
+    -- Lấy phòng ban nhân viên đó làm việc, họ tên 
+    SELECT 
+		@Ho = Ho,
+		@Ten = Ten,
+        @MaPB = MaPB,
+		@MoTa = MoTa
+    FROM NhanVien nv JOIN (SELECT ctcc.MaNV, ctcc.MaCC, t.MoTa FROM ctChamCong ctcc LEFT JOIN Thang t ON ctcc.MaThang = t.MaThang) as ngaychamcong
+	ON nv.MaNV = ngaychamcong.MaNV
+    WHERE nv.MaNV = @MaNV;
+    
+
+    -- Tạo tiêu đề và nội dung thông báo
+    SET @TieuDe = N'Thông Báo Chấm Công: ' + @Ho + ' ' + @Ten;
+    SET @NoiDung = @Ho + ' ' + @Ten + N' đã chấm công thành công vào Ngày ' + CAST(@NgayChamCong AS NVARCHAR(10)) +' ' + @MoTa + '.';
+
+    -- Chèn thông báo vào bảng ThongBao
+    INSERT INTO ThongBao (TieuDe, NoiDung, MaPB, NgayGui)
+    VALUES (@TieuDe, @NoiDung, @MaPB, GETDATE());
+END;
+GO
+-- TRIGGER THÊM THÔNG BÁO CHO NHÂN VIÊN NẾU ĐƯỢC THĂNG CHỨC--
+CREATE OR ALTER TRIGGER tr_NhanVien_ThangChucVu
+ON NhanVien
+AFTER UPDATE
+AS
+BEGIN
+    DECLARE @MaNV NVARCHAR(10), @Ho NVARCHAR(50), @Ten NVARCHAR(50), @MaCVOld NVARCHAR(10), @MaCVNew NVARCHAR(10), @TieuDe NVARCHAR(100), @NoiDung NVARCHAR(MAX), @MaPB NVARCHAR(10);
+
+    -- Lấy thông tin từ bảng inserted (cập nhật mới)
+    SELECT 
+        @MaNV = MaNV,
+        @MaCVOld = (SELECT MaCV FROM deleted WHERE MaNV = inserted.MaNV),  -- Lấy MaCV cũ từ bảng deleted
+        @MaCVNew = MaCV
+    FROM inserted
+    WHERE MaNV IN (SELECT MaNV FROM inserted);
+
+    -- Kiểm tra nếu MaCV có thay đổi (thăng chức)
+    IF @MaCVOld <> @MaCVNew
+    BEGIN
+        -- Lấy thông tin nhân viên như Họ, Tên, Phòng ban
+        SELECT 
+            @Ho = Ho, 
+            @Ten = Ten, 
+            @MaPB = MaPB
+        FROM NhanVien
+        WHERE MaNV = @MaNV;
+
+        -- Tạo tiêu đề và nội dung thông báo
+        SET @TieuDe = N'Thông Báo Thăng Chức: ' + @Ho + ' ' + @Ten;
+        SET @NoiDung = @Ho + ' ' + @Ten + N' đã được thăng chức từ chức vụ ' + 
+                       (SELECT TenCV FROM ChucVu WHERE MaCV = @MaCVOld) + N' lên ' + 
+                       (SELECT TenCV FROM ChucVu WHERE MaCV = @MaCVNew) + '.';
+
+        -- Chèn thông báo vào bảng ThongBao
+        INSERT INTO ThongBao (TieuDe, NoiDung, MaPB, NgayGui)
+        VALUES (@TieuDe, @NoiDung, @MaPB, GETDATE());
+    END
+END;
+GO
+--
+--TRIGGER UPDATE ID CỦA THÔNG BÁO --
+CREATE OR ALTER TRIGGER tr_UpdateThongBaoId
+ON ThongBao
+AFTER INSERT, DELETE
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    -- Tạo bảng tạm để lưu trữ các thông báo còn lại
+    DECLARE @ThongBaoTemp TABLE (
+        NewId INT IDENTITY(1,1),
+        TieuDe NVARCHAR(100),
+        NoiDung NVARCHAR(MAX),
+        MaPB NVARCHAR(10),
+        NgayGui DATETIME
+    );
+
+    -- Chèn các thông báo còn lại vào bảng tạm
+    INSERT INTO @ThongBaoTemp (TieuDe, NoiDung, MaPB, NgayGui)
+    SELECT TieuDe, NoiDung, MaPB, NgayGui
+    FROM ThongBao
+    ORDER BY Id;
+
+    -- Xóa tất cả các thông báo trong bảng ThongBao
+    DELETE FROM ThongBao;
+
+    -- Bật IDENTITY_INSERT để chèn giá trị cụ thể vào cột IDENTITY
+    SET IDENTITY_INSERT ThongBao ON;
+
+    -- Chèn lại các thông báo từ bảng tạm vào bảng ThongBao với Id mới
+    INSERT INTO ThongBao (Id, TieuDe, NoiDung, MaPB, NgayGui)
+    SELECT NewId, TieuDe, NoiDung, MaPB, NgayGui
+    FROM @ThongBaoTemp;
+
+    -- Tắt IDENTITY_INSERT sau khi chèn xong
+    SET IDENTITY_INSERT ThongBao OFF;
+END;
+GO
+-- TEST--
+INSERT INTO ctPhuCap (MaNV, MaPhuCap, MaThang, NgayPhuCap, SoTien)
+VALUES
+('NV02', 'PC03', '102024', 20, 500000);
+GO
+INSERT INTO NghiPhep (MaNV, MaThang, NgayNghiPhep, GhiChu)
+VALUES ('NV02', '102024', 15, 'Bệnh');
+GO
+INSERT INTO ctChamCong (MaNV, MaCC, MaThang, NgayChamCong)
+VALUES ('NV01', 'CC01', '032023', 10);
+GO 
 UPDATE NhanVien
-SET MaPB = 'PB04', MaCV = 'CV02'
-WHERE MaNV = 'NV04'
+SET MaCV = 'CV02'  -- Chức vụ mới
+WHERE MaNV = 'NV03'
+
+SELECT * FROM PhongBan
+SELECT * FROM dbo.ft_NhanVienNhanThongBao('NV02')
+SELECT * FROM ThongBao
+--
 GO
 CREATE OR ALTER TRIGGER tr_AddctChamCong
 ON ctChamCong
@@ -1067,25 +1282,34 @@ GO
 
 ---//------
 -- Hàm nhận thông báo _ multi statement table-valued có para 
-CREATE OR ALTER FUNCTION dbo.ft_NhanVienNhanThongBao(@MaNV nvarchar(10))
+CREATE OR ALTER FUNCTION dbo.ft_NhanVienNhanThongBao(@MaNV NVARCHAR(10))
 RETURNS @ThongBaoNhanVien TABLE (
-	TieuDe nvarchar(100),
-	NoiDung nvarchar(MAX),
-	NgayGui DATE
-	)
+    TieuDe NVARCHAR(100),
+    NoiDung NVARCHAR(MAX),
+    NgayGui DATE
+)
 AS
 BEGIN
+    -- Lấy thông báo từ bảng ThongBao và PhongBan
     INSERT INTO @ThongBaoNhanVien (TieuDe, NoiDung, NgayGui)
-    SELECT tb.TieuDe, tb.NoiDung, tb.NgayGui
-	FROM 
-        PhongBan pb 
+    SELECT 
+        tb.TieuDe, 
+        -- Thay thế tên nhân viên trong Nội Dung thành "Bạn"
+        CASE 
+            WHEN tb.NoiDung IS NOT NULL THEN 
+                REPLACE(tb.NoiDung, (SELECT Ho + ' ' + Ten FROM NhanVien WHERE MaNV = @MaNV), N'Bạn')
+            ELSE tb.NoiDung 
+        END AS NoiDung, 
+        tb.NgayGui
+    FROM 
+        PhongBan pb
     LEFT JOIN 
-		ThongBao tb ON tb.MaPB = pb.MaPB
-	JOIN
+        ThongBao tb ON tb.MaPB = pb.MaPB
+    JOIN
         NhanVien nv ON pb.MaPB = nv.MaPB
     WHERE 
-        nv.MaNV = @MaNV
-	RETURN;
+        nv.MaNV = @MaNV;
+    RETURN;
 END;
 GO
 SELECT * FROM dbo.ft_NhanVienNhanThongBao('NV03')	
@@ -1121,9 +1345,40 @@ CREATE OR ALTER PROCEDURE sp_XoaThongBao
     @Id INT
 AS
 BEGIN
+    -- Xóa thông báo dựa trên Id
     DELETE FROM ThongBao WHERE Id = @Id;
-END;
 
+    -- Tạo bảng tạm để lưu trữ các thông báo còn lại
+    DECLARE @ThongBaoTemp TABLE (
+        NewId INT IDENTITY(1,1),
+        TieuDe NVARCHAR(100),
+        NoiDung NVARCHAR(MAX),
+        MaPB NVARCHAR(10),
+        NgayGui DATETIME
+    );
+
+    -- Chèn các thông báo còn lại vào bảng tạm
+    INSERT INTO @ThongBaoTemp (TieuDe, NoiDung, MaPB, NgayGui)
+    SELECT TieuDe, NoiDung, MaPB, NgayGui
+    FROM ThongBao
+    ORDER BY Id;
+
+    -- Xóa tất cả các thông báo trong bảng ThongBao
+    DELETE FROM ThongBao;
+
+    -- Bật IDENTITY_INSERT để chèn giá trị cụ thể vào cột IDENTITY
+    SET IDENTITY_INSERT ThongBao ON;
+
+    -- Chèn lại các thông báo từ bảng tạm vào bảng ThongBao với Id mới
+    INSERT INTO ThongBao (Id, TieuDe, NoiDung, MaPB, NgayGui)
+    SELECT NewId, TieuDe, NoiDung, MaPB, NgayGui
+    FROM @ThongBaoTemp;
+
+    -- Tắt IDENTITY_INSERT sau khi chèn xong
+    SET IDENTITY_INSERT ThongBao OFF;
+END;
+GO
+EXEC sp_XoaThongBao @Id = 1;
 GO
 -- QUAN LY HOP DONG -- 
 CREATE OR ALTER PROCEDURE sp_AddHopDong 
