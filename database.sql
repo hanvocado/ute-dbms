@@ -409,7 +409,7 @@ VALUES
 (N'Triển khai dự án mới', 
  N'Phòng Kỹ Thuật sẽ triển khai dự án cải tiến hệ thống quản lý nhân sự từ tháng 12/2024. Liên hệ Trưởng phòng để biết thêm chi tiết.', 
  'PB03', GETDATE());
-GO
+GOs
 -- TRIGGER --
 CREATE OR ALTER TRIGGER tg_TaiKhoan_UpdateMatKhauLogin
 ON TaiKhoan
