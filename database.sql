@@ -570,7 +570,7 @@ BEGIN
     	BEGIN
         	UPDATE PhongBan
         	SET MaTrP = (
-            	SELECT nv.MaNV
+            	SELECT TOP 1 nv.MaNV
             	FROM NhanVien nv
             	JOIN ChucVu cv ON nv.MaCV = cv.MaCV
             	WHERE nv.MaPB = PhongBan.MaPB
@@ -579,6 +579,101 @@ BEGIN
         	WHERE PhongBan.MaPB IN (SELECT MaPB FROM inserted);
     	END
 END;
+
+
+CREATE OR ALTER TRIGGER tr_NhanVien_CapNhatThongTinTruongPhong
+ON NhanVien
+AFTER UPDATE
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    -- Đảm bảo mỗi phòng ban chỉ có một trưởng phòng
+    IF EXISTS (
+        SELECT nv.MaPB
+        FROM NhanVien nv
+        WHERE nv.MaCV IN (SELECT cv.MaCV FROM ChucVu cv WHERE cv.TenCV LIKE N'Trưởng Phòng')
+        GROUP BY nv.MaPB
+        HAVING COUNT(*) > 1
+    )
+    BEGIN
+        RAISERROR ('Mỗi phòng ban chỉ được có duy nhất một trưởng phòng.', 16, 1);
+        ROLLBACK TRANSACTION;
+        RETURN;
+    END
+
+    -- Cập nhật thông tin trưởng phòng cho phòng ban mới
+    IF EXISTS (
+        SELECT 1
+        FROM inserted i
+        JOIN PhongBan pb ON i.MaPB = pb.MaPB
+    )
+    BEGIN
+        -- Đặt MaTrP thành NULL nếu phòng ban không có nhân viên
+        UPDATE PhongBan
+        SET MaTrP = NULL
+        WHERE MaPB IN (
+            SELECT pb.MaPB
+            FROM PhongBan pb
+            LEFT JOIN NhanVien nv ON pb.MaPB = nv.MaPB
+            WHERE nv.MaPB IS NULL
+        );
+
+        -- Cập nhật MaTrP nếu phòng ban có nhân viên
+        UPDATE PhongBan
+        SET MaTrP = (
+            SELECT TOP 1 nv.MaNV
+            FROM NhanVien nv
+            JOIN ChucVu cv ON nv.MaCV = cv.MaCV
+            WHERE nv.MaPB = PhongBan.MaPB
+              AND cv.TenCV LIKE N'Trưởng Phòng'
+        )
+        WHERE MaPB IN (SELECT i.MaPB FROM inserted i)
+          AND EXISTS (
+              SELECT 1
+              FROM NhanVien nv
+              WHERE nv.MaPB = PhongBan.MaPB
+          );
+    END
+
+    -- Kiểm tra và cập nhật thông tin trưởng phòng nếu nhân viên không còn thuộc phòng ban đó
+    IF EXISTS (
+        SELECT 1
+        FROM deleted d
+        JOIN PhongBan pb ON d.MaPB = pb.MaPB
+    )
+    BEGIN
+        -- Đặt MaTrP thành NULL nếu phòng ban không có nhân viên
+        UPDATE PhongBan
+        SET MaTrP = NULL
+        WHERE MaPB IN (
+            SELECT pb.MaPB
+            FROM PhongBan pb
+            LEFT JOIN NhanVien nv ON pb.MaPB = nv.MaPB
+            WHERE nv.MaPB IS NULL
+        );
+
+        -- Cập nhật MaTrP nếu phòng ban có nhân viên
+        UPDATE PhongBan
+        SET MaTrP = (
+            SELECT TOP 1 nv.MaNV
+            FROM NhanVien nv
+            JOIN ChucVu cv ON nv.MaCV = cv.MaCV
+            WHERE nv.MaPB = PhongBan.MaPB
+              AND cv.TenCV LIKE N'Trưởng Phòng'
+        )
+        WHERE MaPB IN (SELECT d.MaPB FROM deleted d)
+          AND EXISTS (
+              SELECT 1
+              FROM NhanVien nv
+              WHERE nv.MaPB = PhongBan.MaPB
+          );
+    END
+END;
+GO
+UPDATE NhanVien
+SET MaPB = 'PB04', MaCV = 'CV02'
+WHERE MaNV = 'NV04'
 GO
 SELECT * FROM PhongBan;
 SELECT * FROM NhanVien;
@@ -706,26 +801,17 @@ CREATE OR ALTER PROCEDURE sp_CapNhatMatKhauDangNhap
     @MatKhau nvarchar(255)
 AS
 BEGIN
---Ngăn không cho trả về thông báo về số hàng bị ảnh hưởng bởi một câu lệnh T-SQL.--
-    SET NOCOUNT ON;
-
-    BEGIN TRANSACTION;
-
-    BEGIN TRY
+   
         -- Update the password in the TaiKhoan table
         UPDATE TaiKhoan
         SET MatKhau = @MatKhau
         WHERE TenDangNhap = @TenDangNhap;
 
-        COMMIT TRANSACTION;
-    END TRY
-    BEGIN CATCH
-        ROLLBACK TRANSACTION;
-        THROW;
-    END CATCH
+        
 END;
 GO
-EXEC sp_CapNhatMatKhauDangNhap @TenDangNhap = 'NV04', @MatKhau = 'NV04';
+EXEC sp_CapNhatMatKhauDangNhap @TenDangNhap = 'NV03', @MatKhau = 'NV04';
+SELECT * FROM TaiKhoan WHERE TenDangNhap = 'NV03';
 GO
 -- QUAN LY NHAN VIEN --
 CREATE OR ALTER PROCEDURE sp_AddNhanVien
@@ -1960,6 +2046,7 @@ GRANT SELECT, REFERENCES ON ctBaoHiem TO Employee
 GRANT SELECT, INSERT, REFERENCES ON NghiPhep TO Employee
 GRANT SELECT, UPDATE, REFERENCES ON TaiKhoan TO Employee
 
+
 GRANT SELECT ON  vw_ThongTinNhanVien to Employee
 GRANT SELECT ON  vw_ThongTinHopDong to Employee
 
@@ -1969,6 +2056,7 @@ GRANT EXECUTE ON sp_GetChamCongByMaNV to Employee;
 GRANT EXECUTE ON sp_AddctChamCong to Employee; 
 GRANT EXECUTE ON sp_TinhLuongTheoThang to Employee;
 GRANT EXECUTE ON sp_GetThang to Employee;
+GRANT EXECUTE ON sp_CapNhatMatKhauDangNhap to Employee;
 
 
 
