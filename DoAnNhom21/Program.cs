@@ -18,7 +18,7 @@ namespace DoAnNhom21
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            Application.Run(new FormQuanLyHopDong());
+            Application.Run(new FormDangNhap());
         }
     }
 }
