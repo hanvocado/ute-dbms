@@ -2444,10 +2444,6 @@ GRANT EXECUTE ON sp_GetChamCongByMaNV to Employee;
 GRANT EXECUTE ON sp_AddctChamCong to Employee; 
 GRANT EXECUTE ON sp_TinhLuongTheoThang to Employee;
 GRANT EXECUTE ON sp_GetThang to Employee;
-GRANT EXECUTE ON sp_CapNhatMatKhauDangNhap to Employee;
-
-
-
 
 CREATE ROLE DepartmentHead
 GO
