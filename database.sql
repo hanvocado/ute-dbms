@@ -27,10 +27,9 @@ CREATE TABLE PhongBan (
     MaPB NVARCHAR(10) PRIMARY KEY,
     TenPB NVARCHAR(50) NOT NULL,
     SDT NVARCHAR(20) NOT NULL,
-    MaTrP NVARCHAR(10) UNIQUE,
+    MaTrP NVARCHAR(10),
     CONSTRAINT ValidPhoneNum CHECK (LEN(SDT) = 10)
 );
-
 GO
 CREATE TABLE HopDong (
     MaHD NVARCHAR(10) PRIMARY KEY,
@@ -50,7 +49,7 @@ GO
 ALTER TABLE HopDong ADD CONSTRAINT fk_HD_MaNV
 	FOREIGN KEY (MaNV) REFERENCES NhanVien(MaNV)
 	ON UPDATE NO ACTION
-	ON DELETE NO ACTION;
+	ON DELETE CASCADE;
 GO
 -- Khóa ngoại bảng Nhân viên
 ALTER TABLE NhanVien ADD CONSTRAINT fk_NV_MaPB
@@ -77,7 +76,6 @@ CREATE TABLE NguoiPhuThuoc (
     ON DELETE CASCADE
 );
 GO
-
 CREATE TABLE ThongBao (
     Id INT PRIMARY KEY IDENTITY(1,1),
     TieuDe NVARCHAR(100),
@@ -86,7 +84,6 @@ CREATE TABLE ThongBao (
     NgayGui DATETIME,
     CONSTRAINT fK_TB_MaPB FOREIGN KEY (MaPB) REFERENCES PhongBan(MaPB)
 );
-
 GO
 CREATE TABLE Thang (
     MaThang NVARCHAR(6) PRIMARY KEY,
@@ -226,20 +223,20 @@ GO
 -- Thêm dữ liệu cho bảng NhanVien
 INSERT INTO NhanVien (MaNV, Ho, Ten, GioiTinh, NgaySinh, DiaChi, SDT, Email, CCCD, MaPB, MaCV, MaHD)
 VALUES
-('NV01', 'Nguyen', 'Anh', 'Nam', '1990-05-12', '123 ABC Street', '0123456789', 'anh.nguyen@gmail.com', '123456789012',NULL, 'CV01', NULL),
-('NV02', 'Le', 'Bao', 'Nam', '1985-10-23', '456 DEF Street', '0987654321', 'bao.le@gmail.com', '234567890123', NULL, 'CV02', NULL),
-('NV03', 'Tran', 'Chi', 'Nữ', '1992-07-15', '789 GHI Street', '0123456790', 'chi.tran@gmail.com', '345678901234', NULL, 'CV03', NULL),
-('NV04', 'Pham', 'Dung', 'Nữ', '1995-03-10', '101 JKL Street', '0987654322', 'dung.pham@gmail.com', '456789012345', NULL, 'CV04', NULL);
+('NV01', N'Đỗ Ngọc', N'Hân', N'Nữ', '1990-05-12', 'Thủ Đức, TP. Hồ Chí Minh', '0123456789', 'han.do@gmail.com', '087304000481',NULL, 'CV01', NULL),
+('NV02', N'Nguyễn Thị Hồng', N'Thơ', N'Nữ', '1985-10-23', 'Hà Nội', '0987654321', 'tho.nguyen@gmail.com', '087304000482', NULL, 'CV02', NULL),
+('NV03', N'Nguyễn Thị Ngọc', N'Hân', N'Nữ', '1992-07-15', 'Linh Chiểu, TP. Thủ Đức', '0123456790', 'han.nguyen@gmail.com', '087304000483', NULL, 'CV03', NULL),
+('NV04', N'Võ Triệu', N'Phúc', N'Nam', '1995-03-10', 'Đồng Nai', '0987654322', 'phuc.vo@gmail.com', '087304000484', NULL, 'CV04', NULL);
 GO
 -- Thêm dữ liệu cho bảng PhongBan
 INSERT INTO PhongBan (MaPB, TenPB, SDT, MaTrP)
-VALUES
+VALUES 
 ('PB01', N'Phòng Nhân Sự', '0123456789', 'NV01'),
-('PB02', N'Phòng Kế Toán', '0987654321', NULL),
+('PB02', N'Phòng Kế Toán', '0987654321', 'NV02'),
 ('PB03', N'Phòng IT', '0123456790', NULL),
-('PB04', N'Phòng Kế Toán', '0987654321', NULL);
+('PB04', N'Phòng Kỹ Thuật', '0924250122', 'NV04'),
+('PB05', N'Phòng Y Tế', '0123456789', NULL);
 GO
-
 -- Thêm dữ liệu cho bảng HopDong
 INSERT INTO HopDong (MaHD, MaNV, LuongCoBan, NgayBD, NgayKT)
 VALUES
@@ -250,12 +247,12 @@ VALUES
 GO
 -- Cập nhật MaPB, MaCV, MaHD cho MaNV = 'NV01'
 UPDATE NhanVien
-SET MaPB = 'PB01', MaCV = 'CV01', MaHD = 'HD01'
+SET MaPB = 'PB01', MaCV = 'CV02', MaHD = 'HD01'
 WHERE MaNV = 'NV01';
 
 -- Cập nhật MaPB, MaCV, MaHD cho MaNV = 'NV02'
 UPDATE NhanVien
-SET MaPB = 'PB01', MaCV = 'CV02', MaHD = 'HD02'
+SET MaPB = 'PB02', MaCV = 'CV02', MaHD = 'HD02'
 WHERE MaNV = 'NV02';
 
 -- Cập nhật MaPB, MaCV, MaHD cho MaNV = 'NV03'
@@ -265,16 +262,16 @@ WHERE MaNV = 'NV03';
 
 -- Cập nhật MaPB, MaCV, MaHD cho MaNV = 'NV04'
 UPDATE NhanVien
-SET MaPB = 'PB03', MaCV = 'CV04', MaHD = 'HD04'
+SET MaPB = 'PB04', MaCV = 'CV02', MaHD = 'HD04'
 WHERE MaNV = 'NV04';
 GO
 -- Thêm dữ liệu cho bảng NguoiPhuThuoc
 INSERT INTO NguoiPhuThuoc (MaNV, HoTen, NgaySinh, QuanHe)
 VALUES
-('NV01', 'Nguyen Thi Minh', '2015-06-12', 'Con'),
-('NV02', 'Le Van Phuc', '2018-04-25', 'Con'),
-('NV03', 'Tran Van Hai', '2017-12-19', 'Con'),
-('NV04', 'Pham Thi Ha', '2020-01-01', 'Con');
+('NV01', N'Nguyễn Thị Minh', '2015-06-12', 'Con'),
+('NV02', N'Lê Văn Phúc', '2018-04-25', 'Con'),
+('NV03', N'Trần Văn Hải', '2017-12-19', 'Em trai'),
+('NV04', N'Phạm Thị Hà', '2020-01-01', 'Con');
 GO
 -- Thêm dữ liệu cho bảng Thang
 INSERT INTO Thang (MaThang, MoTa, SoNgayCongChuan)
@@ -296,7 +293,7 @@ VALUES
 GO
 INSERT INTO ctThuongPhat (MaNV, MaThuongPhat, MaThang, NgayThuongPhat)
 VALUES
-('NV01', 'TP01', '012023', '15'),
+('NV01', 'TP01', '102024', '15'),
 ('NV02', 'TP02', '022023', '10'),
 ('NV03', 'TP03', '032023', '20'),
 ('NV04', 'TP04', '042023', '05');
@@ -315,11 +312,33 @@ GO
 -- Thêm dữ liệu cho bảng ctChamCong
 INSERT INTO ctChamCong (MaNV, MaCC, MaThang, NgayChamCong)
 VALUES
-('NV01', 'CC01', '012023', '20'),
+('NV01', 'CC01', '102024', '20'),
 ('NV02', 'CC03', '022023', '18'),
 ('NV03', 'CC02', '032023', '10'),
-('NV04', 'CC04', '042023', '15');
--- drop table ctChamCong
+('NV04', 'CC04', '042023', '15'),
+('NV01', 'CC01', '102024', 1),
+('NV01', 'CC01', '102024', 2),
+('NV01', 'CC01', '102024', 3),
+('NV01', 'CC01', '102024', 4),
+('NV01', 'CC01', '102024', 5),
+('NV01', 'CC01', '102024', 6),
+('NV01', 'CC01', '102024', 7),
+('NV01', 'CC01', '102024', 8),
+('NV01', 'CC01', '102024', 9),
+('NV01', 'CC01', '102024', 10),
+('NV01', 'CC01', '102024', 11),
+('NV01', 'CC01', '102024', 12),
+('NV01', 'CC01', '102024', 13),
+('NV01', 'CC01', '102024', 14),
+('NV01', 'CC01', '102024', 15),
+('NV01', 'CC01', '102024', 16),
+('NV01', 'CC01', '102024', 17),
+('NV01', 'CC01', '102024', 18),
+('NV01', 'CC01', '102024', 19),
+('NV01', 'CC01', '102024', 20),
+('NV01', 'CC01', '102024', 21),
+('NV01', 'CC01', '102024', 22);
+
 GO
 -- Thêm dữ liệu cho bảng BaoHiem
 INSERT INTO BaoHiem (MaLoai, TenBH)
@@ -331,16 +350,16 @@ GO
 -- Thêm dữ liệu cho bảng ctBaoHiem
 INSERT INTO ctBaoHiem (MaNV, MaBH, MaLoai, NgayBD, NgayKT)
 VALUES
-('NV01', 'BH01', 'BH01', '2023-01-01', '2024-01-01'),
-('NV02', 'BH02', 'BH02', '2022-06-15', '2023-06-15'),
-('NV03', 'BH03', 'BH03', '2021-09-01', '2022-09-01'),
-('NV04', 'BH04', 'BH01', '2023-03-10', '2024-03-10');
+('NV01', 'HC9981234', 'BH01', '2023-01-01', '2024-01-01'),
+('NV02', '8723436537', 'BH02', '2022-06-15', '2023-06-15'),
+('NV03', 'TN20200003', 'BH03', '2021-09-01', '2022-09-01'),
+('NV04', 'SV20001234', 'BH01', '2023-03-10', '2024-03-10');
 GO
 -- check MaThang
 -- Thêm dữ liệu cho bảng NghiPhep
 INSERT INTO NghiPhep (MaNV, MaThang, NgayNghiPhep, GhiChu)
 VALUES
-('NV01', '012023', 2, N'Nghỉ phép thường niên'),
+('NV01', '102024', 2, N'Nghỉ phép thường niên'),
 ('NV02', '022023', 3, N'Nghỉ ốm'),
 ('NV03', '032023', 1, N'Nghỉ việc riêng'),
 ('NV04', '042023', 4, N'Nghỉ phép thường niên');
@@ -348,8 +367,8 @@ GO
 -- Thêm dữ liệu cho bảng LoaiTaiKhoan
 INSERT INTO LoaiTaiKhoan (MaLoai, Ten)
 VALUES
-('LTK01', 'Admin'),
-('LTK02', 'User'),
+('LTK01', 'QuanTriVien'),
+('LTK02', 'TruongPhong'),
 ('LTK03', 'NhanVien');
 GO
 -- Thêm dữ liệu cho bảng TaiKhoan
@@ -363,15 +382,15 @@ GO
 -- Thêm dữ liệu cho bảng PhuCap
 INSERT INTO PhuCap (MaPhuCap, LoaiPhuCap)
 VALUES
-('PC01', 'di lai'),
-('PC02', 'an trua'),
-('PC03', 'cho o');
+('PC01', N'Đi lại'),
+('PC02', N'Ăn trưa'),
+('PC03', N'Chỗ ở');
 GO
 -- Check MaThang
 -- Thêm dữ liệu cho bảng ctPhuCap
 INSERT INTO ctPhuCap (MaNV, MaPhuCap, MaThang, NgayPhuCap, SoTien)
 VALUES
-('NV01', 'PC01', '012023', 10, 500000),
+('NV01', 'PC01', '102024', 10, 500000),
 ('NV02', 'PC02', '022023', 15, 300000),
 ('NV03', 'PC03', '032023', 20, 400000),
 ('NV04', 'PC01', '042023', 25, 200000);
@@ -379,9 +398,17 @@ GO
 -- Chèn dữ liệu cho bảng Thông báo
 INSERT INTO ThongBao (TieuDe, NoiDung, MaPB, NgayGui)
 VALUES 
-('Thông báo 1', 'Nội dung thông báo 1', 'PB01', GETDATE()),
-('Thông báo 2', 'Nội dung thông báo 2', 'PB01', GETDATE()),
-('Thông báo 3', 'Nội dung thông báo 3', 'PB02', GETDATE());
+-- Thông báo của Phòng Kế Toán
+(N'Thông báo họp định kỳ', 
+ N'Phòng Kế Toán sẽ tổ chức họp định kỳ vào ngày 20/11/2024 tại phòng họp A. Nội dung: Báo cáo tài chính quý 4 và kế hoạch năm tới.', 
+ 'PB01', GETDATE()),
+-- Thông báo của Phòng Nhân Sự
+(N'Thông báo nghỉ lễ', 
+ N'Tất cả nhân viên được nghỉ lễ Giáng sinh từ ngày 24/12/2024 đến hết ngày 26/12/2024. Đề nghị hoàn thành công việc trước kỳ nghỉ.', 
+ 'PB02', GETDATE()),
+(N'Triển khai dự án mới', 
+ N'Phòng Kỹ Thuật sẽ triển khai dự án cải tiến hệ thống quản lý nhân sự từ tháng 12/2024. Liên hệ Trưởng phòng để biết thêm chi tiết.', 
+ 'PB03', GETDATE());
 GO
 -- TRIGGER --
 CREATE OR ALTER TRIGGER tg_TaiKhoan_UpdateMatKhauLogin
@@ -675,10 +702,6 @@ UPDATE NhanVien
 SET MaPB = 'PB04', MaCV = 'CV02'
 WHERE MaNV = 'NV04'
 GO
-SELECT * FROM PhongBan;
-SELECT * FROM NhanVien;
-GO
-
 CREATE OR ALTER TRIGGER tr_AddctChamCong
 ON ctChamCong
 INSTEAD OF INSERT
@@ -738,7 +761,8 @@ GO
 
 ---------- VIEW -----------------
 
-CREATE OR ALTER VIEW vw_QuanLyNhanVien AS SELECT nv.MaNV, nv.Ho, nv.Ten, nv.GioiTinh, nv.NgaySinh, nv.DiaChi, nv.SDT, nv.Email, nv.CCCD, pb.TenPB AS TenPhongBan, cv.TenCV AS TenChucVu
+CREATE OR ALTER VIEW vw_ThongTinNhanVien AS 
+SELECT nv.MaNV, nv.Ho, nv.Ten, nv.GioiTinh, nv.NgaySinh, nv.DiaChi, nv.SDT, nv.Email, nv.CCCD, pb.TenPB AS TenPhongBan, cv.TenCV AS TenChucVu
 FROM NhanVien nv JOIN PhongBan pb ON nv.MaPB = pb.MaPB JOIN ChucVu cv ON nv.MaCV = cv.MaCV;
 GO
 
@@ -842,7 +866,6 @@ BEGIN
 END;
 
 GO
-
 CREATE OR ALTER PROCEDURE sp_UpdateNhanVien
     @MaNV NVARCHAR(10), 
     @Ho NVARCHAR(50),
@@ -1038,8 +1061,8 @@ BEGIN
 		GROUP BY t.MaPB, t.SoThongBao, t.MaTrP
     RETURN;
 END;
+GO
 SELECT * FROM dbo.ft_XemChiTietPhongBan()
-
 GO
 
 ---//------
@@ -1066,7 +1089,7 @@ BEGIN
 END;
 GO
 SELECT * FROM dbo.ft_NhanVienNhanThongBao('NV03')	
-
+GO
 -- QUAN LY THONG BAO PRECEDURE --
 CREATE OR ALTER PROCEDURE sp_ThemThongBao
     @TieuDe NVARCHAR(100),
@@ -1121,9 +1144,9 @@ BEGIN
     -- Chèn dữ liệu vào bảng HopDong
     INSERT INTO HopDong (MaHD, MaNV, LuongCoBan, NgayBD, NgayKT)
     VALUES (@MaHD, @MaNV, @LuongCoBan, @NgayBD, @NgayKT);
-END
-GO
+END;
 
+GO
 CREATE OR ALTER   PROCEDURE sp_UpdateHopDong
     @MaHD nvarchar(10),
     @NgayBD DATE,
@@ -1150,6 +1173,7 @@ AS
 BEGIN
 	DELETE FROM HopDong 
 	WHERE MaHD = @MaHD;
+END;
 GO
 -- QUAN LY THUONG PHAT --
 
@@ -1311,9 +1335,7 @@ RETURN
 );
 GO
 SELECT * FROM dbo.ft_LocThuongPhatNhanVien('NV01', N'Thưởng')
-
-
-
+GO
 -- QUAN LY CHUC VU --
 
 CREATE OR ALTER PROCEDURE sp_AddChucVu
@@ -1955,32 +1977,6 @@ BEGIN
 END;
 GO
 -- EXEC sp_TinhLuongTheoThangTraVeNhieuBang @MaThang = '032023'
-
---------
-INSERT INTO ctChamCong (MaNV, MaCC, MaThang, NgayChamCong)
-VALUES ('NV01', 'CC01', '102024', 1),
-('NV01', 'CC01', '102024', 2),
-('NV01', 'CC01', '102024', 3),
-('NV01', 'CC01', '102024', 4),
-('NV01', 'CC01', '102024', 5),
-('NV01', 'CC01', '102024', 6),
-('NV01', 'CC01', '102024', 7),
-('NV01', 'CC01', '102024', 8),
-('NV01', 'CC01', '102024', 9),
-('NV01', 'CC01', '102024', 10),
-('NV01', 'CC01', '102024', 11),
-('NV01', 'CC01', '102024', 12),
-('NV01', 'CC01', '102024', 13),
-('NV01', 'CC01', '102024', 14),
-('NV01', 'CC01', '102024', 15),
-('NV01', 'CC01', '102024', 16),
-('NV01', 'CC01', '102024', 17),
-('NV01', 'CC01', '102024', 18),
-('NV01', 'CC01', '102024', 19),
-('NV01', 'CC01', '102024', 20),
-('NV01', 'CC01', '102024', 21),
-('NV01', 'CC01', '102024', 22);
-
 GO
 
 CREATE OR ALTER FUNCTION ft_TinhThamNien (@NgayBD DATE)
@@ -2078,9 +2074,6 @@ GRANT EXECUTE ON sp_GetChamCongByMaNV to DepartmentHead;
 GRANT EXECUTE ON sp_AddctChamCong to DepartmentHead; 
 GRANT EXECUTE ON sp_TinhLuongTheoThang to DepartmentHead;
 GRANT EXECUTE ON sp_GetThang to DepartmentHead;
-
-
-
 GO
 -- Quan ly
 CREATE LOGIN  NV01 WITH PASSWORD = 'password1', DEFAULT_DATABASE = [QLNSG21], CHECK_EXPIRATION = OFF, CHECK_POLICY = OFF;
