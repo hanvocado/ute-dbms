@@ -69,7 +69,7 @@ namespace DoAnNhom21
         {
             try
             {
-                using (SqlCommand command = new SqlCommand("AddPhuCap"))
+                using (SqlCommand command = new SqlCommand("sp_AddPhuCap"))
                 {
                     command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@MaPhuCap", this.txtMaPC.Text);
@@ -89,7 +89,7 @@ namespace DoAnNhom21
         {
             try
             {
-                using (SqlCommand command = new SqlCommand("DeletePhuCap"))
+                using (SqlCommand command = new SqlCommand("sp_DeletePhuCap"))
                 {
                     command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@MaPhuCap", this.txtMaPC.Text);
@@ -108,7 +108,7 @@ namespace DoAnNhom21
         {
             try
             {
-                using (SqlCommand command = new SqlCommand("UpdatePhuCap"))
+                using (SqlCommand command = new SqlCommand("sp_UpdatePhuCap"))
                 {
                     command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@MaPhuCap", this.txtMaPC.Text);
@@ -128,7 +128,7 @@ namespace DoAnNhom21
         {
             try
             {
-                using (SqlCommand command = new SqlCommand("AddctPhuCap"))
+                using (SqlCommand command = new SqlCommand("sp_AddctPhuCap"))
                 {
                     command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@MaNV", this.cbbMaNV.Text);
@@ -153,7 +153,7 @@ namespace DoAnNhom21
         {
             try
             {
-                using (SqlCommand command = new SqlCommand("DeletectPhuCap"))
+                using (SqlCommand command = new SqlCommand("sp_DeletectPhuCap"))
                 {
                     command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@MaNV", this.cbbMaNV.Text);
@@ -177,7 +177,7 @@ namespace DoAnNhom21
         {
             try
             {
-                using (SqlCommand command = new SqlCommand("UpdatectPhuCap"))
+                using (SqlCommand command = new SqlCommand("sp_UpdatectPhuCap"))
                 {
                     command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@MaNV", this.cbbMaNV.Text);

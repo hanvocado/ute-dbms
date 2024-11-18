@@ -76,9 +76,9 @@ namespace DoAnNhom21
             this.guna2GroupBox1.CustomBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(218)))), ((int)(((byte)(81)))), ((int)(((byte)(57)))));
             this.guna2GroupBox1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
             this.guna2GroupBox1.ForeColor = System.Drawing.Color.Black;
-            this.guna2GroupBox1.Location = new System.Drawing.Point(89, 157);
+            this.guna2GroupBox1.Location = new System.Drawing.Point(39, 12);
             this.guna2GroupBox1.Name = "guna2GroupBox1";
-            this.guna2GroupBox1.Size = new System.Drawing.Size(877, 225);
+            this.guna2GroupBox1.Size = new System.Drawing.Size(963, 238);
             this.guna2GroupBox1.TabIndex = 24;
             this.guna2GroupBox1.Text = "THÔNG BÁO ";
             // 
@@ -186,14 +186,15 @@ namespace DoAnNhom21
             this.guna2GroupBox2.CustomBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(218)))), ((int)(((byte)(81)))), ((int)(((byte)(57)))));
             this.guna2GroupBox2.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
             this.guna2GroupBox2.ForeColor = System.Drawing.Color.Black;
-            this.guna2GroupBox2.Location = new System.Drawing.Point(75, 418);
+            this.guna2GroupBox2.Location = new System.Drawing.Point(39, 256);
             this.guna2GroupBox2.Name = "guna2GroupBox2";
-            this.guna2GroupBox2.Size = new System.Drawing.Size(877, 225);
+            this.guna2GroupBox2.Size = new System.Drawing.Size(963, 439);
             this.guna2GroupBox2.TabIndex = 25;
             this.guna2GroupBox2.Text = "DANH SÁCH THÔNG BÁO";
             // 
             // dataGridViewThongBao
             // 
+            this.dataGridViewThongBao.AllowDrop = true;
             this.dataGridViewThongBao.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridViewThongBao.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewThongBao.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -201,13 +202,13 @@ namespace DoAnNhom21
             this.Column2,
             this.Column3,
             this.Column4});
-            this.dataGridViewThongBao.Location = new System.Drawing.Point(14, 46);
+            this.dataGridViewThongBao.Location = new System.Drawing.Point(27, 58);
             this.dataGridViewThongBao.Name = "dataGridViewThongBao";
             this.dataGridViewThongBao.ReadOnly = true;
             this.dataGridViewThongBao.RowHeadersVisible = false;
             this.dataGridViewThongBao.RowHeadersWidth = 51;
             this.dataGridViewThongBao.RowTemplate.Height = 24;
-            this.dataGridViewThongBao.Size = new System.Drawing.Size(839, 286);
+            this.dataGridViewThongBao.Size = new System.Drawing.Size(914, 363);
             this.dataGridViewThongBao.TabIndex = 5;
             this.dataGridViewThongBao.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewThongBao_CellContentClick);
             // 

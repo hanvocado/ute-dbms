@@ -409,7 +409,7 @@ VALUES
 (N'Triển khai dự án mới', 
  N'Phòng Kỹ Thuật sẽ triển khai dự án cải tiến hệ thống quản lý nhân sự từ tháng 12/2024. Liên hệ Trưởng phòng để biết thêm chi tiết.', 
  'PB03', GETDATE());
-GO
+GOs
 -- TRIGGER --
 CREATE OR ALTER TRIGGER tg_TaiKhoan_UpdateMatKhauLogin
 ON TaiKhoan
@@ -496,7 +496,7 @@ BEGIN
 	JOIN NhanVien ON inserted.MaNV = NhanVien.MaNV;
 END;
 GO
-
+-- Trigger thêm tài khoản khi thêm nhân viên mới
 CREATE OR ALTER TRIGGER tr_NhanVien_ThemTaiKhoan
 ON NhanVien
 AFTER INSERT
@@ -509,8 +509,7 @@ BEGIN
 
 END;
 GO
-
-
+-- Trigger tự động chấm công nghỉ phép có lương hoặc không lương khi nhân viên đăng ký nghỉ phép--
 CREATE OR ALTER TRIGGER tr_NghiPhep_ctChamCong_CheckNghiPhep
 ON NghiPhep
 AFTER INSERT
@@ -548,7 +547,7 @@ BEGIN
     VALUES (@MaNV, @MaCC, @MaThang, @NgayNghiPhep);
 END;
 GO
-
+-- Trigger kiểm tra ngày bắt đầu và ngày kết thúc bảo hiểm:
 CREATE OR ALTER TRIGGER tr_ctBaoHiem_KiemTraNgay
 ON ctBaoHiem
 AFTER INSERT, UPDATE
@@ -566,8 +565,9 @@ BEGIN
         ROLLBACK TRANSACTION;
     END
 END;
-
 GO
+-- Trigger kiểm tra mỗi phòng ban chỉ có một trưởng phòng, trưởng phòng của các phòng ban phải khác nhau 
+-- và đồng bộ MaTrP trong bảng PhongBan khi thông tin chức vụ của nhân viên được cập nhật--
 CREATE OR ALTER TRIGGER tr_NhanVien_CapNhatThongTinTruongPhong
 ON NhanVien
 AFTER UPDATE
@@ -671,6 +671,7 @@ BEGIN
     END
 END;
 GO
+
 -- TRIGGER THÊM THÔNG BÁO CHO NHÂN VIÊN NẾU CÓ THÊM THƯỞNG PHẠT--
 CREATE OR ALTER TRIGGER tr_ctThuongPhat_ThemThongBaoThuongPhat
 ON ctThuongPhat
@@ -683,41 +684,36 @@ BEGIN
     DECLARE @TieuDe NVARCHAR(100);
     DECLARE @NoiDung NVARCHAR(MAX);
     DECLARE @Loai NVARCHAR(50);
+	DECLARE @Ho NVARCHAR(50);
+	DECLARE @Ten NVARCHAR(50);
 
-    -- Lấy thông tin từ bản ghi vừa được thêm vào bảng ctThuongPhat
-    SELECT @MaNV = inserted.MaNV, @Loai = tp.Loai
+    -- Lấy thông tin từ bản ghi vừa được thêm
+    SELECT @MaNV = inserted.MaNV, @Loai = tp.Loai, @Ho = nv.Ho, @Ten = nv.Ten
     FROM inserted
-    JOIN ThuongPhat tp ON inserted.MaThuongPhat = tp.MaThuongPhat;
+    JOIN ThuongPhat tp ON inserted.MaThuongPhat = tp.MaThuongPhat
+	JOIN NhanVien nv ON nv.MaNV = inserted.MaNV
 
-    -- Lấy mã phòng ban của nhân viên
+    -- Lấy mã phòng ban
     SELECT @MaPB = MaPB
     FROM NhanVien
     WHERE MaNV = @MaNV;
 
-    -- Tạo thông báo dựa trên loại thưởng/phạt
+    -- Tạo thông báo
     SET @NgayGui = GETDATE();
     IF @Loai = N'Phạt'
     BEGIN
         SET @TieuDe = N'Có hình phạt';
-        SET @NoiDung = N'Nhân viên ' + @MaNV + N' đã nhận được một hình phạt.';
+        SET @NoiDung = @Ho + ' ' + @Ten + N' đã nhận được một hình phạt.';
     END
     ELSE IF @Loai = N'Thưởng'
     BEGIN
         SET @TieuDe = N'Có thưởng';
-        SET @NoiDung = N'Nhân viên ' + @MaNV + N' đã nhận được một phần thưởng.';
+        SET @NoiDung = @Ho + ' ' + @Ten + N' đã nhận được thưởng.';
     END
 
-    -- Thêm thông báo vào bảng ThongBao
-    INSERT INTO ThongBao (TieuDe, NoiDung, MaPB, NgayGui)
-    VALUES (@TieuDe, @NoiDung, @MaPB, @NgayGui);
+    -- Gọi thủ tục lưu trữ
+    EXEC sp_ThemThongBao @TieuDe, @NoiDung, @MaPB, @NgayGui;
 END;
-GO
--- Chèn dữ liệu vào bảng Thang
-INSERT INTO Thang (MaThang, MoTa, SoNgayCongChuan) VALUES ('202301', 'Tháng 1 năm 2023', 31);
-INSERT INTO Thang (MaThang, MoTa, SoNgayCongChuan) VALUES ('202302', 'Tháng 2 năm 2023', 28);
--- Chèn dữ liệu vào bảng ctThuongPhat
-INSERT INTO ctThuongPhat (MaNV, MaThuongPhat, MaThang, NgayThuongPhat) VALUES ('NV01', 'TP01', '202301', 15);
-INSERT INTO ctThuongPhat (MaNV, MaThuongPhat, MaThang, NgayThuongPhat) VALUES ('NV02', 'TP02', '202301', 20);
 GO
 -- TRIGGER THÊM THÔNG BÁO CHO NHÂN VIÊN NẾU NHẬN ĐƯỢC PHỤ CẤP--
 CREATE OR ALTER TRIGGER tr_ctPhuCap_ThemThongBaoPhuCap
@@ -725,12 +721,13 @@ ON ctPhuCap
 AFTER INSERT
 AS
 BEGIN
-    SET NOCOUNT ON;
-
     DECLARE @MaNV NVARCHAR(10),
             @MaPhuCap NVARCHAR(10),
             @LoaiPhuCap NVARCHAR(50),
+			@TieuDe NVARCHAR(100),
             @NgayPhuCap INT,
+			@MaPB NVARCHAR(10),
+			@NgayGui DATE,
             @NoiDung NVARCHAR(MAX),
 			@Ho NVARCHAR(50),
 			@Ten NVARCHAR(50);
@@ -742,10 +739,19 @@ BEGIN
     FROM PhuCap p 
     WHERE p.MaPhuCap = @MaPhuCap;
 
+	-- Lấy mã phòng ban
+    SELECT @MaPB = MaPB
+    FROM NhanVien
+    WHERE MaNV = @MaNV;
+
+    -- Tạo thông báo
+    SET @NgayGui = GETDATE();
+
+	SET @TieuDe =N'Thông báo phụ cấp';
     SET @NoiDung = @Ho + ' ' + @Ten + N' đã nhận được phụ cấp: ' + @LoaiPhuCap;
 
-    INSERT INTO ThongBao (TieuDe, NoiDung, MaPB, NgayGui)
-    VALUES (N'Thông báo phụ cấp', @NoiDung, (SELECT MaPB FROM NhanVien WHERE MaNV = @MaNV), GETDATE());
+    -- Gọi thủ tục lưu trữ
+    EXEC sp_ThemThongBao @TieuDe, @NoiDung, @MaPB, @NgayGui;
 END;
 GO
 -- TRIGGER THÊM THÔNG BÁO CHO NHÂN VIÊN NẾU NHÂN VIÊN ĐĂNG KÝ NGHỈ PHÉP--
@@ -820,7 +826,7 @@ BEGIN
 END;
 GO
 -- TRIGGER THÊM THÔNG BÁO CHO NHÂN VIÊN NẾU ĐƯỢC THĂNG CHỨC--
-CREATE OR ALTER TRIGGER tr_NhanVien_ThangChucVu
+CREATE OR ALTER TRIGGER tr_NhanVien_DoiChucVu
 ON NhanVien
 AFTER UPDATE
 AS
@@ -847,9 +853,9 @@ BEGIN
         WHERE MaNV = @MaNV;
 
         -- Tạo tiêu đề và nội dung thông báo
-        SET @TieuDe = N'Thông Báo Thăng Chức: ' + @Ho + ' ' + @Ten;
-        SET @NoiDung = @Ho + ' ' + @Ten + N' đã được thăng chức từ chức vụ ' + 
-                       (SELECT TenCV FROM ChucVu WHERE MaCV = @MaCVOld) + N' lên ' + 
+        SET @TieuDe = N'Thông Báo Chuyển Chức Vụ: ' + @Ho + ' ' + @Ten;
+        SET @NoiDung = @Ho + ' ' + @Ten + N' đã được chuyển từ chức vụ ' + 
+                       (SELECT TenCV FROM ChucVu WHERE MaCV = @MaCVOld) + N' sang ' + 
                        (SELECT TenCV FROM ChucVu WHERE MaCV = @MaCVNew) + '.';
 
         -- Chèn thông báo vào bảng ThongBao
@@ -897,13 +903,14 @@ BEGIN
     SET IDENTITY_INSERT ThongBao OFF;
 END;
 GO
+--
 -- TEST--
 INSERT INTO ctPhuCap (MaNV, MaPhuCap, MaThang, NgayPhuCap, SoTien)
 VALUES
-('NV02', 'PC03', '102024', 20, 500000);
+('NV02', 'PC01', '102024', 23, 500000);
 GO
 INSERT INTO NghiPhep (MaNV, MaThang, NgayNghiPhep, GhiChu)
-VALUES ('NV02', '102024', 15, 'Bệnh');
+VALUES ('NV02', '102024', 17, 'Bệnh');
 GO
 INSERT INTO ctChamCong (MaNV, MaCC, MaThang, NgayChamCong)
 VALUES ('NV01', 'CC01', '032023', 10);
@@ -913,8 +920,11 @@ SET MaCV = 'CV02'  -- Chức vụ mới
 WHERE MaNV = 'NV03'
 
 SELECT * FROM PhongBan
-SELECT * FROM dbo.ft_NhanVienNhanThongBao('NV02')
+SELECT * FROM dbo.ft_NhanVienNhanThongBao('NV01')
 SELECT * FROM ThongBao
+UPDATE NhanVien
+SET MaPB = 'PB02'
+WHERE MaNV = 'NV01';
 --
 GO
 CREATE OR ALTER TRIGGER tr_AddctChamCong
@@ -1675,7 +1685,7 @@ AS
         PRINT 'Xóa thành công!';
 END;
 GO
-
+---
 CREATE OR ALTER PROCEDURE sp_AddctPhuCap
   @MaNV NVARCHAR(10),
   @MaPhuCap NVARCHAR(10),
@@ -2233,7 +2243,158 @@ END;
 GO
 -- EXEC sp_TinhLuongTheoThangTraVeNhieuBang @MaThang = '032023'
 GO
+-- TÍNH LƯƠNG CHI TIẾT TẤT CẢ NHÂN VIÊN--
+CREATE OR ALTER PROCEDURE sp_TinhLuongChiTietTatCaNhanVien
+AS
+BEGIN
+    -- Bảng phụ tính toán chấm công
+    DECLARE @ChamCong TABLE (
+        MaNV VARCHAR(10),
+        MaThang VARCHAR(6),
+        SoNgayLamViec INT
+    );
 
+    INSERT INTO @ChamCong (MaNV, MaThang, SoNgayLamViec)
+    SELECT MaNV, MaThang, COUNT(*) AS SoNgayLamViec
+    FROM ctChamCong
+    WHERE MaCC = 'CC01'
+    GROUP BY MaNV, MaThang;
+
+    -- Bảng phụ người phụ thuộc
+    DECLARE @NguoiPhuThuoc TABLE (
+        MaNV VARCHAR(10),
+        SoNguoiPhuThuoc INT
+    );
+
+    INSERT INTO @NguoiPhuThuoc (MaNV, SoNguoiPhuThuoc)
+    SELECT MaNV, COUNT(*) AS SoNguoiPhuThuoc
+    FROM NguoiPhuThuoc
+    GROUP BY MaNV;
+
+    -- Bảng phụ phụ cấp
+    DECLARE @PhuCap TABLE (
+        MaNV VARCHAR(10),
+        MaThang VARCHAR(6),
+        TongPhuCap INT
+    );
+
+    INSERT INTO @PhuCap (MaNV, MaThang, TongPhuCap)
+    SELECT MaNV, MaThang, ISNULL(SUM(SoTien), 0)
+    FROM ctPhuCap
+    GROUP BY MaNV, MaThang;
+
+    -- Bảng phụ thưởng phạt
+    DECLARE @ThuongPhat TABLE (
+        MaNV VARCHAR(10),
+        MaThang VARCHAR(6),
+        TongThuongPhat INT
+    );
+
+    INSERT INTO @ThuongPhat (MaNV, MaThang, TongThuongPhat)
+    SELECT MaNV, MaThang, ISNULL(SUM(tp.SoTien), 0)
+    FROM ctThuongPhat ctp 
+    JOIN ThuongPhat tp ON ctp.MaThuongPhat = tp.MaThuongPhat
+    GROUP BY MaNV, MaThang;
+
+    -- Bảng phụ bảo hiểm
+    DECLARE @BaoHiem TABLE (
+        MaNV VARCHAR(10),
+        BH01 FLOAT,
+        BH02 FLOAT,
+        BH03 FLOAT
+    );
+
+    INSERT INTO @BaoHiem (MaNV, BH01, BH02, BH03)
+    SELECT bh.MaNV, 
+           SUM(CASE WHEN bh.MaLoai = 'BH01' THEN 0.015 * hd.LuongCoBan ELSE 0 END), 
+           SUM(CASE WHEN bh.MaLoai = 'BH02' THEN 0.01 * hd.LuongCoBan ELSE 0 END), 
+           SUM(CASE WHEN bh.MaLoai = 'BH03' THEN 0.08 * hd.LuongCoBan ELSE 0 END)
+    FROM ctBaoHiem bh
+    JOIN HopDong hd ON bh.MaNV = hd.MaNV
+    GROUP BY bh.MaNV;
+
+    -- Bảng phụ lương chịu thuế
+    DECLARE @LuongChiuThue TABLE (
+        MaNV VARCHAR(10),
+        MaThang VARCHAR(6),
+        LuongCoBan INT,
+        TongPhuCap INT,
+        TongThuongPhat INT,
+        TongTienBaoHiem INT,
+        SoNgayLamViec INT,
+        GiamTruGiaCanh INT,
+        ThuNhapChiuThue INT
+    );
+
+    INSERT INTO @LuongChiuThue (MaNV, MaThang, LuongCoBan, TongPhuCap, TongThuongPhat, TongTienBaoHiem, SoNgayLamViec, GiamTruGiaCanh, ThuNhapChiuThue)
+    SELECT  
+        nv.MaNV, th.MaThang, hd.LuongCoBan, 
+        ISNULL(pc.TongPhuCap, 0), ISNULL(tp.TongThuongPhat, 0),
+        ISNULL(bhct.BH01, 0) + ISNULL(bhct.BH02, 0) + ISNULL(bhct.BH03, 0) AS TongTienBaoHiem,
+        ISNULL(cc.SoNgayLamViec, 0),
+        ISNULL(npt.SoNguoiPhuThuoc, 0) * 4400000 AS GiamTruGiaCanh,
+        ( ( (hd.LuongCoBan / th.SoNgayCongChuan * ISNULL(cc.SoNgayLamViec, 0)) 
+          + ISNULL(pc.TongPhuCap, 0) + ISNULL(tp.TongThuongPhat, 0))
+          - (ISNULL(bhct.BH01, 0) + ISNULL(bhct.BH02, 0) + ISNULL(bhct.BH03, 0))
+- ISNULL(npt.SoNguoiPhuThuoc, 0) * 4400000
+        ) AS ThuNhapChiuThue
+    FROM NhanVien nv
+    JOIN HopDong hd ON nv.MaNV = hd.MaNV 
+    JOIN Thang th ON 1 = 1 
+    LEFT JOIN @ChamCong cc ON nv.MaNV = cc.MaNV AND cc.MaThang = th.MaThang
+    LEFT JOIN @NguoiPhuThuoc npt ON nv.MaNV = npt.MaNV
+    LEFT JOIN @PhuCap pc ON nv.MaNV = pc.MaNV AND pc.MaThang = th.MaThang
+    LEFT JOIN @ThuongPhat tp ON nv.MaNV = tp.MaNV AND tp.MaThang = th.MaThang
+    LEFT JOIN @BaoHiem bhct ON nv.MaNV = bhct.MaNV;
+
+    -- Bảng phụ tính lương thực lãnh
+    DECLARE @LuongThucLanh TABLE (
+        MaNV VARCHAR(10),
+        MaThang VARCHAR(6),
+        LuongThucTe INT,
+        ThueThuNhapCaNhan INT,
+        LuongThucLanh INT
+    );
+
+    INSERT INTO @LuongThucLanh (MaNV, MaThang, LuongThucTe, ThueThuNhapCaNhan, LuongThucLanh)
+    SELECT 
+        lct.MaNV, lct.MaThang,
+        ( (lct.LuongCoBan / th.SoNgayCongChuan * lct.SoNgayLamViec) 
+          + lct.TongPhuCap + lct.TongThuongPhat
+        ) AS LuongThucTe,
+        CASE 
+            WHEN lct.ThuNhapChiuThue <= 5000000 THEN lct.ThuNhapChiuThue * 5 / 100
+            WHEN lct.ThuNhapChiuThue <= 10000000 THEN lct.ThuNhapChiuThue * 10 / 100
+            WHEN lct.ThuNhapChiuThue <= 18000000 THEN lct.ThuNhapChiuThue * 15 / 100
+            WHEN lct.ThuNhapChiuThue <= 32000000 THEN lct.ThuNhapChiuThue * 20 / 100
+            WHEN lct.ThuNhapChiuThue <= 52000000 THEN lct.ThuNhapChiuThue * 25 / 100
+            WHEN lct.ThuNhapChiuThue <= 80000000 THEN lct.ThuNhapChiuThue * 30 / 100
+            ELSE lct.ThuNhapChiuThue * 35 / 100
+        END AS ThueThuNhapCaNhan,
+        ( lct.ThuNhapChiuThue - CASE 
+            WHEN lct.ThuNhapChiuThue <= 5000000 THEN lct.ThuNhapChiuThue * 5 / 100
+            WHEN lct.ThuNhapChiuThue <= 10000000 THEN lct.ThuNhapChiuThue * 10 / 100
+            WHEN lct.ThuNhapChiuThue <= 18000000 THEN lct.ThuNhapChiuThue * 15 / 100
+            WHEN lct.ThuNhapChiuThue <= 32000000 THEN lct.ThuNhapChiuThue * 20 / 100
+            WHEN lct.ThuNhapChiuThue <= 52000000 THEN lct.ThuNhapChiuThue * 25 / 100
+            WHEN lct.ThuNhapChiuThue <= 80000000 THEN lct.ThuNhapChiuThue * 30 / 100
+            ELSE lct.ThuNhapChiuThue * 35 / 100
+          END
+        ) AS LuongThucLanh
+    FROM @LuongChiuThue lct
+    JOIN Thang th ON lct.MaThang = th.MaThang;
+
+    -- Trả về các bảng phụ
+    SELECT * FROM @LuongChiuThue;
+    SELECT * FROM @LuongThucLanh;
+	SELECT * FROM @ChamCong; 
+    SELECT * FROM @PhuCap; 
+    SELECT * FROM @ThuongPhat; 
+    SELECT * FROM @BaoHiem; 
+END;
+
+GO
+--
 CREATE OR ALTER FUNCTION ft_TinhThamNien (@NgayBD DATE)
 RETURNS INT
 AS
@@ -2243,7 +2404,7 @@ BEGIN
     RETURN @ThamNien;
 END;
 GO
-
+--
 CREATE FUNCTION dbo.ft_SoNgayCongChuan (@MaThang VARCHAR(6))
 RETURNS INT
 AS
@@ -2278,12 +2439,7 @@ BEGIN
 
     RETURN @SoNgayLamViec;
 END;
-
 GO
-
-
-
-
 SELECT dbo.ft_SoNgayCongChuan('122024') AS SoNgayLamViec;
 
 DElete from ctChamCong WHERE MaNV = 'NV02';
