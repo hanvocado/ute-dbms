@@ -73,5 +73,7 @@ namespace DoAnNhom21
             OpenForm(new FormThongBaoPhongBan(this.maNv));
            
         }
+
+       
     }
 }

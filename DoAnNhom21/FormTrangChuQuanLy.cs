@@ -54,7 +54,7 @@ namespace DoAnNhom21
             }
             else if (cbbQuanLy.SelectedItem.ToString() == "Quản lý chấm công")
             {
-                OpenForm(new FormQuanLyBaoHiem());
+                OpenForm(new FormQuanLyChamCong());
             }
             else if (cbbQuanLy.SelectedItem.ToString() == "Quản lý phòng ban")
             {
@@ -80,8 +80,9 @@ namespace DoAnNhom21
             {
                 OpenForm(new FormQuanLyThangCong());
             }
+           
 
-            }
+        }
 
         private void btnDangXuat_Click(object sender, EventArgs e)
         {  
@@ -103,5 +104,11 @@ namespace DoAnNhom21
             OpenForm(new FormThongKeLuong());
         }
 
+        private void btnCapNhatMauKhau_Click(object sender, EventArgs e)
+        {
+           
+                OpenForm(new FormCapNhatMatKhau());
+            
+        }
     }
 }

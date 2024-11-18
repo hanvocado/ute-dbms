@@ -32,10 +32,10 @@ namespace DoAnNhom21
         {
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
             this.btnXemThongBao = new Guna.UI2.WinForms.Guna2Button();
-            this.btnChamCong = new Guna.UI2.WinForms.Guna2Button();
-            this.btnNghiPhep = new Guna.UI2.WinForms.Guna2Button();
             this.btnHopDong = new Guna.UI2.WinForms.Guna2Button();
             this.btnXemLuong = new Guna.UI2.WinForms.Guna2Button();
+            this.btnChamCong = new Guna.UI2.WinForms.Guna2Button();
+            this.btnNghiPhep = new Guna.UI2.WinForms.Guna2Button();
             this.btnDangXuat = new Guna.UI2.WinForms.Guna2Button();
             this.btnTrangChu = new Guna.UI2.WinForms.Guna2Button();
             this.pnlContent = new Guna.UI2.WinForms.Guna2Panel();
@@ -69,47 +69,13 @@ namespace DoAnNhom21
             this.btnXemThongBao.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(218)))), ((int)(((byte)(81)))), ((int)(((byte)(57)))));
             this.btnXemThongBao.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnXemThongBao.ForeColor = System.Drawing.Color.Black;
-            this.btnXemThongBao.Location = new System.Drawing.Point(1040, 4);
+            this.btnXemThongBao.Location = new System.Drawing.Point(1043, 9);
             this.btnXemThongBao.Margin = new System.Windows.Forms.Padding(4);
             this.btnXemThongBao.Name = "btnXemThongBao";
             this.btnXemThongBao.Size = new System.Drawing.Size(198, 72);
             this.btnXemThongBao.TabIndex = 10;
             this.btnXemThongBao.Text = "Xem Thông Báo";
             this.btnXemThongBao.Click += new System.EventHandler(this.btnXemThongBao_Click);
-            // 
-            // btnChamCong
-            // 
-            this.btnChamCong.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnChamCong.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnChamCong.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnChamCong.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnChamCong.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(218)))), ((int)(((byte)(81)))), ((int)(((byte)(57)))));
-            this.btnChamCong.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnChamCong.ForeColor = System.Drawing.Color.Black;
-            this.btnChamCong.Location = new System.Drawing.Point(826, 13);
-            this.btnChamCong.Margin = new System.Windows.Forms.Padding(4);
-            this.btnChamCong.Name = "btnChamCong";
-            this.btnChamCong.Size = new System.Drawing.Size(252, 55);
-            this.btnChamCong.TabIndex = 9;
-            this.btnChamCong.Text = "Chấm công";
-            this.btnChamCong.Click += new System.EventHandler(this.btnChamCong_Click);
-            // 
-            // btnNghiPhep
-            // 
-            this.btnNghiPhep.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnNghiPhep.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnNghiPhep.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnNghiPhep.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnNghiPhep.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(218)))), ((int)(((byte)(81)))), ((int)(((byte)(57)))));
-            this.btnNghiPhep.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnNghiPhep.ForeColor = System.Drawing.Color.Black;
-            this.btnNghiPhep.Location = new System.Drawing.Point(611, 14);
-            this.btnNghiPhep.Margin = new System.Windows.Forms.Padding(4);
-            this.btnNghiPhep.Name = "btnNghiPhep";
-            this.btnNghiPhep.Size = new System.Drawing.Size(252, 55);
-            this.btnNghiPhep.TabIndex = 8;
-            this.btnNghiPhep.Text = "Đăng ký nghỉ phép";
-            this.btnNghiPhep.Click += new System.EventHandler(this.btnNghiPhep_Click);
             // 
             // btnHopDong
             // 
@@ -120,7 +86,7 @@ namespace DoAnNhom21
             this.btnHopDong.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(218)))), ((int)(((byte)(81)))), ((int)(((byte)(57)))));
             this.btnHopDong.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnHopDong.ForeColor = System.Drawing.Color.Black;
-            this.btnHopDong.Location = new System.Drawing.Point(417, 14);
+            this.btnHopDong.Location = new System.Drawing.Point(637, 13);
             this.btnHopDong.Margin = new System.Windows.Forms.Padding(4);
             this.btnHopDong.Name = "btnHopDong";
             this.btnHopDong.Size = new System.Drawing.Size(176, 55);
@@ -137,13 +103,47 @@ namespace DoAnNhom21
             this.btnXemLuong.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(218)))), ((int)(((byte)(81)))), ((int)(((byte)(57)))));
             this.btnXemLuong.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnXemLuong.ForeColor = System.Drawing.Color.Black;
-            this.btnXemLuong.Location = new System.Drawing.Point(223, 14);
+            this.btnXemLuong.Location = new System.Drawing.Point(35, 14);
             this.btnXemLuong.Margin = new System.Windows.Forms.Padding(4);
             this.btnXemLuong.Name = "btnXemLuong";
             this.btnXemLuong.Size = new System.Drawing.Size(176, 55);
             this.btnXemLuong.TabIndex = 6;
             this.btnXemLuong.Text = "Xem lương";
             this.btnXemLuong.Click += new System.EventHandler(this.btnXemLuong_Click);
+            // 
+            // btnChamCong
+            // 
+            this.btnChamCong.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnChamCong.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnChamCong.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnChamCong.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnChamCong.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(218)))), ((int)(((byte)(81)))), ((int)(((byte)(57)))));
+            this.btnChamCong.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnChamCong.ForeColor = System.Drawing.Color.Black;
+            this.btnChamCong.Location = new System.Drawing.Point(219, 14);
+            this.btnChamCong.Margin = new System.Windows.Forms.Padding(4);
+            this.btnChamCong.Name = "btnChamCong";
+            this.btnChamCong.Size = new System.Drawing.Size(169, 46);
+            this.btnChamCong.TabIndex = 9;
+            this.btnChamCong.Text = "Chấm công";
+            this.btnChamCong.Click += new System.EventHandler(this.btnChamCong_Click);
+            // 
+            // btnNghiPhep
+            // 
+            this.btnNghiPhep.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnNghiPhep.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnNghiPhep.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnNghiPhep.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnNghiPhep.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(218)))), ((int)(((byte)(81)))), ((int)(((byte)(57)))));
+            this.btnNghiPhep.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNghiPhep.ForeColor = System.Drawing.Color.Black;
+            this.btnNghiPhep.Location = new System.Drawing.Point(406, 14);
+            this.btnNghiPhep.Margin = new System.Windows.Forms.Padding(4);
+            this.btnNghiPhep.Name = "btnNghiPhep";
+            this.btnNghiPhep.Size = new System.Drawing.Size(223, 55);
+            this.btnNghiPhep.TabIndex = 8;
+            this.btnNghiPhep.Text = "Đăng ký nghỉ phép";
+            this.btnNghiPhep.Click += new System.EventHandler(this.btnNghiPhep_Click);
             // 
             // btnDangXuat
             // 
@@ -154,7 +154,7 @@ namespace DoAnNhom21
             this.btnDangXuat.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(218)))), ((int)(((byte)(81)))), ((int)(((byte)(57)))));
             this.btnDangXuat.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDangXuat.ForeColor = System.Drawing.Color.Black;
-            this.btnDangXuat.Location = new System.Drawing.Point(1246, 14);
+            this.btnDangXuat.Location = new System.Drawing.Point(1249, 14);
             this.btnDangXuat.Margin = new System.Windows.Forms.Padding(4);
             this.btnDangXuat.Name = "btnDangXuat";
             this.btnDangXuat.Size = new System.Drawing.Size(151, 55);
@@ -216,6 +216,5 @@ namespace DoAnNhom21
         private Guna.UI2.WinForms.Guna2Panel pnlContent;
         private Guna.UI2.WinForms.Guna2Button btnChamCong;
         private Guna.UI2.WinForms.Guna2Button btnXemThongBao;
-        
     }
 }

@@ -24,7 +24,7 @@ namespace DoAnNhom21
 
         public static SqlConnection getConnection()
         {
-            return new SqlConnection(connectString);
+            return new SqlConnection(GetConnectionString(user,pass));
         }
 
         public static DataTable LoadDataTable(string query)

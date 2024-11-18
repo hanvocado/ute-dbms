@@ -59,7 +59,7 @@
             this.dataGridViewChamCong.RowHeadersVisible = false;
             this.dataGridViewChamCong.RowHeadersWidth = 51;
             this.dataGridViewChamCong.RowTemplate.Height = 24;
-            this.dataGridViewChamCong.Size = new System.Drawing.Size(865, 198);
+            this.dataGridViewChamCong.Size = new System.Drawing.Size(868, 325);
             this.dataGridViewChamCong.TabIndex = 4;
             // 
             // Column2
@@ -127,7 +127,7 @@
             this.txtMaNV.Location = new System.Drawing.Point(407, 83);
             this.txtMaNV.Name = "txtMaNV";
             this.txtMaNV.ReadOnly = true;
-            this.txtMaNV.Size = new System.Drawing.Size(310, 35);
+            this.txtMaNV.Size = new System.Drawing.Size(310, 30);
             this.txtMaNV.TabIndex = 12;
             // 
             // lblMaNV
@@ -136,7 +136,7 @@
             this.lblMaNV.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
             this.lblMaNV.Location = new System.Drawing.Point(238, 91);
             this.lblMaNV.Name = "lblMaNV";
-            this.lblMaNV.Size = new System.Drawing.Size(156, 27);
+            this.lblMaNV.Size = new System.Drawing.Size(127, 22);
             this.lblMaNV.TabIndex = 10;
             this.lblMaNV.Text = "Mã nhân viên: ";
             // 
@@ -148,13 +148,13 @@
             this.guna2GroupBox2.ForeColor = System.Drawing.Color.Black;
             this.guna2GroupBox2.Location = new System.Drawing.Point(69, 370);
             this.guna2GroupBox2.Name = "guna2GroupBox2";
-            this.guna2GroupBox2.Size = new System.Drawing.Size(877, 174);
+            this.guna2GroupBox2.Size = new System.Drawing.Size(877, 385);
             this.guna2GroupBox2.TabIndex = 11;
             this.guna2GroupBox2.Text = "DANH SÁCH CHẤM CÔNG";
             // 
             // FormChamCong
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(234)))), ((int)(((byte)(220)))));

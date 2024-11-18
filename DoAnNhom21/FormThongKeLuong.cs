@@ -35,7 +35,7 @@ namespace DoAnNhom21
             SqlCommand cmd = new SqlCommand("sp_TinhLuongTheoThang");
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@MaThang", cbbMaThang.SelectedValue);
-            //dgvLuong.DataSource = Connection.LoadDataTable(cmd);
+            dgvLuong.DataSource = Connection.LoadDataTable(cmd);
         }
 
         private void btnXemChiTiet_Click(object sender, EventArgs e)
