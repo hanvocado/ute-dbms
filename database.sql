@@ -409,7 +409,7 @@ VALUES
 (N'Triển khai dự án mới', 
  N'Phòng Kỹ Thuật sẽ triển khai dự án cải tiến hệ thống quản lý nhân sự từ tháng 12/2024. Liên hệ Trưởng phòng để biết thêm chi tiết.', 
  'PB03', GETDATE());
-GOs
+GO
 -- TRIGGER --
 CREATE OR ALTER TRIGGER tg_TaiKhoan_UpdateMatKhauLogin
 ON TaiKhoan
@@ -1043,25 +1043,6 @@ GO
 
 -- PROCEDURE --
 
--- CAP NHAT MAT KHAU--
-
-CREATE OR ALTER PROCEDURE sp_CapNhatMatKhauDangNhap
-    @TenDangNhap nvarchar(10),
-    @MatKhau nvarchar(255)
-AS
-BEGIN
-   
-        -- Update the password in the TaiKhoan table
-        UPDATE TaiKhoan
-        SET MatKhau = @MatKhau
-        WHERE TenDangNhap = @TenDangNhap;
-
-        
-END;
-GO
-EXEC sp_CapNhatMatKhauDangNhap @TenDangNhap = 'NV03', @MatKhau = 'NV04';
-SELECT * FROM TaiKhoan WHERE TenDangNhap = 'NV03';
-GO
 -- QUAN LY NHAN VIEN --
 CREATE OR ALTER PROCEDURE sp_AddNhanVien
     @MaNV NVARCHAR(10),
@@ -1336,7 +1317,7 @@ BEGIN
     VALUES (@TieuDe, @NoiDung, @MaPB, @NgayGui);
 END;
 GO
-
+-- Trigger Cập Nhật Thông Báo--
 CREATE OR ALTER PROCEDURE sp_CapNhatThongBao
     @Id INT,
     @TieuDe NVARCHAR(100),
@@ -1350,7 +1331,8 @@ BEGIN
     WHERE Id = @Id;
 END;
 GO
-
+-- TRIGGER Xóa Thông Báo--
+--
 CREATE OR ALTER PROCEDURE sp_XoaThongBao
     @Id INT
 AS
@@ -1869,7 +1851,28 @@ BEGIN
 		END
 END;
 GO
-
+-- QUAN LY NGUOI PHU THUOC
+CREATE OR ALTER PROCEDURE sp_AddNguoiPhuThuoc
+    @MaNV NVARCHAR(10),
+    @HoTen NVARCHAR(50),
+    @NgaySinh DATE,
+    @QuanHe NVARCHAR(50)
+AS
+BEGIN
+    -- Thêm thông tin người phụ thuộc mới
+    INSERT INTO NguoiPhuThuoc (MaNV, HoTen, NgaySinh, QuanHe)
+    VALUES (@MaNV, @HoTen, @NgaySinh, @QuanHe);
+END;
+GO
+CREATE OR ALTER PROCEDURE sp_DeleteNguoiPhuThuoc
+    @MaNV NVARCHAR(10),
+    @HoTen NVARCHAR(50)
+AS
+BEGIN
+    DELETE FROM NguoiPhuThuoc
+    WHERE MaNV = @MaNV AND HoTen = @HoTen;
+END;
+GO	
 -- QUAN LY BAO HIEM --
 CREATE OR ALTER PROCEDURE sp_GetctBaoHiemByMaNV
     @MaNV VARCHAR(10)
@@ -2463,10 +2466,6 @@ GRANT EXECUTE ON sp_GetChamCongByMaNV to Employee;
 GRANT EXECUTE ON sp_AddctChamCong to Employee; 
 GRANT EXECUTE ON sp_TinhLuongTheoThang to Employee;
 GRANT EXECUTE ON sp_GetThang to Employee;
-GRANT EXECUTE ON sp_CapNhatMatKhauDangNhap to Employee;
-
-
-
 
 CREATE ROLE DepartmentHead
 GO
