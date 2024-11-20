@@ -290,6 +290,9 @@
     <EmbeddedResource Include="FormThongBao.resx">
       <DependentUpon>FormThongBao.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormThongBaoNhanVien.resx">
+      <DependentUpon>FormThongBaoNhanVien.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormThongBaoPhongBan.resx">
       <DependentUpon>FormThongBaoPhongBan.cs</DependentUpon>
     </EmbeddedResource>

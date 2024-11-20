@@ -410,27 +410,25 @@ VALUES
  'PB03', GETDATE());
 GO
 -- TRIGGER --
-CREATE OR ALTER TRIGGER tg_TaiKhoan_UpdateMatKhauLogin
-ON TaiKhoan
-AFTER UPDATE
+-- Triggers thêm nhân viên thì thêm tài khoản--
+CREATE OR ALTER TRIGGER tg_NhanVien_ThemTaiKhoan
+ON NhanVien
+AFTER INSERT
 AS
 BEGIN
-  SET NOCOUNT ON;
-
-  IF UPDATE(MatKhau)
-  BEGIN
-    DECLARE @TenDangNhap nvarchar(10);
-    DECLARE @MatKhau nvarchar(255);
-
-    SELECT @TenDangNhap = i.TenDangNhap, @MatKhau = i.MatKhau
-    FROM inserted i;
-
-    DECLARE @sqlString nvarchar(2000);
-    SET @sqlString = 'ALTER LOGIN [' + @TenDangNhap + '] WITH PASSWORD=''' + @MatKhau + '''';
-    EXEC (@sqlString);
-  END
+	INSERT INTO TaiKhoan(TenDangNhap, MatKhau, MaLoai)
+	SELECT
+        inserted.MaNV,'123',
+        CASE
+            WHEN NhanVien.MaCV = 'CV01' THEN 'LTK01'
+            WHEN NhanVien.MaCV = 'CV02' THEN 'LTK02'
+		ELSE 'LTK03'
+        END AS MaLoai
+	FROM inserted
+	JOIN NhanVien ON inserted.MaNV = NhanVien.MaNV;
 END;
 GO
+-- Trigger thêm tài khoản thì thêm phân quyền --
 CREATE OR ALTER TRIGGER tg_TaiKhoan_ThemQuyen 
 ON TaiKhoan
 AFTER INSERT
@@ -478,36 +476,29 @@ BEGIN
     END CATCH
 END;
 GO
-CREATE OR ALTER TRIGGER tg_NhanVien_ThemTaiKhoan
-ON NhanVien
-AFTER INSERT
+--Trigger đồng bộ mật khẩu khi nhân viên đổi mật khẩu--
+CREATE OR ALTER TRIGGER tg_TaiKhoan_UpdateMatKhauLogin
+ON TaiKhoan
+AFTER UPDATE
 AS
 BEGIN
-	INSERT INTO TaiKhoan(TenDangNhap, MatKhau, MaLoai)
-	SELECT
-        inserted.MaNV,'123',
-        CASE
-            WHEN NhanVien.MaCV = 'CV01' THEN 'LTK01'
-            WHEN NhanVien.MaCV = 'CV02' THEN 'LTK02'
-		ELSE 'LTK03'
-        END AS MaLoai
-	FROM inserted
-	JOIN NhanVien ON inserted.MaNV = NhanVien.MaNV;
-END;
-GO
--- Trigger thêm tài khoản khi thêm nhân viên mới
-CREATE OR ALTER TRIGGER tr_NhanVien_ThemTaiKhoan
-ON NhanVien
-AFTER INSERT
-AS
-BEGIN
+  SET NOCOUNT ON;
 
-	INSERT INTO TaiKhoan(TenDangNhap, MatKhau, MaLoai)
-    SELECT i.MaNV, i.MaNV, 'NV'
+  IF UPDATE(MatKhau)
+  BEGIN
+    DECLARE @TenDangNhap nvarchar(10);
+    DECLARE @MatKhau nvarchar(255);
+
+    SELECT @TenDangNhap = i.TenDangNhap, @MatKhau = i.MatKhau
     FROM inserted i;
 
+    DECLARE @sqlString nvarchar(2000);
+    SET @sqlString = 'ALTER LOGIN [' + @TenDangNhap + '] WITH PASSWORD=''' + @MatKhau + '''';
+    EXEC (@sqlString);
+  END
 END;
 GO
+
 -- Trigger tự động chấm công nghỉ phép có lương hoặc không lương khi nhân viên đăng ký nghỉ phép--
 CREATE OR ALTER TRIGGER tr_NghiPhep_ctChamCong_CheckNghiPhep
 ON NghiPhep
@@ -565,8 +556,8 @@ BEGIN
     END
 END;
 GO
--- Trigger kiểm tra mỗi phòng ban chỉ có một trưởng phòng, trưởng phòng của các phòng ban phải khác nhau 
--- và đồng bộ MaTrP trong bảng PhongBan khi thông tin chức vụ của nhân viên được cập nhật--
+-- Trigger kiểm tra mỗi phòng ban chỉ có một trưởng phòng, đảm bảo MaTrP là duy nhất giữa các phòng ban và đồng bộ MaTrP 
+--trong bảng PhongBan khi có nhân viên được cập nhật--
 CREATE OR ALTER TRIGGER tr_NhanVien_CapNhatThongTinTruongPhong
 ON NhanVien
 AFTER UPDATE
@@ -670,7 +661,6 @@ BEGIN
     END
 END;
 GO
-
 -- TRIGGER THÊM THÔNG BÁO CHO NHÂN VIÊN NẾU CÓ THÊM THƯỞNG PHẠT--
 CREATE OR ALTER TRIGGER tr_ctThuongPhat_ThemThongBaoThuongPhat
 ON ctThuongPhat
@@ -753,13 +743,13 @@ BEGIN
     EXEC sp_ThemThongBao @TieuDe, @NoiDung, @MaPB, @NgayGui;
 END;
 GO
--- TRIGGER THÊM THÔNG BÁO CHO NHÂN VIÊN NẾU NHÂN VIÊN ĐĂNG KÝ NGHỈ PHÉP--
+-- Trigger thông báo cho nhân viên nếu nhân viên đăng ký nghỉ phép thành công--
 CREATE OR ALTER TRIGGER tr_NghiPhep_ThongBao
 ON NghiPhep
 AFTER INSERT
 AS
 BEGIN
-    DECLARE @MaNV NVARCHAR(10), @Ho NVARCHAR(50), @Ten NVARCHAR(50), @NgayNghiPhep INT, @MoTa NVARCHAR(MAX), @MaPB NVARCHAR(10);
+    DECLARE @MaNV NVARCHAR(10), @Ho NVARCHAR(50), @Ten NVARCHAR(50), @NgayNghiPhep INT, @MaPB NVARCHAR(10);
     DECLARE @TieuDe NVARCHAR(100), @NoiDung NVARCHAR(MAX);
     
     -- Lấy thông tin nhân viên từ bảng NhanVien và thông tin ngày nghỉ phép
@@ -767,28 +757,24 @@ BEGIN
         @MaNV = MaNV,
         @NgayNghiPhep = NgayNghiPhep
     FROM inserted;
-    
+
     -- Lấy tên, phòng ban và các thông tin khác của nhân viên
     SELECT 
         @Ho = Ho, 
         @Ten = Ten, 
-        @MoTa = MoTa,
         @MaPB = MaPB
     FROM NhanVien nv 
-    JOIN NghiPhep np ON nv.MaNV = np.MaNV
-    LEFT JOIN Thang t ON np.MaThang = t.MaThang
     WHERE nv.MaNV = @MaNV;
     
     -- Tạo tiêu đề và nội dung thông báo
     SET @TieuDe = N'Thông Báo Nghỉ Phép: ' + @Ho + ' ' + @Ten;
-    SET @NoiDung = @Ho + ' ' + @Ten + N' đã đăng ký nghỉ phép vào ngày ' + CAST(@NgayNghiPhep AS NVARCHAR(10)) + ' ' + @MoTa + '.';
+    SET @NoiDung = @Ho + ' ' + @Ten + N' đã đăng ký nghỉ phép vào ngày ' + CAST(@NgayNghiPhep AS NVARCHAR(10))
 
     -- Chèn thông báo vào bảng ThongBao
     INSERT INTO ThongBao (TieuDe, NoiDung, MaPB, NgayGui)
     VALUES (@TieuDe, @NoiDung, @MaPB, GETDATE());
 END;
 GO
-
 -- TRIGGER THÊM THÔNG BÁO CHO NHÂN VIÊN NẾU NHÂN VIÊN CHẤM CÔNG--
 CREATE OR ALTER TRIGGER tr_ctChamCong_ThongBao
 ON ctChamCong
@@ -827,7 +813,7 @@ BEGIN
 END;
 
 GO
--- TRIGGER THÊM THÔNG BÁO CHO NHÂN VIÊN NẾU ĐƯỢC THĂNG CHỨC--
+-- Trigger thông báo cho nhân viên nếu nhân viên đổi chức vụ--
 CREATE OR ALTER TRIGGER tr_NhanVien_DoiChucVu
 ON NhanVien
 AFTER UPDATE
@@ -868,42 +854,40 @@ END;
 GO
 --
 --TRIGGER UPDATE ID CỦA THÔNG BÁO --
-CREATE OR ALTER TRIGGER tr_UpdateThongBaoId
+DROP TRIGGER tr_UpdateThongBaoId
 ON ThongBao
 AFTER INSERT, DELETE
 AS
 BEGIN
     SET NOCOUNT ON;
 
-    -- Tạo bảng tạm để lưu trữ các thông báo còn lại
-    DECLARE @ThongBaoTemp TABLE (
-        NewId INT IDENTITY(1,1),
-        TieuDe NVARCHAR(100),
-        NoiDung NVARCHAR(MAX),
-        MaPB NVARCHAR(10),
-        NgayGui DATETIME
-    );
+    -- Kiểm tra nếu có thay đổi trong bảng (insert hoặc delete)
+    IF EXISTS (SELECT 1 FROM inserted) OR EXISTS (SELECT 1 FROM deleted)
+    BEGIN
+        -- Tạo bảng tạm để lưu trữ các thông báo hiện tại và thêm cột NewId
+        DECLARE @ThongBaoTemp TABLE (
+            Id INT,
+            NewId INT IDENTITY(1,1),
+            TieuDe NVARCHAR(100),
+            NoiDung NVARCHAR(MAX),
+            MaPB NVARCHAR(10),
+            NgayGui DATETIME
+        );
 
-    -- Chèn các thông báo còn lại vào bảng tạm
-    INSERT INTO @ThongBaoTemp (TieuDe, NoiDung, MaPB, NgayGui)
-    SELECT TieuDe, NoiDung, MaPB, NgayGui
-    FROM ThongBao
-    ORDER BY Id;
+        -- Chèn dữ liệu hiện tại vào bảng tạm
+        INSERT INTO @ThongBaoTemp (Id, TieuDe, NoiDung, MaPB, NgayGui)
+        SELECT Id, TieuDe, NoiDung, MaPB, NgayGui
+        FROM ThongBao
+        ORDER BY Id;
 
-    -- Xóa tất cả các thông báo trong bảng ThongBao
-    DELETE FROM ThongBao;
-
-    -- Bật IDENTITY_INSERT để chèn giá trị cụ thể vào cột IDENTITY
-    SET IDENTITY_INSERT ThongBao ON;
-
-    -- Chèn lại các thông báo từ bảng tạm vào bảng ThongBao với Id mới
-    INSERT INTO ThongBao (Id, TieuDe, NoiDung, MaPB, NgayGui)
-    SELECT NewId, TieuDe, NoiDung, MaPB, NgayGui
-    FROM @ThongBaoTemp;
-
-    -- Tắt IDENTITY_INSERT sau khi chèn xong
-    SET IDENTITY_INSERT ThongBao OFF;
+        -- Cập nhật Id trong bảng ThongBao dựa trên giá trị NewId từ bảng tạm
+        UPDATE T
+        SET T.Id = Temp.NewId
+        FROM ThongBao T
+        INNER JOIN @ThongBaoTemp Temp ON T.Id = Temp.Id;
+    END
 END;
+
 GO
 --
 -- TEST--
@@ -912,7 +896,7 @@ VALUES
 ('NV04', 'PC01', '102024', 23, 500000);
 GO
 INSERT INTO NghiPhep (MaNV, MaThang, NgayNghiPhep, GhiChu)
-VALUES ('NV04', '102024', 17, 'Bệnh');
+VALUES ('NV04', '102024', 18, 'Bệnh');
 GO
 INSERT INTO ctChamCong (MaNV, MaCC, MaThang, NgayChamCong)
 VALUES ('NV01', 'CC01', '032023', 11);
@@ -929,8 +913,42 @@ SET MaPB = 'PB02'
 WHERE MaNV = 'NV01';
 --
 GO
-CREATE OR ALTER TRIGGER tr_AddctChamCong
-ON ctChamCong
+--Trigger kiểm tra đăng ký nghỉ phép nếu trùng với ngày nghỉ chính thức của công ty thì thông báo cho nhân viên--
+CREATE OR ALTER TRIGGER tr_NghiPhep_CheckNgayLe
+ON NghiPhep
+INSTEAD OF INSERT
+AS
+BEGIN
+    DECLARE @MaNV NVARCHAR(10), @MaThang NVARCHAR(6), @NgayNghiPhep INT, @NgayPhepFull DATE;
+    SELECT @MaNV = i.MaNV, @MaThang = i.MaThang, @NgayNghiPhep = i.NgayNghiPhep
+    FROM inserted i;
+    -- Chuyển đổi ngày và tháng thành kiểu DATE để kiểm tra với ngày nghỉ lễ
+    SET @NgayPhepFull = DATEFROMPARTS(CONVERT(INT, RIGHT(@MaThang, 4)), CONVERT(INT, LEFT(@MaThang, 2)), @NgayNghiPhep);
+    -- Danh sách các ngày lễ cố định
+    IF @NgayPhepFull IN (
+        '2024-01-01',  -- Tết Dương lịch
+        '2024-04-30',  -- Ngày Giải phóng miền Nam
+        '2024-05-01',  -- Ngày Quốc tế Lao động
+        '2024-09-02',  -- Quốc khánh Việt Nam
+        '2024-12-31'   -- Ngày cuối năm
+        -- Thêm các ngày lễ khác vào đây nếu cần
+    )
+    BEGIN
+        RAISERROR('Ngày này là ngày lễ chính thức của công ty, không cần đăng ký nghỉ phép.', 16, 1);
+        RETURN;
+    END
+    ELSE
+    BEGIN
+        -- Chèn dữ liệu nếu ngày không trùng với ngày lễ
+        INSERT INTO NghiPhep (MaNV, MaThang, NgayNghiPhep, GhiChu)
+        SELECT MaNV, MaThang, NgayNghiPhep, GhiChu
+        FROM inserted;
+    END
+END;
+
+-- Trigger tự động tạo tháng và tính số ngày công chuẩn nếu tháng nhân viên thực hiện chấm công chưa tồn tại--
+CREATE OR ALTER TRIGGER [dbo].[tr_AddctChamCong]
+ON [dbo].[ctChamCong]
 INSTEAD OF INSERT
 AS
 BEGIN
@@ -961,47 +979,93 @@ BEGIN
 			VALUES (@MaThang, N'Tháng ' + @Thang + N' năm ' + @Nam, @SoNgayCongChuan);
 		END
 
-		-- Kiểm tra và Thêm record vào bảng ctChamCong
-		IF NOT EXISTS (SELECT 1 FROM ctChamCong WHERE MaNV = @MaNV 
-												 AND MaThang = @MaThang 
-												 AND NgayChamCong = @NgayChamCong)
-		BEGIN
-			INSERT INTO ctChamCong (MaNV, MaCC, MaThang, NgayChamCong)
-			VALUES (@MaNV, @MaCC, @MaThang, @NgayChamCong);
-		END
-		ELSE
-		BEGIN
-			RAISERROR('Đã chấm công cho ngày này', 16, 1);
+		DECLARE @NgayHienTai DATE = GETDATE(), @NgayCCFull DATE
+
+    SET @NgayCCFull = CONVERT(DATE, RIGHT(@MaThang, 4) + LEFT(@MaThang, 2) + RIGHT('00' + CAST(@NgayChamCong AS VARCHAR), 2), 112)
+
+    IF @NgayCCFull > @NgayHienTai and ( @MaCC = 'CC01' or @MaCC = 'CC02')
+        BEGIN
+			RAISERROR('Không thể chấm công đi làm cho ngày ở tương lai', 16, 1);
 			ROLLBACK TRANSACTION;
 			RETURN;
 		END
-		COMMIT TRANSACTION;
+    ELSE
+        BEGIN
+			-- Kiểm tra và Thêm record vào bảng ctChamCong
+			IF NOT EXISTS (SELECT 1 FROM ctChamCong WHERE MaNV = @MaNV 
+													 AND MaThang = @MaThang 
+													 AND NgayChamCong = @NgayChamCong)
+			BEGIN
+				INSERT INTO ctChamCong (MaNV, MaCC, MaThang, NgayChamCong)
+				VALUES (@MaNV, @MaCC, @MaThang, @NgayChamCong);
+			END
+			ELSE
+			BEGIN
+				RAISERROR('Đã chấm công cho ngày này', 16, 1);
+				ROLLBACK TRANSACTION;
+				RETURN;
+			END
+			COMMIT TRANSACTION;
+		END
 	END TRY
-	BEGIN CATCH
-		RAISERROR('Có lỗi, vui lòng thử lại.', 16, 1);
-		ROLLBACK TRANSACTION;
-	END CATCH;
+  BEGIN CATCH
+    DECLARE @ErrorMessage NVARCHAR(4000);
+    SET @ErrorMessage = ERROR_MESSAGE();
+    PRINT 'Error Message: ' + @ErrorMessage;
+
+    ROLLBACK TRANSACTION;
+  END CATCH;
+END;
+-- Hàm tính số ngày công chuẩn (số ngày làm việc không tính thứ bảy, chủ nhật):--
+CREATE OR ALTER FUNCTION dbo.ft_SoNgayCongChuan (@MaThang VARCHAR(6))
+RETURNS INT
+AS
+BEGIN
+    DECLARE @SoNgayLamViec INT = 0;
+    DECLARE @NgayBatDau DATE;
+    DECLARE @NgayKetThuc DATE;
+    DECLARE @NgayHienTai DATE;
+    DECLARE @Thang INT;
+    DECLARE @Nam INT;
+
+    -- Lấy tháng và năm từ MaThang
+    SET @Thang = CAST(SUBSTRING(@MaThang, 1, 2) AS INT);
+    SET @Nam = CAST(SUBSTRING(@MaThang, 3, 4) AS INT);
+
+    -- Xác định ngày bắt đầu và ngày kết thúc của tháng
+    SET @NgayBatDau = DATEFROMPARTS(@Nam, @Thang, 1);
+    SET @NgayKetThuc = EOMONTH(@NgayBatDau);
+
+    -- Duyệt qua từng ngày trong tháng
+    SET @NgayHienTai = @NgayBatDau;
+    WHILE @NgayHienTai <= @NgayKetThuc
+    BEGIN
+        -- Nếu là thứ Hai đến thứ Sáu tăng biến đếm số ngày làm việc
+        IF DATEPART(WEEKDAY, @NgayHienTai) BETWEEN 2 AND 6
+        BEGIN
+            SET @SoNgayLamViec = @SoNgayLamViec + 1;
+        END
+        -- Chuyển sang ngày tiếp theo
+        SET @NgayHienTai = DATEADD(DAY, 1, @NgayHienTai);
+    END
+
+    RETURN @SoNgayLamViec;
 END;
 GO
-
 --------- END TRIGGER -------------
 
 ---------- VIEW -----------------
-
+-- Hiển thị thông tin nhân viên-- 
 CREATE OR ALTER VIEW vw_ThongTinNhanVien AS 
 SELECT nv.MaNV, nv.Ho, nv.Ten, nv.GioiTinh, nv.NgaySinh, nv.DiaChi, nv.SDT, nv.Email, nv.CCCD, pb.TenPB AS TenPhongBan, cv.TenCV AS TenChucVu
 FROM NhanVien nv JOIN PhongBan pb ON nv.MaPB = pb.MaPB JOIN ChucVu cv ON nv.MaCV = cv.MaCV;
 GO
-
+-- Hiển thị thông tin các loại bảo hiểm --
 CREATE OR ALTER VIEW vw_QuanLyBaoHiem AS
 SELECT nv.MaNV, nv.Ho, nv.Ten, bh.TenBH, ctbh.MaBH, ctbh.NgayBD, ctbh.NgayKT
 FROM NhanVien nv JOIN ctBaoHiem ctbh ON nv.MaNV = ctbh.MaNV JOIN BaoHiem bh ON ctbh.MaLoai = bh.MaLoai;
 GO
-
-CREATE OR ALTER VIEW vw_QuanLyHopDong AS SELECT nv.MaNV, nv.Ho, nv.Ten, hd.MaHD, hd.LuongCoBan, hd.NgayBD
-AS NgayBatDauHopDong, hd.NgayKT AS NgayKetThucHopDong FROM NhanVien nv JOIN HopDong hd ON nv.MaHD = hd.MaHD;
-GO
-
+--- 
 CREATE OR ALTER VIEW vw_ChamCongNhanVien AS
 SELECT nv.MaNV as MaNhanVien, nv.Ho as Ho, nv.Ten as Ten, ctcc.NgayChamCong
 FROM ctChamCong ctcc
@@ -2497,7 +2561,7 @@ GRANT SELECT, REFERENCES ON ctChamCong TO Employee
 GRANT SELECT, REFERENCES ON ctBaoHiem TO Employee
 GRANT SELECT, INSERT, REFERENCES ON NghiPhep TO Employee
 GRANT SELECT, UPDATE, REFERENCES ON TaiKhoan TO Employee
-
+GRANT SELECT, INSERT, UPDATE, DELETE, REFERENCES ON ThongBao TO Employee
 
 GRANT SELECT ON  vw_ThongTinNhanVien to Employee
 GRANT SELECT ON  vw_ThongTinHopDong to Employee
@@ -2517,11 +2581,12 @@ GRANT SELECT, REFERENCES ON ctChamCong TO DepartmentHead
 GRANT SELECT, REFERENCES ON ctBaoHiem TO DepartmentHead
 GRANT SELECT, INSERT, REFERENCES ON NghiPhep TO DepartmentHead
 GRANT SELECT, UPDATE, REFERENCES ON TaiKhoan TO DepartmentHead
+GRANT SELECT, INSERT, UPDATE, DELETE, REFERENCES ON ThongBao TO DepartmentHead
 
 GRANT SELECT ON  vw_ThongTinNhanVien to DepartmentHead
 GRANT SELECT ON  vw_ThongTinHopDong to DepartmentHead
 
-GRANT SELECT on ft_TruongPhongNhanThongBao to Employee;
+GRANT SELECT ON ft_TruongPhongNhanThongBao to DepartmentHead;
 GRANT SELECT ON ft_NhanVienNhanThongBao TO DepartmentHead;
 GRANT EXECUTE ON sp_GetNghiPhepByMaNV to DepartmentHead;
 GRANT EXECUTE ON sp_GetChamCongByMaNV to DepartmentHead;

@@ -31,7 +31,16 @@ namespace DoAnNhom21
                     command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@MaNV", this.txtMaNV.Text);
                     command.Parameters.AddWithValue("@MaThang", this.cbbThang.SelectedValue.ToString());
-                    command.Parameters.AddWithValue("@NgayNghiPhep", this.txtNgayNghi.Text);
+                    int value;
+                    if (int.TryParse(this.txtNgayNghi.Text, out value))
+                    {
+                        command.Parameters.AddWithValue("@NgayNghiPhep", value);
+                    }
+                    else
+                    {
+                        // Lỗi, xử lý khi giá trị không hợp lệ
+                        MessageBox.Show("Giá trị trong nhãn không hợp lệ!");
+                    }
                     command.Parameters.AddWithValue("@GhiChu", this.txtLyDo.Text);
                     Connection.ExecuteCommand(command);
                     load();

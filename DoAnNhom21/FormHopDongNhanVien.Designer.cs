@@ -86,7 +86,7 @@
             this.btnThoat.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnThoat.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(8)))), ((int)(((byte)(23)))));
             this.btnThoat.Location = new System.Drawing.Point(923, 436);
-            this.btnThoat.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnThoat.Margin = new System.Windows.Forms.Padding(4);
             this.btnThoat.Name = "btnThoat";
             this.btnThoat.Size = new System.Drawing.Size(147, 41);
             this.btnThoat.TabIndex = 20;
