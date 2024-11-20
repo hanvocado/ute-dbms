@@ -58,6 +58,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.BackColor = System.Drawing.Color.White;
             this.groupBox2.Controls.Add(this.btnLamMoi);
             this.groupBox2.Controls.Add(this.btnThoat);
             this.groupBox2.Controls.Add(this.btnXoa);
@@ -80,7 +81,6 @@
             this.btnLamMoi.Size = new System.Drawing.Size(142, 39);
             this.btnLamMoi.TabIndex = 7;
             this.btnLamMoi.Text = "Làm mới";
-            this.btnLamMoi.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnLamMoi.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnLamMoi.UseVisualStyleBackColor = false;
             this.btnLamMoi.Click += new System.EventHandler(this.btnLamMoi_Click);
@@ -95,7 +95,6 @@
             this.btnThoat.Size = new System.Drawing.Size(142, 39);
             this.btnThoat.TabIndex = 8;
             this.btnThoat.Text = "Thoát";
-            this.btnThoat.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnThoat.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnThoat.UseVisualStyleBackColor = false;
             this.btnThoat.Click += new System.EventHandler(this.btnThoat_Click);
@@ -110,7 +109,6 @@
             this.btnXoa.Size = new System.Drawing.Size(142, 39);
             this.btnXoa.TabIndex = 10;
             this.btnXoa.Text = "Xoá";
-            this.btnXoa.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnXoa.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnXoa.UseVisualStyleBackColor = false;
             this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
@@ -125,13 +123,13 @@
             this.btnThem.Size = new System.Drawing.Size(142, 39);
             this.btnThem.TabIndex = 11;
             this.btnThem.Text = "Thêm";
-            this.btnThem.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnThem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnThem.UseVisualStyleBackColor = false;
             this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
             // 
             // groupBox1
             // 
+            this.groupBox1.BackColor = System.Drawing.Color.White;
             this.groupBox1.Controls.Add(this.pictureBox1);
             this.groupBox1.Controls.Add(this.cbbQuanHe);
             this.groupBox1.Controls.Add(this.dateTimePickerNgaySinh);
@@ -142,9 +140,10 @@
             this.groupBox1.Controls.Add(this.lblHoTen);
             this.groupBox1.Controls.Add(this.lblMaNV);
             this.groupBox1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.groupBox1.Location = new System.Drawing.Point(392, 40);
+            this.groupBox1.Location = new System.Drawing.Point(392, 12);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 20, 3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(775, 254);
+            this.groupBox1.Size = new System.Drawing.Size(775, 282);
             this.groupBox1.TabIndex = 15;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "THÔNG TIN NGƯỜI PHỤ THUỘC ";
@@ -308,6 +307,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(234)))), ((int)(((byte)(220)))));
             this.ClientSize = new System.Drawing.Size(1395, 829);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);

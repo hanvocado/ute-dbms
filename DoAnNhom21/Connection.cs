@@ -21,7 +21,7 @@ namespace DoAnNhom21
         {
             return connectString + ";User Id=" + user + ";Password=" + pass;
         }
-
+        
         public static SqlConnection getConnection()
         {
             return new SqlConnection(GetConnectionString(user,pass));

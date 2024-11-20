@@ -70,8 +70,13 @@ namespace DoAnNhom21
 
         private void btnXemThongBao_Click(object sender, EventArgs e)
         {
-            OpenForm(new FormThongBaoPhongBan(this.maNv));
+            OpenForm(new FormThongBaoNhanVien(this.maNv));
            
+        }
+
+        private void guna2Button1_Click(object sender, EventArgs e)
+        {
+            OpenForm(new FormThongBaoPhongBan(this.maNv));
         }
     }
 }

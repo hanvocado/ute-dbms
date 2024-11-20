@@ -26,8 +26,7 @@ namespace DoAnNhom21.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DESKTOP-0PJCAJ8\\SQLEXPRESS;Initial Catalog=QLNSG21;Integrated Securit" +
-            "y=True;Encrypt=False")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DESKTOP-0PJCAJ8\\SQLEXPRESS;Initial Catalog=QLNSG21;")]
         public string ConnectionString {
             get {
                 return ((string)(this["ConnectionString"]));
@@ -37,8 +36,7 @@ namespace DoAnNhom21.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DESKTOP-0PJCAJ8\\SQLEXPRESS;Initial Catalog=QLNSG21;Integrated Securit" +
-            "y=True;Encrypt=False")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DESKTOP-0PJCAJ8\\SQLEXPRESS;Initial Catalog=QLNSG21;")]
         public string AuthConnStr {
             get {
                 return ((string)(this["AuthConnStr"]));

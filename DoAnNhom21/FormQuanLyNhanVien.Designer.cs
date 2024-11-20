@@ -99,10 +99,10 @@
             this.guna2Panel1.Controls.Add(this.btnXemChiTiet);
             this.guna2Panel1.Controls.Add(this.btnLamMoi);
             this.guna2Panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.guna2Panel1.Location = new System.Drawing.Point(0, 778);
+            this.guna2Panel1.Location = new System.Drawing.Point(0, 757);
             this.guna2Panel1.Margin = new System.Windows.Forms.Padding(4);
             this.guna2Panel1.Name = "guna2Panel1";
-            this.guna2Panel1.Size = new System.Drawing.Size(1413, 98);
+            this.guna2Panel1.Size = new System.Drawing.Size(1392, 94);
             this.guna2Panel1.TabIndex = 8;
             // 
             // guna2Button1
@@ -235,10 +235,10 @@
             this.guna2GroupBox3.CustomBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(218)))), ((int)(((byte)(81)))), ((int)(((byte)(57)))));
             this.guna2GroupBox3.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
             this.guna2GroupBox3.ForeColor = System.Drawing.Color.Black;
-            this.guna2GroupBox3.Location = new System.Drawing.Point(87, 48);
+            this.guna2GroupBox3.Location = new System.Drawing.Point(87, 59);
             this.guna2GroupBox3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.guna2GroupBox3.Name = "guna2GroupBox3";
-            this.guna2GroupBox3.Size = new System.Drawing.Size(1255, 370);
+            this.guna2GroupBox3.Size = new System.Drawing.Size(1255, 390);
             this.guna2GroupBox3.TabIndex = 27;
             this.guna2GroupBox3.Text = "THÔNG TIN NHÂN VIÊN";
             // 
@@ -728,7 +728,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(234)))), ((int)(((byte)(220)))));
-            this.ClientSize = new System.Drawing.Size(1413, 876);
+            this.ClientSize = new System.Drawing.Size(1413, 850);
             this.Controls.Add(this.guna2GroupBox1);
             this.Controls.Add(this.guna2GroupBox3);
             this.Controls.Add(this.guna2Panel1);
