@@ -267,6 +267,29 @@ namespace DoAnNhom21
             }
         }
 
-       
+        private void dataGridViewTP_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridViewRow row = dataGridViewTP.Rows[e.RowIndex];
+
+            // Hiển thị thông tin của hàng được chọn
+            txtMaTP.Text = row.Cells["Column1"].Value.ToString();
+            cbbLoai.Text = row.Cells["Column2"].Value.ToString();
+            txtTien.Text = row.Cells["Column3"].Value.ToString();
+            txtLyDo.Text = row.Cells["Column4"].Value.ToString();
+           
+            /*cbbLoai.Text = row.Cells["Column5"].Value.ToString();*/
+        }
+
+        private void dataGridViewCTTP_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridViewRow row = dataGridViewCTTP.Rows[e.RowIndex];
+
+            // Hiển thị thông tin của hàng được chọn
+            cbbMaNV.Text = row.Cells["dataGridViewTextBoxColumn1"].Value.ToString();
+            cbbMaTP.Text = row.Cells["dataGridViewTextBoxColumn2"].Value.ToString();
+            cbbMaThang.Text = row.Cells["dataGridViewTextBoxColumn3"].Value.ToString();
+            txtNgayTP.Text = row.Cells["dataGridViewTextBoxColumn4"].Value.ToString();
+
+        }
     }
 }

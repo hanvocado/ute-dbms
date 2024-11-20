@@ -32,7 +32,6 @@ namespace DoAnNhom21
             cbbChucVu.DataSource = Connection.LoadDataTable(chucvu);
             cbbChucVu.ValueMember = "MaCV";
             cbbChucVu.DisplayMember = "TenCV";
-
         
     }
 

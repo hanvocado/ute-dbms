@@ -1,6 +1,8 @@
-﻿namespace DoAnNhom21
+﻿using System;
+
+namespace DoAnNhom21
 {
-    partial class FormThongBaoPhongBan
+    partial class FormThongBaoNhanVien
     {
         /// <summary>
         /// Required designer variable.
@@ -133,21 +135,23 @@
             this.btnXemThongBao.Text = "Xem thông báo";
             this.btnXemThongBao.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnXemThongBao.UseVisualStyleBackColor = false;
-            this.btnXemThongBao.Click += new System.EventHandler(this.btnXemThongBao1_Click);
+            this.btnXemThongBao.Click += new System.EventHandler(this.btnXemThongBao_Click);
             // 
-            // FormThongBaoPhongBan
+            // FormThongBaoNhanVien
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1234, 570);
             this.Controls.Add(this.btnXemThongBao);
             this.Controls.Add(this.guna2DataGridViewThongBao);
-            this.Name = "FormThongBaoPhongBan";
-            this.Text = "FormThongBaoPhongBan";
+            this.Name = "FormThongBaoNhanVien";
+            this.Text = "FormThongBaoNhanVien";
             ((System.ComponentModel.ISupportInitialize)(this.guna2DataGridViewThongBao)).EndInit();
             this.ResumeLayout(false);
 
         }
+
+        
 
         #endregion
 

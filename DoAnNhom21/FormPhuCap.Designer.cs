@@ -190,7 +190,6 @@ namespace DoAnNhom21
             this.btnXoa.Size = new System.Drawing.Size(63, 34);
             this.btnXoa.TabIndex = 3;
             this.btnXoa.Text = "Xoá";
-            this.btnXoa.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnXoa.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnXoa.UseVisualStyleBackColor = false;
             this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
@@ -382,7 +381,6 @@ namespace DoAnNhom21
             this.btnLoc.Size = new System.Drawing.Size(63, 34);
             this.btnLoc.TabIndex = 3;
             this.btnLoc.Text = "Lọc";
-            this.btnLoc.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnLoc.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnLoc.UseVisualStyleBackColor = false;
             // 
@@ -397,7 +395,6 @@ namespace DoAnNhom21
             this.btnSuact.Size = new System.Drawing.Size(63, 34);
             this.btnSuact.TabIndex = 3;
             this.btnSuact.Text = "Sửa";
-            this.btnSuact.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnSuact.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSuact.UseVisualStyleBackColor = false;
             this.btnSuact.Click += new System.EventHandler(this.btnSuact_Click);
@@ -429,7 +426,6 @@ namespace DoAnNhom21
             this.btnXoact.Size = new System.Drawing.Size(63, 34);
             this.btnXoact.TabIndex = 3;
             this.btnXoact.Text = "Xoá";
-            this.btnXoact.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnXoact.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnXoact.UseVisualStyleBackColor = false;
             this.btnXoact.Click += new System.EventHandler(this.btnXoact_Click);
@@ -512,6 +508,7 @@ namespace DoAnNhom21
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(234)))), ((int)(((byte)(220)))));
             this.ClientSize = new System.Drawing.Size(1256, 622);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox5);

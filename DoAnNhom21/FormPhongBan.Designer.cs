@@ -78,6 +78,7 @@ namespace DoAnNhom21
             this.dataGridViewPhongBan.RowTemplate.Height = 24;
             this.dataGridViewPhongBan.Size = new System.Drawing.Size(865, 159);
             this.dataGridViewPhongBan.TabIndex = 4;
+            this.dataGridViewPhongBan.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewPhongBan_CellContentClick);
             // 
             // Column1
             // 
@@ -293,7 +294,7 @@ namespace DoAnNhom21
             this.btnThem.Text = "Thêm";
             this.btnThem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnThem.UseVisualStyleBackColor = false;
-            this.btnThem.Click+= new System.EventHandler(this.btnThem_Click);
+            this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
             // 
             // btnXoa
             // 
@@ -307,7 +308,7 @@ namespace DoAnNhom21
             this.btnXoa.Text = "Xoá";
             this.btnXoa.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnXoa.UseVisualStyleBackColor = false;
-            this.btnXoa.Click+= new System.EventHandler(this.btnXoa_Click);
+            this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
             // 
             // btnThoat
             // 
@@ -351,13 +352,14 @@ namespace DoAnNhom21
             this.Name = "FormPhongBan";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Phòng Ban";
+            this.Load += new System.EventHandler(this.FormPhongBan_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPhongBan)).EndInit();
             this.guna2GroupBox1.ResumeLayout(false);
             this.guna2GroupBox1.PerformLayout();
+
             this.guna2GroupBox2.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.Load += new System.EventHandler(this.FormPhongBan_Load);
 
         }
 

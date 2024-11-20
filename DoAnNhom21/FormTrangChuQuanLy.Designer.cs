@@ -36,9 +36,9 @@ namespace DoAnNhom21
             this.guna2Elipse1 = new Guna.UI2.WinForms.Guna2Elipse(this.components);
             this.pnlContent = new Guna.UI2.WinForms.Guna2Panel();
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
+            this.btnCapNhatMauKhau = new Guna.UI2.WinForms.Guna2Button();
             this.btnThongKeLuong = new Guna.UI2.WinForms.Guna2Button();
             this.btnDangXuat = new Guna.UI2.WinForms.Guna2Button();
-            this.btnCapNhatMauKhau = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -75,7 +75,7 @@ namespace DoAnNhom21
             this.cbbQuanLy.ItemsAppearance.BackColor = System.Drawing.Color.White;
             this.cbbQuanLy.ItemsAppearance.ForeColor = System.Drawing.Color.Black;
             this.cbbQuanLy.ItemsAppearance.SelectedBackColor = System.Drawing.Color.Silver;
-            this.cbbQuanLy.Location = new System.Drawing.Point(109, 18);
+            this.cbbQuanLy.Location = new System.Drawing.Point(109, 17);
             this.cbbQuanLy.Margin = new System.Windows.Forms.Padding(29, 9, 3, 2);
             this.cbbQuanLy.Name = "cbbQuanLy";
             this.cbbQuanLy.Size = new System.Drawing.Size(314, 56);
@@ -123,6 +123,23 @@ namespace DoAnNhom21
             this.guna2Panel1.Size = new System.Drawing.Size(1413, 84);
             this.guna2Panel1.TabIndex = 4;
             // 
+            // btnCapNhatMauKhau
+            // 
+            this.btnCapNhatMauKhau.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnCapNhatMauKhau.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnCapNhatMauKhau.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnCapNhatMauKhau.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnCapNhatMauKhau.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(218)))), ((int)(((byte)(81)))), ((int)(((byte)(57)))));
+            this.btnCapNhatMauKhau.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCapNhatMauKhau.ForeColor = System.Drawing.Color.Black;
+            this.btnCapNhatMauKhau.Location = new System.Drawing.Point(710, 18);
+            this.btnCapNhatMauKhau.Margin = new System.Windows.Forms.Padding(4);
+            this.btnCapNhatMauKhau.Name = "btnCapNhatMauKhau";
+            this.btnCapNhatMauKhau.Size = new System.Drawing.Size(265, 55);
+            this.btnCapNhatMauKhau.TabIndex = 8;
+            this.btnCapNhatMauKhau.Text = "Đổi mật khẩu nhân viên";
+            this.btnCapNhatMauKhau.Click += new System.EventHandler(this.btnCapNhatMauKhau_Click);
+            // 
             // btnThongKeLuong
             // 
             this.btnThongKeLuong.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
@@ -149,30 +166,13 @@ namespace DoAnNhom21
             this.btnDangXuat.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(218)))), ((int)(((byte)(81)))), ((int)(((byte)(57)))));
             this.btnDangXuat.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDangXuat.ForeColor = System.Drawing.Color.Black;
-            this.btnDangXuat.Location = new System.Drawing.Point(1249, 13);
+            this.btnDangXuat.Location = new System.Drawing.Point(1249, 18);
             this.btnDangXuat.Margin = new System.Windows.Forms.Padding(4);
             this.btnDangXuat.Name = "btnDangXuat";
             this.btnDangXuat.Size = new System.Drawing.Size(151, 55);
             this.btnDangXuat.TabIndex = 4;
             this.btnDangXuat.Text = "Đăng xuất";
             this.btnDangXuat.Click += new System.EventHandler(this.btnDangXuat_Click);
-            // 
-            // btnCapNhatMauKhau
-            // 
-            this.btnCapNhatMauKhau.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnCapNhatMauKhau.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnCapNhatMauKhau.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnCapNhatMauKhau.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnCapNhatMauKhau.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(218)))), ((int)(((byte)(81)))), ((int)(((byte)(57)))));
-            this.btnCapNhatMauKhau.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCapNhatMauKhau.ForeColor = System.Drawing.Color.Black;
-            this.btnCapNhatMauKhau.Location = new System.Drawing.Point(710, 13);
-            this.btnCapNhatMauKhau.Margin = new System.Windows.Forms.Padding(4);
-            this.btnCapNhatMauKhau.Name = "btnCapNhatMauKhau";
-            this.btnCapNhatMauKhau.Size = new System.Drawing.Size(265, 55);
-            this.btnCapNhatMauKhau.TabIndex = 8;
-            this.btnCapNhatMauKhau.Text = "Đổi mật khẩu nhân viên";
-            this.btnCapNhatMauKhau.Click += new System.EventHandler(this.btnCapNhatMauKhau_Click);
             // 
             // FormTrangChuQuanLy
             // 

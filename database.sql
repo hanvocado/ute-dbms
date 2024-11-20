@@ -795,34 +795,37 @@ ON ctChamCong
 AFTER INSERT
 AS
 BEGIN
-    DECLARE @MaNV NVARCHAR(10), @Ho NVARCHAR(50), @Ten NVARCHAR(50), @MoTa NVARCHAR(MAX), @NgayChamCong INT, @MaPB NVARCHAR(10);
-    DECLARE @TieuDe NVARCHAR(100), @NoiDung NVARCHAR(MAX);
-    
-    -- Lấy thông tin nhân viên từ bảng NhanVien và thông tin ngày chấm công
-    SELECT 
-        @MaNV = MaNV,
-        @NgayChamCong = NgayChamCong
-    FROM inserted;
-    
-    -- Lấy phòng ban nhân viên đó làm việc, họ tên 
-    SELECT 
-		@Ho = Ho,
-		@Ten = Ten,
-        @MaPB = MaPB,
-		@MoTa = MoTa
-    FROM NhanVien nv JOIN (SELECT ctcc.MaNV, ctcc.MaCC, t.MoTa FROM ctChamCong ctcc LEFT JOIN Thang t ON ctcc.MaThang = t.MaThang) as ngaychamcong
-	ON nv.MaNV = ngaychamcong.MaNV
-    WHERE nv.MaNV = @MaNV;
-    
+    SET NOCOUNT ON;
 
-    -- Tạo tiêu đề và nội dung thông báo
-    SET @TieuDe = N'Thông Báo Chấm Công: ' + @Ho + ' ' + @Ten;
-    SET @NoiDung = @Ho + ' ' + @Ten + N' đã chấm công thành công vào Ngày ' + CAST(@NgayChamCong AS NVARCHAR(10)) +' ' + @MoTa + '.';
+    -- Tạo bảng tạm để xử lý tập hợp
+    DECLARE @ThongBao TABLE (
+        TieuDe NVARCHAR(100),
+        NoiDung NVARCHAR(MAX),
+        MaPB NVARCHAR(10),
+        NgayGui DATETIME
+    );
+
+    -- Lấy thông tin từ bảng inserted và liên kết với bảng NhanVien
+    INSERT INTO @ThongBao (TieuDe, NoiDung, MaPB, NgayGui)
+    SELECT 
+        N'Thông Báo Chấm Công: ' + nv.Ho + ' ' + nv.Ten AS TieuDe,
+        nv.Ho + ' ' + nv.Ten + N' đã chấm công thành công vào Ngày ' + 
+        CAST(i.NgayChamCong AS NVARCHAR(10)) + ' ' + ISNULL(t.MoTa, '') + '.' AS NoiDung,
+        nv.MaPB,
+        GETDATE()
+    FROM 
+        inserted i
+    LEFT JOIN NhanVien nv ON i.MaNV = nv.MaNV
+    LEFT JOIN Thang t ON i.MaThang = t.MaThang;
 
     -- Chèn thông báo vào bảng ThongBao
     INSERT INTO ThongBao (TieuDe, NoiDung, MaPB, NgayGui)
-    VALUES (@TieuDe, @NoiDung, @MaPB, GETDATE());
+    SELECT TieuDe, NoiDung, MaPB, NgayGui
+    FROM @ThongBao;
+
+    SET NOCOUNT OFF;
 END;
+
 GO
 -- TRIGGER THÊM THÔNG BÁO CHO NHÂN VIÊN NẾU ĐƯỢC THĂNG CHỨC--
 CREATE OR ALTER TRIGGER tr_NhanVien_DoiChucVu
@@ -906,13 +909,13 @@ GO
 -- TEST--
 INSERT INTO ctPhuCap (MaNV, MaPhuCap, MaThang, NgayPhuCap, SoTien)
 VALUES
-('NV02', 'PC01', '102024', 23, 500000);
+('NV04', 'PC01', '102024', 23, 500000);
 GO
 INSERT INTO NghiPhep (MaNV, MaThang, NgayNghiPhep, GhiChu)
-VALUES ('NV02', '102024', 17, 'Bệnh');
+VALUES ('NV04', '102024', 17, 'Bệnh');
 GO
 INSERT INTO ctChamCong (MaNV, MaCC, MaThang, NgayChamCong)
-VALUES ('NV01', 'CC01', '032023', 10);
+VALUES ('NV01', 'CC01', '032023', 11);
 GO 
 UPDATE NhanVien
 SET MaCV = 'CV02'  -- Chức vụ mới
@@ -995,6 +998,31 @@ SELECT nv.MaNV, nv.Ho, nv.Ten, bh.TenBH, ctbh.MaBH, ctbh.NgayBD, ctbh.NgayKT
 FROM NhanVien nv JOIN ctBaoHiem ctbh ON nv.MaNV = ctbh.MaNV JOIN BaoHiem bh ON ctbh.MaLoai = bh.MaLoai;
 GO
 
+CREATE OR ALTER VIEW vw_QuanLyHopDong AS SELECT nv.MaNV, nv.Ho, nv.Ten, hd.MaHD, hd.LuongCoBan, hd.NgayBD
+AS NgayBatDauHopDong, hd.NgayKT AS NgayKetThucHopDong FROM NhanVien nv JOIN HopDong hd ON nv.MaHD = hd.MaHD;
+GO
+
+CREATE OR ALTER VIEW vw_ChamCongNhanVien AS
+SELECT nv.MaNV as MaNhanVien, nv.Ho as Ho, nv.Ten as Ten, ctcc.NgayChamCong
+FROM ctChamCong ctcc
+join ChamCong cc on ctcc.MaCC = cc.MaCC
+join NhanVien nv on nv.MaNV = ctcc.MaNV;
+GO
+
+CREATE OR ALTER VIEW vw_ThuongPhatNhanVien AS
+SELECT nv.MaNV as MaNhanVien, nv.Ho as Ho, nv.Ten as Ten,  tp.Loai as Loai, tp.LyDo as LyDo, tp.SoTien as TienThuongPhat, cttp.NgayThuongPhat  as NgayThuongPhat
+FROM ctThuongPhat cttp
+join ThuongPhat tp on cttp.MaThuongPhat = tp.MaThuongPhat
+join NhanVien nv on cttp.MaNV = nv.MaNV;
+GO
+
+CREATE OR ALTER VIEW vw_PhuCapNhanVien AS
+SELECT nv.MaNV as MaNhanVien, nv.Ho as Ho, nv.Ten as Ten,  pc.LoaiPhuCap as Loai, ctpc.SoTien as TienPhuCap, ctpc.NgayPhuCap  as NgayPhuCap
+FROM ctPhuCap ctpc
+join PhuCap pc on ctpc.MaPhuCap = pc.MaPhuCap
+join NhanVien nv on ctpc.MaNV = nv.MaNV;
+GO
+
 CREATE OR ALTER VIEW vw_ThongTinPhongBan AS
 SELECT 
     pb.MaPB, 
@@ -1015,7 +1043,7 @@ GROUP BY
     nv.SDT;
 GO
 
-CREATE VIEW vw_ThongTinHopDong AS 
+CREATE OR ALTER VIEW vw_ThongTinHopDong AS 
 SELECT nv.MaNV,hd.MaHD, hd.LuongCoBan, hd.NgayBD AS NgayBatDauHopDong, hd.NgayKT AS NgayKetThucHopDong, pb.TenPB AS TenPhongBan, cv.TenCV AS TenChucVu 
 FROM NhanVien nv 
 JOIN HopDong hd ON nv.MaHD = hd.MaHD
@@ -1255,7 +1283,7 @@ SELECT * FROM dbo.ft_XemChiTietPhongBan()
 GO
 
 ---//------
--- Hàm nhận thông báo _ multi statement table-valued có para 
+-- Hàm nhận nhân viên nhận thông báo _ multi statement table-valued có para 
 CREATE OR ALTER FUNCTION dbo.ft_NhanVienNhanThongBao(@MaNV NVARCHAR(10))
 RETURNS @ThongBaoNhanVien TABLE (
     TieuDe NVARCHAR(100),
@@ -1286,7 +1314,42 @@ BEGIN
     RETURN;
 END;
 GO
-SELECT * FROM dbo.ft_NhanVienNhanThongBao('NV03')	
+
+GO
+-- Trưởng phòng xem thông báo tất cả nhân viên  -- 
+CREATE OR ALTER FUNCTION dbo.ft_TruongPhongNhanThongBao(@MaNV NVARCHAR(10))
+RETURNS @ThongBao TABLE (
+    TieuDe NVARCHAR(100),
+    NoiDung NVARCHAR(MAX),
+    NgayGui DATETIME
+)
+AS
+BEGIN
+    -- Kiểm tra xem người dùng có phải là trưởng phòng không
+    IF EXISTS (
+        SELECT 1 
+        FROM NhanVien nv 
+        JOIN PhongBan pb ON nv.MaNV = pb.MaTrP 
+        WHERE nv.MaNV = @MaNV
+    )
+    BEGIN
+        -- Nếu là trưởng phòng, lấy thông báo của tất cả phòng ban
+        INSERT INTO @ThongBao (TieuDe, NoiDung, NgayGui)
+        SELECT DISTINCT
+            tb.TieuDe, 
+            tb.NoiDung, 
+            tb.NgayGui
+        FROM ThongBao tb
+        
+        ORDER BY tb.NgayGui DESC;
+    END
+    RETURN;
+END;
+GO
+-- Example usage:
+SELECT * FROM dbo.ft_NhanVienNhanThongBao('NV03');
+SELECT * FROM dbo.ft_TruongPhongNhanThongBao('NV03');
+SELECT * FROM ThongBao
 GO
 -- QUAN LY THONG BAO PRECEDURE --
 CREATE OR ALTER PROCEDURE sp_ThemThongBao
@@ -2389,7 +2452,7 @@ BEGIN
 END;
 GO
 --
-CREATE FUNCTION dbo.ft_SoNgayCongChuan (@MaThang VARCHAR(6))
+CREATE OR ALTER FUNCTION dbo.ft_SoNgayCongChuan (@MaThang VARCHAR(6))
 RETURNS INT
 AS
 BEGIN
@@ -2439,7 +2502,8 @@ GRANT SELECT, UPDATE, REFERENCES ON TaiKhoan TO Employee
 GRANT SELECT ON  vw_ThongTinNhanVien to Employee
 GRANT SELECT ON  vw_ThongTinHopDong to Employee
 
-Deny select on ft_NhanVienNhanThongBao to Employee;
+Deny select on ft_TruongPhongNhanThongBao to Employee;
+GRANT select on ft_NhanVienNhanThongBao to Employee;
 GRANT EXECUTE ON sp_GetNghiPhepByMaNV to Employee;
 GRANT EXECUTE ON sp_GetChamCongByMaNV to Employee;
 GRANT EXECUTE ON sp_AddctChamCong to Employee; 
@@ -2457,6 +2521,7 @@ GRANT SELECT, UPDATE, REFERENCES ON TaiKhoan TO DepartmentHead
 GRANT SELECT ON  vw_ThongTinNhanVien to DepartmentHead
 GRANT SELECT ON  vw_ThongTinHopDong to DepartmentHead
 
+GRANT SELECT on ft_TruongPhongNhanThongBao to Employee;
 GRANT SELECT ON ft_NhanVienNhanThongBao TO DepartmentHead;
 GRANT EXECUTE ON sp_GetNghiPhepByMaNV to DepartmentHead;
 GRANT EXECUTE ON sp_GetChamCongByMaNV to DepartmentHead;

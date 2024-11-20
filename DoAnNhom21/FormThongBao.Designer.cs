@@ -210,6 +210,7 @@ namespace DoAnNhom21
             this.dataGridViewThongBao.RowTemplate.Height = 24;
             this.dataGridViewThongBao.Size = new System.Drawing.Size(914, 363);
             this.dataGridViewThongBao.TabIndex = 5;
+            this.dataGridViewThongBao.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewThongBao_CellContentClick);
             // 
             // Column1
             // 

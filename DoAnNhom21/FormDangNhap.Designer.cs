@@ -104,7 +104,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Sitka Banner", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(465, 113);
+            this.label1.Location = new System.Drawing.Point(486, 133);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(159, 43);
             this.label1.TabIndex = 1;
@@ -121,7 +121,7 @@
             this.btnLogin.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(218)))), ((int)(((byte)(81)))), ((int)(((byte)(57)))));
             this.btnLogin.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLogin.ForeColor = System.Drawing.Color.White;
-            this.btnLogin.Location = new System.Drawing.Point(469, 346);
+            this.btnLogin.Location = new System.Drawing.Point(486, 365);
             this.btnLogin.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(368, 46);
@@ -146,7 +146,7 @@
             this.txtPassword.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtPassword.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.txtPassword.IconLeftOffset = new System.Drawing.Point(10, 0);
-            this.txtPassword.Location = new System.Drawing.Point(469, 249);
+            this.txtPassword.Location = new System.Drawing.Point(486, 268);
             this.txtPassword.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '●';
@@ -178,7 +178,7 @@
             this.txtMaNhanVien.ForeColor = System.Drawing.Color.Black;
             this.txtMaNhanVien.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.txtMaNhanVien.IconLeftOffset = new System.Drawing.Point(10, 0);
-            this.txtMaNhanVien.Location = new System.Drawing.Point(469, 182);
+            this.txtMaNhanVien.Location = new System.Drawing.Point(486, 201);
             this.txtMaNhanVien.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtMaNhanVien.Name = "txtMaNhanVien";
             this.txtMaNhanVien.PasswordChar = '\0';
@@ -197,9 +197,10 @@
             // 
             // guna2PictureBox1
             // 
+            this.guna2PictureBox1.BorderRadius = 10;
             this.guna2PictureBox1.Image = global::DoAnNhom21.Properties.Resources.AnhNen;
             this.guna2PictureBox1.ImageRotate = 0F;
-            this.guna2PictureBox1.Location = new System.Drawing.Point(0, 2);
+            this.guna2PictureBox1.Location = new System.Drawing.Point(3, 5);
             this.guna2PictureBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.guna2PictureBox1.Name = "guna2PictureBox1";
             this.guna2PictureBox1.Size = new System.Drawing.Size(463, 515);

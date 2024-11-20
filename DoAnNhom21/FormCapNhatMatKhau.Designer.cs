@@ -32,11 +32,11 @@
             this.lblMaNV = new System.Windows.Forms.Label();
             this.btnCapNhat = new System.Windows.Forms.Button();
             this.guna2GroupBox1 = new Guna.UI2.WinForms.Guna2GroupBox();
+            this.cbbMaNV = new Guna.UI2.WinForms.Guna2ComboBox();
             this.txtNhapLaiMatkhau = new System.Windows.Forms.TextBox();
             this.txtMatKhauMoi = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.cbbMaNV = new Guna.UI2.WinForms.Guna2ComboBox();
             this.guna2GroupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -82,6 +82,21 @@
             this.guna2GroupBox1.TabIndex = 12;
             this.guna2GroupBox1.Text = "CẬP NHẬT MẬT KHẨU ";
             // 
+            // cbbMaNV
+            // 
+            this.cbbMaNV.BackColor = System.Drawing.Color.Transparent;
+            this.cbbMaNV.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cbbMaNV.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbbMaNV.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.cbbMaNV.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.cbbMaNV.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.cbbMaNV.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
+            this.cbbMaNV.ItemHeight = 30;
+            this.cbbMaNV.Location = new System.Drawing.Point(399, 59);
+            this.cbbMaNV.Name = "cbbMaNV";
+            this.cbbMaNV.Size = new System.Drawing.Size(310, 36);
+            this.cbbMaNV.TabIndex = 18;
+            // 
             // txtNhapLaiMatkhau
             // 
             this.txtNhapLaiMatkhau.Location = new System.Drawing.Point(399, 171);
@@ -116,25 +131,11 @@
             this.label1.TabIndex = 13;
             this.label1.Text = "Mật khẩu mới ";
             // 
-            // cbbMaNV
-            // 
-            this.cbbMaNV.BackColor = System.Drawing.Color.Transparent;
-            this.cbbMaNV.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cbbMaNV.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbbMaNV.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.cbbMaNV.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.cbbMaNV.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.cbbMaNV.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
-            this.cbbMaNV.ItemHeight = 30;
-            this.cbbMaNV.Location = new System.Drawing.Point(399, 59);
-            this.cbbMaNV.Name = "cbbMaNV";
-            this.cbbMaNV.Size = new System.Drawing.Size(310, 36);
-            this.cbbMaNV.TabIndex = 18;
-            // 
             // FormCapNhatMatKhau
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(234)))), ((int)(((byte)(220)))));
             this.ClientSize = new System.Drawing.Size(1045, 551);
             this.Controls.Add(this.guna2GroupBox1);
             this.Name = "FormCapNhatMatKhau";
