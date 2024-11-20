@@ -1043,7 +1043,7 @@ GROUP BY
     nv.SDT;
 GO
 
-CREATE VIEW vw_ThongTinHopDong AS 
+CREATE OR ALTER VIEW vw_ThongTinHopDong AS 
 SELECT nv.MaNV,hd.MaHD, hd.LuongCoBan, hd.NgayBD AS NgayBatDauHopDong, hd.NgayKT AS NgayKetThucHopDong, pb.TenPB AS TenPhongBan, cv.TenCV AS TenChucVu 
 FROM NhanVien nv 
 JOIN HopDong hd ON nv.MaHD = hd.MaHD
