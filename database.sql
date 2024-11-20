@@ -995,31 +995,6 @@ SELECT nv.MaNV, nv.Ho, nv.Ten, bh.TenBH, ctbh.MaBH, ctbh.NgayBD, ctbh.NgayKT
 FROM NhanVien nv JOIN ctBaoHiem ctbh ON nv.MaNV = ctbh.MaNV JOIN BaoHiem bh ON ctbh.MaLoai = bh.MaLoai;
 GO
 
-CREATE OR ALTER VIEW vw_QuanLyHopDong AS SELECT nv.MaNV, nv.Ho, nv.Ten, hd.MaHD, hd.LuongCoBan, hd.NgayBD
-AS NgayBatDauHopDong, hd.NgayKT AS NgayKetThucHopDong FROM NhanVien nv JOIN HopDong hd ON nv.MaHD = hd.MaHD;
-GO
-
-CREATE OR ALTER VIEW vw_ChamCongNhanVien AS
-SELECT nv.MaNV as MaNhanVien, nv.Ho as Ho, nv.Ten as Ten, ctcc.NgayChamCong
-FROM ctChamCong ctcc
-join ChamCong cc on ctcc.MaCC = cc.MaCC
-join NhanVien nv on nv.MaNV = ctcc.MaNV;
-GO
-
-CREATE OR ALTER VIEW vw_ThuongPhatNhanVien AS
-SELECT nv.MaNV as MaNhanVien, nv.Ho as Ho, nv.Ten as Ten,  tp.Loai as Loai, tp.LyDo as LyDo, tp.SoTien as TienThuongPhat, cttp.NgayThuongPhat  as NgayThuongPhat
-FROM ctThuongPhat cttp
-join ThuongPhat tp on cttp.MaThuongPhat = tp.MaThuongPhat
-join NhanVien nv on cttp.MaNV = nv.MaNV;
-GO
-
-CREATE OR ALTER VIEW vw_PhuCapNhanVien AS
-SELECT nv.MaNV as MaNhanVien, nv.Ho as Ho, nv.Ten as Ten,  pc.LoaiPhuCap as Loai, ctpc.SoTien as TienPhuCap, ctpc.NgayPhuCap  as NgayPhuCap
-FROM ctPhuCap ctpc
-join PhuCap pc on ctpc.MaPhuCap = pc.MaPhuCap
-join NhanVien nv on ctpc.MaNV = nv.MaNV;
-GO
-
 CREATE OR ALTER VIEW vw_ThongTinPhongBan AS
 SELECT 
     pb.MaPB, 
@@ -1046,6 +1021,7 @@ FROM NhanVien nv
 JOIN HopDong hd ON nv.MaHD = hd.MaHD
 JOIN ChucVu cv ON nv.MaCV = cv.MaCV
 JOIN PhongBan pb ON pb.MaPB = nv.MaPB;
+GO
 --- END VIEW ----
 
 -- PROCEDURE --
@@ -1587,8 +1563,6 @@ RETURN
     WHERE 
         tp.Loai = @Loai AND nv.MaNV = @MaNV
 );
-GO
-SELECT * FROM dbo.ft_LocThuongPhatNhanVien('NV01', N'Thưởng')
 GO
 -- QUAN LY CHUC VU --
 
