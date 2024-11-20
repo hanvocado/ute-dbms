@@ -64,9 +64,9 @@
             this.groupBox2.Controls.Add(this.btnXoa);
             this.groupBox2.Controls.Add(this.btnThem);
             this.groupBox2.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.groupBox2.Location = new System.Drawing.Point(392, 312);
+            this.groupBox2.Location = new System.Drawing.Point(293, 312);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(773, 101);
+            this.groupBox2.Size = new System.Drawing.Size(854, 101);
             this.groupBox2.TabIndex = 16;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "CHỨC NĂNG";
@@ -76,7 +76,7 @@
             this.btnLamMoi.BackColor = System.Drawing.Color.LavenderBlush;
             this.btnLamMoi.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLamMoi.Font = new System.Drawing.Font("Times New Roman", 12F);
-            this.btnLamMoi.Location = new System.Drawing.Point(404, 37);
+            this.btnLamMoi.Location = new System.Drawing.Point(471, 37);
             this.btnLamMoi.Name = "btnLamMoi";
             this.btnLamMoi.Size = new System.Drawing.Size(142, 39);
             this.btnLamMoi.TabIndex = 7;
@@ -90,7 +90,7 @@
             this.btnThoat.BackColor = System.Drawing.Color.LavenderBlush;
             this.btnThoat.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnThoat.Font = new System.Drawing.Font("Times New Roman", 12F);
-            this.btnThoat.Location = new System.Drawing.Point(573, 37);
+            this.btnThoat.Location = new System.Drawing.Point(671, 37);
             this.btnThoat.Name = "btnThoat";
             this.btnThoat.Size = new System.Drawing.Size(142, 39);
             this.btnThoat.TabIndex = 8;
@@ -104,7 +104,7 @@
             this.btnXoa.BackColor = System.Drawing.Color.LavenderBlush;
             this.btnXoa.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnXoa.Font = new System.Drawing.Font("Times New Roman", 12F);
-            this.btnXoa.Location = new System.Drawing.Point(235, 37);
+            this.btnXoa.Location = new System.Drawing.Point(268, 37);
             this.btnXoa.Name = "btnXoa";
             this.btnXoa.Size = new System.Drawing.Size(142, 39);
             this.btnXoa.TabIndex = 10;
@@ -140,10 +140,10 @@
             this.groupBox1.Controls.Add(this.lblHoTen);
             this.groupBox1.Controls.Add(this.lblMaNV);
             this.groupBox1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.groupBox1.Location = new System.Drawing.Point(392, 12);
+            this.groupBox1.Location = new System.Drawing.Point(293, 14);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 20, 3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(775, 282);
+            this.groupBox1.Size = new System.Drawing.Size(854, 282);
             this.groupBox1.TabIndex = 15;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "THÔNG TIN NGƯỜI PHỤ THUỘC ";
@@ -243,11 +243,12 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.BackColor = System.Drawing.Color.White;
             this.groupBox3.Controls.Add(this.dataGridViewNguoiPhuThuoc);
             this.groupBox3.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.groupBox3.Location = new System.Drawing.Point(392, 449);
+            this.groupBox3.Location = new System.Drawing.Point(293, 449);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(773, 319);
+            this.groupBox3.Size = new System.Drawing.Size(854, 319);
             this.groupBox3.TabIndex = 17;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "DANH SÁCH NGƯỜI PHỤ THUỘC";
@@ -261,13 +262,13 @@
             this.Column2,
             this.Column3,
             this.Column4});
-            this.dataGridViewNguoiPhuThuoc.Location = new System.Drawing.Point(6, 44);
+            this.dataGridViewNguoiPhuThuoc.Location = new System.Drawing.Point(6, 29);
             this.dataGridViewNguoiPhuThuoc.Name = "dataGridViewNguoiPhuThuoc";
             this.dataGridViewNguoiPhuThuoc.ReadOnly = true;
             this.dataGridViewNguoiPhuThuoc.RowHeadersVisible = false;
             this.dataGridViewNguoiPhuThuoc.RowHeadersWidth = 51;
             this.dataGridViewNguoiPhuThuoc.RowTemplate.Height = 24;
-            this.dataGridViewNguoiPhuThuoc.Size = new System.Drawing.Size(749, 453);
+            this.dataGridViewNguoiPhuThuoc.Size = new System.Drawing.Size(842, 468);
             this.dataGridViewNguoiPhuThuoc.TabIndex = 6;
             this.dataGridViewNguoiPhuThuoc.DoubleClick += new System.EventHandler(this.dataGridViewNguoiPhuThuoc_DoubleClick);
             // 

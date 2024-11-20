@@ -551,6 +551,7 @@ namespace DoAnNhom21
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(234)))), ((int)(((byte)(220)))));
             this.ClientSize = new System.Drawing.Size(1256, 622);
+            this.Controls.Add(this.panelFormCTThuongPhat);
             this.Controls.Add(this.rbPhat);
             this.Controls.Add(this.rbThuong);
             this.Controls.Add(this.btnXemThuongHayPhat);
@@ -558,7 +559,6 @@ namespace DoAnNhom21
             this.Controls.Add(this.btnThoat);
             this.Controls.Add(this.guna2GroupBox2);
             this.Controls.Add(this.guna2GroupBox1);
-            this.Controls.Add(this.panelFormCTThuongPhat);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormThuongPhat";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

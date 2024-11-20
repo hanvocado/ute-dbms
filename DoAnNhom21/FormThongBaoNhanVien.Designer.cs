@@ -137,7 +137,7 @@ namespace DoAnNhom21
             this.btnXemThongBao.UseVisualStyleBackColor = false;
             this.btnXemThongBao.Click += new System.EventHandler(this.btnXemThongBao_Click);
             // 
-            // FormThongBaoPhongBan
+            // FormThongBaoNhanVien
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
