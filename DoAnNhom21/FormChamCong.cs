@@ -47,9 +47,8 @@ namespace DoAnNhom21
                     command.Parameters.AddWithValue("@NgayChamCong", today.Day);
                     command.Parameters.AddWithValue("@MaCC", "CC01");
                     Connection.ExecuteCommand(command);
-                    MessageBox.Show("Chấm công thành công");
-
                     load();
+                    MessageBox.Show("Chấm công thành công");
                 }
             }
             catch (Exception ex)

@@ -77,9 +77,9 @@
             this.guna2GroupBox2.CustomBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(218)))), ((int)(((byte)(81)))), ((int)(((byte)(57)))));
             this.guna2GroupBox2.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
             this.guna2GroupBox2.ForeColor = System.Drawing.Color.Black;
-            this.guna2GroupBox2.Location = new System.Drawing.Point(204, 55);
+            this.guna2GroupBox2.Location = new System.Drawing.Point(269, 24);
             this.guna2GroupBox2.Name = "guna2GroupBox2";
-            this.guna2GroupBox2.Size = new System.Drawing.Size(1058, 244);
+            this.guna2GroupBox2.Size = new System.Drawing.Size(878, 251);
             this.guna2GroupBox2.TabIndex = 19;
             this.guna2GroupBox2.Text = "THÔNG TIN BẢO HIỂM";
             // 
@@ -188,9 +188,9 @@
             this.guna2GroupBox1.CustomBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(218)))), ((int)(((byte)(81)))), ((int)(((byte)(57)))));
             this.guna2GroupBox1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
             this.guna2GroupBox1.ForeColor = System.Drawing.Color.Black;
-            this.guna2GroupBox1.Location = new System.Drawing.Point(204, 305);
+            this.guna2GroupBox1.Location = new System.Drawing.Point(266, 296);
             this.guna2GroupBox1.Name = "guna2GroupBox1";
-            this.guna2GroupBox1.Size = new System.Drawing.Size(1058, 350);
+            this.guna2GroupBox1.Size = new System.Drawing.Size(878, 288);
             this.guna2GroupBox1.TabIndex = 20;
             this.guna2GroupBox1.Text = "DANH SÁCH BẢO HIỂM ";
             // 
@@ -212,7 +212,7 @@
             this.dataGridViewBaoHiemNV.RowHeadersVisible = false;
             this.dataGridViewBaoHiemNV.RowHeadersWidth = 51;
             this.dataGridViewBaoHiemNV.RowTemplate.Height = 24;
-            this.dataGridViewBaoHiemNV.Size = new System.Drawing.Size(1052, 304);
+            this.dataGridViewBaoHiemNV.Size = new System.Drawing.Size(866, 242);
             this.dataGridViewBaoHiemNV.TabIndex = 0;
             this.dataGridViewBaoHiemNV.DoubleClick += new System.EventHandler(this.dataGridViewBaoHiemNV_DoubleClick);
             // 
@@ -281,9 +281,9 @@
             this.panel1.Controls.Add(this.btnTim);
             this.panel1.Controls.Add(this.btnThem);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 678);
+            this.panel1.Location = new System.Drawing.Point(0, 605);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1413, 100);
+            this.panel1.Size = new System.Drawing.Size(1413, 173);
             this.panel1.TabIndex = 21;
             // 
             // btnLamMoi
