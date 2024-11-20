@@ -1858,7 +1858,28 @@ BEGIN
 		END
 END;
 GO
-
+-- QUAN LY NGUOI PHU THUOC
+CREATE OR ALTER PROCEDURE sp_AddNguoiPhuThuoc
+    @MaNV NVARCHAR(10),
+    @HoTen NVARCHAR(50),
+    @NgaySinh DATE,
+    @QuanHe NVARCHAR(50)
+AS
+BEGIN
+    -- Thêm thông tin người phụ thuộc mới
+    INSERT INTO NguoiPhuThuoc (MaNV, HoTen, NgaySinh, QuanHe)
+    VALUES (@MaNV, @HoTen, @NgaySinh, @QuanHe);
+END;
+GO
+CREATE OR ALTER PROCEDURE sp_DeleteNguoiPhuThuoc
+    @MaNV NVARCHAR(10),
+    @HoTen NVARCHAR(50)
+AS
+BEGIN
+    DELETE FROM NguoiPhuThuoc
+    WHERE MaNV = @MaNV AND HoTen = @HoTen;
+END;
+GO	
 -- QUAN LY BAO HIEM --
 CREATE OR ALTER PROCEDURE sp_GetctBaoHiemByMaNV
     @MaNV VARCHAR(10)
