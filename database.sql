@@ -250,16 +250,19 @@ UPDATE NhanVien
 SET MaPB = 'PB01', MaCV = 'CV02', MaHD = 'HD01'
 WHERE MaNV = 'NV01';
 
+GO
 -- Cập nhật MaPB, MaCV, MaHD cho MaNV = 'NV02'
 UPDATE NhanVien
 SET MaPB = 'PB02', MaCV = 'CV02', MaHD = 'HD02'
 WHERE MaNV = 'NV02';
 
+GO
 -- Cập nhật MaPB, MaCV, MaHD cho MaNV = 'NV03'
 UPDATE NhanVien
 SET MaPB = 'PB03', MaCV = 'CV03', MaHD = 'HD03'
 WHERE MaNV = 'NV03';
 
+GO
 -- Cập nhật MaPB, MaCV, MaHD cho MaNV = 'NV04'
 UPDATE NhanVien
 SET MaPB = 'PB04', MaCV = 'CV02', MaHD = 'HD04'
@@ -312,32 +315,28 @@ GO
 -- Thêm dữ liệu cho bảng ctChamCong
 INSERT INTO ctChamCong (MaNV, MaCC, MaThang, NgayChamCong)
 VALUES
-('NV01', 'CC01', '102024', '20'),
-('NV02', 'CC03', '022023', '18'),
-('NV03', 'CC02', '032023', '10'),
-('NV04', 'CC04', '042023', '15'),
-('NV01', 'CC01', '102024', 1),
-('NV01', 'CC01', '102024', 2),
-('NV01', 'CC01', '102024', 3),
-('NV01', 'CC01', '102024', 4),
-('NV01', 'CC01', '102024', 5),
-('NV01', 'CC01', '102024', 6),
-('NV01', 'CC01', '102024', 7),
-('NV01', 'CC01', '102024', 8),
-('NV01', 'CC01', '102024', 9),
-('NV01', 'CC01', '102024', 10),
-('NV01', 'CC01', '102024', 11),
-('NV01', 'CC01', '102024', 12),
-('NV01', 'CC01', '102024', 13),
-('NV01', 'CC01', '102024', 14),
-('NV01', 'CC01', '102024', 15),
-('NV01', 'CC01', '102024', 16),
-('NV01', 'CC01', '102024', 17),
-('NV01', 'CC01', '102024', 18),
-('NV01', 'CC01', '102024', 19),
-('NV01', 'CC01', '102024', 20),
-('NV01', 'CC01', '102024', 21),
-('NV01', 'CC01', '102024', 22);
+('NV02', 'CC01', '102024', 1),
+('NV02', 'CC01', '102024', 2),
+('NV02', 'CC01', '102024', 3),
+('NV02', 'CC01', '102024', 4),
+('NV02', 'CC01', '102024', 5),
+('NV02', 'CC01', '102024', 6),
+('NV02', 'CC01', '102024', 7),
+('NV02', 'CC01', '102024', 8),
+('NV02', 'CC01', '102024', 9),
+('NV02', 'CC01', '102024', 10),
+('NV02', 'CC01', '102024', 11),
+('NV02', 'CC01', '102024', 12),
+('NV02', 'CC01', '102024', 13),
+('NV02', 'CC01', '102024', 14),
+('NV02', 'CC01', '102024', 15),
+('NV02', 'CC01', '102024', 16),
+('NV02', 'CC01', '102024', 17),
+('NV02', 'CC01', '102024', 18),
+('NV02', 'CC01', '102024', 19),
+('NV02', 'CC01', '102024', 20),
+('NV02', 'CC01', '102024', 21),
+('NV02', 'CC01', '102024', 22);
 
 GO
 -- Thêm dữ liệu cho bảng BaoHiem
@@ -996,31 +995,6 @@ SELECT nv.MaNV, nv.Ho, nv.Ten, bh.TenBH, ctbh.MaBH, ctbh.NgayBD, ctbh.NgayKT
 FROM NhanVien nv JOIN ctBaoHiem ctbh ON nv.MaNV = ctbh.MaNV JOIN BaoHiem bh ON ctbh.MaLoai = bh.MaLoai;
 GO
 
-CREATE OR ALTER VIEW vw_QuanLyHopDong AS SELECT nv.MaNV, nv.Ho, nv.Ten, hd.MaHD, hd.LuongCoBan, hd.NgayBD
-AS NgayBatDauHopDong, hd.NgayKT AS NgayKetThucHopDong FROM NhanVien nv JOIN HopDong hd ON nv.MaHD = hd.MaHD;
-GO
-
-CREATE OR ALTER VIEW vw_ChamCongNhanVien AS
-SELECT nv.MaNV as MaNhanVien, nv.Ho as Ho, nv.Ten as Ten, ctcc.NgayChamCong
-FROM ctChamCong ctcc
-join ChamCong cc on ctcc.MaCC = cc.MaCC
-join NhanVien nv on nv.MaNV = ctcc.MaNV;
-GO
-
-CREATE OR ALTER VIEW vw_ThuongPhatNhanVien AS
-SELECT nv.MaNV as MaNhanVien, nv.Ho as Ho, nv.Ten as Ten,  tp.Loai as Loai, tp.LyDo as LyDo, tp.SoTien as TienThuongPhat, cttp.NgayThuongPhat  as NgayThuongPhat
-FROM ctThuongPhat cttp
-join ThuongPhat tp on cttp.MaThuongPhat = tp.MaThuongPhat
-join NhanVien nv on cttp.MaNV = nv.MaNV;
-GO
-
-CREATE OR ALTER VIEW vw_PhuCapNhanVien AS
-SELECT nv.MaNV as MaNhanVien, nv.Ho as Ho, nv.Ten as Ten,  pc.LoaiPhuCap as Loai, ctpc.SoTien as TienPhuCap, ctpc.NgayPhuCap  as NgayPhuCap
-FROM ctPhuCap ctpc
-join PhuCap pc on ctpc.MaPhuCap = pc.MaPhuCap
-join NhanVien nv on ctpc.MaNV = nv.MaNV;
-GO
-
 CREATE OR ALTER VIEW vw_ThongTinPhongBan AS
 SELECT 
     pb.MaPB, 
@@ -1040,6 +1014,15 @@ GROUP BY
     pb.SDT, 
     nv.SDT;
 GO
+
+CREATE VIEW vw_ThongTinHopDong AS 
+SELECT nv.MaNV,hd.MaHD, hd.LuongCoBan, hd.NgayBD AS NgayBatDauHopDong, hd.NgayKT AS NgayKetThucHopDong, pb.TenPB AS TenPhongBan, cv.TenCV AS TenChucVu 
+FROM NhanVien nv 
+JOIN HopDong hd ON nv.MaHD = hd.MaHD
+JOIN ChucVu cv ON nv.MaCV = cv.MaCV
+JOIN PhongBan pb ON pb.MaPB = nv.MaPB;
+GO
+--- END VIEW ----
 
 -- PROCEDURE --
 
@@ -1581,8 +1564,6 @@ RETURN
         tp.Loai = @Loai AND nv.MaNV = @MaNV
 );
 GO
-SELECT * FROM dbo.ft_LocThuongPhatNhanVien('NV01', N'Thưởng')
-GO
 -- QUAN LY CHUC VU --
 
 CREATE OR ALTER PROCEDURE sp_AddChucVu
@@ -1851,7 +1832,28 @@ BEGIN
 		END
 END;
 GO
-
+-- QUAN LY NGUOI PHU THUOC
+CREATE OR ALTER PROCEDURE sp_AddNguoiPhuThuoc
+    @MaNV NVARCHAR(10),
+    @HoTen NVARCHAR(50),
+    @NgaySinh DATE,
+    @QuanHe NVARCHAR(50)
+AS
+BEGIN
+    -- Thêm thông tin người phụ thuộc mới
+    INSERT INTO NguoiPhuThuoc (MaNV, HoTen, NgaySinh, QuanHe)
+    VALUES (@MaNV, @HoTen, @NgaySinh, @QuanHe);
+END;
+GO
+CREATE OR ALTER PROCEDURE sp_DeleteNguoiPhuThuoc
+    @MaNV NVARCHAR(10),
+    @HoTen NVARCHAR(50)
+AS
+BEGIN
+    DELETE FROM NguoiPhuThuoc
+    WHERE MaNV = @MaNV AND HoTen = @HoTen;
+END;
+GO	
 -- QUAN LY BAO HIEM --
 CREATE OR ALTER PROCEDURE sp_GetctBaoHiemByMaNV
     @MaNV VARCHAR(10)
@@ -2422,9 +2424,7 @@ BEGIN
     RETURN @SoNgayLamViec;
 END;
 GO
-SELECT dbo.ft_SoNgayCongChuan('122024') AS SoNgayLamViec;
 
-DElete from ctChamCong WHERE MaNV = 'NV02';
 -- Phan Quyen --
 
 CREATE ROLE Employee
@@ -2468,12 +2468,13 @@ GO
 CREATE LOGIN  NV01 WITH PASSWORD = 'password1', DEFAULT_DATABASE = [QLNSG21], CHECK_EXPIRATION = OFF, CHECK_POLICY = OFF;
 CREATE USER  NV01  FOR LOGIN  NV01;
 ALTER SERVER ROLE sysadmin ADD MEMBER NV01
+GO
 -- Truong Phong
 CREATE LOGIN  NV02 WITH PASSWORD = 'password2', DEFAULT_DATABASE = [QLNSG21], CHECK_EXPIRATION = OFF, CHECK_POLICY = OFF;
 CREATE USER  NV02  FOR LOGIN  NV02;
 ALTER ROLE DepartmentHead ADD MEMBER NV02
+GO
 -- NhanVien
 CREATE LOGIN  NV03 WITH PASSWORD = 'password3', DEFAULT_DATABASE = [QLNSG21], CHECK_EXPIRATION = OFF, CHECK_POLICY = OFF;
 CREATE USER  NV03  FOR LOGIN  NV03;
 ALTER ROLE Employee ADD MEMBER NV03
-

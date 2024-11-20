@@ -71,9 +71,9 @@
             this.guna2GroupBox2.CustomBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(218)))), ((int)(((byte)(81)))), ((int)(((byte)(57)))));
             this.guna2GroupBox2.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
             this.guna2GroupBox2.ForeColor = System.Drawing.Color.Black;
-            this.guna2GroupBox2.Location = new System.Drawing.Point(267, 81);
+            this.guna2GroupBox2.Location = new System.Drawing.Point(267, 12);
             this.guna2GroupBox2.Name = "guna2GroupBox2";
-            this.guna2GroupBox2.Size = new System.Drawing.Size(878, 237);
+            this.guna2GroupBox2.Size = new System.Drawing.Size(878, 202);
             this.guna2GroupBox2.TabIndex = 20;
             this.guna2GroupBox2.Text = "CHẤM CÔNG";
             // 
@@ -160,9 +160,9 @@
             this.panel1.Controls.Add(this.btnTim);
             this.panel1.Controls.Add(this.btnThem);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 678);
+            this.panel1.Location = new System.Drawing.Point(0, 496);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1413, 100);
+            this.panel1.Size = new System.Drawing.Size(1413, 282);
             this.panel1.TabIndex = 21;
             // 
             // btnLamMoi
@@ -248,9 +248,9 @@
             this.guna2GroupBox1.CustomBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(218)))), ((int)(((byte)(81)))), ((int)(((byte)(57)))));
             this.guna2GroupBox1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold);
             this.guna2GroupBox1.ForeColor = System.Drawing.Color.Black;
-            this.guna2GroupBox1.Location = new System.Drawing.Point(267, 367);
+            this.guna2GroupBox1.Location = new System.Drawing.Point(267, 239);
             this.guna2GroupBox1.Name = "guna2GroupBox1";
-            this.guna2GroupBox1.Size = new System.Drawing.Size(878, 248);
+            this.guna2GroupBox1.Size = new System.Drawing.Size(878, 223);
             this.guna2GroupBox1.TabIndex = 22;
             this.guna2GroupBox1.Text = "DANH SÁCH CHẤM CÔNG";
             // 

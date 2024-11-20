@@ -1,5 +1,4 @@
-﻿using DoAnNhom21;
-using System;
+﻿using System;
 using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
@@ -49,11 +48,12 @@ namespace DoAnNhom21
                 txtTongBaoHiem.Text = reader["TongTienBaoHiem"].ToString();
                 txtThue.Text = reader["Thue"].ToString();
                 txtThuongPhat.Text = reader["TongThuongPhat"].ToString();
-            }catch(SqlException )
+            }
+            catch (SqlException)
             {
                 MessageBox.Show("LOI");
             }
-           
+
         }
         private void btnThoat_Click(object sender, EventArgs e)
         {
